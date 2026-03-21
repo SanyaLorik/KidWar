@@ -1,0 +1,15 @@
+[submodule "Assets/_MODULES/Architecture_M"]
+	path = Assets/_MODULES/Architecture_M
+	url = https://github.com/SanyaLorik/Architecture_M.git
+[submodule "Assets/_MODULES/SanyaBeerExtension"]
+	path = Assets/_MODULES/SanyaBeerExtension
+	url = https://github.com/SanyaLorik/SanyaBeerExtension.git
+[submodule "Assets/_MODULES/MediaKit_M"]
+	path = Assets/_MODULES/MediaKit_M
+	url = https://github.com/SanyaLorik/MediaKit_M.git
+[submodule "Assets/_MODULES/MirraSDK_M"]
+	path = Assets/_MODULES/MirraSDK_M
+	url = https://github.com/SanyaLorik/MirraSDK_M.git
+[submodule "Assets/_MODULES/LuringPlayer_M"]
+	path = Assets/_MODULES/LuringPlayer_M
+	url = https://github.com/SanyaLorik/LuringPlayer_M.git

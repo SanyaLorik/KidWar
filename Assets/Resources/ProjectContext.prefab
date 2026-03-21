@@ -96,6 +96,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.InfoSDKInstaller
   <IsInstalled>k__BackingField: 0
   _infoSDK: {fileID: 3140716675811931507, guid: a33638103b868fe45b2c7c8184deb2e7, type: 3}
+--- !u!1 &5146493453567671108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6880980788172335616}
+  - component: {fileID: 5054097142068862217}
+  m_Layer: 0
+  m_Name: LocalizationInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6880980788172335616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146493453567671108}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4585126145387519526}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5054097142068862217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146493453567671108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d60e6cc9c34d488480702591cd69a8c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.LocalizationInstaller
+  <IsInstalled>k__BackingField: 0
+  _textDataSuitable:
+    _localizations:
+    - {fileID: 11400000, guid: 88df91365000591429952c6ddb2725bd, type: 2}
+    - {fileID: 11400000, guid: a2d79142d38f1bc4c90686d790eb0402, type: 2}
+    _defualtLanguage: 1
 --- !u!1 &6285219393915469428
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +195,7 @@ MonoBehaviour:
     - {fileID: 8144385924307249441}
     - {fileID: 4235193305082247487}
     - {fileID: 7102050068006995259}
+    - {fileID: 5054097142068862217}
 --- !u!1 &8712559440092046437
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +230,7 @@ Transform:
   - {fileID: 8439127442707991860}
   - {fileID: 1676644243807959159}
   - {fileID: 2948190861776538507}
+  - {fileID: 6880980788172335616}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1954841306348415042
@@ -199,6 +251,7 @@ MonoBehaviour:
   - {fileID: 8144385924307249441}
   - {fileID: 4235193305082247487}
   - {fileID: 7102050068006995259}
+  - {fileID: 5054097142068862217}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0

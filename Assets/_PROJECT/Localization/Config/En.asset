@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196f4d3c079dd594ea366842c439b197, type: 3}
+  m_Name: En
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationData
+  <Real>k__BackingField: 1
+  <Substitutes>k__BackingField: 01000000
+  <HourTime>k__BackingField: 
+  <MinuteTime>k__BackingField: 
+  <SecondTime>k__BackingField: 
+  <AdsInterstitial>k__BackingField: 
+  <LabelProgressNarrator>k__BackingField: 

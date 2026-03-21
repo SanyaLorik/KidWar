@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Game Data
   m_EditorClassIdentifier: Assembly-CSharp::GameDataSO
   <Data>k__BackingField:
-    <MinimumDelaySave>k__BackingField: 0
-    <InterstitialAdStartDelay>k__BackingField: 0
-    <InterstitialDelay>k__BackingField: 0
-    <AdTimerInitial>k__BackingField: 0
+    <MinimumDelaySave>k__BackingField: 1
+    <InterstitialAdStartDelay>k__BackingField: 70
+    <InterstitialDelay>k__BackingField: 70
+    <AdTimerInitial>k__BackingField: 2
     <AdTimerFinal>k__BackingField: 0

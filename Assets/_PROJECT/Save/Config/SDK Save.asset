@@ -10,5 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7119f28a206f8cb43bc38f3763d2f4ee, type: 3}
-  m_Name: New Game Save SO
+  m_Name: SDK Save
   m_EditorClassIdentifier: Assembly-CSharp::GameSaveSO
+  Save:
+    REMOVE_THIS_VARIABLE: 51

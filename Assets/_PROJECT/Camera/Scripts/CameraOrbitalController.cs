@@ -8,8 +8,15 @@ using Zenject;
 
 public class CameraOrbitalController : MonoBehaviour {
     [SerializeField] private CinemachineCamera _cinemachineCamera;
-    [SerializeField] private Transform _walkPoint;
-    [SerializeField] private Transform _flightPoint;
+    
+    
+    [Header("Точка движения игрока")]
+    [SerializeField] private Transform _walkPoint; 
+    
+    
+    [Header("Левая и правая точка кидания")]
+    [SerializeField] private Transform _rightPoint;
+    [SerializeField] private Transform _leftPoint;
 
     [SerializeField] private CinemachineOrbitalFollow _orbitalFollow;
     [SerializeField] private float _cameraSaveDelay = 1f;
@@ -67,7 +74,6 @@ public class CameraOrbitalController : MonoBehaviour {
         }
         _defaultX = _orbitalFollow.HorizontalAxis.Value;
         _defaultY = _orbitalFollow.VerticalAxis.Value;
-        SetWalkPoint(true);
     }
 
     private void ChangeCameraZoomPercent(float percent) {
@@ -79,12 +85,8 @@ public class CameraOrbitalController : MonoBehaviour {
        
     }
 
-    private void SetWalkPoint(bool setWalk) {
-        if (setWalk) {
-            _cinemachineCamera.Follow = _walkPoint;
-            return;
-        }
-        _cinemachineCamera.Follow = _flightPoint;
+    private void SetPoint(Transform point) {
+        _cinemachineCamera.Follow = point;
     }
 
 

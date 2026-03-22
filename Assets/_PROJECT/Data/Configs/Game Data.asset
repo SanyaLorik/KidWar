@@ -32,5 +32,5 @@ MonoBehaviour:
     <MouseSensivityMultiplier>k__BackingField: 0.4
     <ZoomDiapasone>k__BackingField:
       <From>k__BackingField: 0.5
-      <To>k__BackingField: 2.6
+      <To>k__BackingField: 5
     <MinSensValue>k__BackingField: 0.1

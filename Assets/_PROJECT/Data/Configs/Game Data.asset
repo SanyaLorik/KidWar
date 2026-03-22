@@ -18,3 +18,19 @@ MonoBehaviour:
     <InterstitialDelay>k__BackingField: 70
     <AdTimerInitial>k__BackingField: 2
     <AdTimerFinal>k__BackingField: 0
+    <WalkSpeed>k__BackingField: 10
+    <JumpForce>k__BackingField: 12
+    <SecondJumpForce>k__BackingField: 16
+    <RotateSpeed>k__BackingField: 16
+    <GravityScale>k__BackingField: 4
+    <MobileCameraFov>k__BackingField: 0.452
+    <DesktopCameraFov>k__BackingField: 0.474
+    <FlightCameraFov>k__BackingField: 0
+    <DefaultCameraSens>k__BackingField: 0.137
+    <ZoomSpeed>k__BackingField: 0.1
+    <JoystickSensivityMultiplier>k__BackingField: 500
+    <MouseSensivityMultiplier>k__BackingField: 0.4
+    <ZoomDiapasone>k__BackingField:
+      <From>k__BackingField: 0.5
+      <To>k__BackingField: 2.6
+    <MinSensValue>k__BackingField: 0.1

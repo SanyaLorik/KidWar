@@ -1,19 +1,28 @@
 using System;
+using Architecture_M;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
 public class PlayerBank : MonoBehaviour {
+    [SerializeField] private TextMeshProUGUI _moneyText;
     public event Action<long> BankNewMoneyPlus;
     public event Action<long> BankNewMoneyMinus;
 
-    // [Inject] IGameSave<GameSavePC> _gameSave;
+    [Inject] IGameSave _gameSave;
+    [Inject] NumberFormatter _formatter;
 
-    // public long PlayerCapital {
-    //     get => _gameSave.GetSave.Money;
-    //     private set => _gameSave.GetSave.Money = value;
-    // }
-    
-    public long PlayerCapital;
+    public long PlayerCapital {
+        get => _gameSave.GetSave<GameSave>().Money;
+        private set {
+            _gameSave.GetSave<GameSave>().Money = value;
+            _moneyText.text = _formatter.ValuteFormatter(value);
+        }
+    }
+
+    private void Start() {
+        _moneyText.text = _formatter.ValuteFormatter(PlayerCapital);
+    }
 
     public void AddMoney(long amount) {
         if (amount <= 0) {

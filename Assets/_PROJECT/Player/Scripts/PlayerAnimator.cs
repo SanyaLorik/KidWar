@@ -5,7 +5,6 @@ public class PlayerAnimator : MonoBehaviour {
     private static readonly int Jump = Animator.StringToHash("jump");
     private static readonly int DoubleJump = Animator.StringToHash("doubleJump");
     private static readonly int Run = Animator.StringToHash("isRunning");
-    private static readonly int Fly = Animator.StringToHash("fly");
     [SerializeField] private Animator _animator;
 
     [SerializeField] private SkinElementsController _skinElementsController;

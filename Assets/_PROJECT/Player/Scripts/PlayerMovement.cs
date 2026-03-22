@@ -6,22 +6,13 @@ using Zenject;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour {
     [SerializeField] private CharacterController _controller; // 
-    
-    private Vector2 MoveInput => _inputDirection2.Direction2;
+    // [SerializeField] private PlayerVisual _visual;
+
+    public Vector2 MoveInput => _inputDirection2.Direction2;
     private float _currentRoll;
     private float _rollVelocity;
     private bool _wasGroundedLastFrame;
     private Vector3 _externalMotion;
-    
-    
-    // Инфа в конфиге была
-    private float WalkSpeed;
-    private float JumpForce;
-    private float SecondJumpForce;
-    private float JumpHeight;
-    private float RotateSpeed;
-    private float GravityScale;
-    
     
     public event Action JumpPressed;
     public event Action DoubleJumpPressed;
@@ -33,9 +24,9 @@ public class PlayerMovement : MonoBehaviour {
     public CharacterController Controller => _controller;
     
     
-    // [Inject] private PlayerVisual _visual;
     [Inject] private IInputDirection2 _inputDirection2;
     [Inject] private IInputJumping _inputJumping;
+    [Inject] private GameData _gameData;
     
     // Для гравитации и прыжков
     private float _verticalVelocity;
@@ -50,17 +41,17 @@ public class PlayerMovement : MonoBehaviour {
     }
     
     
-    // private void Update() {
-    //     Walk();
-    // }
-    //
-    // private void OnEnable() {
-    //     _inputJumping.OnJumped += OnJump;
-    // }
-    //
-    // private void OnDisable() {
-    //     _inputJumping.OnJumped -= OnJump;
-    // }
+    private void Update() {
+        Walk();
+    }
+    
+    private void OnEnable() {
+        _inputJumping.OnJumped += OnJump;
+    }
+    
+    private void OnDisable() {
+        _inputJumping.OnJumped -= OnJump;
+    }
 
     
     public void TpPlayerInPoint(Transform target) {
@@ -80,12 +71,12 @@ public class PlayerMovement : MonoBehaviour {
     
     public void OnJump() {
         if (_jumpsUsed == 0) {
-            _verticalVelocity = JumpForce;
+            _verticalVelocity = _gameData.JumpForce;
             JumpPressed?.Invoke();
             _jumpsUsed = 1;
         }
         else if (_jumpsUsed == 1) {
-            _verticalVelocity = SecondJumpForce;
+            _verticalVelocity = _gameData.SecondJumpForce;
             DoubleJumpPressed?.Invoke();
             _jumpsUsed = 2;
         }
@@ -113,12 +104,12 @@ public class PlayerMovement : MonoBehaviour {
 
         // ГРАВИТАЦИЯ
         if (!_controller.isGrounded) {
-            _verticalVelocity += Physics.gravity.y * GravityScale * Time.deltaTime;
+            _verticalVelocity += Physics.gravity.y * _gameData.GravityScale * Time.deltaTime;
         }
         
 
         Vector3 horizontalMove = hasInput
-            ? move.normalized * WalkSpeed * Time.deltaTime
+            ? move.normalized * _gameData.WalkSpeed * Time.deltaTime
             : Vector3.zero;
 
         Vector3 verticalMove = Vector3.up * _verticalVelocity * Time.deltaTime;
@@ -159,7 +150,7 @@ public class PlayerMovement : MonoBehaviour {
             float y = Mathf.LerpAngle(
                 transform.eulerAngles.y,
                 TargetPosY,
-                RotateSpeed * Time.deltaTime
+                _gameData.RotateSpeed * Time.deltaTime
             );
             
             transform.rotation = Quaternion.Euler(

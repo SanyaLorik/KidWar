@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: SDK Save
   m_EditorClassIdentifier: Assembly-CSharp::GameSaveSO
   Save:
-    REMOVE_THIS_VARIABLE: 51
+    Money: 10000
+    IsBoughtPurchase: 0
+    Skins:
+    - Id: obby_skin
+    SkinWearId: obby_skin

@@ -2,6 +2,7 @@
   "dependencies": {
     "com.marijnzwemmer.unity-toolbar-extender": "https://github.com/marijnz/unity-toolbar-extender.git",
     "com.romanlee17.mirrasdk5": "https://github.com/MirraSDK/SDK5.git",
+    "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "2.0.9",
     "com.unity.cinemachine": "3.1.6",
     "com.unity.collab-proxy": "2.10.2",

@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.85117435, b: 0.3820755, a: 1}
+  m_Color: {r: 1, g: 0.91049945, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3803922, g: 0.89155316, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.3914918, b: 0.3803922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -1151,7 +1151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3803922, g: 0.5603928, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6989871, b: 0.3803922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -1247,7 +1247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 19.5}
+  m_AnchoredPosition: {x: 0, y: 35}
   m_SizeDelta: {x: -16, y: -7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1816582169832202969
@@ -1278,7 +1278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c5930aaaf1da4864ca6a5fd486c676f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b25b1e53f4413b743bc256a2ddb91083, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1338,8 +1338,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 19.5}
-  m_SizeDelta: {x: -16, y: -7}
+  m_AnchoredPosition: {x: 0, y: 37.364876}
+  m_SizeDelta: {x: -8, y: -16.7444}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5306266681736654609
 CanvasRenderer:
@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c5930aaaf1da4864ca6a5fd486c676f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c41213fd5875edb4e817f79158b5cdb6, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2510,7 +2510,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1706322857213806378, guid: 3586518634cc1614b8a76eb1a53ceb79, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -86.19568
+      value: -86.1958
       objectReference: {fileID: 0}
     - target: {fileID: 3250301700935660193, guid: 3586518634cc1614b8a76eb1a53ceb79, type: 3}
       propertyPath: m_Name

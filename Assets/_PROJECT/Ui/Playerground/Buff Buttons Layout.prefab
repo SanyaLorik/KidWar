@@ -58,7 +58,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 16
+  m_Spacing: 48
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -100,11 +100,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 156
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 156
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_LocalPosition.x
@@ -166,6 +166,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gigant Text
       objectReference: {fileID: 0}
+    - target: {fileID: 7166779075435991951, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
+      propertyPath: m_fontSize
+      value: 47.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -214,11 +218,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 156
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 156
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_LocalPosition.x
@@ -278,7 +282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7166779075435991951, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_fontSize
-      value: 53.35
+      value: 45.05
       objectReference: {fileID: 0}
     - target: {fileID: 8967729684465275024, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_Sprite
@@ -332,11 +336,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 156
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 156
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_LocalPosition.x
@@ -458,11 +462,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 156
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 156
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 1512795715743427434, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_LocalPosition.x
@@ -538,7 +542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7166779075435991951, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_fontSize
-      value: 59.95
+      value: 59.1
       objectReference: {fileID: 0}
     - target: {fileID: 8967729684465275024, guid: 0a57ade160fbfd24eb68d383177e0017, type: 3}
       propertyPath: m_Sprite

@@ -7,9 +7,8 @@ public class ThrowInstaller : MonoInstaller {
     
     
     private void BindThrow() {
-        Container.Bind<ObjectThrower>().FromComponentInHierarchy().AsSingle().NonLazy();
-        Container.Bind<ThrowGameManager>().FromComponentInHierarchy().AsSingle().NonLazy();
-        Container.Bind<Trajectory3D>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<ThrowGameStarter>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<PlayersIniter>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<ObjectThrowerCalculator>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

@@ -1,30 +1,69 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum BotState {
     Wandering
 }
 
-
+[RequireComponent(typeof(NavMeshAgent))]
 public class BotStateManager : MonoBehaviour {
     [SerializeField] private Transform _skinParent;
     [SerializeField] private BotAnimator _botAnimator;
     [SerializeField] private GameObject _skinInstance;
+    [field: SerializeField] public ObjectThrower BotThrower { get; private set; }
+    private Vector3 _lastSpawnPoint;
+    
     
     private BotWander _botWander;
     private BotMonolog _botMonolog;
     
     private IBotBehaviour _currentBotBehaviour;
+    private NavMeshAgent _agent;
 
+    public bool IsPlaying { get; private set; }
+    
     public BotState State { get; private set; }
-    public Rigidbody Rb { get; private set; }
 
     private void Awake() {
         _botWander = GetComponent<BotWander>();
         _botMonolog = GetComponent<BotMonolog>();
-        Rb = GetComponent<Rigidbody>();
+        _agent = GetComponent<NavMeshAgent>();
         Destroy(_skinInstance);
+    }
+    
+    
+    
+    public void SetBotPlayStatus(bool goPlay) {
+        if (goPlay) {
+            _currentBotBehaviour?.Exit();
+            _lastSpawnPoint = transform.position;
+        }
+        // Возвращение на спавн
+        else if (IsPlaying) {
+            TpInPoint(_lastSpawnPoint);
+        }
+        IsPlaying = goPlay;
+        _agent.enabled = !goPlay;
+    }
+
+    public void TpInPoint(Vector3 pos) {
+        _agent.enabled = false;
+        transform.position = pos;
+    }
+    
+    public void RotateToTarget(Vector3 targetPosition) {
+        Vector3 direction = targetPosition - transform.position;
+        direction.y = 0;
+        if (direction != Vector3.zero) {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = targetRotation;
+        }
+    }
+
+    public void ReturnToWandering() {
+        
     }
 
     private void Start() {

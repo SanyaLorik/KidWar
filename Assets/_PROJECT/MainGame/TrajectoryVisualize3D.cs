@@ -3,7 +3,7 @@ using SanyaBeerExtension;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Trajectory3D : MonoBehaviour
+public class TrajectoryVisualize3D : MonoBehaviour
 {
     [Header("Ссылки")]
     [SerializeField] private Transform throwPoint;     // Точка вылета снаряда (пустой GameObject)
@@ -16,30 +16,41 @@ public class Trajectory3D : MonoBehaviour
     
     [SerializeField] private float _sensitivity = 1f;
     [SerializeField] private float _lineLength;
-    
+    [SerializeField] private GameObject _trajectoryCanvas;
+
+
     private Camera mainCamera;
     private Vector3 throwDirection;
-    private Mouse mouse;
-
+    private Mouse mouse = Mouse.current;
+    
 
     public event Action<float> AngleChoosed;
     
     public float CurrentVerticalAngle { get; private set; }
     
+    private void OnEnable() {
+        
+    }
     private void Start() {
-        trajectoryLine.gameObject.ActiveSelf();
-        if (mainCamera == null)
-            mainCamera = Camera.main;
-        // Получаем доступ к мыши через New Input System
-        mouse = Mouse.current;
+        mainCamera = Camera.main;
+        trajectoryLine.gameObject.DisactiveSelf();
     }
     
     private void Update() {
-        if (mouse == null) return;
-        
         UpdateThrowDirection();
         DrawTrajectory();
     }
+    
+    
+    private void OnChangeState(PlayerState state) {
+        if (state == PlayerState.Play) {
+            _trajectoryCanvas.ActiveSelf();
+        }
+        else {
+            _trajectoryCanvas.DisactiveSelf();
+        }
+    }
+ 
 
     private void UpdateThrowDirection() {
         Vector2 mouseDelta = mouse.delta.ReadValue();

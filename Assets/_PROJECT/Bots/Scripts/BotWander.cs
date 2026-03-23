@@ -57,6 +57,7 @@ public class BotWander : MonoBehaviour, IBotBehaviour {
         _walkingParticles.Stop();
         _agent.enabled = false;
         Eblaning = false;
+        StartWandering?.Invoke(false);
     }
 
     private async UniTask MonitorMovementAsync(CancellationToken token) {

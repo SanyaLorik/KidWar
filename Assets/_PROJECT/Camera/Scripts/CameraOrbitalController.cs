@@ -49,7 +49,6 @@ public class CameraOrbitalController : MonoBehaviour {
     // [Inject] private PlayerStateManager _playerStateManager;
     [Inject] private SettingsManager _settings;
     [Inject] private GameData _gameData;
-    [Inject] private ObjectThrower _objectThrower;
 
     [InjectOptional] private IOrbitalRotationInput _orbitalRotationInput;
     [Inject] private IDeviceTypeProvider _deviceType;
@@ -60,10 +59,11 @@ public class CameraOrbitalController : MonoBehaviour {
         _settings.CameraZoomChanged += ChangeCameraZoomPercent;
         SystemEvents.WindowOpened += ForbidRotate;
         SystemEvents.ForbidZoomChanged += ForbidZoom;
-        _objectThrower.ObjectThrowed += ObjectThrowerOnObjectThrowed;
     }
 
-    private void ObjectThrowerOnObjectThrowed(Transform point) {
+    
+    // Будет менеджер кидать чей ход точку 
+    private void OnObjectThrowed(Transform point) {
         SetFollowPoint(point);
         _orbitalFollow.HorizontalAxis.Value = -90f;
     }

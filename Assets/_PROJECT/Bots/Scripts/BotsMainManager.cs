@@ -17,7 +17,6 @@ public class BotsMainManager : IInitializable, IDisposable {
     private CancellationTokenSource _tokenSource;
     private bool _stopBotSpeaking;
     private List<BotStateManager> _speakingBots = new();
-    
 
     public BotsMainManager(List<BotStateManager> bots, 
         PlayerStateManager playerStateManager, 
@@ -40,7 +39,22 @@ public class BotsMainManager : IInitializable, IDisposable {
             bot.InitAnimator();
         }
     }
+    
+    public BotStateManager GetRandomBot() {
+        // Сбросить всех
+        _bots.ForEach(bot => bot.SetBotPlayStatus(false));
+        // Выбор нового
+        var bot = _bots.GetRandomElement();
+        bot.SetBotPlayStatus(true);
 
+        return bot;
+    }
+
+    private void PlayerOnChangeState(PlayerState state){
+        
+    }
+    
+    
     private async UniTask BotSpeakCycleAsync(CancellationToken token) {
         await UniTask.Delay(1000, cancellationToken: token);
         while (!_stopBotSpeaking) {
@@ -88,17 +102,17 @@ public class BotsMainManager : IInitializable, IDisposable {
     {
         List<int> available = new List<int>();
 
-        for (int i = 0; i < _bots.Count; i++)
-        {
-            available.Add(i);
+        for (int i = 0; i < _bots.Count; i++) {
+            if (_bots[i].IsPlaying == false) {
+                available.Add(i);
+            }
         }
 
         List<int> result = new List<int>();
 
         count = Mathf.Min(count, available.Count);
 
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             int r = Random.Range(0, available.Count);
             result.Add(available[r]);
             available.RemoveAt(r);
@@ -108,14 +122,6 @@ public class BotsMainManager : IInitializable, IDisposable {
     }
     
     
-    private void PlayerOnChangeState(PlayerState state){
-        
-    }
-
-
-    private int GetRandomBot() {
-        return Random.Range(0, _bots.Count);
-    }
 
 
 

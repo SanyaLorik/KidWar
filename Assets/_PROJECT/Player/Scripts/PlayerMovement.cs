@@ -26,8 +26,10 @@ public class PlayerMovement : MonoBehaviour {
     
     
     [Inject] private IInputDirection2 _inputDirection2;
+    [Inject] private IInputActivity _inputActivity;
     [Inject] private IInputJumping _inputJumping;
     [Inject] private GameData _gameData;
+    [Inject] private PlayerStateManager _stateManager;
     
     // Для гравитации и прыжков
     private float _verticalVelocity;
@@ -41,7 +43,7 @@ public class PlayerMovement : MonoBehaviour {
         _externalMotion += motion;
     }
 
-    public void SetCharacterControllerState(bool state) {
+    private void SetCharacterControllerState(bool state) {
         _controller.enabled = state;
     }
     
@@ -51,11 +53,26 @@ public class PlayerMovement : MonoBehaviour {
     
     private void OnEnable() {
         _inputJumping.OnJumped += OnJump;
+        _stateManager.ChangeState += StateManagerOnChangeState;
     }
+    
     
     private void OnDisable() {
         _inputJumping.OnJumped -= OnJump;
+        _stateManager.ChangeState -= StateManagerOnChangeState;
     }
+    
+
+    private void StateManagerOnChangeState(PlayerState state) {
+        if (state == PlayerState.Play) {
+            _inputActivity.Disable();
+        }
+        else {
+            _inputActivity.Enable();
+        }
+    }
+
+
 
     
     public void TpPlayerInPoint(Transform target, float diffToSpawn = 0) {
@@ -79,6 +96,18 @@ public class PlayerMovement : MonoBehaviour {
             DoubleJumpPressed?.Invoke();
             _jumpsUsed = 2;
         }
+    }
+    
+    
+    public void RotateToTarget(Vector3 targetPosition) {
+        Vector3 direction = targetPosition - transform.position;
+        direction.y = 0;
+        SetCharacterControllerState(false);
+        if (direction != Vector3.zero) {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = targetRotation;
+        }
+        SetCharacterControllerState(true);
     }
 
 
@@ -159,5 +188,7 @@ public class PlayerMovement : MonoBehaviour {
             );
         }
     }
+    
+
     
 }

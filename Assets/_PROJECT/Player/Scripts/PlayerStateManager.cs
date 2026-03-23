@@ -1,5 +1,6 @@
 using System;
 using Architecture_M;
+using SanyaBeerExtension;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,10 @@ public enum PlayerState {
 public class PlayerStateManager : MonoBehaviour{
     [SerializeField] private JumpParticlesController _flooringParticlesController;
     [SerializeField] private JumpParticlesController _jumpParticlesController;
+    
+    [Header("Player")]
+    [SerializeField] private GameObject[] _objectsToShowInPlay;
+    [SerializeField] private GameObject[] _objectsToHideInPlay;
 
     
     [Inject] private IInterstitialDelaying  _interstitialDelaying;
@@ -20,6 +25,7 @@ public class PlayerStateManager : MonoBehaviour{
     [Inject] protected IGameSave _saver;
 
     [InjectOptional] private IActivityButtonPC _activityButtonPC;
+    [Inject] private ThrowGameStarter _throwGameManager;
     
     public event Action<PlayerState> ChangeState;
     
@@ -27,6 +33,19 @@ public class PlayerStateManager : MonoBehaviour{
         _playerMovement.Floored += PlayerMovementOnFloored;
         _playerMovement.JumpPressed += PlayerMovementOnJumpPressed;
         _playerMovement.DoubleJumpPressed += PlayerMovementOnJumpPressed;
+        _throwGameManager.GameStarted += OnGameStarted;
+    }
+
+    private void OnGameStarted(bool playerGoPlay) {
+        ChangePlayerState(playerGoPlay ? PlayerState.Play : PlayerState.InSpawn);
+        if (playerGoPlay) {
+            _objectsToShowInPlay.ActiveSelf();
+            _objectsToHideInPlay.DisactiveSelf();
+        }
+        else {
+            _objectsToShowInPlay.DisactiveSelf();
+            _objectsToHideInPlay.ActiveSelf();
+        }
     }
 
     private void PlayerMovementOnJumpPressed() {
@@ -49,23 +68,16 @@ public class PlayerStateManager : MonoBehaviour{
     public PlayerState CurrentState { get; private set; } = PlayerState.InSpawn;
     public PlayerState BeforeState { get; private set; } = PlayerState.InSpawn;
 
-    
-    
-    public void ChangePlayerState(PlayerState newState) {
-       
-        ChangeState?.Invoke(CurrentState);
+    private void ChangePlayerState(PlayerState newState) {
+        if(newState == CurrentState) return;
+        BeforeState = CurrentState;
+        CurrentState = newState;
+        ChangeState?.Invoke(newState);
     }
 
+    // будет настройка канваса для игрока
     private void HideFlightMobileView(bool state) {
-        if(_activityButtonPC == null) return;
-        if (state) {
-            _activityButtonPC.HideJumpButton();
-            _activityButtonPC.HidOrbitalJoystick();
-        }
-        else {
-            _activityButtonPC.ShowJumpButton();
-            _activityButtonPC.ShowOrbitalJoystick();
-        }
+        
     }
 
 }

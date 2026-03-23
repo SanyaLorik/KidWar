@@ -9,28 +9,32 @@ public class PlayersIniter : MonoBehaviour {
     [field: SerializeField] public Transform RightPoint { get; private set; }
     [field: Header("Отступ от игрока при макс броске")]
     [field: SerializeField] public float OffsetToMaxThrow { get; private set; }
-    
+
+
+    [SerializeField] private ObjectThrower _mainPlayer;
     
     [Inject] PlayerMovement _playerMovement;
+    [Inject] BotsMainManager _botsMainManager;
     
+    
+    
+    /// <summary>
+    /// Поидее надо будет указывать режим PVP PVB
+    /// </summary>
     public void InitForNewGame() {
-        Transform playerPoint = Random.value < 0.5f ? LeftPoint : RightPoint;
-        Transform secondPlayerPoint = playerPoint == LeftPoint ? RightPoint : LeftPoint;
-        _playerMovement.TpPlayerInPoint(playerPoint, 3f);
-        RotateToTarget(_playerMovement, secondPlayerPoint.position);
-    }
+        // Настройка первого игрока
+        Transform playerPoint = LeftPoint;
+        _playerMovement.TpPlayerInPoint(playerPoint);
+        _playerMovement.RotateToTarget(RightPoint.position);
+        
+        // Настройка второго игрока
+        Transform secondPlayerPoint = RightPoint;
+        BotStateManager secondPlayer = _botsMainManager.GetRandomBot();
+        secondPlayer.TpInPoint(secondPlayerPoint.position);
+        secondPlayer.RotateToTarget(LeftPoint.position);
 
+    }
 
     
-    private void RotateToTarget(PlayerMovement player, Vector3 targetPosition) {
-        Vector3 direction = targetPosition - player.transform.position;
-        direction.y = 0;
-        player.SetCharacterControllerState(false);
-        if (direction != Vector3.zero) {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            player.transform.rotation = targetRotation;
-        }
-        player.SetCharacterControllerState(true);
-    }
     
 }

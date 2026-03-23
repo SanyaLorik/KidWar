@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using _PROJECT.Scripts.Helpers;
 using Cysharp.Threading.Tasks;
@@ -5,16 +6,23 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class ThrowGameManager : MonoBehaviour  {
+public class ThrowGameStarter : MonoBehaviour  {
     // Шарит за всю инфу по игре, где кто находится 
     [Header("Время")]
     [SerializeField] private float _timerDuration;
     [SerializeField] private TextMeshProUGUI _timerText;
 
-    [Inject] private PlayersIniter _gameIniter;
+    [Inject] private PlayersIniter _playersIniter;
     [Inject] private LocalizationData _localization;
 
     private CancellationTokenSource _tokenSource;
+    
+    
+    
+    
+    public event Action<bool> GameStarted;
+    
+    
     
     private void Start() {
         StartTimer();
@@ -45,7 +53,8 @@ public class ThrowGameManager : MonoBehaviour  {
 
     // Пока просто с ботиком 
     private void StartGame() {
-        _gameIniter.InitForNewGame();
+        _playersIniter.InitForNewGame();
         Debug.Log("Старт игры!");
+        GameStarted?.Invoke(true);
     }
 }

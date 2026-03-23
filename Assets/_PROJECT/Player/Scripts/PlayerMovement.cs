@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Architecture_M;
 using UnityEngine;
 using Zenject;
@@ -39,7 +40,10 @@ public class PlayerMovement : MonoBehaviour {
     public void AddExternalMotion(Vector3 motion) {
         _externalMotion += motion;
     }
-    
+
+    public void SetCharacterControllerState(bool state) {
+        _controller.enabled = state;
+    }
     
     private void Update() {
         Walk();
@@ -54,20 +58,15 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     
-    public void TpPlayerInPoint(Transform target) {
-        TeleportBase(target.position);
-    }
-    
-
-    private void TeleportBase(Vector3 point) {
+    public void TpPlayerInPoint(Transform target, float diffToSpawn = 0) {
+        bool isNearY = Vector3.Magnitude(transform.position - target.position) < diffToSpawn;
+        if(isNearY) return;
         _controller.enabled = false;
-        transform.position = point;
-        _controller.enabled = true;
+        transform.position = target.position;
     
         _verticalVelocity = 0; // Сброс скорости
         _jumpsUsed = 0; // Сброс прыжков
     }
-
     
     public void OnJump() {
         if (_jumpsUsed == 0) {

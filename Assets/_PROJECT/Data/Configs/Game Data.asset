@@ -34,3 +34,20 @@ MonoBehaviour:
       <From>k__BackingField: 0.5
       <To>k__BackingField: 5
     <MinSensValue>k__BackingField: 0.1
+    <CountSpeakingBotsPerTime>k__BackingField:
+      <From>k__BackingField: 0
+      <To>k__BackingField: 1
+    <TimeToSpeak>k__BackingField:
+      <From>k__BackingField: 4
+      <To>k__BackingField: 7
+    <ChanseToChangeSkin>k__BackingField: 0
+    <ChanseToChangeNickname>k__BackingField: 0
+    <RotationSpeed>k__BackingField: 5
+    <ChanceToJump>k__BackingField: 0.862
+    <ChanseToGoPlayer>k__BackingField: 0.1
+    <StoppingDistance>k__BackingField:
+      <From>k__BackingField: 0
+      <To>k__BackingField: 0
+    <TimeToStayOnPoint>k__BackingField:
+      <From>k__BackingField: 5
+      <To>k__BackingField: 10

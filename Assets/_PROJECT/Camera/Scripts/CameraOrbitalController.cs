@@ -49,19 +49,29 @@ public class CameraOrbitalController : MonoBehaviour {
     // [Inject] private PlayerStateManager _playerStateManager;
     [Inject] private SettingsManager _settings;
     [Inject] private GameData _gameData;
+    [Inject] private ObjectThrower _objectThrower;
 
     [InjectOptional] private IOrbitalRotationInput _orbitalRotationInput;
     [Inject] private IDeviceTypeProvider _deviceType;
     [Inject] private IInputActivity _inputActivity;
 
 
-    private void OnEnable() {
+    private void OnEnable()  {
         _settings.CameraZoomChanged += ChangeCameraZoomPercent;
         SystemEvents.WindowOpened += ForbidRotate;
         SystemEvents.ForbidZoomChanged += ForbidZoom;
+        _objectThrower.ObjectThrowed += ObjectThrowerOnObjectThrowed;
     }
 
+    private void ObjectThrowerOnObjectThrowed(Transform point) {
+        SetFollowPoint(point);
+        _orbitalFollow.HorizontalAxis.Value = -90f;
+    }
 
+    private void SetFollowPoint(Transform target) {
+        _cinemachineCamera.Follow = target;
+    }
+    
     private void Start() {
         ChangeCameraZoomPercent(_settings.CameraZoomValue);
         _walkZoom = CurrentFovPercent;

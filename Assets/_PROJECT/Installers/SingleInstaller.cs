@@ -5,6 +5,7 @@ public class SingleInstaller : MonoInstaller {
         BindCamera();
         BindSettings();
         BindValuteFormatter();
+        BindNicknameRandomizer();
     }
 
     private void BindCamera() {
@@ -18,4 +19,10 @@ public class SingleInstaller : MonoInstaller {
     private void BindValuteFormatter() {
         Container.Bind<NumberFormatter>().AsSingle().NonLazy();
     }
+    
+    private void BindNicknameRandomizer() {
+        Container.Bind<NicknameRandomizer>().AsSingle().NonLazy();
+    }
+    
+
 }

@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/_MODULES/Architecture_M" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/_MODULES/LuringPlayer_M" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/_MODULES/MediaKit_M" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/_MODULES/MirraSDK_M" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/_MODULES/SanyaBeerExtension" vcs="Git" />

@@ -6,4 +6,6 @@ public class LocalizationData : LocalizationDataBase
 {
     [Header("Для  больших чисел")]
     public string[] Suffixies = {"", "K", "M", "B", "T", "Кв", "Ка"};
+
+    public string[] BotsPhrases;
 }

@@ -28,6 +28,19 @@ public class GameData : GameDataBase
     [field: SerializeField] public PairedValue<float> ZoomDiapasone  { get; private set; }
     [field: SerializeField] public float MinSensValue  { get; private set; }
     
+    // Боты (потом уберу ненужное)
+    [field: Header("БОТЫ")]
+    [field: SerializeField] public PairedValue<int> CountSpeakingBotsPerTime  { get; private set; }
+    [field: SerializeField] public PairedValue<float> TimeToSpeak { get; private set; }
+    [field: SerializeField, Range(0,1)] public float ChanseToChangeSkin { get; private set; }
+    [field: SerializeField, Range(0,1)] public float ChanseToChangeNickname { get; private set; }
+    
+    [field: Header("Movement")]
+    [field: SerializeField] public float RotationSpeed { get; private set; }
+    [field: SerializeField, Range(0,1)] public float ChanceToJump { get; private set; }
+    [field: SerializeField, Range(0,1)] public float ChanseToGoPlayer { get; private set; }
+    [field: SerializeField] public PairedValue<float> StoppingDistance { get; private set; }
+    [field: SerializeField] public PairedValue<float> TimeToStayOnPoint { get; private set; }
     
     
 }

@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Threading;
+using _PROJECT.Scripts.Helpers;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 public class BotAnimator : MonoBehaviour {
     private static readonly int Jump = Animator.StringToHash("jump");
@@ -33,13 +36,24 @@ public class BotAnimator : MonoBehaviour {
         }
     }
 
-    
+    private CancellationTokenSource _tokenSource;
     private void OnStartWandering(bool isRunning) {
+        UniTaskHelper.DisposeTask(ref _tokenSource);
+        _tokenSource = new CancellationTokenSource();
+        SetWalkLogicLater(isRunning, _tokenSource.Token).Forget();
+    }
+
+    private async UniTask SetWalkLogicLater(bool isRunning, CancellationToken token) {
+        // Ждем 5 кадров через счетчик чтоб анимка заработала
+        int framesToWait = 5;
+        await UniTask.WaitUntil(() => 
+        {
+            framesToWait--;
+            return framesToWait <= 0;
+        }, cancellationToken: token);
+        
+        
         _animator.SetBool(Run, isRunning);
-        _animator.Update(0f);
-        bool actualValue = _animator.GetBool(Run);
-        Debug.Log($"OnStartWandering: установил {isRunning}, реально в аниматоре: {actualValue}");
-        Debug.Log("OnStartWandering:  " + isRunning);
         if (_skinController!=null) {
             _skinController.EnableShadow();
         }

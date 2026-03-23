@@ -47,7 +47,7 @@ MonoBehaviour:
     <ChanseToGoPlayer>k__BackingField: 0.1
     <StoppingDistance>k__BackingField:
       <From>k__BackingField: 0
-      <To>k__BackingField: 0
+      <To>k__BackingField: 4
     <TimeToStayOnPoint>k__BackingField:
       <From>k__BackingField: 5
       <To>k__BackingField: 10

@@ -42,7 +42,8 @@ public class BotWander : MonoBehaviour, IBotBehaviour {
         Eblaning = true;
         // Сначала уведомить о начале движения
         StartWandering?.Invoke(true); // ← Вызвать ДО старта асинхронных задач
-    
+        _walkingParticles.Play();
+
         // Потом запускать циклы
         LifeCycleAsync(_botTokenSource.Token).Forget();
         MonitorMovementAsync(_botTokenSource.Token).Forget();
@@ -124,7 +125,7 @@ public class BotWander : MonoBehaviour, IBotBehaviour {
     
     [SerializeField] private float _jumpDuration;
     private async UniTask FakeJump(CancellationToken token) {
-        float height = _gameData.JumpForce;
+        float height = _gameData.JumpForce / 2f;
         float t = 0f;
 
         _jumpParticlesController.Play();

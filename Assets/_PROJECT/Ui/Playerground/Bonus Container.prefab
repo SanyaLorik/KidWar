@@ -334,6 +334,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85386253989985490}
     m_Modifications:
+    - target: {fileID: 798003842219671852, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Name
+      value: Bonus Button_3
+      objectReference: {fileID: 0}
     - target: {fileID: 2250513150702047470, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -365,6 +369,14 @@ PrefabInstance:
     - target: {fileID: 3189321453220467156, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4065280947177340950, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Name
+      value: Bonus Button_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276588864401953040, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Name
+      value: Bonus Button_1
       objectReference: {fileID: 0}
     - target: {fileID: 6644053897560697203, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
       propertyPath: m_Pivot.x

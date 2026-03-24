@@ -25,7 +25,6 @@ public class TrajectoryVisualize3D : MonoBehaviour
     [SerializeField] private GameObject _trajectoryCanvas;
 
 
-    private Camera _mainCamera;
     private Vector3 _throwDirection;
     // Будет не только мышка нарушка но еще джойстик а еще бот сможет сам выбирать
     private Mouse _mouse = Mouse.current;
@@ -34,12 +33,10 @@ public class TrajectoryVisualize3D : MonoBehaviour
     public float CurrentVerticalAngle { get; private set; }
 
     private void Start() {
-        _mainCamera = Camera.main;
         SetActiveTrajectoryVisual(false);
     }
     
     private void Update() {
-        
         UpdateThrowDirection();
         DrawTrajectory();
     }
@@ -49,8 +46,6 @@ public class TrajectoryVisualize3D : MonoBehaviour
         _trajectoryLine.gameObject.SetActive(state);
     }
     
-
- 
 
     private void UpdateThrowDirection() {
         Vector2 _mouseDelta = _mouse.delta.ReadValue();

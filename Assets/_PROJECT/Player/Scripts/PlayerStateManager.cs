@@ -33,10 +33,10 @@ public class PlayerStateManager : MonoBehaviour{
         _playerMovement.Floored += PlayerMovementOnFloored;
         _playerMovement.JumpPressed += PlayerMovementOnJumpPressed;
         _playerMovement.DoubleJumpPressed += PlayerMovementOnJumpPressed;
-        _throwGameManager.GameStarted += OnGameStarted;
+        _throwGameManager.GameStarted += OnThrowGameStarted;
     }
 
-    private void OnGameStarted(bool playerGoPlay) {
+    private void OnThrowGameStarted(bool playerGoPlay) {
         ChangePlayerState(playerGoPlay ? PlayerState.Play : PlayerState.InSpawn);
         if (playerGoPlay) {
             _objectsToShowInPlay.ActiveSelf();
@@ -62,6 +62,8 @@ public class PlayerStateManager : MonoBehaviour{
         if (_saver.GetSave<GameSave>().IsBoughtPurchase) {
             _interstitialActivity.DisableInterstitial();
         }
+
+        OnThrowGameStarted(false);
     }
 
 

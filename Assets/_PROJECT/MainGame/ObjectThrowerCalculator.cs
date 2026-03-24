@@ -33,8 +33,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     [Header("Коэффициенты меньшего и большего угла")]
     [SerializeField] private float _minAngleRatio;
     
-    
+    [Header("Базовая высота")]
     [SerializeField] private float _baseHeight = 10f;
+    [Header("Высота если под 0 градусов")]
+    [SerializeField] private float _minTrajectoryLength;
     
     [Header("Скорость полёта")] 
     [SerializeField] private float _flySpeed;
@@ -45,6 +47,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     [field: Header("Отступ от игрока при макс броске")]
     [field: SerializeField] public float OffsetToMaxThrow { get; private set; }
     [SerializeField] private Transform _floorPoint;
+    
+    [Header("Задержка перед броском в секундах")]
+    [SerializeField] private float _durationBeforeThrow = .3f;
+    
     
     
     private float _initialDistance;
@@ -65,7 +71,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     private float _trajectoryLength;
     private float _flightDuration;
     
-    public void ThrowNewObject(float angle, Transform obj, Transform throwPoint, Transform enemyPoint) {
+    public void ThrowNewObject(float angle, ThrowableObject obj, Transform throwPoint, Transform enemyPoint) {
         _throwDistance = CalculateThrowDistance(angle);
         _height = CalculateHeight(angle);
         _trajectoryLength = CalculateTrajectoryLength(_throwDistance, _height);
@@ -87,17 +93,16 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     private float CalculateHeight(float angle) {
         return _baseHeight * angle / _angleDiapasone.To;
     }
-
     
     private async UniTask ThrowObject(
-        Transform throwObject, 
+        ThrowableObject throwObject, 
         Transform playerThrowPoint, 
         Transform enemyPoint, 
         CancellationToken token
     ) {
         // задержка перед броском, можна для анимации
-        await UniTask.WaitForSeconds(.3f, cancellationToken: token);
-        ObjectThrowed?.Invoke(throwObject);
+        await UniTask.WaitForSeconds(_durationBeforeThrow, cancellationToken: token);
+        ObjectThrowed?.Invoke(throwObject.transform);
         
         
         Vector3 initialPos = playerThrowPoint.position;
@@ -112,11 +117,11 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         
         
         Debug.Log("Бросок!");
-        Transform throwInstance = Instantiate(throwObject);
+        ThrowableObject throwInstance = Instantiate(throwObject);
 
         
-        throwInstance.position = initialPos;
-        ObjectThrowed?.Invoke(throwInstance);
+        throwInstance.transform.position = initialPos;
+        ObjectThrowed?.Invoke(throwInstance.transform);
 
   
         float elapsedTime = 0f;
@@ -132,6 +137,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
             await UniTask.Yield();
         }
         Debug.Log("Обьект упал! " + throwInstance.transform.position);
+        throwInstance.ObjectIsFall();
         await UniTask.WaitForSeconds(1f, cancellationToken: token);
         ObjectFalled?.Invoke();
     }  
@@ -141,7 +147,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         Debug.Log("_initialDistance = " + _initialDistance);
     }
     
-    // Метод для аппроксимации длины траектории
+
     private float CalculateTrajectoryLength(float distance, float height) {
         // Аппроксимация длины дуги параболы
         // Для параболы y = 4*height * (x/distance) * (1 - x/distance)
@@ -152,8 +158,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         // Формула длины дуги параболы (приближенная)
         float term1 = Mathf.Sqrt(a * a + 4 * b * b);
         float term2 = (a * a) / (2 * b) * Mathf.Log((2 * b + term1) / a);
-    
-        return term1 + term2;
+
+        float trajectoryLength = Mathf.Max((term1 + term2), _minTrajectoryLength);
+        Debug.Log("trajectoryLength = " + trajectoryLength);
+        return trajectoryLength;
     }
     
 

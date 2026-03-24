@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 905650825881342119}
   - component: {fileID: 8549424130676817859}
   - component: {fileID: 1298811877278385144}
+  - component: {fileID: 669403665764818371}
   m_Layer: 0
   m_Name: Labuba
   m_TagString: Untagged
@@ -73,6 +74,20 @@ MonoBehaviour:
     <Ease>k__BackingField: 1
   <IsAutoStart>k__BackingField: 1
   _endAngleValue: {x: 0, y: 0, z: 360}
+--- !u!114 &669403665764818371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209484009150214096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4760ae40f67bd2645be55734ec7b47a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThrowableObject
+  _animation: {fileID: 1298811877278385144}
+  <Force>k__BackingField: 10
 --- !u!1001 &934103248038359030
 PrefabInstance:
   m_ObjectHideFlags: 0

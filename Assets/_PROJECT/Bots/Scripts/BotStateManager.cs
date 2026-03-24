@@ -21,6 +21,7 @@ public class BotStateManager : MonoBehaviour {
     
     private IBotBehaviour _currentBotBehaviour;
     private NavMeshAgent _agent;
+    private Collider _botCollider;
 
     public bool IsPlaying { get; private set; }
     
@@ -30,6 +31,7 @@ public class BotStateManager : MonoBehaviour {
         _botWander = GetComponent<BotWander>();
         _botMonolog = GetComponent<BotMonolog>();
         _agent = GetComponent<NavMeshAgent>();
+        _botCollider = GetComponent<Collider>();
         Destroy(_skinInstance);
     }
     
@@ -39,10 +41,12 @@ public class BotStateManager : MonoBehaviour {
         if (goPlay) {
             _currentBotBehaviour?.Exit();
             _lastSpawnPoint = transform.position;
+            _botCollider.enabled = true;
         }
         // Возвращение на спавн
         else if (IsPlaying) {
             TpInPoint(_lastSpawnPoint);
+            _botCollider.enabled = false;
         }
         IsPlaying = goPlay;
         _agent.enabled = !goPlay;

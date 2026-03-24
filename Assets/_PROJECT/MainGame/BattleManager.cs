@@ -7,7 +7,9 @@ using Zenject;
 // Настройка положения игроков во время игры, поворот и тп
 // Битва, смена ходов, уведомления о ходах которая будет слухать камера!
 public class BattleManager : MonoBehaviour {
-    [SerializeField] private Transform _labuba;
+    // БУдет выбираться рулеткой шо кинуть может
+    [SerializeField] private ThrowableObject _labuba;
+    [SerializeField] private int PlayersLifeCount;
     
     // Игрок
     [SerializeField] private ObjectThrower _mainPlayer;
@@ -36,7 +38,7 @@ public class BattleManager : MonoBehaviour {
     
     
     /// <summary>
-    /// Поидее надо будет указывать режим PVP PVB
+    /// Поидее надо будет выбирать режим PVP PVB
     /// </summary>
     public void InitForNewGame() {
         // Настройка первого игрока
@@ -46,9 +48,11 @@ public class BattleManager : MonoBehaviour {
         
         // Настройка второго игрока
         Transform secondPlayerPoint = _throwerCalculator.RightPoint;
-        BotStateManager secondPlayer = _botsMainManager.GetRandomBot();
+        BotStateManager secondPlayer = _botsMainManager.GetRandomBotToBattle();
         secondPlayer.TpInPoint(secondPlayerPoint.position);
         secondPlayer.RotateToTarget(_throwerCalculator.LeftPoint.position);
+        
+        
         _secondPlayer = secondPlayer.BotThrower;
         GoBattle().Forget();
     }

@@ -14,7 +14,6 @@ public class BotAnimator : MonoBehaviour {
     public void SetModelData(Avatar avatar, SkinElementsController controller) {
         _animator.avatar = avatar;
         _skinController = controller;
-        Debug.Log("SetModelData");
     }
 
 
@@ -23,7 +22,6 @@ public class BotAnimator : MonoBehaviour {
         _botWander.OnJump += OnJump;
         _botWander.StartWandering += OnStartWandering;
         _botWander.Grounded += BotGrounded;
-        Debug.Log("InitAnimator");
     }
 
     private void BotGrounded(bool grounded) {

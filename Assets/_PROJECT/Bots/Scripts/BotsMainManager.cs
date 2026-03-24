@@ -40,11 +40,11 @@ public class BotsMainManager : IInitializable, IDisposable {
         }
     }
     
-    public BotStateManager GetRandomBot() {
+    public BotStateManager GetRandomBotToBattle() {
         // Сбросить всех
         _bots.ForEach(bot => bot.SetBotPlayStatus(false));
         // Выбор нового
-        var bot = _bots.GetRandomElement();
+        BotStateManager bot = _bots.GetRandomElement();
         bot.SetBotPlayStatus(true);
 
         return bot;

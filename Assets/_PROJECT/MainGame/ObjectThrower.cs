@@ -13,7 +13,9 @@ public class ObjectThrower : MonoBehaviour {
 
 
     private Mouse _mouse;
-    public bool AllowToThrow { get; private set; }
+    private bool _allowToThrow;
+
+    public int CurrentLifesCount { get; private set; }
 
     public Transform ThrowPoint =>  _throwVisualize.ThrowPoint;
     public Transform PointToCameraFocus =>  _throwVisualize.PointToCameraFocus;
@@ -23,22 +25,29 @@ public class ObjectThrower : MonoBehaviour {
     [Inject] private BattleManager _battleManager;
 
     
-    
     private void Start() {
         _mouse = Mouse.current;
     }
 
     
     private void Update() {
-        if (_mouse.leftButton.wasReleasedThisFrame && AllowToThrow) {
+        if (_mouse.leftButton.wasReleasedThisFrame && _allowToThrow) {
             _battleManager.DoStep(this);
         }
     }
 
     
     public void SetAllowToThrow(bool state) {
-        AllowToThrow = state;
+        _allowToThrow = state;
         _throwVisualize.SetActiveTrajectoryVisual(state);
+        // поведение бота, както сымитировать бросок
+        if (_allowToThrow == state && !PlayerHandle) {
+            
+        }
+    }
+    
+    public void SetPlayerHandle(bool isPlayerHandle) {
+        PlayerHandle = isPlayerHandle;
     }
 
 

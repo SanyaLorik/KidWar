@@ -9,7 +9,6 @@ using Zenject;
 public class CameraOrbitalController : MonoBehaviour {
     [SerializeField] private CinemachineCamera _cinemachineCamera;
     
-    
     [Header("Точка движения игрока")]
     [SerializeField] private Transform _walkPoint; 
     
@@ -53,6 +52,7 @@ public class CameraOrbitalController : MonoBehaviour {
     [InjectOptional] private IOrbitalRotationInput _orbitalRotationInput;
     [Inject] private IDeviceTypeProvider _deviceType;
     [Inject] private IInputActivity _inputActivity;
+    [Inject] private BattleManager _battleManager;
 
 
     private void OnEnable()  {
@@ -63,9 +63,18 @@ public class CameraOrbitalController : MonoBehaviour {
 
     
     // Будет менеджер кидать чей ход точку 
-    private void OnObjectThrowed(Transform point) {
+    public void ChangeCameraFollow(Transform point) {
         SetFollowPoint(point);
-        _orbitalFollow.HorizontalAxis.Value = -90f;
+        _orbitalFollow.HorizontalAxis.Value = _gameData.HorizontalAxisValueToThrow;
+        _orbitalFollow.VerticalAxis.Value = _gameData.VerticalAxisValueToThrow;
+        ChangeCameraZoomPercent(_gameData.ZoomPercentInThrowGame);
+        
+        // ForbidRotate(true);
+        // ForbidZoom(true);
+    }
+
+    public void ResetCameraBeforePlay() {
+        
     }
 
     private void SetFollowPoint(Transform target) {

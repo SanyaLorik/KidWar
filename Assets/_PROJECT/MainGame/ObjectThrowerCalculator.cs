@@ -4,8 +4,14 @@ using _PROJECT.Scripts.Helpers;
 using Cysharp.Threading.Tasks;
 using SanyaBeerExtension;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
+
+
+public enum ThrowPositionType {
+    Left,
+    Right
+}
+
 
 /// <summary>
 /// Базовый класс для кидателя обьектов
@@ -20,10 +26,6 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     [Header("Сила броска")] 
     [Range(0,1), SerializeField] private float _throwForce;
     
-    
-    [Header("Траектория игрока 1")]
-    [SerializeField] private TrajectoryVisualize3D _playerAngle;
-    
     [Header("Диапазон угла бросания")]
     [SerializeField] private PairedValue<float> _angleDiapasone;
     [Header("Угол при котором будет максимальный бросок")]
@@ -32,109 +34,112 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     [SerializeField] private float _minAngleRatio;
     
     
-    [SerializeField] private GameObject _throwObject;
-    [SerializeField] private Transform _playerThrowPoint;
-    [SerializeField] private Transform _floorPoint;
-    
-    [SerializeField] private float _testHeight;
+    [SerializeField] private float _baseHeight = 10f;
     
     [Header("Скорость полёта")] 
-    [SerializeField] private float _fySpeed;
+    [SerializeField] private float _flySpeed;
+    
+    [field: Header("Инфа по уровню")]
+    [field: SerializeField] public Transform LeftPoint { get; private set; }
+    [field: SerializeField] public Transform RightPoint { get; private set; }
+    [field: Header("Отступ от игрока при макс броске")]
+    [field: SerializeField] public float OffsetToMaxThrow { get; private set; }
+    [SerializeField] private Transform _floorPoint;
     
     
-    
-    private Mouse _mouse;
-    private bool _allowToThrow = true;
     private float _initialDistance;
     private CancellationTokenSource _tokenSource;
     
     
     public event Action<Transform> ObjectThrowed;
+    public event Action ObjectFalled;
     
-    [Inject] PlayerMovement _playerMovement;
-    [Inject] PlayersIniter _playersIniter;
 
-
-    void Start() {
-        _mouse = Mouse.current;
+    private void Start() {
         CalculateInitialDistance();
     }
     
-    private void Update() {
-        if (_mouse.leftButton.wasReleasedThisFrame && _allowToThrow) {
-            ThrowNewObject();
-        }
-    }
-
-    // Вынести
-    private void CalculateInitialDistance() {
-        _initialDistance = Vector3.Distance(_playersIniter.LeftPoint.position, _playersIniter.RightPoint.position) 
-                           + _playersIniter.OffsetToMaxThrow;
-        Debug.Log("_initialDistance = " + _initialDistance);
-    }
+    private float _throwDistance;
+    private float _angleRatio;
+    private float _height;
+    private float _trajectoryLength;
+    private float _flightDuration;
     
-
-    private void ThrowNewObject() {
-        _allowToThrow = false;
-        float distance = CalculateThrowDistance();
-        float height = CalculateHeight();
-
+    public void ThrowNewObject(float angle, Transform obj, Transform throwPoint, Transform enemyPoint) {
+        _throwDistance = CalculateThrowDistance(angle);
+        _height = CalculateHeight(angle);
+        _trajectoryLength = CalculateTrajectoryLength(_throwDistance, _height);
+        _flightDuration = _trajectoryLength / _flySpeed;
+        
+        
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();
-        ThrowObject(distance, height, _tokenSource.Token).Forget();
+        ThrowObject(obj, throwPoint, enemyPoint, _tokenSource.Token).Forget();
     }
 
-    private float CalculateThrowDistance() {
-        CalculateInitialDistance();
-        float angleRatio = CalculateAngleRatio(_playerAngle.CurrentVerticalAngle);
-        float distance = _initialDistance * _throwForce * angleRatio + _windForce;
-        Debug.Log("distance " + distance);
-        return distance;
+    private float CalculateThrowDistance(float angle) {
+        _angleRatio = CalculateAngleRatio(angle);
+        _throwDistance = _initialDistance * _throwForce * _angleRatio + _windForce;
+        Debug.Log("distance " + _throwDistance);
+        return _throwDistance;
     }
 
-    private float CalculateHeight() {
-        float height;
-        height = _testHeight * _playerAngle.CurrentVerticalAngle / _angleDiapasone.To;
-        return height;
+    private float CalculateHeight(float angle) {
+        return _baseHeight * angle / _angleDiapasone.To;
     }
+
     
-    private async UniTask ThrowObject(float distance, float height, CancellationToken token) {
+    private async UniTask ThrowObject(
+        Transform throwObject, 
+        Transform playerThrowPoint, 
+        Transform enemyPoint, 
+        CancellationToken token
+    ) {
         // задержка перед броском, можна для анимации
         await UniTask.WaitForSeconds(.3f, cancellationToken: token);
-        // Кидаем пока из точки игрока в правую точку
-        Vector3 initialPos = _playerThrowPoint.position;
-        Vector3 targetPos = initialPos;
-        targetPos.z += distance;
+        ObjectThrowed?.Invoke(throwObject);
+        
+        
+        Vector3 initialPos = playerThrowPoint.position;
+        Vector3 targetPos = initialPos; // начало в точке игрока
+        
+        // Логика направления
+        float sign = playerThrowPoint.position.z < enemyPoint.position.z ? 1 : -1;
+            
+            
+        targetPos.z += _throwDistance * sign;
         targetPos.y = _floorPoint.position.y;
         
+        
         Debug.Log("Бросок!");
-        Transform throwInstance = Instantiate(_throwObject.transform);
+        Transform throwInstance = Instantiate(throwObject);
+
+        
         throwInstance.position = initialPos;
         ObjectThrowed?.Invoke(throwInstance);
 
-        float trajectoryLength = CalculateTrajectoryLength(distance, height);
-        float flightDuration = trajectoryLength / _fySpeed;
-        
-        
-        
+  
         float elapsedTime = 0f;
-        while (!token.IsCancellationRequested && elapsedTime < flightDuration) {
+        while (!token.IsCancellationRequested && elapsedTime < _flightDuration) {
             elapsedTime += Time.deltaTime;
-            float progress =  elapsedTime / flightDuration;
+            float progress =  elapsedTime / _flightDuration;
             Vector3 newPos = Vector3.Lerp(initialPos, targetPos, progress);
             
-            float currentHeight = height * _throwCurve.Evaluate(progress);
+            float currentHeight = _height * _throwCurve.Evaluate(progress);
             newPos.y += currentHeight;
             
             throwInstance.transform.position = newPos;
             await UniTask.Yield();
         }
         Debug.Log("Обьект упал! " + throwInstance.transform.position);
-        _allowToThrow = true;
         await UniTask.WaitForSeconds(1f, cancellationToken: token);
-        ObjectThrowed?.Invoke(_playerMovement.transform);
+        ObjectFalled?.Invoke();
     }  
     
+    private void CalculateInitialDistance() {
+        _initialDistance = Vector3.Distance(LeftPoint.position, RightPoint.position) + OffsetToMaxThrow;
+        Debug.Log("_initialDistance = " + _initialDistance);
+    }
     
     // Метод для аппроксимации длины траектории
     private float CalculateTrajectoryLength(float distance, float height) {
@@ -155,7 +160,6 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     private float CalculateAngleRatio(float angle) {
         float diff = Mathf.Abs(angle - _angleWithMaxDistance);
         diff = Mathf.Clamp(diff, _angleDiapasone.From, _angleWithMaxDistance);
-        
         
         float ratio = 1f - Mathf.Clamp01(diff / _angleWithMaxDistance);
         ratio = Mathf.Max(_minAngleRatio, ratio);

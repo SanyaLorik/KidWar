@@ -28,6 +28,9 @@ MonoBehaviour:
     <FlightCameraFov>k__BackingField: 0
     <DefaultCameraSens>k__BackingField: 0.137
     <ZoomSpeed>k__BackingField: 0.1
+    <HorizontalAxisValueToThrow>k__BackingField: -84.62
+    <VerticalAxisValueToThrow>k__BackingField: 8.823097
+    <ZoomPercentInThrowGame>k__BackingField: 0.5
     <JoystickSensivityMultiplier>k__BackingField: 500
     <MouseSensivityMultiplier>k__BackingField: 0.4
     <ZoomDiapasone>k__BackingField:

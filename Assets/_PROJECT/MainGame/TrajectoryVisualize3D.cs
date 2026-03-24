@@ -3,11 +3,17 @@ using SanyaBeerExtension;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+/// <summary>
+/// Также может как бот выбирать так и игрок
+/// </summary>
 public class TrajectoryVisualize3D : MonoBehaviour
 {
     [Header("Ссылки")]
-    [SerializeField] private Transform throwPoint;     // Точка вылета снаряда (пустой GameObject)
-    [SerializeField] private LineRenderer trajectoryLine; // Линия траектории
+    [field: SerializeField] public Transform ThrowPoint { get; private set; }
+    [field: SerializeField] public Transform PointToCameraFocus { get; private set; }
+    
+    [SerializeField] private LineRenderer _trajectoryLine; // Линия траектории
     
     [Header("Ограничения угла")]
     [SerializeField] private float maxUpAngle = 90f;      // Максимальный угол вверх
@@ -19,44 +25,38 @@ public class TrajectoryVisualize3D : MonoBehaviour
     [SerializeField] private GameObject _trajectoryCanvas;
 
 
-    private Camera mainCamera;
-    private Vector3 throwDirection;
-    private Mouse mouse = Mouse.current;
+    private Camera _mainCamera;
+    private Vector3 _throwDirection;
+    // Будет не только мышка нарушка но еще джойстик а еще бот сможет сам выбирать
+    private Mouse _mouse = Mouse.current;
     
-
-    public event Action<float> AngleChoosed;
     
     public float CurrentVerticalAngle { get; private set; }
-    
-    private void OnEnable() {
-        
-    }
+
     private void Start() {
-        mainCamera = Camera.main;
-        trajectoryLine.gameObject.DisactiveSelf();
+        _mainCamera = Camera.main;
+        SetActiveTrajectoryVisual(false);
     }
     
     private void Update() {
+        
         UpdateThrowDirection();
         DrawTrajectory();
     }
-    
-    
-    private void OnChangeState(PlayerState state) {
-        if (state == PlayerState.Play) {
-            _trajectoryCanvas.ActiveSelf();
-        }
-        else {
-            _trajectoryCanvas.DisactiveSelf();
-        }
+
+    public void SetActiveTrajectoryVisual(bool state) {
+        _trajectoryCanvas.SetActive(state);
+        _trajectoryLine.gameObject.SetActive(state);
     }
+    
+
  
 
     private void UpdateThrowDirection() {
-        Vector2 mouseDelta = mouse.delta.ReadValue();
+        Vector2 _mouseDelta = _mouse.delta.ReadValue();
         int sign = transform.forward.z > 0 ? 1 : -1;
         // Накопление угла
-        CurrentVerticalAngle += mouseDelta.y * _sensitivity;
+        CurrentVerticalAngle += _mouseDelta.y * _sensitivity;
         CurrentVerticalAngle = Mathf.Clamp(CurrentVerticalAngle, -maxDownAngle, maxUpAngle);
     
         // Направление вперед от игрока
@@ -66,18 +66,18 @@ public class TrajectoryVisualize3D : MonoBehaviour
     
         // Поворачиваем вокруг правого вектора игрока (или глобальной оси)
         Quaternion rotation = Quaternion.AngleAxis(-CurrentVerticalAngle * sign, Vector3.right);
-        throwDirection = rotation * throwBaseDirection; 
+        _throwDirection = rotation * throwBaseDirection; 
     }
 
 
     private void DrawTrajectory() {
         // Конечная точка: startPos + направление * длина
-        Vector3 endPos = throwPoint.position + throwDirection * _lineLength;
+        Vector3 endPos = ThrowPoint.position + _throwDirection * _lineLength;
     
         // Просто рисуем прямую линию из 2 точек
-        trajectoryLine.positionCount = 2;
-        trajectoryLine.SetPosition(0, throwPoint.position);
-        trajectoryLine.SetPosition(1, endPos);
+        _trajectoryLine.positionCount = 2;
+        _trajectoryLine.SetPosition(0, ThrowPoint.position);
+        _trajectoryLine.SetPosition(1, endPos);
     }
     
 }

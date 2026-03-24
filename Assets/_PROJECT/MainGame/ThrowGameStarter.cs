@@ -12,18 +12,14 @@ public class ThrowGameStarter : MonoBehaviour  {
     [SerializeField] private float _timerDuration;
     [SerializeField] private TextMeshProUGUI _timerText;
 
-    [Inject] private PlayersIniter _playersIniter;
+    [Inject] private BattleManager _battleManager;
     [Inject] private LocalizationData _localization;
 
     private CancellationTokenSource _tokenSource;
     
-    
-    
-    
     public event Action<bool> GameStarted;
     
-    
-    
+
     private void Start() {
         StartTimer();
     }
@@ -53,7 +49,7 @@ public class ThrowGameStarter : MonoBehaviour  {
 
     // Пока просто с ботиком 
     private void StartGame() {
-        _playersIniter.InitForNewGame();
+        _battleManager.InitForNewGame();
         Debug.Log("Старт игры!");
         GameStarted?.Invoke(true);
     }

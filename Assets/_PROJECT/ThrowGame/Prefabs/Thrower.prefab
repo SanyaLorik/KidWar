@@ -161,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 1884400226259138182}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.027, z: -0.748}
+  m_LocalPosition: {x: 0, y: -0.62, z: -0.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -395,6 +395,7 @@ GameObject:
   - component: {fileID: 3768071524366892268}
   - component: {fileID: 7969541616269673994}
   - component: {fileID: 5175570297498162569}
+  - component: {fileID: 3951249880273504875}
   m_Layer: 0
   m_Name: Thrower
   m_TagString: Untagged
@@ -452,5 +453,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ba0505c8401b0498f2edc7f49b8da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectThrower
-  _throwVisualize: {fileID: 0}
+  _throwVisualize: {fileID: 7969541616269673994}
   PlayerHandle: 1
+--- !u!65 &3951249880273504875
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7249126386731377980}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7223678, y: 3.5503764, z: 1.0953846}
+  m_Center: {x: -0.0142867565, y: -1.5465539, z: -1.8711233}

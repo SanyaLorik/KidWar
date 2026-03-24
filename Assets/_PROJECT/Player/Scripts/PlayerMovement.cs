@@ -53,37 +53,38 @@ public class PlayerMovement : MonoBehaviour {
     
     private void OnEnable() {
         _inputJumping.OnJumped += OnJump;
-        _stateManager.ChangeState += StateManagerOnChangeState;
     }
     
     
     private void OnDisable() {
         _inputJumping.OnJumped -= OnJump;
-        _stateManager.ChangeState -= StateManagerOnChangeState;
     }
     
 
-    private void StateManagerOnChangeState(PlayerState state) {
-        if (state == PlayerState.Play) {
-            _inputActivity.Disable();
-        }
-        else {
-            _inputActivity.Enable();
-        }
-    }
 
-
-
-    
-    public void TpPlayerInPoint(Transform target, float diffToSpawn = 0) {
-        bool isNearY = Vector3.Magnitude(transform.position - target.position) < diffToSpawn;
+    private Vector3 _posBeforeTeleport;
+    public void TpPlayerInPoint(Vector3 target, float diffToSpawn = 0) {
+        _posBeforeTeleport = transform.position;
+        bool isNearY = Vector3.Magnitude(transform.position - target) < diffToSpawn;
         if(isNearY) return;
-        _controller.enabled = false;
-        transform.position = target.position;
+        SetCharacterControllerState(false);
+        transform.position = target;
+        SetCharacterControllerState(true);
     
         _verticalVelocity = 0; // Сброс скорости
         _jumpsUsed = 0; // Сброс прыжков
     }
+
+    public void SetPlayStatus(bool goPlay) {
+        if (!goPlay) {
+            TpPlayerInPoint(_posBeforeTeleport);
+            _inputActivity.Enable();
+        }
+        else {
+            _inputActivity.Disable();
+        }
+    }
+
     
     public void OnJump() {
         if (_jumpsUsed == 0) {

@@ -11,11 +11,7 @@ public class CameraOrbitalController : MonoBehaviour {
     
     [Header("Точка движения игрока")]
     [SerializeField] private Transform _walkPoint; 
-    
-    
-    [Header("Левая и правая точка кидания")]
-    [SerializeField] private Transform _rightPoint;
-    [SerializeField] private Transform _leftPoint;
+
 
     [SerializeField] private CinemachineOrbitalFollow _orbitalFollow;
     [SerializeField] private float _cameraSaveDelay = 1f;
@@ -62,8 +58,10 @@ public class CameraOrbitalController : MonoBehaviour {
     }
 
     
-    // Будет менеджер кидать чей ход точку 
-    public void ChangeCameraFollow(Transform point) {
+    // Будет менеджер кидать чей ход точку
+    private float _zoomBeforeGame;
+    public void SetCameraToPlayThrow(Transform point) {
+        _zoomBeforeGame = CurrentFovPercent;
         SetFollowPoint(point);
         _orbitalFollow.HorizontalAxis.Value = _gameData.HorizontalAxisValueToThrow;
         _orbitalFollow.VerticalAxis.Value = _gameData.VerticalAxisValueToThrow;
@@ -74,7 +72,10 @@ public class CameraOrbitalController : MonoBehaviour {
     }
 
     public void ResetCameraBeforePlay() {
-        
+        ForbidRotate(false);
+        ForbidZoom(false);
+        SetFollowPoint(_walkPoint);
+        ChangeCameraZoomPercent(_zoomBeforeGame);
     }
 
     private void SetFollowPoint(Transform target) {

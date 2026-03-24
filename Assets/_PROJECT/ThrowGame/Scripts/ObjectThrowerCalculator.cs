@@ -1,16 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using _PROJECT.Scripts.Helpers;
 using Cysharp.Threading.Tasks;
 using SanyaBeerExtension;
 using UnityEngine;
 using Zenject;
-
-
-public enum ThrowPositionType {
-    Left,
-    Right
-}
 
 
 /// <summary>
@@ -55,11 +50,26 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     
     private float _initialDistance;
     private CancellationTokenSource _tokenSource;
+    private List<ThrowableObject> _throwInstances = new();
     
     
     public event Action<Transform> ObjectThrowed;
     public event Action ObjectFalled;
     
+
+    
+    [Inject] ThrowGameStarter _gameStarter;
+
+    private void OnEnable() {
+        _gameStarter.GameStarted += BattleManagerOnGameIsStarted;
+    }
+
+    private void BattleManagerOnGameIsStarted(bool isStarted) {
+        if (isStarted) {
+            _throwInstances.ForEach(obj => Destroy(obj.gameObject));
+            _throwInstances.Clear();
+        }
+    }
 
     private void Start() {
         CalculateInitialDistance();
@@ -86,7 +96,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     private float CalculateThrowDistance(float angle) {
         _angleRatio = CalculateAngleRatio(angle);
         _throwDistance = _initialDistance * _throwForce * _angleRatio + _windForce;
-        Debug.Log("distance " + _throwDistance);
+        // Debug.Log("distance " + _throwDistance);
         return _throwDistance;
     }
 
@@ -118,14 +128,17 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         
         Debug.Log("Бросок!");
         ThrowableObject throwInstance = Instantiate(throwObject);
-
+        _throwInstances.Add(throwInstance);
         
         throwInstance.transform.position = initialPos;
         ObjectThrowed?.Invoke(throwInstance.transform);
 
   
         float elapsedTime = 0f;
-        while (!token.IsCancellationRequested && elapsedTime < _flightDuration) {
+        while (!token.IsCancellationRequested 
+               && elapsedTime < _flightDuration
+               && !throwInstance.ContactPlayer
+        ) {
             elapsedTime += Time.deltaTime;
             float progress =  elapsedTime / _flightDuration;
             Vector3 newPos = Vector3.Lerp(initialPos, targetPos, progress);
@@ -134,7 +147,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
             newPos.y += currentHeight;
             
             throwInstance.transform.position = newPos;
-            await UniTask.Yield();
+            await UniTask.WaitForFixedUpdate();
         }
         Debug.Log("Обьект упал! " + throwInstance.transform.position);
         throwInstance.ObjectIsFall();
@@ -171,7 +184,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         
         float ratio = 1f - Mathf.Clamp01(diff / _angleWithMaxDistance);
         ratio = Mathf.Max(_minAngleRatio, ratio);
-        Debug.Log($"Угол {angle}, ratio: {ratio}");
+        // Debug.Log($"Угол {angle}, ratio: {ratio}");
         return ratio;
     }
 }

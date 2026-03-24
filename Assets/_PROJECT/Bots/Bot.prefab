@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3667074117147502011}
   - component: {fileID: 1212541108296832897}
-  - component: {fileID: 3348576593049283747}
   - component: {fileID: 1402330233937831249}
   - component: {fileID: 7393878432037271427}
   - component: {fileID: 790296001332029354}
@@ -62,27 +61,6 @@ NavMeshAgent:
   m_BaseOffset: 0.18
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!65 &3348576593049283747
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593425612949582850}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 4.3223305, z: 1}
-  m_Center: {x: 0, y: 1.6611652, z: 0}
 --- !u!114 &1402330233937831249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +107,7 @@ MonoBehaviour:
   _skinParent: {fileID: 4005745868750855142}
   _botAnimator: {fileID: 586101920010288029}
   _skinInstance: {fileID: 7053059051747391328}
+  _botCollider: {fileID: 839309783632820333}
   <BotThrower>k__BackingField: {fileID: 8836954011182606223}
 --- !u!1 &734268474806474848
 GameObject:
@@ -685,6 +664,11 @@ PrefabInstance:
 --- !u!4 &665013286946164458 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3768071524366892268, guid: b9af0c26d58ebdf41bf84065b5648c88, type: 3}
+  m_PrefabInstance: {fileID: 4427173785194492422}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &839309783632820333 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3951249880273504875, guid: b9af0c26d58ebdf41bf84065b5648c88, type: 3}
   m_PrefabInstance: {fileID: 4427173785194492422}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6046369445922878476 stripped

@@ -9,18 +9,19 @@ using Zenject;
 public class BattleManager : MonoBehaviour {
     // БУдет выбираться рулеткой шо кинуть может
     [SerializeField] private ThrowableObject _labuba;
-    [SerializeField] private int PlayersLifeCount;
+    [SerializeField] private int PlayersHp;
     
     // Игрок
     [SerializeField] private ObjectThrower _mainPlayer;
-    private ObjectThrower _secondPlayer;
+    private ObjectThrower _secondPlayerBotThrower;
+    private BotStateManager _secondPlayerBotState;
     
     [Inject] PlayerMovement _playerMovement;
     [Inject] BotsMainManager _botsMainManager;
     [Inject] ObjectThrowerCalculator _throwerCalculator;
     [Inject] CameraOrbitalController _camera;
-    
-    
+    [Inject] ThrowGameStarter _throwGameStarter;
+
     
     private void OnEnable() {
         _throwerCalculator.ObjectThrowed += FocusCamera;
@@ -32,7 +33,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void FocusCamera(Transform obj) {
-        _camera.ChangeCameraFollow(obj);
+        _camera.SetCameraToPlayThrow(obj);
     }
 
     
@@ -42,46 +43,70 @@ public class BattleManager : MonoBehaviour {
     /// </summary>
     public void InitForNewGame() {
         // Настройка первого игрока
-        Transform playerPoint = _throwerCalculator.LeftPoint;
-        _playerMovement.TpPlayerInPoint(playerPoint);
+        _playerMovement.TpPlayerInPoint(_throwerCalculator.LeftPoint.position);
         _playerMovement.RotateToTarget(_throwerCalculator.RightPoint.position);
         
         // Настройка второго игрока
         Transform secondPlayerPoint = _throwerCalculator.RightPoint;
-        BotStateManager secondPlayer = _botsMainManager.GetRandomBotToBattle();
-        secondPlayer.TpInPoint(secondPlayerPoint.position);
-        secondPlayer.RotateToTarget(_throwerCalculator.LeftPoint.position);
+        _secondPlayerBotState = _botsMainManager.GetRandomBotToBattle();
         
+        _playerMovement.SetPlayStatus(true);
+        _secondPlayerBotState.SetPlayStatus(true);
         
-        _secondPlayer = secondPlayer.BotThrower;
+        _secondPlayerBotState.TpInPoint(secondPlayerPoint.position);
+        _secondPlayerBotState.RotateToTarget(_throwerCalculator.LeftPoint.position);
+        _secondPlayerBotThrower = _secondPlayerBotState.BotThrower;
+        
+        _mainPlayer.SetStartHp(PlayersHp);
+        _secondPlayerBotThrower.SetStartHp(PlayersHp);
+        
         GoBattle().Forget();
     }
 
     private bool _stepIsOver;
+    private bool GameIsOver => _mainPlayer.CurrentLifesCount == 0 ||  _secondPlayerBotThrower.CurrentLifesCount == 0;
+    
+    
     private async UniTask GoBattle() {
         // Пока без хп 10 ходов чисто
-        for (int i = 0; i < 10; i++) {
+        
+        while(!GameIsOver) {
             _mainPlayer.SetAllowToThrow(true);
             _stepIsOver = false;
             FocusCamera(_mainPlayer.PointToCameraFocus);
-            await UniTask.WaitUntil(() => _stepIsOver);
+            await UniTask.WaitUntil(() => _stepIsOver || GameIsOver);
             _mainPlayer.SetAllowToThrow(false);
             // както-то закончить ход игрока
             
             
-            _secondPlayer.SetAllowToThrow(true);
+            _secondPlayerBotThrower.SetAllowToThrow(true);
             _stepIsOver = false;
-            FocusCamera(_secondPlayer.PointToCameraFocus);
-            await UniTask.WaitUntil(() => _stepIsOver);
-            _secondPlayer.SetAllowToThrow(false);
+            FocusCamera(_secondPlayerBotThrower.PointToCameraFocus);
+            await UniTask.WaitUntil(() => _stepIsOver || GameIsOver);
+            _secondPlayerBotThrower.SetAllowToThrow(false);
         }
+
+        SetSpawnState();
+        Debug.Log("Игра закончилась нахуй!");
     }
 
 
+    private void SetSpawnState() {
+        _throwGameStarter.GameOver();
+        
+        _secondPlayerBotThrower.SetAllowToThrow(false);
+        _mainPlayer.SetAllowToThrow(false);
+        _camera.ResetCameraBeforePlay();
+        
+        _secondPlayerBotState.SetPlayStatus(false);
+        _playerMovement.SetPlayStatus(false);
+    }
+
     public void DoStep(ObjectThrower thrower) {
+        thrower.SetAllowToThrow(false);
         Transform enemyPoint =  
             thrower.ThrowPoint == _mainPlayer.ThrowPoint 
-            ? _secondPlayer.transform 
+            ? _secondPlayerBotThrower.transform 
             :
             _mainPlayer.transform;
         

@@ -19,3 +19,13 @@ MonoBehaviour:
   <SecondTime>k__BackingField: 
   <AdsInterstitial>k__BackingField: 
   <LabelProgressNarrator>k__BackingField: 
+  Suffixies:
+  - 
+  - K
+  - M
+  - B
+  - T
+  - "\u041A\u0432"
+  - "\u041A\u0430"
+  BotsPhrases: []
+  Timer: Start in {0}...

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 905650825881342119}
   - component: {fileID: 8549424130676817859}
+  - component: {fileID: 2308224207372316375}
+  - component: {fileID: -6019317019176728663}
   - component: {fileID: 1298811877278385144}
   - component: {fileID: 669403665764818371}
   m_Layer: 0
@@ -50,12 +52,60 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.48429385, y: 0.74182165, z: 0.41461128}
+  m_Center: {x: 0.014326379, y: 0.12908918, z: 0.011287123}
+--- !u!65 &2308224207372316375
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209484009150214096}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.48429385, y: 0.74182165, z: 0.41461128}
   m_Center: {x: 0.014326379, y: 0.12908918, z: 0.011287123}
+--- !u!54 &-6019317019176728663
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209484009150214096}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1298811877278385144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,7 +137,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThrowableObject
   _animation: {fileID: 1298811877278385144}
-  <Force>k__BackingField: 10
+  _rb: {fileID: -6019317019176728663}
+  _bounceForce: 1
+  _rotationForceAfterFall: 5
+  <Force>k__BackingField: 5
 --- !u!1001 &934103248038359030
 PrefabInstance:
   m_ObjectHideFlags: 0

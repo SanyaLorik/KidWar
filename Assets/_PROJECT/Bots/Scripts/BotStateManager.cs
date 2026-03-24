@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +11,8 @@ public class BotStateManager : MonoBehaviour {
     [SerializeField] private Transform _skinParent;
     [SerializeField] private BotAnimator _botAnimator;
     [SerializeField] private GameObject _skinInstance;
+    [SerializeField] private Collider _botCollider;
+    
     [field: SerializeField] public ObjectThrower BotThrower { get; private set; }
     private Vector3 _lastSpawnPoint;
     
@@ -21,7 +22,6 @@ public class BotStateManager : MonoBehaviour {
     
     private IBotBehaviour _currentBotBehaviour;
     private NavMeshAgent _agent;
-    private Collider _botCollider;
 
     public bool IsPlaying { get; private set; }
     
@@ -31,25 +31,28 @@ public class BotStateManager : MonoBehaviour {
         _botWander = GetComponent<BotWander>();
         _botMonolog = GetComponent<BotMonolog>();
         _agent = GetComponent<NavMeshAgent>();
-        _botCollider = GetComponent<Collider>();
+        _botCollider.enabled = false;
         Destroy(_skinInstance);
     }
     
     
     
-    public void SetBotPlayStatus(bool goPlay) {
+    public void SetPlayStatus(bool goPlay) {
         if (goPlay) {
             _currentBotBehaviour?.Exit();
             _lastSpawnPoint = transform.position;
             _botCollider.enabled = true;
+            _agent.enabled = false;
+            IsPlaying =  true;
         }
         // Возвращение на спавн
         else if (IsPlaying) {
             TpInPoint(_lastSpawnPoint);
             _botCollider.enabled = false;
+            _agent.enabled = true;
+            ChangeBotState(BotState.Wandering);
+            IsPlaying = false;
         }
-        IsPlaying = goPlay;
-        _agent.enabled = !goPlay;
     }
 
     public void TpInPoint(Vector3 pos) {

@@ -8,4 +8,6 @@ public class LocalizationData : LocalizationDataBase
     public string[] Suffixies = {"", "K", "M", "B", "T", "Кв", "Ка"};
 
     public string[] BotsPhrases;
+
+    public string Timer;
 }

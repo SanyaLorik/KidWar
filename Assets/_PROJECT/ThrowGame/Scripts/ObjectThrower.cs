@@ -44,6 +44,10 @@ public class ObjectThrower : MonoBehaviour {
     }
     
     public void MinusHp(int hp) {
+        if (_allowToThrow) {
+            Debug.Log("Сам по себе попал, ну можно и отключить...");
+            return;
+        }
         CurrentLifesCount -= hp;
         CurrentLifesCount = Mathf.Max(0, CurrentLifesCount);
         Debug.Log($"Попал! Минус {hp} хп, щас HP = {CurrentLifesCount} ");

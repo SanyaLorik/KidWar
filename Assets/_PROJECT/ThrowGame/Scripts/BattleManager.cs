@@ -9,7 +9,6 @@ using Zenject;
 public class BattleManager : MonoBehaviour {
     // БУдет выбираться рулеткой шо кинуть может
     [SerializeField] private ThrowableObject _labuba;
-    [SerializeField] private TimerToThrowStep _timerToThrowStep;
     [SerializeField] private int _secondsInStep;
     [field: SerializeField] public int PlayersStartHp { get; private set; }
 
@@ -23,6 +22,8 @@ public class BattleManager : MonoBehaviour {
     [Inject] ObjectThrowerCalculator _throwerCalculator;
     [Inject] CameraOrbitalController _camera;
     [Inject] ThrowGameStarter _throwGameStarter;
+    [Inject] TimerToThrowStep _timerToThrowStep;
+    [Inject] WindChooseView _windChooser;
 
     
     private void OnEnable() {
@@ -76,25 +77,25 @@ public class BattleManager : MonoBehaviour {
         // Пока без хп 10 ходов чисто
         
         while(!GameIsOver) {
-            _mainPlayer.SetAllowToThrow(true);
-            _timerToThrowStep.StartTimer(_secondsInStep);
-            _stepIsOver = false;
-            FocusCamera(_mainPlayer.PointToCameraFocus);
-            await UniTask.WaitUntil(() => _stepIsOver || GameIsOver);
-            _mainPlayer.SetAllowToThrow(false);
-            // както-то закончить ход игрока
-            
-            
-            _secondPlayerBotThrower.SetAllowToThrow(true);
-            _timerToThrowStep.StartTimer(_secondsInStep);
-            _stepIsOver = false;
-            FocusCamera(_secondPlayerBotThrower.PointToCameraFocus);
-            await UniTask.WaitUntil(() => _stepIsOver || GameIsOver);
-            _secondPlayerBotThrower.SetAllowToThrow(false);
+            await PlayerStepAsync(_mainPlayer);
+            await PlayerStepAsync(_secondPlayerBotThrower);
         }
 
         SetSpawnState();
-        Debug.Log("Игра закончилась нахуй!");
+        Debug.Log("Игра закончилась !");
+    }
+
+    private async UniTask PlayerStepAsync(ObjectThrower thrower) {
+        _stepIsOver = false;
+        thrower.SetAllowToThrow(true);
+        
+        _timerToThrowStep.StartTimer(_secondsInStep);
+        _windChooser.UpdateWind();
+        FocusCamera(thrower.PointToCameraFocus);
+        
+        await UniTask.WaitUntil(() => _stepIsOver || GameIsOver);
+        
+        thrower.SetAllowToThrow(false);
     }
 
 

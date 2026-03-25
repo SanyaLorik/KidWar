@@ -15,12 +15,6 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     [Header("Анимационная кривая")]
     [SerializeField] private AnimationCurve _throwCurve;
     
-    [Header("Ветра")] 
-    [Range(-2,2), SerializeField] private float _windForce;
-    
-    [Header("Сила броска")] 
-    [Range(0,1), SerializeField] private float _throwForce;
-    
     [Header("Диапазон угла бросания")]
     [SerializeField] private PairedValue<float> _angleDiapasone;
     [Header("Угол при котором будет максимальный бросок")]
@@ -45,8 +39,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     
     [Header("Задержка перед броском в секундах")]
     [SerializeField] private float _durationBeforeThrow = .3f;
-    
-    
+ 
     
     private float _initialDistance;
     private CancellationTokenSource _tokenSource;
@@ -54,11 +47,14 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     
     
     public event Action<Transform> ObjectThrowed;
+    public event Action PlayerPressThrow;
     public event Action ObjectFalled;
     
 
     
     [Inject] ThrowGameStarter _gameStarter;
+    [Inject] WindChooseView _wind;
+    [Inject] ForceChooseView _force;
 
     private void OnEnable() {
         _gameStarter.GameStarted += BattleManagerOnGameIsStarted;
@@ -82,7 +78,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     private float _flightDuration;
     
     public void ThrowNewObject(float angle, ThrowableObject obj, Transform throwPoint, Transform enemyPoint) {
-        _throwDistance = CalculateThrowDistance(angle);
+        float windSign = throwPoint.position.z < enemyPoint.position.z ? 1 : -1;
+        
+        
+        _throwDistance = CalculateThrowDistance(angle, windSign);
         _height = CalculateHeight(angle);
         _trajectoryLength = CalculateTrajectoryLength(_throwDistance, _height);
         _flightDuration = _trajectoryLength / _flySpeed;
@@ -93,10 +92,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         ThrowObject(obj, throwPoint, enemyPoint, _tokenSource.Token).Forget();
     }
 
-    private float CalculateThrowDistance(float angle) {
+    private float CalculateThrowDistance(float angle, float windSign) {
         _angleRatio = CalculateAngleRatio(angle);
-        _throwDistance = _initialDistance * _throwForce * _angleRatio + _windForce;
-        // Debug.Log("distance " + _throwDistance);
+        _throwDistance = _initialDistance * _force.CurrentForce * _angleRatio + _wind.CurrentWindForce * windSign;
+        Debug.Log("distance " + _throwDistance);
         return _throwDistance;
     }
 
@@ -111,8 +110,8 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         CancellationToken token
     ) {
         // задержка перед броском, можна для анимации
+        PlayerPressThrow?.Invoke();
         await UniTask.WaitForSeconds(_durationBeforeThrow, cancellationToken: token);
-        ObjectThrowed?.Invoke(throwObject.transform);
         
         
         Vector3 initialPos = playerThrowPoint.position;
@@ -120,19 +119,15 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         
         // Логика направления
         float sign = playerThrowPoint.position.z < enemyPoint.position.z ? 1 : -1;
-            
-            
         targetPos.z += _throwDistance * sign;
         targetPos.y = _floorPoint.position.y;
         
         
         Debug.Log("Бросок!");
         ThrowableObject throwInstance = Instantiate(throwObject);
-        _throwInstances.Add(throwInstance);
-        
-        throwInstance.transform.position = initialPos;
         ObjectThrowed?.Invoke(throwInstance.transform);
-
+        _throwInstances.Add(throwInstance);
+        throwInstance.transform.position = initialPos;
   
         float elapsedTime = 0f;
         while (!token.IsCancellationRequested 

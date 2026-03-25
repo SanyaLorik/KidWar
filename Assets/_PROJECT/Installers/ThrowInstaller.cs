@@ -11,5 +11,8 @@ public class ThrowInstaller : MonoInstaller {
         Container.Bind<BattleManager>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<ObjectThrowerCalculator>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<HpView>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<WindChooseView>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<TimerToThrowStep>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<ForceChooseView>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

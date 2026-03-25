@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Diagnostics;
 using Architecture_M;
 using UnityEngine;
@@ -75,17 +76,33 @@ public class PlayerMovement : MonoBehaviour {
         _jumpsUsed = 0; // Сброс прыжков
     }
 
+    private bool _gameIsStarted;
     public void SetPlayStatus(bool goPlay) {
+        // Вернулся
         if (!goPlay) {
             TpPlayerInPoint(_posBeforeTeleport);
             _inputActivity.Enable();
+            _gameIsStarted = false;
+            SetCharacterControllerState(true);
         }
         else {
+            StartCoroutine(ControllerOffRoutine());
             _inputActivity.Disable();
         }
     }
 
-    
+    /// <summary>
+    /// После телепорта пусть все коллизии просчитает а потом отключится для игры
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ControllerOffRoutine() {
+        yield return new WaitForSeconds(1f);
+        _gameIsStarted = true;
+        SetCharacterControllerState(false);
+    }
+
+
+
     public void OnJump() {
         if (_jumpsUsed == 0) {
             _verticalVelocity = _gameData.JumpForce;
@@ -113,6 +130,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
     private void Walk() {
+        if (_gameIsStarted) return;
         Transform cam = Camera.main.transform;
         Vector3 camForward = cam.forward;
         Vector3 camRight = cam.right;

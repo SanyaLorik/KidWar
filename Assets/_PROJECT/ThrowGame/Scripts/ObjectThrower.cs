@@ -8,9 +8,10 @@ using Zenject;
 /// </summary>
 public class ObjectThrower : MonoBehaviour {
     [SerializeField] private TrajectoryVisualize3D _throwVisualize;
-    [field: Header("Игрок или бот управляет")]
-    [field: SerializeField] public bool PlayerHandle;
 
+    [field: Header("Игрок или бот управляет")]
+    [field: SerializeField] public bool PlayerHandle { get; set; }
+    [SerializeField] private bool _stayInLeft;
 
     private Mouse _mouse;
     private bool _allowToThrow;
@@ -23,6 +24,7 @@ public class ObjectThrower : MonoBehaviour {
 
     // Расчет физики полета и тп
     [Inject] private BattleManager _battleManager;
+    [Inject] private HpView _hpView;
 
     
     private void Start() {
@@ -38,15 +40,14 @@ public class ObjectThrower : MonoBehaviour {
 
     public void SetStartHp(int hp) {
         CurrentLifesCount = hp;
+        _hpView.ChangeHp(CurrentLifesCount, _stayInLeft);
     }
     
     public void MinusHp(int hp) {
         CurrentLifesCount -= hp;
         CurrentLifesCount = Mathf.Max(0, CurrentLifesCount);
         Debug.Log($"Попал! Минус {hp} хп, щас HP = {CurrentLifesCount} ");
-        if (CurrentLifesCount == 0) {
-            // УМЕР!
-        }
+        _hpView.ChangeHp(CurrentLifesCount, _stayInLeft);
     }
     
     
@@ -59,10 +60,4 @@ public class ObjectThrower : MonoBehaviour {
             
         }
     }
-    
-    public void SetPlayerHandle(bool isPlayerHandle) {
-        PlayerHandle = isPlayerHandle;
-    }
-
-
 }

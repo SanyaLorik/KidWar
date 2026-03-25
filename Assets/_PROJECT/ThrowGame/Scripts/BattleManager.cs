@@ -9,8 +9,10 @@ using Zenject;
 public class BattleManager : MonoBehaviour {
     // БУдет выбираться рулеткой шо кинуть может
     [SerializeField] private ThrowableObject _labuba;
-    [SerializeField] private int PlayersHp;
-    
+    [SerializeField] private TimerToThrowStep _timerToThrowStep;
+    [SerializeField] private int _secondsInStep;
+    [field: SerializeField] public int PlayersStartHp { get; private set; }
+
     // Игрок
     [SerializeField] private ObjectThrower _mainPlayer;
     private ObjectThrower _secondPlayerBotThrower;
@@ -25,12 +27,15 @@ public class BattleManager : MonoBehaviour {
     
     private void OnEnable() {
         _throwerCalculator.ObjectThrowed += FocusCamera;
-        _throwerCalculator.ObjectFalled += OnObjectFalled;
+        // Конец хода если игрок походил чи кончилось время
+        _throwerCalculator.ObjectFalled += StepIsOver;
+        _timerToThrowStep.TimeIsOver += StepIsOver;
     }
 
-    private void OnObjectFalled() {
+    private void StepIsOver() {
         _stepIsOver = true;
     }
+
 
     private void FocusCamera(Transform obj) {
         _camera.SetCameraToPlayThrow(obj);
@@ -57,8 +62,8 @@ public class BattleManager : MonoBehaviour {
         _secondPlayerBotState.RotateToTarget(_throwerCalculator.LeftPoint.position);
         _secondPlayerBotThrower = _secondPlayerBotState.BotThrower;
         
-        _mainPlayer.SetStartHp(PlayersHp);
-        _secondPlayerBotThrower.SetStartHp(PlayersHp);
+        _mainPlayer.SetStartHp(PlayersStartHp);
+        _secondPlayerBotThrower.SetStartHp(PlayersStartHp);
         
         GoBattle().Forget();
     }
@@ -72,6 +77,7 @@ public class BattleManager : MonoBehaviour {
         
         while(!GameIsOver) {
             _mainPlayer.SetAllowToThrow(true);
+            _timerToThrowStep.StartTimer(_secondsInStep);
             _stepIsOver = false;
             FocusCamera(_mainPlayer.PointToCameraFocus);
             await UniTask.WaitUntil(() => _stepIsOver || GameIsOver);
@@ -80,6 +86,7 @@ public class BattleManager : MonoBehaviour {
             
             
             _secondPlayerBotThrower.SetAllowToThrow(true);
+            _timerToThrowStep.StartTimer(_secondsInStep);
             _stepIsOver = false;
             FocusCamera(_secondPlayerBotThrower.PointToCameraFocus);
             await UniTask.WaitUntil(() => _stepIsOver || GameIsOver);
@@ -104,6 +111,7 @@ public class BattleManager : MonoBehaviour {
 
     public void DoStep(ObjectThrower thrower) {
         thrower.SetAllowToThrow(false);
+        _timerToThrowStep.StopTimer();
         Transform enemyPoint =  
             thrower.ThrowPoint == _mainPlayer.ThrowPoint 
             ? _secondPlayerBotThrower.transform 

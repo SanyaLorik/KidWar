@@ -10,5 +10,6 @@ public class ThrowInstaller : MonoInstaller {
         Container.Bind<ThrowGameStarter>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<BattleManager>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<ObjectThrowerCalculator>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<HpView>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

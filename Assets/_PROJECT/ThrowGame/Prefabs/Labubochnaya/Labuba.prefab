@@ -140,7 +140,7 @@ MonoBehaviour:
   _rb: {fileID: -6019317019176728663}
   _bounceForce: 1
   _rotationForceAfterFall: 5
-  <Force>k__BackingField: 5
+  <Force>k__BackingField: 2
 --- !u!1001 &934103248038359030
 PrefabInstance:
   m_ObjectHideFlags: 0

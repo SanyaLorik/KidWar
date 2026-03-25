@@ -13,9 +13,13 @@ public class ForceChooseView : MonoBehaviour {
     [Header("Диапазон силы")] 
     [SerializeField] private float _forceMax;
     [SerializeField] private float _minForce;
+    [Header("Кривая скорости")] 
+    [SerializeField] private AnimationCurve _forwardCurve;  // Кривая для движения 0→0.5
+    [SerializeField] private AnimationCurve _backwardCurve; // Кривая для движения 0.5→1
 
     [Inject] private ObjectThrowerCalculator _objectThrowerCalculator;
     [Inject] private ThrowGameStarter _throwGameStarter;
+    private float _currentForcePercent;
 
 
     public float CurrentForce => Mathf.Max(_forceMax * _currentForcePercent, _minForce); 
@@ -45,22 +49,43 @@ public class ForceChooseView : MonoBehaviour {
         StartForceChooserAsync(_tokenSource.Token).Forget();
     }
 
-    private float _currentForcePercent;
-    private async UniTask StartForceChooserAsync(CancellationToken token) {
+    private async UniTask StartForceChooserAsync(CancellationToken token) 
+    {
         float yEnd = CalculateYEnd(_progressParent);
         SetPointerYNegative(_pointer, 0f, yEnd);
-        
+    
         float elapsedTime = 0f;
-        while (!token.IsCancellationRequested) {
+        while (!token.IsCancellationRequested) 
+        {
             elapsedTime += Time.deltaTime;
-            _currentForcePercent = Mathf.PingPong(elapsedTime, 1);
-            
-            // Сведём до [-1:1] (min + t * distance)
+        
+            // Получаем линейное PingPong от 0 до 1
+            float linearT = Mathf.PingPong(elapsedTime, _timeToFullCycle) / _timeToFullCycle;
+        
+            // Применяем разные кривые в зависимости от фазы
+            float curvedT;
+            if (linearT <= 0.5f)
+            {
+                // Первая половина: идем от 0 к 1
+                float t = linearT / 0.5f; // Нормализуем в 0→1
+                curvedT = _forwardCurve.Evaluate(t) * 0.5f; // Масштабируем в 0→0.5
+            }
+            else
+            {
+                // Вторая половина: идем от 1 к 0
+                float t = (linearT - 0.5f) / 0.5f; // Нормализуем в 0→1
+                curvedT = 0.5f + _backwardCurve.Evaluate(t) * 0.5f; // Масштабируем в 0.5→1
+            }
+        
+            _currentForcePercent = curvedT;
+        
+            // Сведём до [-1:1]
             float percentToVisual = -1f + _currentForcePercent * 2;
-            
-            // деление на 2f для пивота т.к он от центра в обе стороны на [-0.5:0.5] от высоты
+        
+            // деление на 2f для пивота
             float percent = percentToVisual / 2f; 
             SetPointerYNegative(_pointer, percent, yEnd);
+        
             await UniTask.Yield();
         }
     }

@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using SanyaBeerExtension;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class ThrowGameStarter : MonoBehaviour  {
@@ -13,10 +14,12 @@ public class ThrowGameStarter : MonoBehaviour  {
     [SerializeField] private float _timerDuration;
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private GameObject _timerCanvas;
+    [SerializeField] private Button _afkButton;
 
     [Inject] private BattleManager _battleManager;
     [Inject] private LocalizationData _localization;
 
+    private bool _afkPressed;
     private CancellationTokenSource _tokenSource;
     
     public event Action<bool> GameStarted;
@@ -25,20 +28,32 @@ public class ThrowGameStarter : MonoBehaviour  {
     private void Start() {
         StartTimer();
     }
-
-
+    
     public void GameOver() {
         GameStarted?.Invoke(false);
         // Ну наверное начинать сразу...
         StartTimer();
     }
     
+
+    private void OnEnable() {
+        _afkButton.onClick.AddListener(ChangeAfkStatus);
+    }
+
+    private void ChangeAfkStatus() {
+        _afkPressed = !_afkPressed;
+        if (_afkPressed) {
+            StopTimer();
+        }
+        else {
+            StartTimer();
+        }
+    }
     
-    /// <summary>
-    /// Кнопка афк
-    /// </summary>
-    public void StopTimer() {
+
+    private void StopTimer() {
         UniTaskHelper.DisposeTask(ref _tokenSource);
+        _timerCanvas.DisactiveSelf();
     }
 
     private void StartTimer() {

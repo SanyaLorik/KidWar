@@ -88,6 +88,7 @@ public class BattleManager : MonoBehaviour {
     private async UniTask PlayerStepAsync(ObjectThrower thrower) {
         _stepIsOver = false;
         thrower.SetAllowToThrow(true);
+        thrower.SetInvinsible(true);
         
         _timerToThrowStep.StartTimer(_secondsInStep);
         _windChooser.UpdateWind();
@@ -96,6 +97,7 @@ public class BattleManager : MonoBehaviour {
         await UniTask.WaitUntil(() => _stepIsOver || GameIsOver);
         
         thrower.SetAllowToThrow(false);
+        thrower.SetInvinsible(false);
     }
 
 
@@ -113,11 +115,14 @@ public class BattleManager : MonoBehaviour {
     public void DoStep(ObjectThrower thrower) {
         thrower.SetAllowToThrow(false);
         _timerToThrowStep.StopTimer();
-        Transform enemyPoint =  
+        Vector3 enemyPoint =  
             thrower.ThrowPoint == _mainPlayer.ThrowPoint 
-            ? _secondPlayerBotThrower.transform 
+            ? _secondPlayerBotState.transform.position 
             :
-            _mainPlayer.transform;
+            _playerMovement.transform.position;
+
+        // Чтоб не в ноги летело а в тело
+        enemyPoint.y += 1f;
         
         _throwerCalculator.ThrowNewObject(thrower.AngleToThrow, _labuba, thrower.ThrowPoint, enemyPoint);
         _stepIsOver = false;

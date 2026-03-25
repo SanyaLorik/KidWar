@@ -45,7 +45,6 @@ public class HpView : MonoBehaviour {
         percent = Mathf.Clamp01(percent);
         float xEnd = parent.rect.width;
         var a = new Vector2(GetXPoseByPercent(percent, xEnd, parent), 0);
-        Debug.Log("img.offsetMax = " + a);
         img.offsetMax = a;
     }
     
@@ -54,7 +53,6 @@ public class HpView : MonoBehaviour {
         percent = Mathf.Clamp01(percent);
         float xEnd = parent.rect.width;
         var a = new Vector2(GetXPoseByPercent(percent, xEnd, parent), 0);
-        Debug.Log("img.offsetMin = " + a);
         img.offsetMin = -a;
     }
     

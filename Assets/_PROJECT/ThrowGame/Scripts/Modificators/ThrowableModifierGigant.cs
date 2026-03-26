@@ -6,6 +6,9 @@ using UnityEngine;
 
 [Serializable]
 public class ThrowableModifierGigant : IThrowableModifier {
+    [SerializeField] private float _scaling = 4f;
+    [SerializeField] private float _duration = 1f;
+    [SerializeField] private Ease _ease = Ease.OutBounce;
     public ThrowableObject ThrowableObject { get; private set; }
 
     public void SetThrowableObject(ThrowableObject throwableObject) {
@@ -13,9 +16,12 @@ public class ThrowableModifierGigant : IThrowableModifier {
     }
 
     public void ExtensionBehaviour() {
-        ThrowableObject.transform.DOScale(3f, 1f)
-            .SetEase(Ease.OutBounce);
+        ThrowableObject.transform.DOScale(_scaling, _duration)
+            .SetEase(_ease);
     }
+    
+    public void OnPlayerContact() { }
+    
 
 
     public void CalculatePose(float elapsedTime) {

@@ -42,10 +42,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     [Header("Задержка перед броском в секундах")]
     [SerializeField] private float _durationBeforeThrow = .3f;
 
-    
-    // По умолчанию будет обычный полёт
-    private ThrowableModifierDefault _defaultModifier;
-    private IThrowableModifier _currentModifier;
+
     
     
     
@@ -64,10 +61,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     [Inject] ThrowGameStarter _gameStarter;
     [Inject] WindChooseView _wind;
     [Inject] ForceChooseView _force;
+    [Inject] ModifierManager _modifierManager;
 
     private void OnEnable() {
         _gameStarter.GameStarted += BattleManagerOnGameIsStarted;
-        _currentModifier = _defaultModifier;
     }
 
     private void BattleManagerOnGameIsStarted(bool isStarted) {
@@ -88,10 +85,6 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     private float _flightDuration;
     private float _flightDurationToEnemy;
 
-    public void SetModifier(IThrowableModifier modifier) {
-        _currentModifier = modifier;
-        Debug.Log("установка модификатора " + _currentModifier.GetType());
-    }
     
     private float DistanceBeforePlayers => Vector3.Distance(LeftPoint.position, RightPoint.position);
     
@@ -160,11 +153,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
             _flightDurationToEnemy,
             _height,
             _throwCurve,
-            _currentModifier
+            _modifierManager.CurrentModifier
         );
         ObjectThrowed?.Invoke(throwInstance.transform);
         await throwInstance.StartFlight(token);
-        _currentModifier = _defaultModifier;
         
         Debug.Log("Обьект упал! " + throwInstance.transform.position);
         throwInstance.ObjectIsFall();

@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using System.Threading;
 using Architecture_M;
 using Cysharp.Threading.Tasks;
+using SanyaBeerExtension;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,6 +15,7 @@ public class ThrowableObject : MonoBehaviour {
     
     private IThrowableModifier _modifier;
     private CancellationTokenSource _token;
+    private bool _ignoreColliders;
     
     public Vector3 InitialPos { get; private set; }
     public Vector3 TargetPos { get; private set; }
@@ -40,7 +41,13 @@ public class ThrowableObject : MonoBehaviour {
     
     private void OnTriggerEnter(Collider collider) {
         if(!collider.TryGetComponent(out ObjectThrower thrower) || ContactPlayer) return;
-        if (thrower.IsInvinsible) return;
+        if (_modifier != null) {
+            _modifier.OnPlayerContact();
+        }
+        if (thrower.IsInvinsible) {
+            Debug.Log("Игрок Invinsible");
+            return;
+        }
         thrower.MinusHp(Force);
         ContactPlayer = true;
     }
@@ -63,12 +70,13 @@ public class ThrowableObject : MonoBehaviour {
         FlightDurationToEnemy = flightDurationToEnemy;
         Height = height;
         ThrowCurve = throwCurve;
-        _modifier = modifier == null ? new ThrowableModifierDefault() : modifier;
+        _modifier = modifier;
         _modifier.SetThrowableObject(this);
     }
-    
+
+    private float elapsedTime;
     public async UniTask StartFlight(CancellationToken token) {
-        float elapsedTime = 0f;
+        elapsedTime = 0f;
         Debug.Log($"TargetPos = {TargetPos}, модификатор: {_modifier.GetType()}");
         _modifier.ExtensionBehaviour();
         while (!token.IsCancellationRequested && elapsedTime < FlightDuration && !ContactPlayer) {
@@ -78,19 +86,28 @@ public class ThrowableObject : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Если обьект ударился об пол он всеровно нанесёт урон игроку
+    /// пока использует только модификатор взрыва
+    /// </summary>
+    public void SetIgnoreOtherColliders() {
+        _ignoreColliders = true;
+    }
+    
 
     private void OnCollisionEnter(Collision other) {
         EnablePhysicsAfterHit(other);
-        if (!other.gameObject.TryGetComponent(out ObjectThrower thrower)) {
+        if(_ignoreColliders) return;
+        if (!other.gameObject.TryGetComponent(out ObjectThrower _)) {
             // Об землю ударилось, сё низя урон наносить
             ContactPlayer = true;
         }
     }
 
+
     private void EnablePhysicsAfterHit(Collision collision) {
         // Включаем гравитацию
         _rb.useGravity = true;
-        
         // Отталкиваемся от точки столкновения
         ContactPoint contact = collision.contacts[0];
         Vector3 bounceDir = Vector3.Reflect(_rb.linearVelocity, contact.normal);
@@ -105,6 +122,11 @@ public class ThrowableObject : MonoBehaviour {
             Random.Range(-_rotationForceAfterFall, _rotationForceAfterFall)
         );
         // Уничтожаем через 3 секунды
+    }
+
+    public void Destroy() {
+        elapsedTime = FlightDuration;
+        gameObject.DisactiveSelf();
     }
 
     public void ObjectIsFall() {

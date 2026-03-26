@@ -169,12 +169,12 @@ public class BotWander : MonoBehaviour, IBotBehaviour {
 
         NavMeshHit hit;
         if (NavMesh.SamplePosition(target, out hit, 1f, NavMesh.AllAreas)) {
-            Debug.Log("Цель бота: " + hit.position);
+            // Debug.Log("Цель бота: " + hit.position);
             return hit.position;
         }
 
         // Если не нашли на навмеш, просто центр куба
-        Debug.Log("Цель бота: " + point.position);
+        // Debug.Log("Цель бота: " + point.position);
         return point.position;
     }
 

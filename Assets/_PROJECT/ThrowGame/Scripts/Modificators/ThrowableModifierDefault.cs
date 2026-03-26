@@ -11,6 +11,8 @@ public class ThrowableModifierDefault : IThrowableModifier {
 
     public void ExtensionBehaviour() {}
 
+    public void OnPlayerContact() { }
+    
 
     public void CalculatePose(float elapsedTime) {
         // Обычыный полет

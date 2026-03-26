@@ -15,6 +15,7 @@ public class ThrowGameStarter : MonoBehaviour  {
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private GameObject _timerCanvas;
     [SerializeField] private Button _afkButton;
+    [SerializeField] private GameObject _afkStatusText;
 
     [Inject] private BattleManager _battleManager;
     [Inject] private LocalizationData _localization;
@@ -27,6 +28,7 @@ public class ThrowGameStarter : MonoBehaviour  {
 
     private void Start() {
         StartTimer();
+        _afkStatusText.DisactiveSelf();
     }
     
     public void GameOver() {
@@ -42,6 +44,7 @@ public class ThrowGameStarter : MonoBehaviour  {
 
     private void ChangeAfkStatus() {
         _afkPressed = !_afkPressed;
+        _afkStatusText.SetActive(_afkPressed);
         if (_afkPressed) {
             StopTimer();
         }

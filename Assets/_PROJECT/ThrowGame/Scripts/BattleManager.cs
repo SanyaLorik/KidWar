@@ -16,6 +16,13 @@ public class BattleManager : MonoBehaviour {
     [SerializeField] private ObjectThrower _mainPlayer;
     private ObjectThrower _secondPlayerBotThrower;
     private BotStateManager _secondPlayerBotState;
+    private bool _stepIsOver;
+    
+    public event Action NewPlayerTurn;
+    
+    private bool GameIsOver => _mainPlayer.CurrentLifesCount == 0 ||  _secondPlayerBotThrower.CurrentLifesCount == 0;
+
+    public bool IsMainPlayerStep { get; private set; }
     
     [Inject] PlayerMovement _playerMovement;
     [Inject] BotsMainManager _botsMainManager;
@@ -41,7 +48,6 @@ public class BattleManager : MonoBehaviour {
     private void FocusCamera(Transform obj) {
         _camera.SetCameraToPlayThrow(obj);
     }
-
     
     
     /// <summary>
@@ -69,15 +75,15 @@ public class BattleManager : MonoBehaviour {
         GoBattle().Forget();
     }
 
-    private bool _stepIsOver;
-    private bool GameIsOver => _mainPlayer.CurrentLifesCount == 0 ||  _secondPlayerBotThrower.CurrentLifesCount == 0;
     
     
     private async UniTask GoBattle() {
         // Пока без хп 10 ходов чисто
         
         while(!GameIsOver) {
+            IsMainPlayerStep = true;
             await PlayerStepAsync(_mainPlayer);
+            IsMainPlayerStep = false;
             await PlayerStepAsync(_secondPlayerBotThrower);
         }
 
@@ -86,6 +92,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     private async UniTask PlayerStepAsync(ObjectThrower thrower) {
+        NewPlayerTurn?.Invoke();
         _stepIsOver = false;
         thrower.SetAllowToThrow(true);
         thrower.SetInvinsible(true);

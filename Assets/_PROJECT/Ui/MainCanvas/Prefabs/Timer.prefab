@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 4162816600585923250}
   - component: {fileID: 7146462998852132824}
   m_Layer: 0
-  m_Name: Bonus Text
+  m_Name: Timer Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

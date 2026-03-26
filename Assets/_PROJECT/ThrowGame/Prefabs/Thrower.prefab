@@ -438,7 +438,7 @@ MonoBehaviour:
   _trajectoryLine: {fileID: 2153384445589912019}
   maxUpAngle: 90
   maxDownAngle: 0
-  _sensitivity: 0.3
+  _sensitivity: 0.1
   _lineLength: 6.15
   _trajectoryCanvas: {fileID: 86650966132628642}
 --- !u!114 &5175570297498162569
@@ -454,7 +454,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectThrower
   _throwVisualize: {fileID: 7969541616269673994}
-  PlayerHandle: 1
+  <PlayerHandle>k__BackingField: 0
+  _stayInLeft: 0
+  _requiredHoldTime: 0.5
 --- !u!65 &3951249880273504875
 BoxCollider:
   m_ObjectHideFlags: 0

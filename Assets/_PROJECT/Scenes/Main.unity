@@ -119,6 +119,16 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1720877 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3917330444479104612, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9712267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2704156621552904005, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &81327182 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5189908968470787554, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -146,6 +156,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4970941057080216971, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &228719997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5873842927757448871, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &229610878 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5194921409329958626, guid: 8576fca35b1243d4eabc909b5029eb12, type: 3}
@@ -154,6 +169,11 @@ GameObject:
 --- !u!224 &232500476 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7768757483726362006, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &238635382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3697547273689207246, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &245312473
@@ -505,6 +525,11 @@ Transform:
   - {fileID: 1582775764}
   m_Father: {fileID: 1457575249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &377439647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1537699439427883867, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &395243937
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,6 +801,11 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &511494423 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 978708844572759331, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &550129490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,6 +1685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForceChooseView
   _timeToFullCycle: 1
+  _canvas: {fileID: 238635382}
   _pointer: {fileID: 232500476}
   _progressParent: {fileID: 1507919081}
   _forceMax: 1
@@ -1665,20 +1696,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 0.58883053
+      outSlope: 0.58883053
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5570673
+      value: 0.32801822
+      inSlope: 1.0529749
+      outSlope: 1.0529749
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1.5171194
+      outSlope: 1.5171194
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1688,28 +1728,50 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      value: 1
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      value: 0
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _forceTiles:
+  - {fileID: 1767122275}
+  - {fileID: 1260419636}
+  - {fileID: 377439647}
+  - {fileID: 1720877}
+  - {fileID: 1219297392}
+  - {fileID: 9712267}
+  - {fileID: 1823202491}
+  - {fileID: 1047719977}
+  - {fileID: 511494423}
+  - {fileID: 1071489081}
+  - {fileID: 228719997}
 --- !u!1 &1013483478 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4944206640553063384, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1047719977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2583705232236357723, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1071489081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6683492949532192349, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1075025631
@@ -1797,11 +1859,12 @@ MonoBehaviour:
   _baseHeight: 20
   _minTrajectoryLength: 5
   _flySpeed: 30
+  _minFlightDuration: 0.6
   <LeftPoint>k__BackingField: {fileID: 1246083445}
   <RightPoint>k__BackingField: {fileID: 1845374056}
   <OffsetToMaxThrow>k__BackingField: 30
   _floorPoint: {fileID: 5540201212081949085}
-  _durationBeforeThrow: 0.3
+  _durationBeforeThrow: 0.1
 --- !u!4 &1085738096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 846283726500613230, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
@@ -2030,10 +2093,20 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1802844134549732080, guid: 3abd8afc3ca19f14c89b52bea64c0c83, type: 3}
   m_PrefabInstance: {fileID: 1186856429}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1219297392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1733461706903142200, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1246083445 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7315791491920274858, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
   m_PrefabInstance: {fileID: 5540201212081949083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1260419636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8433666116863342258, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1348448667 stripped
 GameObject:
@@ -2899,6 +2972,11 @@ MonoBehaviour:
     - rid: 8231486680537759811
       type: {class: ThrowableModifierGigant, ns: , asm: Assembly-CSharp}
       data: 
+--- !u!1 &1767122275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5797184024923599887, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1773929533 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4288597205843080724, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -2991,6 +3069,11 @@ Transform:
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 353985650039050393, guid: 4f07cbbee7ed7cd4c8b6198846d2d3fb, type: 3}
   m_PrefabInstance: {fileID: 1813737571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1823202491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6715184566505406739, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1833797884 stripped
 MonoBehaviour:
@@ -3864,6 +3947,10 @@ PrefabInstance:
     - target: {fileID: 5744624049274098158, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873842927757448871, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5954162367254877495, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_AnchorMax.y

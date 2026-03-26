@@ -1,7 +1,6 @@
-using System;
 using SanyaBeerExtension;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using Zenject;
 
 
 /// <summary>
@@ -24,34 +23,61 @@ public class TrajectoryVisualize3D : MonoBehaviour
     [SerializeField] private float _lineLength;
     [SerializeField] private GameObject _trajectoryCanvas;
 
-
     private Vector3 _throwDirection;
-    // Будет не только мышка нарушка но еще джойстик а еще бот сможет сам выбирать
-    private Mouse _mouse = Mouse.current;
-    
     
     public float CurrentVerticalAngle { get; private set; }
 
+    [Inject] private InputThrowGame _inputThrowGame;
+    [Inject] private ObjectThrowerCalculator _calculator;
+    
+    
+    
     private void Start() {
         SetActiveTrajectoryVisual(false);
+        _trajectoryLine.gameObject.SetActive(false);
+    }
+
+    
+    private void OnEnable() {
+        _inputThrowGame.OnDragged += DragController;
+        _inputThrowGame.OnUpped += OnUppedScreen;
+        _inputThrowGame.OnDowned += OnDownedScreen;
     }
     
-    private void Update() {
-        UpdateThrowDirection();
+    
+    private void OnDisable() {
+        _inputThrowGame.OnDragged -= DragController;
+        _inputThrowGame.OnUpped -= OnUppedScreen;
+        _inputThrowGame.OnDowned -= OnDownedScreen;
+    }
+    
+    
+    private void OnUppedScreen() {
+        _trajectoryLine.gameObject.DisactiveSelf();
+    }
+    
+    
+    private void OnDownedScreen() {
+        _trajectoryLine.gameObject.ActiveSelf();
+    }
+
+    
+    private void DragController(Vector2 delta) {
+        if(_calculator.ObjectInFly) return;
+        UpdateThrowDirection(delta);
         DrawTrajectory();
     }
 
+    
     public void SetActiveTrajectoryVisual(bool state) {
         _trajectoryCanvas.SetActive(state);
-        _trajectoryLine.gameObject.SetActive(state);
     }
     
 
-    private void UpdateThrowDirection() {
-        Vector2 _mouseDelta = _mouse.delta.ReadValue();
+    private void UpdateThrowDirection(Vector2 screenDelta) {
         int sign = transform.forward.z > 0 ? 1 : -1;
         // Накопление угла
-        CurrentVerticalAngle += _mouseDelta.y * _sensitivity;
+        CurrentVerticalAngle += screenDelta.y * _sensitivity;
         CurrentVerticalAngle = Mathf.Clamp(CurrentVerticalAngle, -maxDownAngle, maxUpAngle);
     
         // Направление вперед от игрока

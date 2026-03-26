@@ -14,5 +14,6 @@ public class ThrowInstaller : MonoInstaller {
         Container.Bind<WindChooseView>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<TimerToThrowStep>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<ForceChooseView>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<InputThrowGame>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

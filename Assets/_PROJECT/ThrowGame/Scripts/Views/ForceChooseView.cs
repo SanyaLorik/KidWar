@@ -8,6 +8,7 @@ using Zenject;
 public class ForceChooseView : MonoBehaviour {
     [SerializeField] private float _timeToFullCycle;
     
+    [SerializeField] private GameObject _canvas;
     [SerializeField] private RectTransform _pointer;
     [SerializeField] private RectTransform _progressParent;
     [Header("Диапазон силы")] 
@@ -16,33 +17,55 @@ public class ForceChooseView : MonoBehaviour {
     [Header("Кривая скорости")] 
     [SerializeField] private AnimationCurve _forwardCurve;  // Кривая для движения 0→0.5
     [SerializeField] private AnimationCurve _backwardCurve; // Кривая для движения 0.5→1
+    [Header("Плитки силы")] 
+    [SerializeField] private GameObject[] _forceTiles;
 
     [Inject] private ObjectThrowerCalculator _objectThrowerCalculator;
     [Inject] private ThrowGameStarter _throwGameStarter;
+    [Inject] private InputThrowGame _inputThrowGame;
+    [Inject] private ThrowGameStarter _gameStarter;
+    
     private float _currentForcePercent;
+    private CancellationTokenSource _tokenSource;
+    private bool _gameIsStarted;
 
 
     public float CurrentForce => Mathf.Max(_forceMax * _currentForcePercent, _minForce); 
 
     private void OnEnable() {
         _objectThrowerCalculator.PlayerPressThrow += StopChooser;
-        _objectThrowerCalculator.ObjectFalled += StartChooser;
+        // Скрою опять мало ли игрок решит еще раз на экран нажать
+        _objectThrowerCalculator.ObjectFalled += StopChooser;
         _throwGameStarter.GameStarted += ThrowGameStarterOnGameStarted;
+        // Опять же если бот то игрок не сможет скрыть
+        _inputThrowGame.OnDowned += ShowForceView;
+        _inputThrowGame.OnUpped += HideForceView;
+        // Убираем поинтер
+        _pointer.DisactiveSelf();
+    }
+
+    private void HideForceView() {
+        // Проверка что ход не бота еще сделать
+        _canvas.DisactiveSelf();
+        StopChooser();
+    }
+
+    private void ShowForceView() {
+        if(_objectThrowerCalculator.ObjectInFly) return;
+        _canvas.ActiveSelf();
+        StartChooser();
     }
 
     private void ThrowGameStarterOnGameStarted(bool isStarted) {
-        if (isStarted) {
-            StartChooser();
-        }
+        _canvas.DisactiveSelf();
+        _gameIsStarted = isStarted;
     }
 
     private void StopChooser() {
         Debug.Log("Force choose " + CurrentForce);
         UniTaskHelper.DisposeTask(ref _tokenSource);
     }
-
     
-    private CancellationTokenSource _tokenSource;
     private void StartChooser() {
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();
@@ -51,45 +74,47 @@ public class ForceChooseView : MonoBehaviour {
 
     private async UniTask StartForceChooserAsync(CancellationToken token) 
     {
-        float yEnd = CalculateYEnd(_progressParent);
-        SetPointerYNegative(_pointer, 0f, yEnd);
-    
         float elapsedTime = 0f;
         while (!token.IsCancellationRequested) 
         {
             elapsedTime += Time.deltaTime;
+            Debug.Log("Force choose " + CurrentForce);
+            float pingPongValue = Mathf.PingPong(elapsedTime, _timeToFullCycle) / _timeToFullCycle;
         
-            // Получаем линейное PingPong от 0 до 1
-            float linearT = Mathf.PingPong(elapsedTime, _timeToFullCycle) / _timeToFullCycle;
-        
-            // Применяем разные кривые в зависимости от фазы
             float curvedT;
-            if (linearT <= 0.5f)
+            // Проверяем направление: возрастает или убывает
+            if (pingPongValue < _timeToFullCycle)
             {
-                // Первая половина: идем от 0 к 1
-                float t = linearT / 0.5f; // Нормализуем в 0→1
-                curvedT = _forwardCurve.Evaluate(t) * 0.5f; // Масштабируем в 0→0.5
+                // Идем от 0 к _timeToFullCycle -> _currentForcePercent от 0 к 1
+                curvedT = _forwardCurve.Evaluate(pingPongValue);
             }
             else
             {
-                // Вторая половина: идем от 1 к 0
-                float t = (linearT - 0.5f) / 0.5f; // Нормализуем в 0→1
-                curvedT = 0.5f + _backwardCurve.Evaluate(t) * 0.5f; // Масштабируем в 0.5→1
+                // Идем от _timeToFullCycle к 0 -> pingPongValue от 1 к 0
+                curvedT = _backwardCurve.Evaluate(1f - pingPongValue);
             }
-        
+
             _currentForcePercent = curvedT;
         
-            // Сведём до [-1:1]
-            float percentToVisual = -1f + _currentForcePercent * 2;
-        
-            // деление на 2f для пивота
-            float percent = percentToVisual / 2f; 
-            SetPointerYNegative(_pointer, percent, yEnd);
-        
+            UpdateTiles(curvedT);
             await UniTask.Yield();
         }
     }
     
+    
+    private void UpdateTiles(float forcePercent) 
+    {
+        // forcePercent от 0 до 1
+        // Сколько плиток должно быть активно (0..n)
+        int activeCount = Mathf.FloorToInt(forcePercent * _forceTiles.Length);
+        activeCount = Mathf.Clamp(activeCount, 0, _forceTiles.Length);
+    
+        // Включаем/выключаем плитки
+        for (int i = 0; i < _forceTiles.Length; i++)
+        {
+            _forceTiles[i].SetActive(i <= activeCount);
+        }
+    }
     
     
     // Visual --> Move later to RectTransformHelper

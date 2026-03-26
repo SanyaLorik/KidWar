@@ -1,4 +1,8 @@
+using System;
 using System.Collections;
+using System.Threading;
+using _PROJECT.Scripts.Helpers;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -13,8 +17,8 @@ public class ObjectThrower : MonoBehaviour {
     [field: Header("Игрок или бот управляет")]
     [field: SerializeField] public bool PlayerHandle { get; set; }
     [SerializeField] private bool _stayInLeft;
+    [field: Header("Сколько держать времени")]
 
-    private Mouse _mouse;
     private bool _allowToThrow;
 
     public int CurrentLifesCount { get; private set; }
@@ -25,57 +29,22 @@ public class ObjectThrower : MonoBehaviour {
 
     // Расчет физики полета и тп
     [Inject] private BattleManager _battleManager;
+    [Inject] private ObjectThrowerCalculator _calculator;
     [Inject] private HpView _hpView;
+    [Inject] private InputThrowGame _inputThrowGame;
 
     
-    private void Start() {
-        _mouse = Mouse.current;
+
+    private void OnEnable() {
+        _inputThrowGame.OnUpped += Throw;
     }
 
-    private bool _isCharging = false;
-    private float _chargeTime = 0f;
-    private float _requiredHoldTime = 0.5f; // Сколько нужно держать
 
-    void Update() 
-    {
+    private void Throw() {
         // Нажали
-        if (_mouse.leftButton.wasPressedThisFrame) 
-        {
-            Debug.Log($"Нажали! _allowToThrow = {_allowToThrow}");
-            if (_allowToThrow) 
-            {
-                _isCharging = true;
-                _chargeTime = 0f;
-                Debug.Log("Начали зарядку");
-            }
-        }
-
-        // Держим
-        if (_isCharging && _mouse.leftButton.isPressed) 
-        {
-            _chargeTime += Time.deltaTime;
-            Debug.Log($"Зарядка: {_chargeTime}/{_requiredHoldTime}");
-        }
-
-        // Отпустили
-        if (_mouse.leftButton.wasReleasedThisFrame) 
-        {
-            Debug.Log($"Отпустили! _isCharging = {_isCharging}, _chargeTime = {_chargeTime}, _allowToThrow = {_allowToThrow}");
-        
-            if (_isCharging && _allowToThrow) 
-            {
-                _isCharging = false;
-            
-                if (_chargeTime >= _requiredHoldTime) 
-                {
-                    Debug.Log("ВЫСТРЕЛ!");
-                    _battleManager.DoStep(this);
-                }
-                else
-                {
-                    Debug.Log($"Зарядка не завершена ({_chargeTime} < {_requiredHoldTime})");
-                }
-            }
+        if (_allowToThrow && !_calculator.ObjectInFly) {
+            Debug.Log("ВЫСТРЕЛ!");
+            _battleManager.DoStep(this);
         }
     }
     
@@ -97,11 +66,8 @@ public class ObjectThrower : MonoBehaviour {
     }
     
     
-    
     public void SetAllowToThrow(bool state) {
         _allowToThrow = state;
-        _isCharging = false;
-        _chargeTime = 0f;
         _throwVisualize.SetActiveTrajectoryVisual(state);
         // поведение бота, както сымитировать бросок
         if (_allowToThrow == state && !PlayerHandle) {

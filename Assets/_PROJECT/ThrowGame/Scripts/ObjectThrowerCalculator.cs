@@ -29,6 +29,8 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     
     [Header("Скорость полёта")] 
     [SerializeField] private float _flySpeed;
+    [Header("Минимальное время в воздухе")] 
+    [SerializeField] private float _minFlightDuration;
     
     [field: Header("Инфа по уровню")]
     [field: SerializeField] public Transform LeftPoint { get; private set; }
@@ -55,9 +57,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     public event Action<Transform> ObjectThrowed;
     public event Action PlayerPressThrow;
     public event Action ObjectFalled;
-    
 
-    
+    public bool ObjectInFly { get; private set; }
+
+
     [Inject] ThrowGameStarter _gameStarter;
     [Inject] WindChooseView _wind;
     [Inject] ForceChooseView _force;
@@ -101,7 +104,12 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         _trajectoryLength = CalculateTrajectoryLength(_throwDistance, _height);
         
         _flightDuration = _trajectoryLength / _flySpeed;
+        _flightDuration = MathF.Max(_flightDurationToEnemy, _minFlightDuration);
+        
+        
         _flightDurationToEnemy = CalculateTrajectoryLength(DistanceBeforePlayers, _height) / _flySpeed;
+
+        
         Debug.Log("_flightDuration = " + _flightDuration);
         Debug.Log("_flightDurationToEnemy = " + _flightDurationToEnemy);
         
@@ -139,6 +147,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
 
 
         Debug.Log("Бросок!");
+        ObjectInFly = true;
         ThrowableObject throwInstance = Instantiate(throwObject);
         throwInstance.transform.position = initialPos;
         _throwInstances.Add(throwInstance);
@@ -160,6 +169,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         Debug.Log("Обьект упал! " + throwInstance.transform.position);
         throwInstance.ObjectIsFall();
         await UniTask.WaitForSeconds(1f, cancellationToken: token);
+        ObjectInFly = false;
         ObjectFalled?.Invoke();
     }
 
@@ -201,14 +211,15 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         return trajectoryLength;
     }
     
-
+    
     private float CalculateAngleRatio(float angle) {
+        // Отклонение от 45°, максимальное 45°
         float diff = Mathf.Abs(angle - _angleWithMaxDistance);
-        diff = Mathf.Clamp(diff, _angleDiapasone.From, _angleWithMaxDistance);
-        
-        float ratio = 1f - Mathf.Clamp01(diff / _angleWithMaxDistance);
-        ratio = Mathf.Max(_minAngleRatio, ratio);
-        // Debug.Log($"Угол {angle}, ratio: {ratio}");
-        return ratio;
+    
+        // ratio: 1 при 45°, 0 при 0° или 90°
+        float ratio = 1f - (diff / _angleWithMaxDistance);
+    
+        return Mathf.Max(_minAngleRatio, ratio);
     }
+
 }

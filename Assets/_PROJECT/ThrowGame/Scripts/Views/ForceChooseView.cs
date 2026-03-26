@@ -62,7 +62,6 @@ public class ForceChooseView : MonoBehaviour {
     }
 
     private void StopChooser() {
-        Debug.Log("Force choose " + CurrentForce);
         UniTaskHelper.DisposeTask(ref _tokenSource);
     }
     

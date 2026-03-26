@@ -77,7 +77,6 @@ public class ForceChooseView : MonoBehaviour {
         while (!token.IsCancellationRequested) 
         {
             elapsedTime += Time.deltaTime;
-            Debug.Log("Force choose " + CurrentForce);
             float pingPongValue = Mathf.PingPong(elapsedTime, _timeToFullCycle) / _timeToFullCycle;
         
             float curvedT;

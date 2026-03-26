@@ -1862,7 +1862,7 @@ MonoBehaviour:
   _minFlightDuration: 0.6
   <LeftPoint>k__BackingField: {fileID: 1246083445}
   <RightPoint>k__BackingField: {fileID: 1845374056}
-  <OffsetToMaxThrow>k__BackingField: 15
+  <OffsetToMaxThrow>k__BackingField: 20
   _floorPoint: {fileID: 5540201212081949085}
   _durationBeforeThrow: 0.1
 --- !u!4 &1085738096 stripped

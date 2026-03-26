@@ -104,7 +104,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         _trajectoryLength = CalculateTrajectoryLength(_throwDistance, _height);
         
         _flightDuration = _trajectoryLength / _flySpeed;
-        _flightDuration = MathF.Max(_flightDurationToEnemy, _minFlightDuration);
+        _flightDuration = MathF.Max(_flightDuration, _minFlightDuration);
         
         
         _flightDurationToEnemy = CalculateTrajectoryLength(DistanceBeforePlayers, _height) / _flySpeed;

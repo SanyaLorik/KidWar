@@ -49,7 +49,7 @@ MonoBehaviour:
   _entity: {fileID: 6535873217055565256}
   _startPoint: {fileID: 0}
   _finishPoint: {fileID: 0}
-  _speed: 10
+  _speed: 3.6
 --- !u!1 &1740260933676531103
 GameObject:
   m_ObjectHideFlags: 0

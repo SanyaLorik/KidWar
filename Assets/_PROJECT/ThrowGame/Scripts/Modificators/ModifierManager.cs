@@ -25,7 +25,7 @@ public class ModifierManager : MonoBehaviour {
 
     private void OnObjectThrowed(Transform _) {
         if (CurrentModifier != _defaultModifier) {
-            _choosedModifierChanger.StartColldown();
+            _choosedModifierChanger.SetUnvailable(true);
         }
     }
 

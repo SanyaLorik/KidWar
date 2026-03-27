@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using System.Threading;
-using _PROJECT.Scripts.Helpers;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
 
@@ -12,29 +6,42 @@ using Zenject;
 /// Делает бросок с помощью ObjectThrowerBase
 /// </summary>
 public class ObjectThrower : MonoBehaviour {
+    [SerializeField] private PlayerHp _playerHp;
+    [field: SerializeField] public bool StayInLeft { get; private set; }
+
     [SerializeField] private TrajectoryVisualize3D _throwVisualize;
 
     [field: Header("Игрок или бот управляет")]
     [field: SerializeField] public bool PlayerHandle { get; set; }
-    [SerializeField] private bool _stayInLeft;
+
     [field: Header("Сколько держать времени")]
 
     private bool _allowToThrow;
 
-    public int CurrentLifesCount { get; private set; }
+    public int CurrentLifesCount => _playerHp.CurrentHp;
 
     public Transform ThrowPoint =>  _throwVisualize.ThrowPoint;
     public Transform PointToCameraFocus =>  _throwVisualize.PointToCameraFocus;
     public float AngleToThrow =>  _throwVisualize.CurrentVerticalAngle;
-
+    
+    
     // Расчет физики полета и тп
     [Inject] private BattleManager _battleManager;
     [Inject] private ObjectThrowerCalculator _calculator;
-    [Inject] private HpView _hpView;
     [Inject] private InputThrowGame _inputThrowGame;
+    [Inject] private HpView _hpView;
+    [Inject] private GameData _gameData;
 
+
+    public IDamageable Damageable => _playerHp;
     
-
+    
+    public void InitToNewGame() {
+        _playerHp.InitPosition(StayInLeft);
+        _playerHp.SetMaxHp();
+    }
+    
+    
     private void OnEnable() {
         _inputThrowGame.OnUpped += Throw;
     }
@@ -47,37 +54,16 @@ public class ObjectThrower : MonoBehaviour {
             _battleManager.DoStep(this);
         }
     }
-    
 
-    public void SetStartHp(int hp) {
-        CurrentLifesCount = hp;
-        _hpView.ChangeHp(CurrentLifesCount, _stayInLeft);
-    }
-    
-    public void MinusHp(int hp) {
-        if (IsInvinsible) {
-            Debug.Log("Сам по себе попал, ну можно и отключить...");
-            return;
-        }
-        CurrentLifesCount -= hp;
-        CurrentLifesCount = Mathf.Max(0, CurrentLifesCount);
-        Debug.Log($"Попал! Минус {hp} хп, щас HP = {CurrentLifesCount} ");
-        _hpView.ChangeHp(CurrentLifesCount, _stayInLeft);
-    }
-    
     
     public void SetAllowToThrow(bool state) {
         _allowToThrow = state;
         _throwVisualize.SetActiveTrajectoryVisual(state);
+        // Сам по себе не бьёт
+        _playerHp.SetInvinsible(state);
         // поведение бота, както сымитировать бросок
         if (_allowToThrow == state && !PlayerHandle) {
             
         }
-    }
-
-    public bool IsInvinsible { get; private set; }
-
-    public void SetInvinsible(bool state) {
-        IsInvinsible = state;
     }
 }

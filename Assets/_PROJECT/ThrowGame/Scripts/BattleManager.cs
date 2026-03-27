@@ -10,19 +10,22 @@ public class BattleManager : MonoBehaviour {
     // БУдет выбираться рулеткой шо кинуть может
     [SerializeField] private ThrowableObject _labuba;
     [SerializeField] private int _secondsInStep;
-    [field: SerializeField] public int PlayersStartHp { get; private set; }
 
-    // Игрок
-    [SerializeField] private ObjectThrower _mainPlayer;
-    private ObjectThrower _secondPlayerBotThrower;
+    
+    // Игроки
+    [field: SerializeField] public ObjectThrower MainPlayer { get; private set; }
+    public ObjectThrower SecondPlayer { get; private set; }
+    
+    
+    
     private BotStateManager _secondPlayerBotState;
     private bool _stepIsOver;
-    
-    public event Action NewPlayerTurn;
-    
-    private bool GameIsOver => _mainPlayer.CurrentLifesCount == 0 ||  _secondPlayerBotThrower.CurrentLifesCount == 0;
-
+    private bool GameIsOver => MainPlayer.CurrentLifesCount == 0 ||  SecondPlayer.CurrentLifesCount == 0;
     public bool IsMainPlayerStep { get; private set; }
+    public event Action NewPlayerTurn;
+
+    
+    
     
     [Inject] PlayerMovement _playerMovement;
     [Inject] BotsMainManager _botsMainManager;
@@ -67,10 +70,10 @@ public class BattleManager : MonoBehaviour {
         
         _secondPlayerBotState.TpInPoint(secondPlayerPoint.position);
         _secondPlayerBotState.RotateToTarget(_throwerCalculator.LeftPoint.position);
-        _secondPlayerBotThrower = _secondPlayerBotState.BotThrower;
+        SecondPlayer = _secondPlayerBotState.BotThrower;
         
-        _mainPlayer.SetStartHp(PlayersStartHp);
-        _secondPlayerBotThrower.SetStartHp(PlayersStartHp);
+        MainPlayer.InitToNewGame();
+        SecondPlayer.InitToNewGame();
         
         GoBattle().Forget();
     }
@@ -82,9 +85,9 @@ public class BattleManager : MonoBehaviour {
         
         while(!GameIsOver) {
             IsMainPlayerStep = true;
-            await PlayerStepAsync(_mainPlayer);
+            await PlayerStepAsync(MainPlayer);
             IsMainPlayerStep = false;
-            await PlayerStepAsync(_secondPlayerBotThrower);
+            await PlayerStepAsync(SecondPlayer);
         }
 
         SetSpawnState();
@@ -95,7 +98,6 @@ public class BattleManager : MonoBehaviour {
         NewPlayerTurn?.Invoke();
         _stepIsOver = false;
         thrower.SetAllowToThrow(true);
-        thrower.SetInvinsible(true);
         
         _timerToThrowStep.StartTimer(_secondsInStep);
         _windChooser.UpdateWind();
@@ -104,15 +106,14 @@ public class BattleManager : MonoBehaviour {
         await UniTask.WaitUntil(() => _stepIsOver || GameIsOver);
         
         thrower.SetAllowToThrow(false);
-        thrower.SetInvinsible(false);
     }
 
 
     private void SetSpawnState() {
         _throwGameStarter.GameOver();
         
-        _secondPlayerBotThrower.SetAllowToThrow(false);
-        _mainPlayer.SetAllowToThrow(false);
+        SecondPlayer.SetAllowToThrow(false);
+        MainPlayer.SetAllowToThrow(false);
         _camera.ResetCameraBeforePlay();
         
         _secondPlayerBotState.SetPlayStatus(false);
@@ -123,7 +124,7 @@ public class BattleManager : MonoBehaviour {
         thrower.SetAllowToThrow(false);
         _timerToThrowStep.StopTimer();
         Vector3 enemyPoint =  
-            thrower.ThrowPoint == _mainPlayer.ThrowPoint 
+            thrower.ThrowPoint == MainPlayer.ThrowPoint 
             ? _secondPlayerBotState.transform.position 
             :
             _playerMovement.transform.position;

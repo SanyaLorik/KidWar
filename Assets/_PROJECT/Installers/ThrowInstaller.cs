@@ -16,5 +16,6 @@ public class ThrowInstaller : MonoInstaller {
         Container.Bind<ForceChooseView>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<InputThrowGame>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<ModifierManager>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<BonusManager>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

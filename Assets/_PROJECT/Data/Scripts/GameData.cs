@@ -11,6 +11,9 @@ public class GameData : GameDataBase
     [field: SerializeField] public float SecondJumpForce { get; private set; }
     [field: SerializeField] public float RotateSpeed { get; private set; }
     [field: SerializeField] public float GravityScale { get; private set; }
+    [field: Header("Player Movement")]
+    [field: SerializeField] public int PlayerMaxHp { get; private set; }
+    
     
     [field: Header("Camera")]
     [field: Header("Дефолтные значения в процентах")]

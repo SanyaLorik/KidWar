@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 7969541616269673994}
   - component: {fileID: 5175570297498162569}
   - component: {fileID: 3951249880273504875}
+  - component: {fileID: 3419313491196096615}
   m_Layer: 0
   m_Name: Thrower
   m_TagString: Untagged
@@ -453,10 +454,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ba0505c8401b0498f2edc7f49b8da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectThrower
+  _playerHp: {fileID: 3419313491196096615}
+  <StayInLeft>k__BackingField: 0
   _throwVisualize: {fileID: 7969541616269673994}
   <PlayerHandle>k__BackingField: 0
-  _stayInLeft: 0
-  _requiredHoldTime: 0.5
 --- !u!65 &3951249880273504875
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -478,3 +479,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.7223678, y: 3.5503764, z: 1.0953846}
   m_Center: {x: -0.0142867565, y: -1.5465539, z: -1.8711233}
+--- !u!114 &3419313491196096615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7249126386731377980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423fb77e9d1840fe8f53b3cbad5304bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHp

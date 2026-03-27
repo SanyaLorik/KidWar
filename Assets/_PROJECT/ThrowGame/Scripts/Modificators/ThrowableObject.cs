@@ -40,15 +40,15 @@ public class ThrowableObject : MonoBehaviour {
     
     
     private void OnTriggerEnter(Collider collider) {
-        if(!collider.TryGetComponent(out ObjectThrower thrower) || ContactPlayer) return;
+        if(!collider.TryGetComponent(out IDamageable player) || ContactPlayer) return;
         if (_modifier != null) {
             _modifier.OnPlayerContact();
         }
-        if (thrower.IsInvinsible) {
+        if (player.IsInvinsible) {
             Debug.Log("Игрок Invinsible");
             return;
         }
-        thrower.MinusHp(Force);
+        player.TakeDamage(Force);
         ContactPlayer = true;
     }
     

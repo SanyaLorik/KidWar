@@ -10,6 +10,9 @@ public class BattleManager : MonoBehaviour {
     // БУдет выбираться рулеткой шо кинуть может
     [SerializeField] private ThrowableObject _labuba;
     [SerializeField] private int _secondsInStep;
+    
+    [SerializeField] private BotObjectThrower _bot1;
+    [SerializeField] private BotObjectThrower _bot2;
 
     
     // Игроки
@@ -22,6 +25,8 @@ public class BattleManager : MonoBehaviour {
     private bool _stepIsOver;
     private bool GameIsOver => MainPlayer.CurrentLifesCount == 0 ||  SecondPlayer.CurrentLifesCount == 0;
     public bool IsMainPlayerStep { get; private set; }
+    public bool BotTurnNow { get; private set; }
+    
     public event Action NewPlayerTurn;
 
     
@@ -75,6 +80,10 @@ public class BattleManager : MonoBehaviour {
         MainPlayer.InitToNewGame();
         SecondPlayer.InitToNewGame();
         
+        SecondPlayer.SetBotBehaviour(_bot1, MainPlayer);
+        
+        
+        
         GoBattle().Forget();
     }
 
@@ -94,18 +103,29 @@ public class BattleManager : MonoBehaviour {
         Debug.Log("Игра закончилась !");
     }
 
+    
     private async UniTask PlayerStepAsync(ObjectThrower thrower) {
         NewPlayerTurn?.Invoke();
         _stepIsOver = false;
         thrower.SetAllowToThrow(true);
+        if (!thrower.PlayerHandle) {
+            BotTurnNow = true;
+        }
         
         _timerToThrowStep.StartTimer(_secondsInStep);
         _windChooser.UpdateWind();
         FocusCamera(thrower.PointToCameraFocus);
         
+        
+        thrower.Damageable.SetInvinsible(true);
         await UniTask.WaitUntil(() => _stepIsOver || GameIsOver);
+        thrower.Damageable.SetInvinsible(false);
+        
         
         thrower.SetAllowToThrow(false);
+        if (!thrower.PlayerHandle) {
+            BotTurnNow = false;
+        }
     }
 
 

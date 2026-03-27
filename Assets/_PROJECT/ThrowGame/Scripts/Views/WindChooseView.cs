@@ -19,7 +19,7 @@ public class WindChooseView : MonoBehaviour {
         
         float xEnd = RectTransformHelper.CalculateXEnd(_progressParent);
         SetPointerNegative(_pointer, _windPercent, xEnd);
-        // Debug.Log("установка уэтра! " + CurrentWindForce);
+        Debug.Log("установка уэтра! " + CurrentWindForce);
     }
     
     

@@ -18,10 +18,13 @@ public class ThrowableModifierDouble : IThrowableModifier {
     public void ExtensionBehaviour() {
         _secondThrowableObject = Object.Instantiate(ThrowableObject);
         ThrowableObject.StartCoroutine(DeleteAsync());
+        _secondThrowableObject.SetGravity(true);
     }
 
 
-    public void OnPlayerContact() { }
+    public void OnPlayerContact() {
+        _secondThrowableObject.SetGravity(true);
+    }
     
     public void CalculatePose(float elapsedTime) {
         // Обычыный полет

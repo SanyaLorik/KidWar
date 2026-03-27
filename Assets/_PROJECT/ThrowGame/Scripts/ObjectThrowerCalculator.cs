@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using SanyaBeerExtension;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 
 /// <summary>
@@ -105,18 +106,66 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         
         Debug.Log("_flightDuration = " + _flightDuration);
         Debug.Log("_flightDurationToEnemy = " + _flightDurationToEnemy);
+        Debug.Log("Ветер сейчас = " + _wind.CurrentWindForce);
         
         
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();
         ThrowObject(obj, throwPoint, enemyPoint, _tokenSource.Token).Forget();
     }
+    
+    
 
     private float CalculateThrowDistance(float angle, float windSign) {
         _angleRatio = CalculateAngleRatio(angle);
         _throwDistance = _initialDistance * _force.CurrentForce * _angleRatio + _wind.CurrentWindForce * windSign;
         Debug.Log("distance " + _throwDistance);
         return _throwDistance;
+    }
+
+    /// <summary>
+    /// Выбирается точка куда бот хочет попасть
+    /// </summary>
+    /// <param name="throwDistance"> - дистанция от него до точки</param>
+    /// <returns></returns>
+    public (float force, float angle) CalculateForceAndAngleToPoint(float throwDistance, float throwZ, float enemyZ) {
+        // Формула
+        // _throwDistance = _initialDistance * _force.CurrentForce * _angleRatio + _wind.CurrentWindForce * windSign;
+        // _initialDistance известна
+        // _throwDistance известна
+        // нам нужно подобрать что-то, допустим бот выбирает еще силу, тогда надо выразить из формулы и получить угол 
+        // или если угол выбирает тогда получаем силу
+        // _force.CurrentForce * _angleRatio =  (_throwDistance - _wind.CurrentWindForce * windSign) / _initialDistance;
+        
+        
+        // _throwDistance = _initialDistance * _force.CurrentForce * _angleRatio + _wind.CurrentWindForce * windSign;
+        // _throwDistance - _wind.CurrentWindForce * windSign = _initialDistance * _force.CurrentForce * _angleRatio
+        // _force.CurrentForce = (_throwDistance - _wind.CurrentWindForce * windSign) / _angleRatio * _initialDistance;
+        
+        // Погрешность влево вправо похуй
+        Debug.Log("Ветер сейчас = " + _wind.CurrentWindForce);
+        
+        // Шаг итерации
+        float forceEps = 0.05f;
+        float angleEps = 2f;
+        // Начальная сила
+        // Чуть заранее от самого сильного 
+        float startAngle = Random.Range(20,50);
+        float angleRatio = CalculateAngleRatio(startAngle);
+        float windSign = throwZ < enemyZ ? 1 : -1;
+        bool forceFinded = false;
+        // Начинаем наверное с подбора угла
+        
+        // _force.CurrentForce * _angleRatio =  (_throwDistance - _wind.CurrentWindForce * windSign) / _initialDistance;
+        
+        // bool trueForce = currForce * _angleRatio - (throwDistance - _wind.CurrentWindForce * windSign) / _initialDistance < delta
+
+        float currForce = (throwDistance - _wind.CurrentWindForce * windSign) / (angleRatio * _initialDistance);
+        Debug.Log($"Для дистанции {throwDistance} угол {startAngle}, сила = {currForce}");
+        float distance = _initialDistance * currForce * angleRatio + _wind.CurrentWindForce * windSign;
+        Debug.Log("Ветер сейчас = " + _wind.CurrentWindForce);
+        Debug.Log("Подставив в формулу мы получим distance = " + distance);
+        return (currForce, startAngle);
     }
 
 
@@ -139,7 +188,6 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         Vector3 targetPos = CalculateTargetPose(playerThrowPoint, enemyPoint);
 
 
-        Debug.Log("Бросок!");
         ObjectInFly = true;
         ThrowableObject throwInstance = Instantiate(throwObject);
         throwInstance.transform.position = initialPos;

@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(Graphic))]
 public class InputThrowGame : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler {
@@ -14,6 +15,9 @@ public class InputThrowGame : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private float _chargeTime = 0f;
     private bool _isDownInvoked;
     
+    [Inject] private BattleManager _battleManager;
+
+    
     public event Action OnUpped;
     public event Action OnDowned;
     public event Action<Vector2> OnDragged;
@@ -22,6 +26,7 @@ public class InputThrowGame : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if(_battleManager.BotTurnNow) return;
         UniTaskHelper.DisposeTask(ref _tokenSource);
         if (_chargeTime >= _requiredHoldTime) {
             OnUpped?.Invoke();
@@ -31,6 +36,7 @@ public class InputThrowGame : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if(_battleManager.BotTurnNow) return;
         // Нажал хуем на экран
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();
@@ -40,6 +46,7 @@ public class InputThrowGame : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     
     public void OnDrag(PointerEventData eventData)
     {
+        if(_battleManager.BotTurnNow) return;
         DragDelta = eventData.delta;
         OnDragged?.Invoke(DragDelta);
     }

@@ -7,9 +7,10 @@ using Zenject;
 /// </summary>
 public class ObjectThrower : MonoBehaviour {
     [SerializeField] private PlayerHp _playerHp;
+    [field: SerializeField] public Transform PointToBeat { get; private set; }
     [field: SerializeField] public bool StayInLeft { get; private set; }
 
-    [SerializeField] private TrajectoryVisualize3D _throwVisualize;
+    [field: SerializeField] public TrajectoryVisualize3D ThrowVisualize { get; private set; }
 
     [field: Header("Игрок или бот управляет")]
     [field: SerializeField] public bool PlayerHandle { get; set; }
@@ -20,9 +21,18 @@ public class ObjectThrower : MonoBehaviour {
 
     public int CurrentLifesCount => _playerHp.CurrentHp;
 
-    public Transform ThrowPoint =>  _throwVisualize.ThrowPoint;
-    public Transform PointToCameraFocus =>  _throwVisualize.PointToCameraFocus;
-    public float AngleToThrow =>  _throwVisualize.CurrentVerticalAngle;
+    public Transform ThrowPoint =>  ThrowVisualize.ThrowPoint;
+    public Transform PointToCameraFocus =>  ThrowVisualize.PointToCameraFocus;
+
+    public float AngleToThrow { get; private set; }
+
+    private BotObjectThrower _botObjectThrower;
+
+
+    public void SetBotBehaviour(BotObjectThrower botObjectThrower, ObjectThrower enemyObjectThrower) {
+        _botObjectThrower = botObjectThrower;
+        _botObjectThrower.SetData(this, enemyObjectThrower);
+    }
     
     
     // Расчет физики полета и тп
@@ -39,6 +49,7 @@ public class ObjectThrower : MonoBehaviour {
     public void InitToNewGame() {
         _playerHp.InitPosition(StayInLeft);
         _playerHp.SetMaxHp();
+        _playerHp.SetShielded(false);
     }
     
     
@@ -50,20 +61,29 @@ public class ObjectThrower : MonoBehaviour {
     private void Throw() {
         // Нажали
         if (_allowToThrow && !_calculator.ObjectInFly) {
+            AngleToThrow = ThrowVisualize.CurrentVerticalAngle;
             Debug.Log("ВЫСТРЕЛ!");
             _battleManager.DoStep(this);
         }
     }
 
+    public void BotThrow(float newAngleToThrow) {
+        AngleToThrow = newAngleToThrow;
+        Debug.Log("ВЫСТРЕЛ БОТА!");
+        _battleManager.DoStep(this);
+    }
+
     
     public void SetAllowToThrow(bool state) {
         _allowToThrow = state;
-        _throwVisualize.SetActiveTrajectoryVisual(state);
+        ThrowVisualize.SetActiveTrajectoryVisual(state);
         // Сам по себе не бьёт
-        _playerHp.SetInvinsible(state);
+
         // поведение бота, както сымитировать бросок
-        if (_allowToThrow == state && !PlayerHandle) {
-            
+        if (_allowToThrow && !PlayerHandle) {
+            // Запрещаем игроку и даем боту
+            _allowToThrow = false;
+            _botObjectThrower.TransferControl();
         }
     }
 }

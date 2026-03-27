@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using _PROJECT.Scripts.Helpers;
 using Cysharp.Threading.Tasks;
@@ -97,6 +98,51 @@ public class ForceChooseView : MonoBehaviour {
             UpdateTiles(curvedT);
             await UniTask.Yield();
         }
+    }
+
+    public void InitBotForce(float forcePercent) {
+        _currentForcePercent = forcePercent;
+    }
+
+    public async UniTask StartBotForceChooser(float targetProgress, float time) {
+        _canvas.ActiveSelf();
+        float elapsedTime = 0f;
+        // Первый цикл просто удовлетворяем времени
+        float curvedT = 0f;
+        while (elapsedTime < time) {
+            elapsedTime += Time.deltaTime;
+            float pingPongValue = Mathf.PingPong(elapsedTime, _timeToFullCycle) / _timeToFullCycle;
+        
+            // Проверяем направление: возрастает или убывает
+            if (pingPongValue < _timeToFullCycle) {
+                // Идем от 0 к _timeToFullCycle -> _currentForcePercent от 0 к 1
+                curvedT = _forwardCurve.Evaluate(pingPongValue);
+            }
+            else {
+                // Идем от _timeToFullCycle к 0 -> pingPongValue от 1 к 0
+                curvedT = _backwardCurve.Evaluate(1f - pingPongValue);
+            }
+            UpdateTiles(curvedT);
+            await UniTask.Yield();
+        }
+        // Добиваем до нужного процента
+        float e = 0.05f;
+        int countIters = 0;
+        while (Math.Abs(targetProgress - curvedT) > e && countIters < 10000) {
+            countIters++;
+            elapsedTime += Time.deltaTime;
+            float pingPongValue = Mathf.PingPong(elapsedTime, _timeToFullCycle) / _timeToFullCycle;
+        
+            curvedT = pingPongValue < _timeToFullCycle ? 
+                _forwardCurve.Evaluate(pingPongValue) 
+                : 
+                _backwardCurve.Evaluate(1f - pingPongValue);
+            
+            UpdateTiles(curvedT);
+            await UniTask.Yield();
+        }
+        Debug.Log($"Force chooser finished, countIters: {countIters}, force = {curvedT}");
+        _canvas.DisactiveSelf();
     }
     
     

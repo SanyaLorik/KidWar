@@ -129,6 +129,60 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2704156621552904005, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &74558240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 74558241}
+  - component: {fileID: 74558242}
+  m_Layer: 0
+  m_Name: BotThrowBehaviour2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &74558241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74558240}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 895105926}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &74558242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74558240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
+  _chanceToBeatPlayer: 0.6
+  _delayBeforeThrow:
+    <From>k__BackingField: 0.7
+    <To>k__BackingField: 1.5
+  _angleChooseTimeDiapasone:
+    <From>k__BackingField: 1
+    <To>k__BackingField: 2
+  _diapasoneNearPlayer:
+    <From>k__BackingField: -7
+    <To>k__BackingField: 7
 --- !u!114 &81327182 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5189908968470787554, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -525,7 +579,7 @@ GameObject:
   - component: {fileID: 271583257}
   - component: {fileID: 271583258}
   m_Layer: 0
-  m_Name: BotThrowBehaviour
+  m_Name: BotThrowBehaviour1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -558,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
-  _chanceToBeatPlayer: 1
+  _chanceToBeatPlayer: 0.6
   _delayBeforeThrow:
     <From>k__BackingField: 0.7
     <To>k__BackingField: 1.5
@@ -566,8 +620,8 @@ MonoBehaviour:
     <From>k__BackingField: 1
     <To>k__BackingField: 2
   _diapasoneNearPlayer:
-    <From>k__BackingField: 10
-    <To>k__BackingField: 20
+    <From>k__BackingField: -7
+    <To>k__BackingField: 7
 --- !u!1 &276983290 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6832806544913796401, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -1856,6 +1910,7 @@ Transform:
   m_Children:
   - {fileID: 1639090478}
   - {fileID: 271583257}
+  - {fileID: 74558241}
   - {fileID: 1075025632}
   m_Father: {fileID: 1605051503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1874,7 +1929,7 @@ MonoBehaviour:
   _labuba: {fileID: 669403665764818371, guid: f3cd6dbe84bccaa44a9385bb759d31bf, type: 3}
   _secondsInStep: 20
   _bot1: {fileID: 271583258}
-  _bot2: {fileID: 0}
+  _bot2: {fileID: 74558242}
   <MainPlayer>k__BackingField: {fileID: 857750883}
 --- !u!1 &906176968
 GameObject:
@@ -4330,7 +4385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3004130610153138799, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_fontSize
-      value: 69.65
+      value: 45.35
       objectReference: {fileID: 0}
     - target: {fileID: 3416866595209642892, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4926,7 +4981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7242194451410922246, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_fontSize
-      value: 69.65
+      value: 45.35
       objectReference: {fileID: 0}
     - target: {fileID: 7703487453978091790, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_AnchorMax.x

@@ -81,6 +81,7 @@ public class BattleManager : MonoBehaviour {
         SecondPlayer.InitToNewGame();
         
         SecondPlayer.SetBotBehaviour(_bot1, MainPlayer);
+        MainPlayer.SetBotBehaviour(_bot2, SecondPlayer);
         
         
         

@@ -146,25 +146,30 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         Debug.Log("Ветер сейчас = " + _wind.CurrentWindForce);
         
         // Шаг итерации
-        float forceEps = 0.05f;
-        float angleEps = 2f;
+        float angleEps = .5f;
         // Начальная сила
         // Чуть заранее от самого сильного 
         float startAngle = Random.Range(20,50);
         float angleRatio = CalculateAngleRatio(startAngle);
         float windSign = throwZ < enemyZ ? 1 : -1;
-        bool forceFinded = false;
         // Начинаем наверное с подбора угла
-        
-        // _force.CurrentForce * _angleRatio =  (_throwDistance - _wind.CurrentWindForce * windSign) / _initialDistance;
-        
-        // bool trueForce = currForce * _angleRatio - (throwDistance - _wind.CurrentWindForce * windSign) / _initialDistance < delta
-
         float currForce = (throwDistance - _wind.CurrentWindForce * windSign) / (angleRatio * _initialDistance);
+        if (currForce > 1f) {
+            int maxAttempts = 100; // защита от бесконечного цикла
+            startAngle = _angleWithMaxDistance; 
+            while (currForce > 1f && startAngle >= _angleDiapasone.From && maxAttempts > 0) {
+                startAngle -= angleEps;
+                angleRatio = CalculateAngleRatio(startAngle);
+                currForce = (throwDistance - _wind.CurrentWindForce * windSign) / (angleRatio * _initialDistance);
+                maxAttempts--;
+            }
+        }
+
         Debug.Log($"Для дистанции {throwDistance} угол {startAngle}, сила = {currForce}");
         float distance = _initialDistance * currForce * angleRatio + _wind.CurrentWindForce * windSign;
         Debug.Log("Ветер сейчас = " + _wind.CurrentWindForce);
         Debug.Log("Подставив в формулу мы получим distance = " + distance);
+        currForce = MathF.Min(currForce, 1f);
         return (currForce, startAngle);
     }
 

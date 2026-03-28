@@ -5358,14 +5358,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Playground
       objectReference: {fileID: 0}
-    - target: {fileID: 4343414195835875579, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7636138327067140985, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.292
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

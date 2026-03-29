@@ -57,8 +57,10 @@ public class ObjectThrower : MonoBehaviour {
         _playerHp.SetShielded(false);
         
     }
-    
 
+    public void SetDead() {
+        _playerHp.SetDead();
+    }
 
 
     private void Throw() {
@@ -77,7 +79,10 @@ public class ObjectThrower : MonoBehaviour {
     }
 
     
+    
     public void SetAllowToThrow(bool state) {
+        ThrowVisualize.SetAllowToChooseAngle(state);
+        Debug.Log("SetAllowToThrow " + state);
         _allowToThrow = state;
         ThrowVisualize.SetActiveTrajectoryVisual(state);
         // Сам по себе не бьёт

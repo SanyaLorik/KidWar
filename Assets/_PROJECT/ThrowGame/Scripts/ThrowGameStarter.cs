@@ -23,44 +23,64 @@ public class ThrowGameStarter : MonoBehaviour  {
     [Inject] private LocalizationData _localization;
 
     private bool _afkPressed;
+    private bool _startGamePressed;
+    
     private CancellationTokenSource _tokenSource;
     
     public event Action<bool> GameStarted;
-    
+    private bool _firstPlayerBot;
+    private bool _secondPlayerBot = true;
 
     private void Start() {
-        StartTimer();
+        _firstPlayerBot = false;
+        _secondPlayerBot = true;
+        StartTimer(_timerDuration);
         _afkStatusText.DisactiveSelf();
     }
     
     public void GameOver() {
-        Debug.Log("GameOver");
+        Debug.Log("GameOver, _startGamePressed = " + _startGamePressed);
         GameStarted?.Invoke(false);
         // Ну наверное начинать сразу...
-        StartTimer();
+        if (!_startGamePressed) {
+            StartTimer(_timerDuration);
+        }
     }
     
 
     private void OnEnable() {
-        _afkButton.onClick.AddListener(ChangeAfkStatus);
+        _afkButton.onClick.AddListener(() => ChangeAfkStatus(!_afkPressed));
         _duoButton.onClick.AddListener(StartDuoGame);
         _onlineButton.onClick.AddListener(StartOnlineGame);
     }
 
     private void StartDuoGame() {
+        ChangeAfkStatus(false);
+        _startGamePressed = true;
         Debug.Log("StartDuoGame");
-        StartGame(false, false);
+        StopTimer();
+        _battleManager.SetGameOver();
+        _firstPlayerBot = false;
+        _secondPlayerBot = false;
+        StartTimer(.1f);
     }
-    
     
     private void StartOnlineGame() {
+        ChangeAfkStatus(false);
+        _startGamePressed = true;
         Debug.Log("StartOnlineGame");
-        StartGame(false, true);
+        StopTimer();
+        _battleManager.SetGameOver();
+        _firstPlayerBot = false;
+        _secondPlayerBot = true;
+        StartTimer(.1f);
     }
 
-    private void ChangeAfkStatus() {
+    private void ChangeAfkStatus(bool state) {
         Debug.Log("ChangeAfkStatus");
-        _afkPressed = !_afkPressed;
+        _afkPressed = state;
+        _firstPlayerBot = _afkPressed;
+        _secondPlayerBot = true;
         _afkStatusText.SetActive(_afkPressed);
     }
     
@@ -70,37 +90,39 @@ public class ThrowGameStarter : MonoBehaviour  {
         _timerCanvas.DisactiveSelf();
     }
 
-    private void StartTimer() {
+    private void StartTimer(float time) {
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();
-        NewGameTimer(_tokenSource.Token).Forget();
+        NewGameTimer(time, _tokenSource.Token).Forget();
     }
     
     
     // По таймеру играем PVB
-    private async UniTaskVoid NewGameTimer(CancellationToken token) {
+    private async UniTaskVoid NewGameTimer(float time, CancellationToken token) {
         Debug.Log("NewGameTimer");
         float elapsedTime = 0f;
         _timerCanvas.ActiveSelf();
-        while (elapsedTime <  _timerDuration && !token.IsCancellationRequested) {
+        while (elapsedTime <  time && !token.IsCancellationRequested) {
             elapsedTime += Time.deltaTime;
             string timerText = string.Format(
                 _localization.Timer,
-                _localization.GetPrettyTime((int)(_timerDuration - elapsedTime))
+                _localization.GetPrettyTime((int)(time - elapsedTime))
             );
             _timerText.text = timerText;
             await UniTask.Yield();
         }
+        await UniTask.Yield();
         _timerCanvas.DisactiveSelf();
         if (!token.IsCancellationRequested) {
-            StartGame(_afkPressed, true);
+            StartGame();
         }
     }
 
     // Пока просто с ботиком 
-    private void StartGame(bool firstPlayerBot, bool secondPlayerBot) {
-        _battleManager.InitForNewGame(firstPlayerBot, secondPlayerBot);
-        Debug.Log("Старт игры!");
+    private void StartGame() {
+        _battleManager.InitForNewGame(_firstPlayerBot, _secondPlayerBot);
         GameStarted?.Invoke(true);
+        _startGamePressed = false;
+        Debug.Log("Старт игры!");
     }
 }

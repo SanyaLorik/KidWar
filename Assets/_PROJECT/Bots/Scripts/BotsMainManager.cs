@@ -43,7 +43,7 @@ public class BotsMainManager : IInitializable, IDisposable {
     public BotStateManager GetRandomBotToBattle() {
         foreach (var bot in _bots) {
             if (!bot.IsPlaying) {
-                bot.SetPlayStatus(true);
+                bot.SetPlayStatusSilent(true);
                 return bot;
             }
         }

@@ -141,7 +141,7 @@ public class ForceChooseView : MonoBehaviour {
             UpdateTiles(curvedT);
             await UniTask.Yield();
         }
-        Debug.Log($"Force chooser finished, countIters: {countIters}, force = {curvedT}");
+        // Debug.Log($"Force chooser finished, countIters: {countIters}, force = {curvedT}");
         _canvas.DisactiveSelf();
     }
     

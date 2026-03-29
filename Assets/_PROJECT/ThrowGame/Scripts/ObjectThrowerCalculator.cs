@@ -69,10 +69,17 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     }
 
     private void BattleManagerOnGameIsStarted(bool isStarted) {
-        if (isStarted) {
-            _throwInstances.ForEach(obj => Destroy(obj.gameObject));
-            _throwInstances.Clear();
-        }
+        ObjectInFly = false;
+        UniTaskHelper.DisposeTask(ref _tokenSource);
+        _tokenSource = new CancellationTokenSource();
+        WaitFewFramesToDelete(_tokenSource.Token).Forget();
+    }
+
+    private async UniTask WaitFewFramesToDelete(CancellationToken token) {
+        await UniTask.WaitForSeconds(.5f, cancellationToken: token);
+        _throwInstances.ForEach(obj => Destroy(obj.gameObject));
+        _throwInstances.Clear();
+        
     }
 
     private void Start() {
@@ -104,9 +111,9 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         _flightDurationToEnemy = CalculateTrajectoryLength(DistanceBeforePlayers, _height) / _flySpeed;
 
         
-        Debug.Log("_flightDuration = " + _flightDuration);
-        Debug.Log("_flightDurationToEnemy = " + _flightDurationToEnemy);
-        Debug.Log("Ветер сейчас = " + _wind.CurrentWindForce);
+        // Debug.Log("_flightDuration = " + _flightDuration);
+        // Debug.Log("_flightDurationToEnemy = " + _flightDurationToEnemy);
+        // Debug.Log("Ветер сейчас = " + _wind.CurrentWindForce);
         
         
         UniTaskHelper.DisposeTask(ref _tokenSource);
@@ -143,7 +150,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         // _force.CurrentForce = (_throwDistance - _wind.CurrentWindForce * windSign) / _angleRatio * _initialDistance;
         
         // Погрешность влево вправо похуй
-        Debug.Log("Ветер сейчас = " + _wind.CurrentWindForce);
+        // Debug.Log("Ветер сейчас = " + _wind.CurrentWindForce);
         
         // Шаг итерации
         float angleEps = .5f;
@@ -165,10 +172,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
             }
         }
 
-        Debug.Log($"Для дистанции {throwDistance} угол {startAngle}, сила = {currForce}");
-        float distance = _initialDistance * currForce * angleRatio + _wind.CurrentWindForce * windSign;
-        Debug.Log("Ветер сейчас = " + _wind.CurrentWindForce);
-        Debug.Log("Подставив в формулу мы получим distance = " + distance);
+        // Debug.Log($"Для дистанции {throwDistance} угол {startAngle}, сила = {currForce}");
+        // float distance = _initialDistance * currForce * angleRatio + _wind.CurrentWindForce * windSign;
+        // Debug.Log("Ветер сейчас = " + _wind.CurrentWindForce);
+        // Debug.Log("Подставив в формулу мы получим distance = " + distance);
         currForce = MathF.Min(currForce, 1f);
         return (currForce, startAngle);
     }
@@ -251,7 +258,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         float term2 = (a * a) / (2 * b) * Mathf.Log((2 * b + term1) / a);
     
         float trajectoryLength = Mathf.Max((term1 + term2), _minTrajectoryLength);
-        Debug.Log($"distance={distance}, height={height}, length={trajectoryLength}");
+        // Debug.Log($"distance={distance}, height={height}, length={trajectoryLength}");
     
         return trajectoryLength;
     }

@@ -59,6 +59,10 @@ public class PlayerHp : MonoBehaviour, IDamageable {
     private void ChangeHpView() {
         _hpView.ChangeHp(CurrentHp, _stayInLeft);
     }
+    
+    public void SetDead() {
+        CurrentHp = 0;
+    }
 
 
 }

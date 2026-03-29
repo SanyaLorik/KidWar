@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
     [Inject] private IInputJumping _inputJumping;
     [Inject] private GameData _gameData;
     [Inject] private PlayerStateManager _stateManager;
+    [Inject] private IInterstitialDelaying _interstitialDelaying;
     
     // Для гравитации и прыжков
     private float _verticalVelocity;
@@ -79,20 +80,23 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
     }
 
     public void SetPlayStatus(bool goPlay) {
+        _stateManager.SetupCanvases(goPlay);
         // игрок не учавствовал в бою
         // Вернулся
         if (!goPlay) {
             TpInPoint(_posBeforeTeleport);
             _inputActivity.Enable();
+            _interstitialDelaying.EnableTimer();
             SetCharacterControllerState(true);
             IsPlaying = false;
         }
         else {
+            _interstitialDelaying.DisableTimer();
+            _inputActivity.Disable();
             if (_controllerOffRoutine != null) {
                 StopCoroutine(_controllerOffRoutine);
             }
             _controllerOffRoutine = StartCoroutine(ControllerOffRoutine());
-            _inputActivity.Disable();
         }
     }
 

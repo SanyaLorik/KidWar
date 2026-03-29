@@ -22,6 +22,7 @@ public class PlayerStateManager : MonoBehaviour{
     [Inject] private IInterstitialDelaying  _interstitialDelaying;
     [Inject] private IInterstitialActivity  _interstitialActivity;
     [Inject] private PlayerMovement _playerMovement;
+    [Inject] private BattleManager _battleManager;
     [Inject] protected IGameSave _saver;
 
     [InjectOptional] private IActivityButtonPC _activityButtonPC;
@@ -33,10 +34,9 @@ public class PlayerStateManager : MonoBehaviour{
         _playerMovement.Floored += PlayerMovementOnFloored;
         _playerMovement.JumpPressed += PlayerMovementOnJumpPressed;
         _playerMovement.DoubleJumpPressed += PlayerMovementOnJumpPressed;
-        _throwGameManager.GameStarted += OnThrowGameStarted;
     }
 
-    private void OnThrowGameStarted(bool playerGoPlay) {
+    public void SetupCanvases(bool playerGoPlay) {
         ChangePlayerState(playerGoPlay ? PlayerState.Play : PlayerState.InSpawn);
         if (playerGoPlay) {
             _objectsToShowInPlay.ActiveSelf();
@@ -62,8 +62,7 @@ public class PlayerStateManager : MonoBehaviour{
         if (_saver.GetSave<GameSave>().IsBoughtPurchase) {
             _interstitialActivity.DisableInterstitial();
         }
-
-        OnThrowGameStarted(false);
+        SetupCanvases(false);
     }
 
 

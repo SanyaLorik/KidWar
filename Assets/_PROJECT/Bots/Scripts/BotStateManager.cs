@@ -14,7 +14,7 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
     [SerializeField] private Collider _botCollider;
 
     [SerializeField] private ObjectThrower _thrower;
-    private Vector3 _lastSpawnPoint;
+    private Vector3 _posBeforeTeleport;
     
     
     private BotWander _botWander;
@@ -40,30 +40,31 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
     
     
     public void SetPlayStatus(bool goPlay) {
+        Debug.Log("SetPlayStatus: " + goPlay);
+        Debug.Log("_posBeforeTeleport: " + _posBeforeTeleport);
+        IsPlaying = goPlay;
         if (goPlay) {
             _currentBotBehaviour?.Exit();
-            _lastSpawnPoint = transform.position;
             _botCollider.enabled = true;
-            // _agent.enabled = false;
-            IsPlaying =  true;
         }
         // Возвращение на спавн
-        else if (IsPlaying) {
-            TpInPoint(_lastSpawnPoint);
+        else {
+            TpInPoint(_posBeforeTeleport);
             _botCollider.enabled = false;
-            // _agent.enabled = true;
             ChangeBotState(BotState.Wandering);
-            IsPlaying = false;
         }
+    }
+
+    public void SetPlayStatusSilent(bool goPlay) {
+        IsPlaying =  goPlay;
     }
 
 
     public void TpInPoint(Vector3 pos) {
+        _posBeforeTeleport = transform.position;
+        Debug.Log("TpInPoint bot");
         // _agent.enabled = false;
-        NavMeshHit hit;
-
-        if (NavMesh.SamplePosition(pos, out hit, 5f, NavMesh.AllAreas))
-        {
+        if (NavMesh.SamplePosition(pos, out var hit, 5f, NavMesh.AllAreas)) {
             _agent.Warp(hit.position);
         }
     }

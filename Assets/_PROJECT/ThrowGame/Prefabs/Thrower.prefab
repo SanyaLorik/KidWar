@@ -425,8 +425,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3768071524366892268}
   - component: {fileID: 7969541616269673994}
-  - component: {fileID: 5175570297498162569}
   - component: {fileID: 3951249880273504875}
+  - component: {fileID: 5175570297498162569}
   - component: {fileID: 3419313491196096615}
   m_Layer: 0
   m_Name: Thrower
@@ -481,23 +481,6 @@ MonoBehaviour:
   _smoothVariationChance: 0.3
   _onlyOvershootChance: 0.2
   _onlyUndershootChance: 0.2
---- !u!114 &5175570297498162569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7249126386731377980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53ba0505c8401b0498f2edc7f49b8da0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectThrower
-  _playerHp: {fileID: 3419313491196096615}
-  <PointToBeat>k__BackingField: {fileID: 120688126886515098}
-  <StayInLeft>k__BackingField: 0
-  <ThrowVisualize>k__BackingField: {fileID: 0}
-  <PlayerHandle>k__BackingField: 0
 --- !u!65 &3951249880273504875
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -519,6 +502,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.7223678, y: 3.6395562, z: 1.0953846}
   m_Center: {x: -0.0142867565, y: -1.5911437, z: -1.8711233}
+--- !u!114 &5175570297498162569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7249126386731377980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ba0505c8401b0498f2edc7f49b8da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectThrower
+  _playerHp: {fileID: 3419313491196096615}
+  <PointToBeat>k__BackingField: {fileID: 120688126886515098}
+  <StayInLeft>k__BackingField: 0
+  <ThrowVisualize>k__BackingField: {fileID: 0}
+  <PlayerHandle>k__BackingField: 0
 --- !u!114 &3419313491196096615
 MonoBehaviour:
   m_ObjectHideFlags: 0

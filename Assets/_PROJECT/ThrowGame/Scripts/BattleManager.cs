@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using _PROJECT.Scripts.Helpers;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -26,6 +28,8 @@ public class BattleManager : MonoBehaviour {
     private bool GameIsOver => FirstThrower.ObjectThrower.CurrentLifesCount == 0 ||  SecondThrower.ObjectThrower.CurrentLifesCount == 0;
     public bool IsFirstThrowerStep { get; private set; }
     public bool BotTurnNow { get; private set; }
+    public bool MainPlayerPlay { get; private set; }
+    
     
     public event Action NewPlayerTurn;
 
@@ -52,20 +56,17 @@ public class BattleManager : MonoBehaviour {
 
 
     private void FocusCamera(Transform obj) {
+        if(!MainPlayerPlay) return;
         Debug.Log("Focus camera");
         _camera.SetCameraToPlayThrow(obj);
     }
-    
-    
-    // Надо будет сделать скрытного бота который будет дублировать внешность игрока
-    // и выступать за 2го игрока, покачто это бот с управлением игрока
-    /// <summary>
-    /// Поидее надо будет выбирать режим PVP PVB
-    /// </summary>
+
     public void InitForNewGame(bool firstPlayerBot, bool secondPlayerBot) {
         Debug.Log("firstPlayerBot " + firstPlayerBot);
         Debug.Log("secondPlayerBot " + secondPlayerBot);
-  
+
+        MainPlayerPlay = !firstPlayerBot;
+        
         if (!firstPlayerBot) {
             FirstThrower = _mainPlayer;
             GetReadyPlayer(_mainPlayer, true);
@@ -73,6 +74,8 @@ public class BattleManager : MonoBehaviour {
         else {
             FirstThrower = _botsMainManager.GetRandomBotToBattle();
             GetReadyPlayer(FirstThrower, true);
+            // Это битва 2х ботов
+            // - сделать аим у ботов 100%
         }
 
         // Второй игрок всегда ботяра, ток с настроенным поведением
@@ -86,8 +89,14 @@ public class BattleManager : MonoBehaviour {
         SecondThrower.ObjectThrower.InitToNewGame(false);
         SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
         SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
-        
+
         GoBattle().Forget();
+    }
+
+    public void SetGameOver() {
+        Debug.Log("SetGameOver");
+        FirstThrower.ObjectThrower.SetDead();
+        SecondThrower.ObjectThrower.SetDead();
     }
 
     private void GetReadyPlayer(IThrowGamePlayer player, bool inLeft) {
@@ -106,7 +115,9 @@ public class BattleManager : MonoBehaviour {
 
     private async UniTask GoBattle() {
         Debug.Log("GoBattle");
-        
+                
+        FirstThrower.ObjectThrower.SetAllowToThrow(false);
+        SecondThrower.ObjectThrower.SetAllowToThrow(false);
         while(!GameIsOver) {
             IsFirstThrowerStep = true;
             await PlayerStepAsync(FirstThrower.ObjectThrower, _leftCameraFocus);
@@ -121,13 +132,12 @@ public class BattleManager : MonoBehaviour {
 
     
     private async UniTask PlayerStepAsync(ObjectThrower thrower, Transform pointToCameraFocus) {
-        Debug.Log("NewPlayerTurn");
+        if(GameIsOver) return;
+        Debug.Log("NewPlayerTurn, BotTurnNow = " + !thrower.PlayerHandle);
         NewPlayerTurn?.Invoke();
         _stepIsOver = false;
         thrower.SetAllowToThrow(true);
-        if (!thrower.PlayerHandle) {
-            BotTurnNow = true;
-        }
+        BotTurnNow = !thrower.PlayerHandle;
         
         _timerToThrowStep.StartTimer(_secondsInStep);
         _windChooser.UpdateWind();
@@ -148,21 +158,18 @@ public class BattleManager : MonoBehaviour {
 
     private void SetSpawnState() {
         Debug.Log("SetSpawnState");
-
-
-        if (SecondThrower != null) {
-            _camera.ResetCameraBeforePlay();
-            SecondThrower.ObjectThrower.SetAllowToThrow(false);
-            FirstThrower.ObjectThrower.SetAllowToThrow(false);
-        }
-
         if (FirstThrower != null && FirstThrower.IsPlaying) {
             FirstThrower.SetPlayStatus(false);
-            
+            FirstThrower.ObjectThrower.SetAllowToThrow(false);
         }
 
         if (SecondThrower != null && SecondThrower.IsPlaying) {
             SecondThrower.SetPlayStatus(false);
+            SecondThrower.ObjectThrower.SetAllowToThrow(false);
+        }
+        
+        if (MainPlayerPlay) {
+            _camera.ResetCameraBeforePlay();
         }
     }
 

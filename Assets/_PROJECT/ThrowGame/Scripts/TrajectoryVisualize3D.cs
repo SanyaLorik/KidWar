@@ -27,6 +27,7 @@ public class TrajectoryVisualize3D : MonoBehaviour
     private Vector3 _throwDirection;
     
     public float CurrentVerticalAngle { get; private set; }
+    public bool AllowToChooseAngle { get; private set; }
 
     [Inject] private InputThrowGame _inputThrowGame;
     [Inject] private ObjectThrowerCalculator _calculator;
@@ -55,14 +56,22 @@ public class TrajectoryVisualize3D : MonoBehaviour
     public void InitCurrentAngleByBot(float angle) {
         CurrentVerticalAngle = angle;
     }
+
+    public void SetAllowToChooseAngle(bool state) {
+        AllowToChooseAngle = state;
+        _trajectoryLine.gameObject.SetActive(state);
+        _trajectoryCanvas.SetActive(state);
+    }
     
     
     private void OnUppedScreen() {
+        if (!AllowToChooseAngle) return;
         _trajectoryLine.gameObject.DisactiveSelf();
     }
     
     
     private void OnDownedScreen() {
+        if (!AllowToChooseAngle) return;
         _trajectoryLine.gameObject.ActiveSelf();
     }
 
@@ -72,6 +81,7 @@ public class TrajectoryVisualize3D : MonoBehaviour
 
     
     private void DragController(Vector2 delta) {
+        if (!AllowToChooseAngle) return;
         if(_calculator.ObjectInFly) return;
         UpdateThrowDirection(delta);
         DrawTrajectory();

@@ -25,8 +25,8 @@ public class ThrowableObject : MonoBehaviour {
     public float FlightDurationToEnemy { get; private set; }
     public float Height { get; private set; }
     public AnimationCurve ThrowCurve { get; private set; }
-    
-    
+    public bool ObjectIsFalled { get; private set; }
+
     /// <summary>
     /// Если был контакт с коллайдером или игроком то не наносить больше урона
     /// </summary>
@@ -63,6 +63,10 @@ public class ThrowableObject : MonoBehaviour {
             await UniTask.WaitForFixedUpdate();
         }
         SetGravity(true);
+    }
+
+    public void SetFallStatus(bool state) {
+        ObjectIsFalled = state;
     }
     
     

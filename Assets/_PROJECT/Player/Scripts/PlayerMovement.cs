@@ -6,8 +6,10 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
     [SerializeField] private CharacterController _controller; // 
+    [SerializeField] private ObjectThrower _thrower;
+    
     // [SerializeField] private PlayerVisual _visual;
 
     public Vector2 MoveInput => _inputDirection2.Direction2;
@@ -15,6 +17,8 @@ public class PlayerMovement : MonoBehaviour {
     private float _rollVelocity;
     private bool _wasGroundedLastFrame;
     private Vector3 _externalMotion;
+    private Vector3 _posBeforeTeleport;
+    
     
     public event Action JumpPressed;
     public event Action DoubleJumpPressed;
@@ -23,6 +27,8 @@ public class PlayerMovement : MonoBehaviour {
     
     public bool IsGrounded { get; private set; }
     public bool IsRunning { get; private set; }
+    public bool IsPlaying { get; private set; }
+    
     public CharacterController Controller => _controller;
     
     
@@ -60,14 +66,10 @@ public class PlayerMovement : MonoBehaviour {
     private void OnDisable() {
         _inputJumping.OnJumped -= OnJump;
     }
-    
 
 
-    private Vector3 _posBeforeTeleport;
-    public void TpPlayerInPoint(Vector3 target, float diffToSpawn = 0) {
+    public void TpInPoint(Vector3 target) {
         _posBeforeTeleport = transform.position;
-        bool isNearY = Vector3.Magnitude(transform.position - target) < diffToSpawn;
-        if(isNearY) return;
         SetCharacterControllerState(false);
         transform.position = target;
         SetCharacterControllerState(true);
@@ -76,28 +78,36 @@ public class PlayerMovement : MonoBehaviour {
         _jumpsUsed = 0; // Сброс прыжков
     }
 
-    private bool _gameIsStarted;
     public void SetPlayStatus(bool goPlay) {
+        // игрок не учавствовал в бою
         // Вернулся
         if (!goPlay) {
-            TpPlayerInPoint(_posBeforeTeleport);
+            TpInPoint(_posBeforeTeleport);
             _inputActivity.Enable();
-            _gameIsStarted = false;
             SetCharacterControllerState(true);
+            IsPlaying = false;
         }
         else {
-            StartCoroutine(ControllerOffRoutine());
+            if (_controllerOffRoutine != null) {
+                StopCoroutine(_controllerOffRoutine);
+            }
+            _controllerOffRoutine = StartCoroutine(ControllerOffRoutine());
             _inputActivity.Disable();
         }
     }
 
+
+
+    public ObjectThrower ObjectThrower => _thrower;
+
+    private Coroutine _controllerOffRoutine;
     /// <summary>
     /// После телепорта пусть все коллизии просчитает а потом отключится для игры
     /// </summary>
     /// <returns></returns>
     private IEnumerator ControllerOffRoutine() {
         yield return new WaitForSeconds(1f);
-        _gameIsStarted = true;
+        IsPlaying = true;
         SetCharacterControllerState(false);
     }
 
@@ -115,8 +125,8 @@ public class PlayerMovement : MonoBehaviour {
             _jumpsUsed = 2;
         }
     }
-    
-    
+
+
     public void RotateToTarget(Vector3 targetPosition) {
         Vector3 direction = targetPosition - transform.position;
         direction.y = 0;
@@ -130,7 +140,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
     private void Walk() {
-        if (_gameIsStarted) return;
+        if (IsPlaying) return;
         Transform cam = Camera.main.transform;
         Vector3 camForward = cam.forward;
         Vector3 camRight = cam.right;

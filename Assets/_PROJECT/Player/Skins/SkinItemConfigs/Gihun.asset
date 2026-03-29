@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce84f230e1152664b9b9ba1ff8d010ad, type: 3}
+  m_Name: Gihun
+  m_EditorClassIdentifier: Assembly-CSharp::SkinItem
+  <Id>k__BackingField: gihun_skin
+  <Price>k__BackingField: 0
+  <SkinPrefab>k__BackingField: {fileID: 5194921409329958626, guid: 46aaaff2d218c2b47984b93d849cc0fa, type: 3}
+  <SkinElementsController>k__BackingField: {fileID: 2286371093910534174, guid: 46aaaff2d218c2b47984b93d849cc0fa, type: 3}
+  <Avatar>k__BackingField: {fileID: 9000000, guid: 0645363615836b94ab3b4149772b2a6d, type: 3}
+  <SkinGetType>k__BackingField: 0

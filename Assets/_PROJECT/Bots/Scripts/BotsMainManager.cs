@@ -41,8 +41,14 @@ public class BotsMainManager : IInitializable, IDisposable {
     }
     
     public BotStateManager GetRandomBotToBattle() {
-        BotStateManager bot = _bots.GetRandomElement();
-        return bot;
+        foreach (var bot in _bots) {
+            if (!bot.IsPlaying) {
+                bot.SetPlayStatus(true);
+                return bot;
+            }
+        }
+        Debug.LogError("Все боты для игры заняты, бот не нашелся");
+        return null;
     }
 
     private void PlayerOnChangeState(PlayerState state){

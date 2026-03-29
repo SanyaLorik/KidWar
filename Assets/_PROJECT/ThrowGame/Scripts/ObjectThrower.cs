@@ -22,18 +22,14 @@ public class ObjectThrower : MonoBehaviour {
     public int CurrentLifesCount => _playerHp.CurrentHp;
 
     public Transform ThrowPoint =>  ThrowVisualize.ThrowPoint;
-    public Transform PointToCameraFocus =>  ThrowVisualize.PointToCameraFocus;
 
+    public IDamageable Damageable => _playerHp;
+    
+    
     public float AngleToThrow { get; private set; }
 
     private BotObjectThrower _botObjectThrower;
 
-
-    public void SetBotBehaviour(BotObjectThrower botObjectThrower, ObjectThrower enemyObjectThrower) {
-        _botObjectThrower = botObjectThrower;
-        _botObjectThrower.SetData(this, enemyObjectThrower);
-    }
-    
     
     // Расчет физики полета и тп
     [Inject] private BattleManager _battleManager;
@@ -42,20 +38,27 @@ public class ObjectThrower : MonoBehaviour {
     [Inject] private HpView _hpView;
     [Inject] private GameData _gameData;
 
-
-    public IDamageable Damageable => _playerHp;
-    
-    
-    public void InitToNewGame() {
-        _playerHp.InitPosition(StayInLeft);
-        _playerHp.SetMaxHp();
-        _playerHp.SetShielded(false);
-    }
-    
-    
+        
     private void OnEnable() {
         _inputThrowGame.OnUpped += Throw;
     }
+    
+    
+    public void SetBotBehaviour(BotObjectThrower botObjectThrower, ObjectThrower enemyObjectThrower, bool isBot) {
+        _botObjectThrower = botObjectThrower;
+        _botObjectThrower.SetData(this, enemyObjectThrower);
+        PlayerHandle = !isBot;
+    }
+    
+    public void InitToNewGame(bool stayInLeft) {
+        StayInLeft = stayInLeft;
+        _playerHp.InitPosition(StayInLeft);
+        _playerHp.SetMaxHp();
+        _playerHp.SetShielded(false);
+        
+    }
+    
+
 
 
     private void Throw() {

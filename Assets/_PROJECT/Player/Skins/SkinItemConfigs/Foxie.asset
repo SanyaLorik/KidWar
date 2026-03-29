@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce84f230e1152664b9b9ba1ff8d010ad, type: 3}
+  m_Name: Foxie
+  m_EditorClassIdentifier: Assembly-CSharp::SkinItem
+  <Id>k__BackingField: foxie_skin
+  <Price>k__BackingField: 0
+  <SkinPrefab>k__BackingField: {fileID: 5194921409329958626, guid: da0608650915afb4e9b837d466fce87f, type: 3}
+  <SkinElementsController>k__BackingField: {fileID: 2286371093910534174, guid: da0608650915afb4e9b837d466fce87f, type: 3}
+  <Avatar>k__BackingField: {fileID: 9000000, guid: 64cfd53bdabb3324eb1df6cd516784a1, type: 3}
+  <SkinGetType>k__BackingField: 0

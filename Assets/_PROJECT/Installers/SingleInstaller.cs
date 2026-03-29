@@ -21,7 +21,7 @@ public class SingleInstaller : MonoInstaller {
     }
     
     private void BindNicknameRandomizer() {
-        Container.Bind<NicknameRandomizer>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<NicknameRandomizer>().AsSingle().NonLazy();
     }
     
 

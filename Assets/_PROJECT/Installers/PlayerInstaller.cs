@@ -14,7 +14,7 @@ public class PlayerInstaller : MonoInstaller {
     }
 
     private void BindPlayerSingletones() {
-        Container.Bind<PlayerMovement>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerMovement>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<PlayerStateManager>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
     

@@ -12,7 +12,6 @@ public class TrajectoryVisualize3D : MonoBehaviour
 {
     [Header("Ссылки")]
     [field: SerializeField] public Transform ThrowPoint { get; private set; }
-    [field: SerializeField] public Transform PointToCameraFocus { get; private set; }
     
     [SerializeField] private LineRenderer _trajectoryLine; // Линия траектории
     

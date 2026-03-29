@@ -37,7 +37,6 @@ public class BotWander : MonoBehaviour, IBotBehaviour {
 
 
     public void Enter() {
-        _agent.enabled = true;
         _botTokenSource = new CancellationTokenSource();
         Eblaning = true;
         // Сначала уведомить о начале движения
@@ -53,9 +52,7 @@ public class BotWander : MonoBehaviour, IBotBehaviour {
         _botTokenSource?.Cancel();
         _botTokenSource?.Dispose();
         _botTokenSource =  null;
-        _agent.SafeStop();
         _walkingParticles.Stop();
-        _agent.enabled = false;
         Eblaning = false;
         StartWandering?.Invoke(false);
     }

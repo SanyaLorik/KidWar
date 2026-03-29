@@ -7,13 +7,13 @@ public enum BotState {
 }
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class BotStateManager : MonoBehaviour {
+public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
     [SerializeField] private Transform _skinParent;
     [SerializeField] private BotAnimator _botAnimator;
     [SerializeField] private GameObject _skinInstance;
     [SerializeField] private Collider _botCollider;
-    
-    [field: SerializeField] public ObjectThrower BotThrower { get; private set; }
+
+    [SerializeField] private ObjectThrower _thrower;
     private Vector3 _lastSpawnPoint;
     
     
@@ -26,6 +26,8 @@ public class BotStateManager : MonoBehaviour {
     public bool IsPlaying { get; private set; }
     
     public BotState State { get; private set; }
+    
+    public ObjectThrower ObjectThrower => _thrower;
 
     private void Awake() {
         _botWander = GetComponent<BotWander>();
@@ -42,22 +44,28 @@ public class BotStateManager : MonoBehaviour {
             _currentBotBehaviour?.Exit();
             _lastSpawnPoint = transform.position;
             _botCollider.enabled = true;
-            _agent.enabled = false;
+            // _agent.enabled = false;
             IsPlaying =  true;
         }
         // Возвращение на спавн
         else if (IsPlaying) {
             TpInPoint(_lastSpawnPoint);
             _botCollider.enabled = false;
-            _agent.enabled = true;
+            // _agent.enabled = true;
             ChangeBotState(BotState.Wandering);
             IsPlaying = false;
         }
     }
 
+
     public void TpInPoint(Vector3 pos) {
-        _agent.enabled = false;
-        transform.position = pos;
+        // _agent.enabled = false;
+        NavMeshHit hit;
+
+        if (NavMesh.SamplePosition(pos, out hit, 5f, NavMesh.AllAreas))
+        {
+            _agent.Warp(hit.position);
+        }
     }
     
     public void RotateToTarget(Vector3 targetPosition) {

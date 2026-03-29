@@ -16,6 +16,8 @@ public class ThrowGameStarter : MonoBehaviour  {
     [SerializeField] private GameObject _timerCanvas;
     [SerializeField] private Button _afkButton;
     [SerializeField] private GameObject _afkStatusText;
+    [SerializeField] private Button _onlineButton;
+    [SerializeField] private Button _duoButton;
 
     [Inject] private BattleManager _battleManager;
     [Inject] private LocalizationData _localization;
@@ -32,6 +34,7 @@ public class ThrowGameStarter : MonoBehaviour  {
     }
     
     public void GameOver() {
+        Debug.Log("GameOver");
         GameStarted?.Invoke(false);
         // Ну наверное начинать сразу...
         StartTimer();
@@ -40,17 +43,25 @@ public class ThrowGameStarter : MonoBehaviour  {
 
     private void OnEnable() {
         _afkButton.onClick.AddListener(ChangeAfkStatus);
+        _duoButton.onClick.AddListener(StartDuoGame);
+        _onlineButton.onClick.AddListener(StartOnlineGame);
+    }
+
+    private void StartDuoGame() {
+        Debug.Log("StartDuoGame");
+        StartGame(false, false);
+    }
+    
+    
+    private void StartOnlineGame() {
+        Debug.Log("StartOnlineGame");
+        StartGame(false, true);
     }
 
     private void ChangeAfkStatus() {
+        Debug.Log("ChangeAfkStatus");
         _afkPressed = !_afkPressed;
         _afkStatusText.SetActive(_afkPressed);
-        if (_afkPressed) {
-            StopTimer();
-        }
-        else {
-            StartTimer();
-        }
     }
     
 
@@ -65,7 +76,10 @@ public class ThrowGameStarter : MonoBehaviour  {
         NewGameTimer(_tokenSource.Token).Forget();
     }
     
+    
+    // По таймеру играем PVB
     private async UniTaskVoid NewGameTimer(CancellationToken token) {
+        Debug.Log("NewGameTimer");
         float elapsedTime = 0f;
         _timerCanvas.ActiveSelf();
         while (elapsedTime <  _timerDuration && !token.IsCancellationRequested) {
@@ -79,13 +93,13 @@ public class ThrowGameStarter : MonoBehaviour  {
         }
         _timerCanvas.DisactiveSelf();
         if (!token.IsCancellationRequested) {
-            StartGame();
+            StartGame(_afkPressed, true);
         }
     }
 
     // Пока просто с ботиком 
-    private void StartGame() {
-        _battleManager.InitForNewGame();
+    private void StartGame(bool firstPlayerBot, bool secondPlayerBot) {
+        _battleManager.InitForNewGame(firstPlayerBot, secondPlayerBot);
         Debug.Log("Старт игры!");
         GameStarted?.Invoke(true);
     }

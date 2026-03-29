@@ -135,7 +135,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         // _throwDistance известна
         // нам нужно подобрать что-то, допустим бот выбирает еще силу, тогда надо выразить из формулы и получить угол 
         // или если угол выбирает тогда получаем силу
-        // _force.CurrentForce * _angleRatio =  (_throwDistance - _wind.CurrentWindForce * windSign) / _initialDistance;
+        // _force.CurrentForce * _angleRatio = (_throwDistance - _wind.CurrentWindForce * windSign) / _initialDistance;
         
         
         // _throwDistance = _initialDistance * _force.CurrentForce * _angleRatio + _wind.CurrentWindForce * windSign;

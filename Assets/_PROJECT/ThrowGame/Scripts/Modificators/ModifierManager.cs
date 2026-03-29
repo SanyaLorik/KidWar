@@ -32,13 +32,13 @@ public class ModifierManager : MonoBehaviour {
     public void TrySetModifier(IThrowableModifier modifier, ModifierChanger modifierChanger) {
         // Проверка на соответствие игрока и запроса
         if (IsLeftPlayerModifier(modifierChanger)) {
-            if (_battleManager.IsMainPlayerStep == true) {
+            if (_battleManager.IsFirstThrowerStep == true) {
                 Debug.Log("Установка или снятие модификатора для левого игрока");
                 SetModifierAfterCheck(modifier, modifierChanger);
             }
         }
         else {
-            if (_battleManager.IsMainPlayerStep == false) {
+            if (_battleManager.IsFirstThrowerStep == false) {
                 Debug.Log("Установка или снятие модификатора для правого игрока");
                 SetModifierAfterCheck(modifier, modifierChanger);
             }
@@ -67,7 +67,7 @@ public class ModifierManager : MonoBehaviour {
             _choosedModifierChanger.HidePointer();
         }
         // Left
-        _choosedModifierChanger = _battleManager.IsMainPlayerStep ? 
+        _choosedModifierChanger = _battleManager.IsFirstThrowerStep ? 
             _leftModifierChanger.Find(mc => mc.Modifier.GetType() == modifier.GetType()) 
             :
             _rightModifierChanger.Find(mc => mc.Modifier.GetType() == modifier.GetType());

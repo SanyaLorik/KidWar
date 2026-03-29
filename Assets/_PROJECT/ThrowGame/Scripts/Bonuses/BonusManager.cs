@@ -26,16 +26,16 @@ public class BonusManager : MonoBehaviour {
     public void TryUseBonus(IBonus bonus, BonusChanger bonusChanger) {
         //  Вызвал свой бонус в свой ход левый игрок
         if (IsLeftPlayerBonus(bonusChanger)) {
-            if (_battleManager.IsMainPlayerStep == true) {
-                bonus.Use(_battleManager.MainPlayer.Damageable);
+            if (_battleManager.IsFirstThrowerStep == true) {
+                bonus.Use(_battleManager.FirstThrower.ObjectThrower.Damageable);
                 bonusChanger.GetOneBonus();
                 _leftBonusChangers.ForEach(b => b.SetUnvailable());
             }
         }
         //  Вызвал свой бонус в свой ход правый игрок
         else {
-            if (_battleManager.IsMainPlayerStep == false) {
-                bonus.Use(_battleManager.SecondPlayer.Damageable);
+            if (_battleManager.IsFirstThrowerStep == false) {
+                bonus.Use(_battleManager.SecondThrower.ObjectThrower.Damageable);
                 bonusChanger.GetOneBonus();
                 bonusChanger.SetUnvailable();
                 _rightBonusChangers.ForEach(b => b.SetUnvailable());

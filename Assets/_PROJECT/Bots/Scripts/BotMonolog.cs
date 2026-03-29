@@ -15,11 +15,11 @@ public class BotMonolog : MonoBehaviour {
     
     private void Start() {
         Stfu();
-        // ChangeNickname();
+        ChangeNickname();
     }
 
     public void ChangeNickname() {
-        // _botNicknameText.text = _nicknameRandomizer.GetRandomName();
+        _botNicknameText.text = _nicknameRandomizer.GetRandomName();
     }
 
 

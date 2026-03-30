@@ -104,12 +104,12 @@ public class ForceChooseView : MonoBehaviour {
         _currentForcePercent = forcePercent;
     }
 
-    public async UniTask StartBotForceChooser(float targetProgress, float time) {
+    public async UniTask StartBotForceChooser(float targetProgress, float time, CancellationToken token) {
         _canvas.ActiveSelf();
         float elapsedTime = 0f;
         // Первый цикл просто удовлетворяем времени
         float curvedT = 0f;
-        while (elapsedTime < time) {
+        while (!token.IsCancellationRequested && elapsedTime < time) {
             elapsedTime += Time.deltaTime;
             float pingPongValue = Mathf.PingPong(elapsedTime, _timeToFullCycle) / _timeToFullCycle;
         
@@ -128,7 +128,7 @@ public class ForceChooseView : MonoBehaviour {
         // Добиваем до нужного процента
         float e = 0.05f;
         int countIters = 0;
-        while (Math.Abs(targetProgress - curvedT) > e && countIters < 10000) {
+        while (!token.IsCancellationRequested && Math.Abs(targetProgress - curvedT) > e && countIters < 10000) {
             countIters++;
             elapsedTime += Time.deltaTime;
             float pingPongValue = Mathf.PingPong(elapsedTime, _timeToFullCycle) / _timeToFullCycle;

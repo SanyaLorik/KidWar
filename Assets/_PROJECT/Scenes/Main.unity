@@ -1175,6 +1175,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 978708844572759331, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &522207908 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6130976403912946177, guid: 4618323e71e227f4d92fcd9561fc8042, type: 3}
+  m_PrefabInstance: {fileID: 5123427090692961068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &538365474 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2928683554929948471, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -1313,7 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685e4e6beb9f015409ef464f3a085501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThrowGameManager
-  _timerDuration: 6
+  _timerDuration: 3
   _timerText: {fileID: 1956258026}
   _timerCanvas: {fileID: 1628438532}
   _afkButton: {fileID: 1467414111}
@@ -2142,6 +2147,11 @@ MonoBehaviour:
     - rid: 8231486725257166919
       type: {class: ShieldBonus, ns: , asm: Assembly-CSharp}
       data: 
+--- !u!1 &972953661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6097259951788533781, guid: 4618323e71e227f4d92fcd9561fc8042, type: 3}
+  m_PrefabInstance: {fileID: 5123427090692961068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1004523729
 GameObject:
   m_ObjectHideFlags: 0
@@ -3703,6 +3713,7 @@ Transform:
   - {fileID: 1893693009}
   - {fileID: 1004523730}
   - {fileID: 1513578072}
+  - {fileID: 2049513009}
   m_Father: {fileID: 1584136215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1628438532 stripped
@@ -4121,6 +4132,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 330b7aa97d7c59d4c97b5b8daa091e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Trajectory3D
+--- !u!1 &2049513008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2049513009}
+  - component: {fileID: 2049513010}
+  m_Layer: 0
+  m_Name: MapChooser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2049513009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049513008}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1605051503}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2049513010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049513008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2387d904d88a0854e9d7c04c786f9db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapChanger
+  _maps:
+  - {fileID: 972953661}
+  - {fileID: 522207908}
+  _timeToChangeMaps: 5
+  _changeRandomMap: 1
 --- !u!1 &2052816075
 GameObject:
   m_ObjectHideFlags: 0

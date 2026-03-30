@@ -97,6 +97,8 @@ public class BattleManager : MonoBehaviour {
         Debug.Log("SetGameOver");
         FirstThrower.ObjectThrower.SetDead();
         SecondThrower.ObjectThrower.SetDead();
+        _bot1.DisposeBot();
+        _bot2.DisposeBot();
     }
 
     private void GetReadyPlayer(IThrowGamePlayer player, bool inLeft) {

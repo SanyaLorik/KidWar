@@ -26,7 +26,6 @@ public class BotsMainManager : IInitializable, IDisposable {
         _skins = skins;
         _gameData = gameData;
         _playerStateManager = playerStateManager;
-        _playerStateManager.ChangeState += PlayerOnChangeState;
         // Debug.Log("Bot count: " + _bots.Count);
     }
 
@@ -41,7 +40,10 @@ public class BotsMainManager : IInitializable, IDisposable {
     }
     
     public BotStateManager GetRandomBotToBattle() {
-        foreach (var bot in _bots) {
+        int countIters = 500;
+        while (countIters > 0) {
+            countIters--;
+            var bot = _bots.GetRandomElement();
             if (!bot.IsPlaying) {
                 bot.SetPlayStatusSilent(true);
                 return bot;
@@ -51,10 +53,6 @@ public class BotsMainManager : IInitializable, IDisposable {
         return null;
     }
 
-    private void PlayerOnChangeState(PlayerState state){
-        
-    }
-    
     
     private async UniTask BotSpeakCycleAsync(CancellationToken token) {
         await UniTask.Delay(1000, cancellationToken: token);
@@ -121,12 +119,8 @@ public class BotsMainManager : IInitializable, IDisposable {
 
         return result;
     }
-    
-    
-
 
 
     public void Dispose() {
-        _playerStateManager.ChangeState -= PlayerOnChangeState;
     }
 }

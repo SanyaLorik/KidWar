@@ -22,11 +22,14 @@ public class BotObjectThrower : MonoBehaviour {
     private ObjectThrower _currentThrower;
     private ObjectThrower _enemyThrower;
     private CancellationTokenSource _tokenSource;
-
     
     public void SetData(ObjectThrower currentThrower, ObjectThrower enemyThrower) {
         _currentThrower = currentThrower;
         _enemyThrower = enemyThrower;
+    }
+
+    public void DisposeBot() {
+        UniTaskHelper.DisposeTask(ref _tokenSource);
     }
 
 
@@ -48,7 +51,7 @@ public class BotObjectThrower : MonoBehaviour {
         _tokenSource = new CancellationTokenSource();
         // Ждем время перед выстрелом
         float waitTime = Random.Range(_delayBeforeThrow.From, _delayBeforeThrow.To);
-        await UniTask.WaitForSeconds(waitTime);
+        await UniTask.WaitForSeconds(waitTime, cancellationToken: _tokenSource.Token);
 
         _currentThrower.ThrowVisualize.SetActiveTrajectoryLine(true);
         float totalDuration = Random.Range(_angleChooseTimeDiapasone.From, _angleChooseTimeDiapasone.To);
@@ -66,7 +69,7 @@ public class BotObjectThrower : MonoBehaviour {
         _currentThrower.ThrowVisualize.InitCurrentAngleByBot(angle);
         
         _currentThrower.ThrowVisualize.SelectAngleWithAnimationAsync(angle, totalDuration, _tokenSource.Token).Forget();
-        await _forceView.StartBotForceChooser(force, totalDuration);
+        await _forceView.StartBotForceChooser(force, totalDuration, _tokenSource.Token);
 
         _currentThrower.ThrowVisualize.SetActiveTrajectoryLine(false);
         _currentThrower.BotThrow(angle);

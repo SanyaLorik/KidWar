@@ -31,6 +31,9 @@ public class ThrowGameStarter : MonoBehaviour  {
     private bool _firstPlayerBot;
     private bool _secondPlayerBot = true;
 
+    public bool GameIsStarted { get; private set; }
+    
+    
     private void Start() {
         _firstPlayerBot = false;
         _secondPlayerBot = true;
@@ -41,6 +44,7 @@ public class ThrowGameStarter : MonoBehaviour  {
     public void GameOver() {
         Debug.Log("GameOver, _startGamePressed = " + _startGamePressed);
         GameStarted?.Invoke(false);
+        GameIsStarted = false;
         // Ну наверное начинать сразу...
         if (!_startGamePressed) {
             StartTimer(_timerDuration);
@@ -120,6 +124,7 @@ public class ThrowGameStarter : MonoBehaviour  {
 
     // Пока просто с ботиком 
     private void StartGame() {
+        GameIsStarted = true;
         _battleManager.InitForNewGame(_firstPlayerBot, _secondPlayerBot);
         GameStarted?.Invoke(true);
         _startGamePressed = false;

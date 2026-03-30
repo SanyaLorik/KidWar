@@ -73,6 +73,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6644053897560697203}
     m_Modifications:
+    - target: {fileID: 69621199297892286, guid: c348a8b08179479409a99f281ebd8199, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 69621199297892286, guid: c348a8b08179479409a99f281ebd8199, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 992041574876883492, guid: c348a8b08179479409a99f281ebd8199, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 64523bbe72960b54488c9a78ab7a2b05, type: 3}
     - target: {fileID: 1428030306147848562, guid: c348a8b08179479409a99f281ebd8199, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -157,6 +169,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bonus Button_1
       objectReference: {fileID: 0}
+    - target: {fileID: 6199113523947959815, guid: c348a8b08179479409a99f281ebd8199, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199113523947959815, guid: c348a8b08179479409a99f281ebd8199, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199113523947959815, guid: c348a8b08179479409a99f281ebd8199, type: 3}
+      propertyPath: m_Color.r
+      value: 0.97383654
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301838730856753620, guid: c348a8b08179479409a99f281ebd8199, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7301838730856753620, guid: c348a8b08179479409a99f281ebd8199, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889015970773248648, guid: c348a8b08179479409a99f281ebd8199, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 64523bbe72960b54488c9a78ab7a2b05, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

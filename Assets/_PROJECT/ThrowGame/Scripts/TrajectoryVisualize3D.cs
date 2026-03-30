@@ -36,7 +36,7 @@ public class TrajectoryVisualize3D : MonoBehaviour
     
     private void Start() {
         SetActiveTrajectoryVisual(false);
-        _trajectoryLine.gameObject.SetActive(false);
+        _trajectoryLine.DisactiveSelf();
     }
 
     
@@ -61,6 +61,9 @@ public class TrajectoryVisualize3D : MonoBehaviour
         AllowToChooseAngle = state;
         _trajectoryLine.gameObject.SetActive(state);
         _trajectoryCanvas.SetActive(state);
+        if (state) {
+            UpdateThrowDirectionAndDraw();
+        }
     }
     
     

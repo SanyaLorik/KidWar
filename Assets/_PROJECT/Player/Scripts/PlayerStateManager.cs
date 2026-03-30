@@ -15,6 +15,7 @@ public class PlayerStateManager : MonoBehaviour{
     [SerializeField] private JumpParticlesController _jumpParticlesController;
     
     [Header("Player")]
+    [SerializeField] private GameObject _playContainer;
     [SerializeField] private GameObject[] _objectsToShowInPlay;
     [SerializeField] private GameObject[] _objectsToHideInPlay;
 
@@ -39,14 +40,18 @@ public class PlayerStateManager : MonoBehaviour{
     public void SetupCanvases(bool playerGoPlay) {
         ChangePlayerState(playerGoPlay ? PlayerState.Play : PlayerState.InSpawn);
         if (playerGoPlay) {
+            _playContainer.ActiveSelf();
             _objectsToShowInPlay.ActiveSelf();
             _objectsToHideInPlay.DisactiveSelf();
         }
         else {
             _objectsToShowInPlay.DisactiveSelf();
             _objectsToHideInPlay.ActiveSelf();
+            _playContainer.DisactiveSelf();
         }
     }
+    
+    
 
     private void PlayerMovementOnJumpPressed() {
         _jumpParticlesController.Play();

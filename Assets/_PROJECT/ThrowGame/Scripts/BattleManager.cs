@@ -41,6 +41,7 @@ public class BattleManager : MonoBehaviour {
     [Inject] ThrowGameStarter _throwGameStarter;
     [Inject] TimerToThrowStep _timerToThrowStep;
     [Inject] WindChooseView _windChooser;
+    [Inject] private StartBattleView _startBattleView;
 
     
     private void OnEnable() {
@@ -90,7 +91,7 @@ public class BattleManager : MonoBehaviour {
         SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
         SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
 
-        GoBattle().Forget();
+        GoBattle(firstPlayerBot, secondPlayerBot).Forget();
     }
 
     public void SetGameOver() {
@@ -115,9 +116,15 @@ public class BattleManager : MonoBehaviour {
     
 
 
-    private async UniTask GoBattle() {
+    private async UniTask GoBattle(bool firstPlayerBot, bool secondPlayerBot) {
         Debug.Log("GoBattle");
-                
+        if (!firstPlayerBot) {
+            FocusCamera(_leftCameraFocus);
+            _startBattleView.StartBattleAnimation(); 
+            await UniTask.WaitWhile(() => _startBattleView.AnimationPlayNow);
+        }        
+        
+        
         FirstThrower.ObjectThrower.SetAllowToThrow(false);
         SecondThrower.ObjectThrower.SetAllowToThrow(false);
         while(!GameIsOver) {

@@ -10,18 +10,17 @@ public abstract class UsableItemBase : MonoBehaviour {
 
     private CancellationTokenSource _tokenSource;
 
-
-    protected bool _isAvailable;
+    public bool IsAvailable { get; private set; }
     public abstract void TryUse();
     
     public void SetAvailable() {
-        _isAvailable = true;
+        IsAvailable = true;
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _availableImage.fillAmount = 0f;
     }
     
     public void SetUnvailable(bool startCooldown = false) {
-        _isAvailable = false;
+        IsAvailable = false;
         _availableImage.fillAmount = 1f;
         if (startCooldown) {
             StartColldown();
@@ -42,6 +41,6 @@ public abstract class UsableItemBase : MonoBehaviour {
             _availableImage.fillAmount = 1f - progress;
             await UniTask.Yield();
         }
-        _isAvailable = true;
+        IsAvailable = true;
     }
 }

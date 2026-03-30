@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using SanyaBeerExtension;
 using UnityEngine;
 using Zenject;
 
 public class ModifierManager : MonoBehaviour {
     [SerializeField] private List<ModifierChanger> _leftModifierChanger;
     [SerializeField] private List<ModifierChanger> _rightModifierChanger;
+    [Range(0,1), SerializeField] private float _chanseToBotUseModifier;
 
     private ModifierChanger _choosedModifierChanger;
     private readonly ThrowableModifierDefault _defaultModifier = new();
@@ -30,6 +32,7 @@ public class ModifierManager : MonoBehaviour {
     }
 
     public void TrySetModifier(IThrowableModifier modifier, ModifierChanger modifierChanger) {
+        if(_battleManager.MainPlayerPlay && _battleManager.BotTurnNow) return;
         // Проверка на соответствие игрока и запроса
         if (IsLeftPlayerModifier(modifierChanger)) {
             if (_battleManager.IsFirstThrowerStep == true) {
@@ -43,6 +46,27 @@ public class ModifierManager : MonoBehaviour {
                 SetModifierAfterCheck(modifier, modifierChanger);
             }
         }
+    }
+
+    public void UseModifierForBot() {
+        if (Random.value > _chanseToBotUseModifier) return;
+        List<ModifierChanger> modifierChangersList = _battleManager.IsFirstThrowerStep ? 
+            _leftModifierChanger 
+            : 
+            _rightModifierChanger;
+        
+        int startIndex =  Random.Range(0, modifierChangersList.Count-1);
+        for (int i = 0; i < modifierChangersList.Count; i++) {
+            int index = (startIndex + i) % modifierChangersList.Count;
+            ModifierChanger modifierChanger = modifierChangersList[index];
+            
+            if (modifierChanger.IsAvailable) {
+                SetModifierAfterCheck(modifierChanger.Modifier, modifierChanger);
+                Debug.Log("Выбран модификатор");
+                return;
+            }
+        }
+        Debug.Log("Бот не нашел модификатор");
     }
 
     private void SetModifierAfterCheck(IThrowableModifier modifier, ModifierChanger modifierChanger) {

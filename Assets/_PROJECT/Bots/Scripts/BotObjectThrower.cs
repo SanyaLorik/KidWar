@@ -18,6 +18,8 @@ public class BotObjectThrower : MonoBehaviour {
     
     [Inject] private ObjectThrowerCalculator _calculator;
     [Inject] private ForceChooseView _forceView;
+    [Inject] private ModifierManager _modifierManager;
+    
     
     private ObjectThrower _currentThrower;
     private ObjectThrower _enemyThrower;
@@ -43,6 +45,7 @@ public class BotObjectThrower : MonoBehaviour {
             // тут поидее тоже с прикольчиком будет типо боту слева над знак менять
             distance += Random.Range(_diapasoneNearPlayer.From, _diapasoneNearPlayer.To);
         }
+        _modifierManager.UseModifierForBot();
         WaitToForceAsync(distance).Forget();
     }
 

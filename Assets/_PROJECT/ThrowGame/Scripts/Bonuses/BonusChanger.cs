@@ -18,7 +18,7 @@ public class BonusChanger : UsableItemBase {
 
 
     public override void TryUse() {
-        if (!_isAvailable) {
+        if (!IsAvailable) {
             Debug.Log("Бонус на перезарядке именно что");
             return;
         }

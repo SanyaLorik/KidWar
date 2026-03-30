@@ -11,7 +11,7 @@ public class ModifierChanger : UsableItemBase {
     [Inject] ModifierManager _modifierManager;
 
     public override void TryUse() {
-        if (!_isAvailable) {
+        if (!IsAvailable) {
             Debug.Log("Модификатор на перезарядке именно что");
             return;
         }

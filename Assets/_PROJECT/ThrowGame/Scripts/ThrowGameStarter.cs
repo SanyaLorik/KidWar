@@ -69,7 +69,7 @@ public class ThrowGameStarter : MonoBehaviour  {
         StartTimer(.1f);
     }
     
-    private void StartOnlineGame() {
+    public void StartOnlineGame() {
         ChangeAfkStatus(false);
         _startGamePressed = true;
         Debug.Log("StartOnlineGame");
@@ -79,8 +79,8 @@ public class ThrowGameStarter : MonoBehaviour  {
         _secondPlayerBot = true;
         StartTimer(.1f);
     }
-
-    private void ChangeAfkStatus(bool state) {
+    
+    public void ChangeAfkStatus(bool state) {
         Debug.Log("ChangeAfkStatus");
         _afkPressed = state;
         _firstPlayerBot = _afkPressed;

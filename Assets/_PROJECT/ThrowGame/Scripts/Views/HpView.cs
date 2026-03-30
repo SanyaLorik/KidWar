@@ -1,4 +1,7 @@
-using SanyaBeerExtension;
+using System;
+using System.Threading;
+using _PROJECT.Scripts.Helpers;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -7,12 +10,34 @@ public class HpView : MonoBehaviour {
     [SerializeField] private RectTransform _parentLeftHp;
     [SerializeField] private RectTransform _rightHp;
     [SerializeField] private RectTransform _parentRightHp;
+    [SerializeField] private float _changeHpDuration = 1f;
     
     
+    [Inject] private ThrowGameStarter _throwGameStarter;
     [Inject] private BattleManager _battleManager;
     [Inject] private GameData _gameData;
-    private int MaxHp => _gameData.PlayerMaxHp;
     
+    
+    private int MaxHp => _gameData.PlayerMaxHp;
+
+    private float _leftPlayerPrevHp;
+    private float _rightPlayerPrevHp;
+
+    private void OnEnable() {
+        _throwGameStarter.GameStarted += OnGameStarted;
+    }
+
+    private void OnGameStarted(bool started) {
+        if(!_battleManager.MainPlayerPlay) return;
+
+        if (started) {
+            _leftPlayerPrevHp = 1f;
+            _rightPlayerPrevHp = 1f;
+        }
+        
+    }
+
+
     public void ChangeHp(int hp, bool stayInLeft) {
         float percent = (float) hp / MaxHp;
         if (stayInLeft) {
@@ -27,21 +52,20 @@ public class HpView : MonoBehaviour {
 
     private void ChangeLeftPlayerHp(float percent) {
         Debug.Log("ChangeLeftPlayerHp " + percent);
-        // Чем больше left тем меньше hp
-        // 0 left - 100hp
-        // _parentLeftHp.width - 0hp
         SetFillAmountInRight(_leftHp, _parentLeftHp, percent);
     }
     
     private void ChangeRightPlayerHp(float percent) {
-        Debug.Log("ChangeRightPlayerHp" + + percent);
-        // Чем больше left тем меньше hp
-        // 0 right - 100hp
-        // _parentRightHp.width - 0hp
+        Debug.Log("ChangeRightPlayerHp" + percent);
         SetFillAmountInLeft(_rightHp, _parentRightHp, percent);
     }
     
     // Перенести в RectTransformHelper, SetFillAmount стал SetFillAmountInLeft
+
+
+
+    private CancellationTokenSource _tokenSource;
+    
     
     /// <summary>
     /// В левую сторону убавляется полоска от 100 процентов
@@ -49,13 +73,19 @@ public class HpView : MonoBehaviour {
     /// <param name="img">Полоска хп</param>
     /// <param name="parent">Родитель полоски хп</param>
     /// <param name="percent">Процент заполнения</param>
-    public static void SetFillAmountInLeft(RectTransform img, RectTransform parent, float percent)
+    private void SetFillAmountInLeft(RectTransform img, RectTransform parent, float percent)
     {
         percent = Mathf.Clamp01(percent);
         float xEnd = parent.rect.width;
         var xPose = new Vector2(GetXPoseByPercent(percent, xEnd, parent), 0);
-        img.offsetMax = xPose;
+                
+        UniTaskHelper.DisposeTask(ref _tokenSource);
+        _tokenSource = new CancellationTokenSource();
+        
+        ChangeHpTask(img, img.offsetMax, xPose, true, _tokenSource.Token).Forget();
+        // img.offsetMax = xPose;
     }
+    
     
     /// <summary>
     /// В правую сторону убавляется полоска от 100 процентов
@@ -63,23 +93,50 @@ public class HpView : MonoBehaviour {
     /// <param name="img">Полоска хп</param>
     /// <param name="parent">Родитель полоски хп</param>
     /// <param name="percent">Процент заполнения</param>
-    public static void SetFillAmountInRight(RectTransform img, RectTransform parent, float percent)
+    private void SetFillAmountInRight(RectTransform img, RectTransform parent, float percent)
     {
         percent = Mathf.Clamp01(percent);
         float xEnd = parent.rect.width;
         var xPose = new Vector2(GetXPoseByPercent(percent, xEnd, parent), 0);
-        img.offsetMin = -xPose;
+        
+        UniTaskHelper.DisposeTask(ref _tokenSource);
+        _tokenSource = new CancellationTokenSource();
+        
+        ChangeHpTask(img, img.offsetMin, -xPose, false, _tokenSource.Token).Forget();
+        // img.offsetMin = -xPose;
     }
+    
+    private async UniTask ChangeHpTask(RectTransform img, Vector2 currentPos, Vector2 targetPos, bool offsetMax, CancellationToken token) {
+        float elapsedTime = 0f;
+        while (!token.IsCancellationRequested && elapsedTime < _changeHpDuration) {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / _changeHpDuration;
+            if (offsetMax) {
+                img.offsetMax = Vector2.Lerp(currentPos, targetPos, progress);
+            }
+            else {
+                img.offsetMin = Vector2.Lerp(currentPos, targetPos, progress);
+            }
+            await UniTask.Yield();
+        }
+        if (offsetMax) {
+            img.offsetMax = targetPos;
+        }
+        else {
+            img.offsetMin = targetPos;
+        }
+    }
+    
     
     /// <summary>
     /// Получить процент заполнения в зависимости от процента
-    /// В SetFillAmountInRight
+    /// В SetFillAmountInRight берем с минусом
     /// </summary>
     /// <param name="percent">Процент</param>
     /// <param name="xEnd">Ширина родителя</param>
     /// <param name="parent">Родитель</param>
     /// <returns></returns>
-    private static float GetXPoseByPercent(float percent, float xEnd, RectTransform parent)
+    private float GetXPoseByPercent(float percent, float xEnd, RectTransform parent)
     {
         if (xEnd < 0)
         {

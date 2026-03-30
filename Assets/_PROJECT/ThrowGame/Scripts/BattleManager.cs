@@ -96,8 +96,8 @@ public class BattleManager : MonoBehaviour {
 
     public void SetGameOver() {
         Debug.Log("SetGameOver");
-        FirstThrower.ObjectThrower.SetDead();
-        SecondThrower.ObjectThrower.SetDead();
+        if (FirstThrower != null) FirstThrower.ObjectThrower.SetDead();
+        if (SecondThrower != null) SecondThrower.ObjectThrower.SetDead();
         _bot1.DisposeBot();
         _bot2.DisposeBot();
     }

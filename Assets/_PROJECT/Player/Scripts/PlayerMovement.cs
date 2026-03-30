@@ -9,6 +9,7 @@ using Zenject;
 public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
     [SerializeField] private CharacterController _controller; // 
     [SerializeField] private ObjectThrower _thrower;
+    [SerializeField] private Transform _spawnPoint;
     
     // [SerializeField] private PlayerVisual _visual;
 
@@ -17,7 +18,6 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
     private float _rollVelocity;
     private bool _wasGroundedLastFrame;
     private Vector3 _externalMotion;
-    private Vector3 _posBeforeTeleport;
     
     
     public event Action JumpPressed;
@@ -70,7 +70,6 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
 
 
     public void TpInPoint(Vector3 target) {
-        _posBeforeTeleport = transform.position;
         SetCharacterControllerState(false);
         transform.position = target;
         SetCharacterControllerState(true);
@@ -84,7 +83,7 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
         // игрок не учавствовал в бою
         // Вернулся
         if (!goPlay) {
-            TpInPoint(_posBeforeTeleport);
+            TpInPoint(_spawnPoint.position);
             _inputActivity.Enable();
             _interstitialDelaying.EnableTimer();
             SetCharacterControllerState(true);

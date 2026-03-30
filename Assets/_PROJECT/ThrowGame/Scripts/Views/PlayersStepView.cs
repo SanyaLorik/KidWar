@@ -19,16 +19,12 @@ public class PlayersStepView : MonoBehaviour {
     [SerializeField] private Ease _hideEase;
 
     
-    
-    [Inject] BattleManager _battleManager;
+    public bool AnimationIsShowing { get; private set; }
 
     private Vector3 _startPos;
     [SerializeField] private Transform _targetToContiner;
     
 
-    private void OnEnable() {
-        _battleManager.NewPlayerTurn += ShowPlayerStep;
-    }
 
     private void Start() {
         _startPos = _playerStepBigContainer.position;
@@ -38,10 +34,9 @@ public class PlayersStepView : MonoBehaviour {
         _yourStepSmall.gameObject.DisactiveSelf();
     }
 
-    private void ShowPlayerStep() {
-        if(!_battleManager.MainPlayerPlay) return;
+    public void ShowPlayerStep(bool isFirstThrowerStep) {
         // Leftning
-        if (_battleManager.IsFirstThrowerStep) {
+        if (isFirstThrowerStep) {
             // Pulse
             _yourStepSmall.gameObject.ActiveSelf();
             _enemyStepSmall.gameObject.DisactiveSelf();
@@ -56,6 +51,7 @@ public class PlayersStepView : MonoBehaviour {
     }
 
     private void AnimateBigAttention(Transform rectTransformContainer) {
+        AnimationIsShowing = true;
         // Вернуть обратно
         rectTransformContainer.transform.position = _startPos;
         rectTransformContainer.gameObject.ActiveSelf();
@@ -83,8 +79,10 @@ public class PlayersStepView : MonoBehaviour {
         sequence.Join(rectTransformContainer
             .DOMove(_targetToContiner.transform.position, _timeToHideBig)
             .SetEase(_hideEase)
+            .OnComplete(() => AnimationIsShowing = false)
         );
 
     }
 
+    
 }

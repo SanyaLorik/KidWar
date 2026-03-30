@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
-  _chanceToBeatPlayer: 1
+  _chanceToBeatPlayer: 0.405
   _delayBeforeThrow:
     <From>k__BackingField: 0.7
     <To>k__BackingField: 1.5
@@ -298,7 +298,7 @@ MonoBehaviour:
   - {fileID: 709640253}
   - {fileID: 2142841490}
   - {fileID: 672196916}
-  _chanseToBotUseModifier: 1
+  _chanseToBotUseModifier: 0.211
 --- !u!1 &170024202 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3028764257783719380, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -623,7 +623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
-  _chanceToBeatPlayer: 1
+  _chanceToBeatPlayer: 0.363
   _delayBeforeThrow:
     <From>k__BackingField: 0.7
     <To>k__BackingField: 1.5
@@ -5213,6 +5213,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1432561616361690403, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1480857687185745873, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1574450829840192073, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}

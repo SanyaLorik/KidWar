@@ -41,7 +41,8 @@ public class BattleManager : MonoBehaviour {
     [Inject] ThrowGameStarter _throwGameStarter;
     [Inject] TimerToThrowStep _timerToThrowStep;
     [Inject] WindChooseView _windChooser;
-    [Inject] private StartBattleView _startBattleView;
+    [Inject] StartBattleView _startBattleView;
+    [Inject] PlayersStepView _playersStepView;
 
     
     private void OnEnable() {
@@ -143,6 +144,14 @@ public class BattleManager : MonoBehaviour {
     private async UniTask PlayerStepAsync(ObjectThrower thrower, Transform pointToCameraFocus) {
         if(GameIsOver) return;
         Debug.Log("NewPlayerTurn, BotTurnNow = " + !thrower.PlayerHandle);
+        // Анимация шага игрока
+        FocusCamera(pointToCameraFocus);
+        if (MainPlayerPlay) {
+            _playersStepView.ShowPlayerStep(IsFirstThrowerStep);
+            await UniTask.WaitWhile(() => _playersStepView.AnimationIsShowing);
+        }
+        
+        
         NewPlayerTurn?.Invoke();
         _stepIsOver = false;
         thrower.SetAllowToThrow(true);
@@ -150,7 +159,6 @@ public class BattleManager : MonoBehaviour {
         
         _timerToThrowStep.StartTimer(_secondsInStep);
         _windChooser.UpdateWind();
-        FocusCamera(pointToCameraFocus);
         
         
         thrower.Damageable.SetInvinsible(true);

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
 using Zenject;
 
 public class BonusManager : MonoBehaviour {

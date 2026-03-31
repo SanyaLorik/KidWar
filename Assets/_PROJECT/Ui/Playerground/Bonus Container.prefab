@@ -354,6 +354,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3151765714407122589, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Color.b
+      value: 0.27944937
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151765714407122589, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Color.g
+      value: 0.21226418
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151765714407122589, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3189321453220467156, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -370,6 +382,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3627561023439301250, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f89b0340a32e52e439a7f47892d08586, type: 3}
     - target: {fileID: 4065280947177340950, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
       propertyPath: m_Name
       value: Bonus Button_2
@@ -377,6 +393,26 @@ PrefabInstance:
     - target: {fileID: 5276588864401953040, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
       propertyPath: m_Name
       value: Bonus Button_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552069856272021403, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Color.b
+      value: 0.21568626
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552069856272021403, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552069856272021403, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8103526
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614022998941968689, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_text
+      value: "\u0417\u0430\u0440\u044F\u0434"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614022998941968689, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_fontSize
+      value: 45.35
       objectReference: {fileID: 0}
     - target: {fileID: 6644053897560697203, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
       propertyPath: m_Pivot.x
@@ -461,6 +497,18 @@ PrefabInstance:
     - target: {fileID: 6948951704507846385, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
       propertyPath: m_Name
       value: Bonus Button Layout
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607833137899288225, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Color.b
+      value: 0.21568626
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607833137899288225, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607833137899288225, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Color.r
+      value: 0.44866517
       objectReference: {fileID: 0}
     - target: {fileID: 7956628192589922792, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
       propertyPath: m_AnchorMax.y

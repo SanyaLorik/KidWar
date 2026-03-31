@@ -132,6 +132,11 @@ public class ModifierManager : MonoBehaviour {
             _rightModifierChanger.ForEach(m => m.SetAvailable());
             _rightModifierChanger.ForEach(m => m.HidePointer());
             NewStep();
+
+            if (!_battleManager.MainPlayerPlay) {
+                //
+            }
+            
         }
     }
 

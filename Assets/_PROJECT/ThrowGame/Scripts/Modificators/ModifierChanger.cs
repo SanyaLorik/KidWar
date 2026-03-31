@@ -3,10 +3,10 @@ using UnityEngine;
 using Zenject;
 
 public class ModifierChanger : UsableItemBase {
-    [SerializeReference, SubclassSelector] IThrowableModifier _throwableModifier;
+    [SerializeReference] ModifierItemSO _throwableModifier;
     [SerializeField] private GameObject _pointerToModifier;
     
-    public IThrowableModifier Modifier => _throwableModifier;
+    public IThrowableModifier Modifier => _throwableModifier.Modifier;
     
     [Inject] ModifierManager _modifierManager;
 
@@ -15,7 +15,7 @@ public class ModifierChanger : UsableItemBase {
             Debug.Log("Модификатор на перезарядке именно что");
             return;
         }
-        _modifierManager.TrySetModifier(_throwableModifier, this);
+        _modifierManager.TrySetModifier(_throwableModifier.Modifier, this);
     }
 
     public void ShowPointer() {

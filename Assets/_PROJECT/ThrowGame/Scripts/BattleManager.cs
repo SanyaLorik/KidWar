@@ -30,6 +30,22 @@ public class BattleManager : MonoBehaviour {
     public bool BotTurnNow { get; private set; }
     public bool MainPlayerPlay { get; private set; }
 
+    public bool IsPvbMode => FirstThrower.ObjectThrower.PlayerHandle && !SecondThrower.ObjectThrower.PlayerHandle;
+    
+    public event Action NewPlayerTurn;
+
+    
+    [Inject] IThrowGamePlayer _mainPlayer;
+    [Inject] BotsMainManager _botsMainManager;
+    [Inject] ObjectThrowerCalculator _throwerCalculator;
+    [Inject] CameraOrbitalController _camera;
+    [Inject] ThrowGameStarter _throwGameStarter;
+    [Inject] TimerToThrowStep _timerToThrowStep;
+    [Inject] WindChooseView _windChooser;
+    [Inject] StartBattleView _startBattleView;
+    [Inject] PlayersStepView _playersStepView;
+
+    
     public int GetCurrentPlayerLifesCount() {
         if (IsFirstThrowerStep) {
             return FirstThrower.ObjectThrower.CurrentLifesCount;
@@ -45,19 +61,6 @@ public class BattleManager : MonoBehaviour {
     } 
     
     
-    
-    public event Action NewPlayerTurn;
-
-    
-    [Inject] IThrowGamePlayer _mainPlayer;
-    [Inject] BotsMainManager _botsMainManager;
-    [Inject] ObjectThrowerCalculator _throwerCalculator;
-    [Inject] CameraOrbitalController _camera;
-    [Inject] ThrowGameStarter _throwGameStarter;
-    [Inject] TimerToThrowStep _timerToThrowStep;
-    [Inject] WindChooseView _windChooser;
-    [Inject] StartBattleView _startBattleView;
-    [Inject] PlayersStepView _playersStepView;
 
     
     private void OnEnable() {

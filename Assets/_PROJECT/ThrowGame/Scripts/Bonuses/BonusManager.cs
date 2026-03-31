@@ -13,19 +13,22 @@ public class BonusManager : MonoBehaviour {
 
     private float _totalWeight;
     private BonusChanger _choosedModifierChanger;
-
     
     [Inject] private ThrowGameStarter _gameStarter;
     [Inject] private ObjectThrowerCalculator _calculator;
     [Inject] private BattleManager _battleManager;
     [Inject] private GameData _data;
+    [Inject] private BonusesLoader _bonusesLoader;
+
 
     private void OnEnable() {
+        _battleManager.NewPlayerTurn += OnNewPlayerTurn;
         _battleManager.NewPlayerTurn += OnNewPlayerTurn;
     }
     
     private void Start() {
         CalculateValueDivider();
+        _bonusesLoader.LoadBonusesComponents(_leftBonusChangers, _rightBonusChangers);
     }
 
     private void CalculateValueDivider() {
@@ -49,7 +52,7 @@ public class BonusManager : MonoBehaviour {
         if (IsLeftPlayerBonus(bonusChanger)) {
             if (_battleManager.IsFirstThrowerStep == true) {
                 bonus.Use(_battleManager.FirstThrower.ObjectThrower.Damageable);
-                bonusChanger.GetOneBonus();
+                bonusChanger.GetOneBonus(_battleManager.IsPvbMode);
                 _leftBonusChangers.ForEach(b => b.SetUnvailable());
             }
         }

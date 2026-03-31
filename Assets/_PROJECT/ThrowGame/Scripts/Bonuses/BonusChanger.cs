@@ -1,24 +1,24 @@
-using System;
+using Architecture_M;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
 public class BonusChanger : UsableItemBase {
-    [SerializeReference, SubclassSelector] private IBonus _bonus;
-    [SerializeField] private int _bonusCounts;
+    [field: SerializeField] public BonusItemSO BonusItem { get; private set; }
     [SerializeField] private TextMeshProUGUI _countText;
     
-    public IBonus Bonus => _bonus;
+    private int _bonusCounts;
+    public IBonus Bonus => BonusItem.Bonus;
     public int BonusCount => _bonusCounts;
     
     [Inject] private BonusManager _bonusManager;
     [Inject] private DiContainer _diContainer;
+    [Inject] private IGameSave _saver; 
 
-    
     
     [Inject]
     private void Init() {
-        _diContainer.QueueForInject(_bonus);
+        _diContainer.QueueForInject(Bonus);
     }
     
     
@@ -37,7 +37,7 @@ public class BonusChanger : UsableItemBase {
             Debug.Log("Бонусов нема");
             return;
         }
-        _bonusManager.UseBonusByClick(_bonus, this);
+        _bonusManager.UseBonusByClick(BonusItem.Bonus, this);
     }
 
     public void CheckAvailable() {
@@ -55,10 +55,19 @@ public class BonusChanger : UsableItemBase {
         ChangeVisualCount();
     }
 
+    public void SetBonusCount(int newBonusCount) {
+        _bonusCounts = newBonusCount;
+        ChangeVisualCount();
+    }
+
     
-    public void GetOneBonus() {
+    public void GetOneBonus(bool useSaves = false) {
         if (_bonusCounts != 0) {
             _bonusCounts--;
+            if (useSaves) {
+                _saver.GetSave<GameSave>().SetMinusOneBonus(BonusItem.Id);
+                _saver.Save();
+            }
         }
         ChangeVisualCount();
     }

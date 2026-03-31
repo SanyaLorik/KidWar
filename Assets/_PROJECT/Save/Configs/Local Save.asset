@@ -13,4 +13,14 @@ MonoBehaviour:
   m_Name: Local Save
   m_EditorClassIdentifier: Assembly-CSharp::GameSaveSO
   Save:
-    REMOVE_THIS_VARIABLE: 545454
+    Money: 0
+    IsBoughtPurchase: 0
+    Skins: []
+    SkinWearId: 
+    Bonuses:
+    - Id: health_bonus
+      Count: 4
+    - Id: shield_bonus
+      Count: 5
+    - Id: reset_bonus
+      Count: 6

@@ -266,16 +266,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModifierChanger
   _timeToColldown: 30
   _availableImage: {fileID: 1517062177}
-  _throwableModifier:
-    rid: 8231486703844982851
+  _throwableModifier: {fileID: 11400000, guid: dd662d3c28d61c1448f87259d087728e, type: 2}
   _pointerToModifier: {fileID: 1129879803}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486703844982851
-      type: {class: ThrowableModifierDouble, ns: , asm: Assembly-CSharp}
-      data:
-        _heightMultiplier: 1.6
 --- !u!1 &106305297 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4765596719274372519, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -408,19 +400,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModifierChanger
   _timeToColldown: 30
   _availableImage: {fileID: 1205325555}
-  _throwableModifier:
-    rid: 8231486703844982853
+  _throwableModifier: {fileID: 11400000, guid: e85b3114c7076364c8a79006716847b4, type: 2}
   _pointerToModifier: {fileID: 183281259}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486703844982853
-      type: {class: ThrowableModifierExplosion, ns: , asm: Assembly-CSharp}
-      data:
-        _percentToExpode: 0.9
-        exposionDuration: 1
-        _scaling: 10
-        _ease: 30
 --- !u!1 &183281259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5037681244615952420, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -451,9 +432,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 203431245}
-  - component: {fileID: 203431246}
   m_Layer: 0
-  m_Name: BonusManager
+  m_Name: Bonuses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,53 +451,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1603008272}
+  - {fileID: 239426334}
   m_Father: {fileID: 1605051503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &203431246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 203431244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576821bfb68f445448f59a56de6e4e34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BonusManager
-  _leftBonusChangers:
-  - {fileID: 712180533}
-  - {fileID: 972949646}
-  - {fileID: 881656477}
-  _rightBonusChangers:
-  - {fileID: 1397685600}
-  - {fileID: 2076096440}
-  - {fileID: 1180198410}
-  _bonusValues:
-  - Item:
-      rid: 8231486814680514631
-    Weight: 0.213
-  - Item:
-      rid: 8231486814680514632
-    Weight: 0.331
-  - Item:
-      rid: 8231486814680514633
-    Weight: 0.81
-  _chanseToTryAgainFindBonusBot: 0.517
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486814680514631
-      type: {class: HealBonus, ns: , asm: Assembly-CSharp}
-      data:
-        _healUnits: 0
-    - rid: 8231486814680514632
-      type: {class: ShieldBonus, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 8231486814680514633
-      type: {class: ResetAllModifiersBonus, ns: , asm: Assembly-CSharp}
-      data: 
 --- !u!224 &203979764 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4970941057080216971, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -543,6 +481,52 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3697547273689207246, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &239426333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239426334}
+  - component: {fileID: 239426335}
+  m_Layer: 0
+  m_Name: BonusLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &239426334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239426333}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 203431245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &239426335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239426333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d7fccde467c40829f26b92ac0f958bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusesLoader
+  _maxRandomCountToBot: 5
+  _countToPvp: 3
 --- !u!1 &245312473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,19 +1770,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModifierChanger
   _timeToColldown: 30
   _availableImage: {fileID: 1302685233}
-  _throwableModifier:
-    rid: 8231486703844982854
+  _throwableModifier: {fileID: 11400000, guid: e85b3114c7076364c8a79006716847b4, type: 2}
   _pointerToModifier: {fileID: 106305297}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486703844982854
-      type: {class: ThrowableModifierExplosion, ns: , asm: Assembly-CSharp}
-      data:
-        _percentToExpode: 0.9
-        exposionDuration: 1
-        _scaling: 10
-        _ease: 30
 --- !u!1 &675302007 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5255119996454779278, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -1969,18 +1942,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModifierChanger
   _timeToColldown: 30
   _availableImage: {fileID: 959455828}
-  _throwableModifier:
-    rid: 8231486680537759813
+  _throwableModifier: {fileID: 11400000, guid: ea7eed4452c093146a3a68d97cb4163b, type: 2}
   _pointerToModifier: {fileID: 938985596}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486680537759813
-      type: {class: ThrowableModifierGigant, ns: , asm: Assembly-CSharp}
-      data:
-        _scaling: 4
-        _duration: 1
-        _ease: 30
 --- !u!1 &712180528 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 592940929858737012, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -1998,19 +1961,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd804cb867d301349afaf14642d04474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BonusChanger
-  _timeToColldown: 10
+  _timeToColldown: 0
   _availableImage: {fileID: 459724807}
-  _bonus:
-    rid: 8231486725257166915
-  _bonusCounts: 4
+  <BonusItem>k__BackingField: {fileID: 11400000, guid: 4164ca232dae75048851cc0e0b2df030, type: 2}
   _countText: {fileID: 887725815}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486725257166915
-      type: {class: HealBonus, ns: , asm: Assembly-CSharp}
-      data:
-        _healUnits: 5
 --- !u!1 &727350865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2333,18 +2287,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd804cb867d301349afaf14642d04474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BonusChanger
-  _timeToColldown: 20
+  _timeToColldown: 0
   _availableImage: {fileID: 1409382493}
-  _bonus:
-    rid: 8231486814680514636
-  _bonusCounts: 3
+  <BonusItem>k__BackingField: {fileID: 11400000, guid: 8185d71f400cf184daa223e183b1e07c, type: 2}
   _countText: {fileID: 1855257147}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486814680514636
-      type: {class: ResetAllModifiersBonus, ns: , asm: Assembly-CSharp}
-      data: 
 --- !u!114 &887725815 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1389640648871621385, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -2586,16 +2532,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BonusChanger
   _timeToColldown: 0
   _availableImage: {fileID: 1550486923}
-  _bonus:
-    rid: 8231486725257166919
-  _bonusCounts: 3
+  <BonusItem>k__BackingField: {fileID: 11400000, guid: 30304a6164c5a1845ab7d39016723efb, type: 2}
   _countText: {fileID: 704699534}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486725257166919
-      type: {class: ShieldBonus, ns: , asm: Assembly-CSharp}
-      data: 
 --- !u!1 &972953661 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6097259951788533781, guid: 4618323e71e227f4d92fcd9561fc8042, type: 3}
@@ -2981,7 +2919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45840b7ee878d8649994ffa40e57a0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInstaller
-  _defaultSkinConfig: {fileID: 11400000, guid: a1d1cb4e2c05c374ba79e03ca879dfb1, type: 2}
+  _defaultSkinConfig: {fileID: 11400000, guid: e5ce4979a2202c243b7d8a307e28a19b, type: 2}
   _skinItemConfigs:
   - {fileID: 11400000, guid: e5ce4979a2202c243b7d8a307e28a19b, type: 2}
   - {fileID: 11400000, guid: b2f9c41f63270f0459adc881c35ab261, type: 2}
@@ -3110,18 +3048,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd804cb867d301349afaf14642d04474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BonusChanger
-  _timeToColldown: 20
+  _timeToColldown: 0
   _availableImage: {fileID: 698182425}
-  _bonus:
-    rid: 8231486814680514635
-  _bonusCounts: 3
+  <BonusItem>k__BackingField: {fileID: 11400000, guid: 8185d71f400cf184daa223e183b1e07c, type: 2}
   _countText: {fileID: 1284928760}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486814680514635
-      type: {class: ResetAllModifiersBonus, ns: , asm: Assembly-CSharp}
-      data: 
 --- !u!1001 &1186856429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3299,16 +3229,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModifierChanger
   _timeToColldown: 30
   _availableImage: {fileID: 267222041}
-  _throwableModifier:
-    rid: 8231486680537759814
+  _throwableModifier: {fileID: 11400000, guid: 08eb7845dca2c2d4d951900d9374850b, type: 2}
   _pointerToModifier: {fileID: 538365474}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486680537759814
-      type: {class: ThrowableModifierAim, ns: , asm: Assembly-CSharp}
-      data:
-        _percentageToStart: 0.6
 --- !u!1 &1367748771
 GameObject:
   m_ObjectHideFlags: 0
@@ -3422,19 +3344,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd804cb867d301349afaf14642d04474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BonusChanger
-  _timeToColldown: 10
+  _timeToColldown: 0
   _availableImage: {fileID: 191727889}
-  _bonus:
-    rid: 8231486725257166916
-  _bonusCounts: 5
+  <BonusItem>k__BackingField: {fileID: 11400000, guid: 4164ca232dae75048851cc0e0b2df030, type: 2}
   _countText: {fileID: 1571911979}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486725257166916
-      type: {class: HealBonus, ns: , asm: Assembly-CSharp}
-      data:
-        _healUnits: 5
 --- !u!114 &1409382493 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 418631199969519690, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -3637,16 +3550,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModifierChanger
   _timeToColldown: 30
   _availableImage: {fileID: 837500170}
-  _throwableModifier:
-    rid: 8231486680537759812
+  _throwableModifier: {fileID: 11400000, guid: 08eb7845dca2c2d4d951900d9374850b, type: 2}
   _pointerToModifier: {fileID: 1146402387}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486680537759812
-      type: {class: ThrowableModifierAim, ns: , asm: Assembly-CSharp}
-      data:
-        _percentageToStart: 0.6
 --- !u!1 &1463497112
 GameObject:
   m_ObjectHideFlags: 0
@@ -4415,6 +4320,82 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3897990057495972252, guid: dd7160742454d214db7fbaaef19d2f6c, type: 3}
   m_PrefabInstance: {fileID: 1589046481}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1603008271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1603008272}
+  - component: {fileID: 1603008273}
+  m_Layer: 0
+  m_Name: BonusManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1603008272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603008271}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 203431245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1603008273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603008271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576821bfb68f445448f59a56de6e4e34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusManager
+  _leftBonusChangers:
+  - {fileID: 712180533}
+  - {fileID: 972949646}
+  - {fileID: 881656477}
+  _rightBonusChangers:
+  - {fileID: 1397685600}
+  - {fileID: 2076096440}
+  - {fileID: 1180198410}
+  _bonusValues:
+  - Item:
+      rid: 8231486814680514631
+    Weight: 0.327
+  - Item:
+      rid: 8231486814680514632
+    Weight: 0.622
+  - Item:
+      rid: 8231486814680514633
+    Weight: 0.186
+  _chanseToTryAgainFindBonusBot: 0.517
+  references:
+    version: 2
+    RefIds:
+    - rid: 8231486814680514631
+      type: {class: HealBonus, ns: , asm: Assembly-CSharp}
+      data:
+        _healUnits: 0
+    - rid: 8231486814680514632
+      type: {class: ShieldBonus, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8231486814680514633
+      type: {class: ResetAllModifiersBonus, ns: , asm: Assembly-CSharp}
+      data: 
 --- !u!1 &1605051502
 GameObject:
   m_ObjectHideFlags: 0
@@ -4444,11 +4425,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1707508955}
   - {fileID: 597798110}
   - {fileID: 895105926}
   - {fileID: 140419455}
   - {fileID: 203431245}
+  - {fileID: 1707508955}
   - {fileID: 1479494121}
   - {fileID: 1893693009}
   - {fileID: 1004523730}
@@ -4604,18 +4585,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModifierChanger
   _timeToColldown: 30
   _availableImage: {fileID: 1570262417}
-  _throwableModifier:
-    rid: 8231486680537759811
+  _throwableModifier: {fileID: 11400000, guid: ea7eed4452c093146a3a68d97cb4163b, type: 2}
   _pointerToModifier: {fileID: 186561742}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486680537759811
-      type: {class: ThrowableModifierGigant, ns: , asm: Assembly-CSharp}
-      data:
-        _scaling: 4
-        _duration: 1
-        _ease: 30
 --- !u!1 &1767122275 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5797184024923599887, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -5197,16 +5168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BonusChanger
   _timeToColldown: 0
   _availableImage: {fileID: 386338974}
-  _bonus:
-    rid: 8231486725257166920
-  _bonusCounts: 3
+  <BonusItem>k__BackingField: {fileID: 11400000, guid: 30304a6164c5a1845ab7d39016723efb, type: 2}
   _countText: {fileID: 588522258}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486725257166920
-      type: {class: ShieldBonus, ns: , asm: Assembly-CSharp}
-      data: 
 --- !u!4 &2122266236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1594451367915086953, guid: 4618323e71e227f4d92fcd9561fc8042, type: 3}
@@ -5231,16 +5194,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModifierChanger
   _timeToColldown: 30
   _availableImage: {fileID: 1685111351}
-  _throwableModifier:
-    rid: 8231486703844982852
+  _throwableModifier: {fileID: 11400000, guid: dd662d3c28d61c1448f87259d087728e, type: 2}
   _pointerToModifier: {fileID: 2055887752}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8231486703844982852
-      type: {class: ThrowableModifierDouble, ns: , asm: Assembly-CSharp}
-      data:
-        _heightMultiplier: 1.6
 --- !u!1001 &2383758755132589753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5301,6 +5256,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f89b0340a32e52e439a7f47892d08586, type: 3}
+    - target: {fileID: 513987463589347873, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 580268472867610850, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -5945,6 +5904,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3772855267401827099, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3852291259309318480, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6201,6 +6164,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4975119718675124765, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5043106933711146239, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6258,6 +6225,10 @@ PrefabInstance:
     - target: {fileID: 5262964279867118062, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337800731344126792, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5470495869229712940, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_SizeDelta.x
@@ -6672,6 +6643,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8710976636124246524, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748944058016825970, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

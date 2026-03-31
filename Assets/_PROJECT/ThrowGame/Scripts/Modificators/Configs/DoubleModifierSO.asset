@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a89a9fb0384466ab71508041080d0f, type: 3}
+  m_Name: DoubleModifierSO
+  m_EditorClassIdentifier: Assembly-CSharp::ModifierItemSO
+  <Id>k__BackingField: double_modifier
+  Modifier:
+    rid: 8231486814680514643
+  references:
+    version: 2
+    RefIds:
+    - rid: 8231486814680514643
+      type: {class: ThrowableModifierDouble, ns: , asm: Assembly-CSharp}
+      data:
+        _heightMultiplier: 1.3

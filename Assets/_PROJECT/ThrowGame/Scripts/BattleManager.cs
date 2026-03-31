@@ -29,6 +29,21 @@ public class BattleManager : MonoBehaviour {
     public bool IsFirstThrowerStep { get; private set; }
     public bool BotTurnNow { get; private set; }
     public bool MainPlayerPlay { get; private set; }
+
+    public int GetCurrentPlayerLifesCount() {
+        if (IsFirstThrowerStep) {
+            return FirstThrower.ObjectThrower.CurrentLifesCount;
+        }
+        return SecondThrower.ObjectThrower.CurrentLifesCount;
+    } 
+    
+    public bool CheckCurrentPlayerUseShield() {
+        if (IsFirstThrowerStep) {
+            return FirstThrower.ObjectThrower.IsShielded;
+        }
+        return SecondThrower.ObjectThrower.IsShielded;
+    } 
+    
     
     
     public event Action NewPlayerTurn;
@@ -129,10 +144,8 @@ public class BattleManager : MonoBehaviour {
         FirstThrower.ObjectThrower.SetAllowToThrow(false);
         SecondThrower.ObjectThrower.SetAllowToThrow(false);
         while(!GameIsOver) {
-            IsFirstThrowerStep = true;
-            await PlayerStepAsync(FirstThrower.ObjectThrower, _leftCameraFocus);
-            IsFirstThrowerStep = false;
-            await PlayerStepAsync(SecondThrower.ObjectThrower, _rightCameraFocus);
+            await PlayerStepAsync(FirstThrower.ObjectThrower, _leftCameraFocus, true);
+            await PlayerStepAsync(SecondThrower.ObjectThrower, _rightCameraFocus, false);
         }
 
         SetSpawnState();
@@ -141,21 +154,20 @@ public class BattleManager : MonoBehaviour {
     }
 
     
-    private async UniTask PlayerStepAsync(ObjectThrower thrower, Transform pointToCameraFocus) {
+    private async UniTask PlayerStepAsync(ObjectThrower thrower, Transform pointToCameraFocus, bool isFirstThrowerStep) {
         if(GameIsOver) return;
         Debug.Log("NewPlayerTurn, BotTurnNow = " + !thrower.PlayerHandle);
+        BotTurnNow = !thrower.PlayerHandle;
         // Анимация шага игрока
         FocusCamera(pointToCameraFocus);
         if (MainPlayerPlay) {
-            _playersStepView.ShowPlayerStep(IsFirstThrowerStep);
+            _playersStepView.ShowPlayerStep(isFirstThrowerStep);
             await UniTask.WaitWhile(() => _playersStepView.AnimationIsShowing);
         }
-        
-        
+        IsFirstThrowerStep = isFirstThrowerStep;
         NewPlayerTurn?.Invoke();
         _stepIsOver = false;
         thrower.SetAllowToThrow(true);
-        BotTurnNow = !thrower.PlayerHandle;
         
         _timerToThrowStep.StartTimer(_secondsInStep);
         _windChooser.UpdateWind();

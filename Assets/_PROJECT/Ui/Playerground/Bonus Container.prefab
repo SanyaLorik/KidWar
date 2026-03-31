@@ -390,6 +390,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bonus Button_2
       objectReference: {fileID: 0}
+    - target: {fileID: 4958463071613151790, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f89b0340a32e52e439a7f47892d08586, type: 3}
     - target: {fileID: 5276588864401953040, guid: b80aaf5f530856848a5c1e93754b30ab, type: 3}
       propertyPath: m_Name
       value: Bonus Button_1

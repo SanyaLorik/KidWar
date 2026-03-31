@@ -1,8 +1,9 @@
-﻿using System;
+﻿using SanyaBeerExtension;
 using UnityEngine;
 using Zenject;
 
 public class PlayerHp : MonoBehaviour, IDamageable {
+    [SerializeField] private Transform _shield;
     private bool _stayInLeft;
     public int MaxHp => _data.PlayerMaxHp;
     public int CurrentHp { get; private set; }
@@ -12,8 +13,12 @@ public class PlayerHp : MonoBehaviour, IDamageable {
 
     [Inject] private HpView _hpView;
     [Inject] private GameData _data;
-    
-    
+    [Inject] private ShieldAnimationLikeBubble _shieldAnimator;
+
+    private void Start() {
+        _shield.DisactiveSelf();
+    }
+
     public void InitPosition(bool stayInLeft) {
         _stayInLeft = stayInLeft;
     }
@@ -38,7 +43,7 @@ public class PlayerHp : MonoBehaviour, IDamageable {
     public void AddHp(int hp) {
         CurrentHp += hp;
         Debug.Log($"Добавление хп {hp} хп, щас HP = {CurrentHp} ");
-        CurrentHp = Math.Min(CurrentHp, MaxHp);
+        CurrentHp = Mathf.Min(CurrentHp, MaxHp);
         ChangeHpView();
     }
 
@@ -49,7 +54,10 @@ public class PlayerHp : MonoBehaviour, IDamageable {
     public void SetShielded(bool state) {
         Debug.Log("Включение щита: " + state);
         IsShielded = state;
+        _shieldAnimator.ShieldEnableAnimate(state, _shield);
     }
+
+    
 
     public void SetMaxHp() {
         CurrentHp = MaxHp;

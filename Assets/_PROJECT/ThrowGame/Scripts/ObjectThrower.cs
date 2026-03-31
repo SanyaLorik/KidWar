@@ -21,6 +21,8 @@ public class ObjectThrower : MonoBehaviour {
 
     public int CurrentLifesCount => _playerHp.CurrentHp;
 
+    public bool IsShielded => _playerHp.IsShielded;
+
     public Transform ThrowPoint =>  ThrowVisualize.ThrowPoint;
 
     public IDamageable Damageable => _playerHp;

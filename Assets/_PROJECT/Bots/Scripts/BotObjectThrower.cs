@@ -11,7 +11,12 @@ using Zenject;
 /// </summary>
 public class BotObjectThrower : MonoBehaviour {
     [Range(0,1), SerializeField] private float _chanceToBeatPlayer;
-    [SerializeField] private PairedValue<float> _delayBeforeThrow;
+    [Header("Задержка перед выбором")]
+    [SerializeField] private PairedValue<float> _delayBeforeUseModifier;
+    [SerializeField] private PairedValue<float> _delayBeforeUseBonus;
+    [Header("Вероятность что выберет первым модификатор или бонус")]
+    [Range(0,1), SerializeField] private float _useModifierFirst;
+    
     [SerializeField] private PairedValue<float> _angleChooseTimeDiapasone;
     [SerializeField] private PairedValue<float> _diapasoneNearPlayer;
     
@@ -19,6 +24,7 @@ public class BotObjectThrower : MonoBehaviour {
     [Inject] private ObjectThrowerCalculator _calculator;
     [Inject] private ForceChooseView _forceView;
     [Inject] private ModifierManager _modifierManager;
+    [Inject] private BonusManager _bonusManager;
     
     
     private ObjectThrower _currentThrower;
@@ -45,7 +51,6 @@ public class BotObjectThrower : MonoBehaviour {
             // тут поидее тоже с прикольчиком будет типо боту слева над знак менять
             distance += Random.Range(_diapasoneNearPlayer.From, _diapasoneNearPlayer.To);
         }
-        _modifierManager.UseModifierForBot();
         WaitToForceAsync(distance).Forget();
     }
 
@@ -53,11 +58,32 @@ public class BotObjectThrower : MonoBehaviour {
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();
         // Ждем время перед выстрелом
-        float waitTime = Random.Range(_delayBeforeThrow.From, _delayBeforeThrow.To);
-        await UniTask.WaitForSeconds(waitTime, cancellationToken: _tokenSource.Token);
 
+        float waitTime;
+        // Сначала выбор модификатора 
+        if (Random.value <  _useModifierFirst) {
+            waitTime = Random.Range(_delayBeforeUseModifier.From, _delayBeforeUseModifier.To);
+            await UniTask.WaitForSeconds(waitTime, cancellationToken: _tokenSource.Token);
+            _modifierManager.UseModifierForBot();
+            
+            waitTime = Random.Range(_delayBeforeUseBonus.From, _delayBeforeUseBonus.To);
+            await UniTask.WaitForSeconds(waitTime, cancellationToken: _tokenSource.Token);
+            _bonusManager.UseBonusForBot();
+        }
+        else {
+            waitTime = Random.Range(_delayBeforeUseBonus.From, _delayBeforeUseBonus.To);
+            await UniTask.WaitForSeconds(waitTime, cancellationToken: _tokenSource.Token);
+            _bonusManager.UseBonusForBot();
+            
+            waitTime = Random.Range(_delayBeforeUseModifier.From, _delayBeforeUseModifier.To);
+            await UniTask.WaitForSeconds(waitTime, cancellationToken: _tokenSource.Token);
+            _modifierManager.UseModifierForBot();
+        }
+        // Сначала выбор бонуса
+        
+        
         _currentThrower.ThrowVisualize.SetActiveTrajectoryLine(true);
-        float totalDuration = Random.Range(_angleChooseTimeDiapasone.From, _angleChooseTimeDiapasone.To);
+        float durationToChooseAngle = Random.Range(_angleChooseTimeDiapasone.From, _angleChooseTimeDiapasone.To);
 
         // Чтобы попасть куда надо подберем значения и инициализируем
         (float force, float angle) force_angle = _calculator.CalculateForceAndAngleToPoint(
@@ -71,8 +97,8 @@ public class BotObjectThrower : MonoBehaviour {
         _forceView.InitBotForce(force);
         _currentThrower.ThrowVisualize.InitCurrentAngleByBot(angle);
         
-        _currentThrower.ThrowVisualize.SelectAngleWithAnimationAsync(angle, totalDuration, _tokenSource.Token).Forget();
-        await _forceView.StartBotForceChooser(force, totalDuration, _tokenSource.Token);
+        _currentThrower.ThrowVisualize.SelectAngleWithAnimationAsync(angle, durationToChooseAngle, _tokenSource.Token).Forget();
+        await _forceView.StartBotForceChooser(force, durationToChooseAngle, _tokenSource.Token);
 
         _currentThrower.ThrowVisualize.SetActiveTrajectoryLine(false);
         _currentThrower.BotThrow(angle);

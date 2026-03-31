@@ -23,7 +23,7 @@ MonoBehaviour:
     <SecondJumpForce>k__BackingField: 16
     <RotateSpeed>k__BackingField: 16
     <GravityScale>k__BackingField: 4
-    <PlayerMaxHp>k__BackingField: 3
+    <PlayerMaxHp>k__BackingField: 20
     <MobileCameraFov>k__BackingField: 0.452
     <DesktopCameraFov>k__BackingField: 0.474
     <FlightCameraFov>k__BackingField: 0

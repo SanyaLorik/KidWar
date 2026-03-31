@@ -1,17 +1,19 @@
 using System.Collections.Generic;
-using SanyaBeerExtension;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
 public class ModifierManager : MonoBehaviour {
     [SerializeField] private List<ModifierChanger> _leftModifierChanger;
     [SerializeField] private List<ModifierChanger> _rightModifierChanger;
-    [Range(0,1), SerializeField] private float _chanseToBotUseModifier;
-
+    [Range(0,1), SerializeField] private float _chanseToTryAgainFindModifierBot;
+    [SerializeField] private List<ItemValueBase<IThrowableModifier>> _modifierValues;
+    
     private ModifierChanger _choosedModifierChanger;
     private readonly ThrowableModifierDefault _defaultModifier = new();
     
-    
+    private float _totalWeight;
+
     [Inject] private ThrowGameStarter _gameStarter;
     [Inject] private ObjectThrowerCalculator _calculator;
     [Inject] private BattleManager _battleManager;
@@ -25,6 +27,14 @@ public class ModifierManager : MonoBehaviour {
         _calculator.ObjectThrowed += OnObjectThrowed;
     }
 
+    private void Start() {
+        CalculateValueDivider();
+    }
+
+    private void CalculateValueDivider() {
+        _totalWeight = _modifierValues.Sum(m => m.Weight);
+    }
+    
     private void OnObjectThrowed(Transform _) {
         if (CurrentModifier != _defaultModifier) {
             _choosedModifierChanger.SetUnvailable(true);
@@ -49,25 +59,41 @@ public class ModifierManager : MonoBehaviour {
     }
 
     public void UseModifierForBot() {
-        if (Random.value > _chanseToBotUseModifier) return;
+        List<ModifierChanger> modifierChangersList = _battleManager.IsFirstThrowerStep ? 
+            _leftModifierChanger 
+            : 
+            _rightModifierChanger;
+
+        // Фаза 1
+        if (TryUseRandomModifierForBot(modifierChangersList)) return;
+        // Фаза 2, модифиактор на перезарядке
+        Debug.Log("Модификатор на перезарядке, бот выбирает другой");
+        if (TryUseRandomModifierForBot(modifierChangersList))  return;
+        Debug.Log("Бот не выбрал модифиактор");
+    }
+
+
+    public void ResetAllPlayerModifiers() {
         List<ModifierChanger> modifierChangersList = _battleManager.IsFirstThrowerStep ? 
             _leftModifierChanger 
             : 
             _rightModifierChanger;
         
-        int startIndex =  Random.Range(0, modifierChangersList.Count-1);
-        for (int i = 0; i < modifierChangersList.Count; i++) {
-            int index = (startIndex + i) % modifierChangersList.Count;
-            ModifierChanger modifierChanger = modifierChangersList[index];
-            
-            if (modifierChanger.IsAvailable) {
-                SetModifierAfterCheck(modifierChanger.Modifier, modifierChanger);
-                Debug.Log("Выбран модификатор");
-                return;
-            }
-        }
-        Debug.Log("Бот не нашел модификатор");
+        modifierChangersList.ForEach(m => m.SetAvailable());
     }
+
+    private bool TryUseRandomModifierForBot(List<ModifierChanger> modifierChangersList) {
+        IThrowableModifier modifier = ItemValueBase.GetRandomItemByWeight(_modifierValues, _totalWeight);
+        ModifierChanger modifierChanger = modifierChangersList.Find(m => m.Modifier.GetType() == modifier.GetType());
+        if (modifierChanger.IsAvailable) {
+            SetModifierAfterCheck(modifierChanger.Modifier, modifierChanger);
+            Debug.Log("Выбран модификатор: " + modifierChanger.Modifier.GetType());
+            return true;
+        }
+        Debug.Log("НЕ Выбран модификатор: is not available" + modifierChanger.Modifier.GetType());
+        return false;
+    }
+
 
     private void SetModifierAfterCheck(IThrowableModifier modifier, ModifierChanger modifierChanger) {
         // Повторное нажатие

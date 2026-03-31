@@ -20,8 +20,6 @@ public class HpView : MonoBehaviour {
     
     private int MaxHp => _gameData.PlayerMaxHp;
 
-    private float _leftPlayerPrevHp;
-    private float _rightPlayerPrevHp;
 
     private void OnEnable() {
         _throwGameStarter.GameStarted += OnGameStarted;
@@ -29,16 +27,10 @@ public class HpView : MonoBehaviour {
 
     private void OnGameStarted(bool started) {
         if(!_battleManager.MainPlayerPlay) return;
-
-        if (started) {
-            _leftPlayerPrevHp = 1f;
-            _rightPlayerPrevHp = 1f;
-        }
-        
     }
 
 
-    public void ChangeHp(int hp, bool stayInLeft) {
+    public void ChangeHp(float hp, bool stayInLeft) {
         float percent = (float) hp / MaxHp;
         if (stayInLeft) {
             // left

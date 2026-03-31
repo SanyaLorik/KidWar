@@ -3,6 +3,7 @@
 public class ThrowInstaller : MonoInstaller {
     public override void InstallBindings() {
         BindThrow();
+        BindViews();
     }
     
     
@@ -13,11 +14,10 @@ public class ThrowInstaller : MonoInstaller {
         Container.Bind<InputThrowGame>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<ModifierManager>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<BonusManager>().FromComponentInHierarchy().AsSingle().NonLazy();
-        InstallViews();
     }
 
 
-    private void InstallViews() {
+    private void BindViews() {
         Container.Bind<StartBattleView>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<HpView>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<WindChooseView>().FromComponentInHierarchy().AsSingle().NonLazy();

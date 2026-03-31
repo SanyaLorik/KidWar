@@ -9,9 +9,19 @@ public class BonusChanger : UsableItemBase {
     [SerializeField] private TextMeshProUGUI _countText;
     
     public IBonus Bonus => _bonus;
+    public int BonusCount => _bonusCounts;
     
     [Inject] private BonusManager _bonusManager;
+    [Inject] private DiContainer _diContainer;
 
+    
+    
+    [Inject]
+    private void Init() {
+        _diContainer.QueueForInject(_bonus);
+    }
+    
+    
     private void Start() {
         ChangeVisualCount();
     }
@@ -27,7 +37,7 @@ public class BonusChanger : UsableItemBase {
             Debug.Log("Бонусов нема");
             return;
         }
-        _bonusManager.TryUseBonus(_bonus, this);
+        _bonusManager.UseBonusByClick(_bonus, this);
     }
 
     public void CheckAvailable() {

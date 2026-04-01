@@ -3933,21 +3933,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4c414c9a8807a4998e089ff5c0b424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RouletteSkin
-  _count: 2
-  _duration: 1000
-  _behaviour:
+  _behaviourCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.28358197
+      value: 0.82511365
+      inSlope: 0.651953
+      outSlope: 0.651953
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3407413
+      outWeight: 0.085595936
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0.021938546
+      outSlope: -0.021938546
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.05458778
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _rect: {fileID: 4058789384184787748}
+  _spinCount: 2
+  _duration: 2
+  _spinRangePercent:
+    <From>k__BackingField: -0.07
+    <To>k__BackingField: 0.07
+  _selectedItem: {fileID: 4435450506287935998}
   _items:
-  - {fileID: 199417430727089076}
-  - {fileID: 9026911329455806859}
-  - {fileID: 2728948810068826004}
-  - {fileID: 8024352953282953702}
-  - {fileID: 1123331453267402402}
+  - {fileID: 1915920861861035486}
+  - {fileID: 7283665028511137761}
+  - {fileID: 4435450506287935998}
+  - {fileID: 8579063414263342988}
+  - {fileID: 1712545190431439048}
+  _infoThrowableObjects:
+  - {fileID: 669403665764818371, guid: 2036a67eb1d01474dbe50a129c78ff39, type: 3}
+  - {fileID: 669403665764818371, guid: 8a170c944501ec14991c68af70c10cbb, type: 3}
+  - {fileID: 669403665764818371, guid: 14c53fcb22b58c946905c4ba4535afe6, type: 3}
+  - {fileID: 669403665764818371, guid: b0fcea1628bc26449a95aac7679589f2, type: 3}
+  - {fileID: 669403665764818371, guid: 8c11ff94e065e0f4c9c9d4ab2255e299, type: 3}
+  - {fileID: 669403665764818371, guid: f3cd6dbe84bccaa44a9385bb759d31bf, type: 3}
+  - {fileID: 669403665764818371, guid: ca96420a1b43d794fb80d6201093c921, type: 3}
+  _rect: {fileID: 4058789384184787748}
 --- !u!1 &3028764257783719380
 GameObject:
   m_ObjectHideFlags: 0
@@ -14242,6 +14281,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 755f7654e13153f429a7c2b7816cd73e, type: 3}
+--- !u!114 &7283665028511137761 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7701328057056016690, guid: 755f7654e13153f429a7c2b7816cd73e, type: 3}
+  m_PrefabInstance: {fileID: 1149644754817238739}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3543b01a9ac8b5349a1f4a245088c410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RouletteSkinItem
 --- !u!224 &9026911329455806859 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8264760449999593304, guid: 755f7654e13153f429a7c2b7816cd73e, type: 3}
@@ -14467,6 +14517,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8264760449999593304, guid: 755f7654e13153f429a7c2b7816cd73e, type: 3}
   m_PrefabInstance: {fileID: 2156777442690588350}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8579063414263342988 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7701328057056016690, guid: 755f7654e13153f429a7c2b7816cd73e, type: 3}
+  m_PrefabInstance: {fileID: 2156777442690588350}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3543b01a9ac8b5349a1f4a245088c410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RouletteSkinItem
 --- !u!1001 &2289007351970667290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15501,6 +15562,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8264760449999593304, guid: 755f7654e13153f429a7c2b7816cd73e, type: 3}
   m_PrefabInstance: {fileID: 6299831833786632396}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4435450506287935998 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7701328057056016690, guid: 755f7654e13153f429a7c2b7816cd73e, type: 3}
+  m_PrefabInstance: {fileID: 6299831833786632396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3543b01a9ac8b5349a1f4a245088c410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RouletteSkinItem
 --- !u!1001 &7155762757892706486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16593,6 +16665,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8264760449999593304, guid: 755f7654e13153f429a7c2b7816cd73e, type: 3}
   m_PrefabInstance: {fileID: 8103711652197565676}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1915920861861035486 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7701328057056016690, guid: 755f7654e13153f429a7c2b7816cd73e, type: 3}
+  m_PrefabInstance: {fileID: 8103711652197565676}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3543b01a9ac8b5349a1f4a245088c410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RouletteSkinItem
 --- !u!1001 &9017530087669137914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16699,6 +16782,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8264760449999593304, guid: 755f7654e13153f429a7c2b7816cd73e, type: 3}
   m_PrefabInstance: {fileID: 9017530087669137914}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1712545190431439048 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7701328057056016690, guid: 755f7654e13153f429a7c2b7816cd73e, type: 3}
+  m_PrefabInstance: {fileID: 9017530087669137914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3543b01a9ac8b5349a1f4a245088c410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RouletteSkinItem
 --- !u!1001 &9192591616386854681
 PrefabInstance:
   m_ObjectHideFlags: 0

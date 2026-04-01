@@ -35,7 +35,7 @@ public class RouletteSkin : MonoBehaviour
     {
         ThrowableObject throwableObject = GetRandomThrowableObjectByChance();
 
-        print("throwableObject " + throwableObject);
+        print("RouletteSkin: " + throwableObject);
 
         float expendedTime = 0;
 
@@ -46,9 +46,6 @@ public class RouletteSkin : MonoBehaviour
         float distance = (_items[^1].Rect.anchoredPosition.x + spacing) - _items[0].Rect.anchoredPosition.x;
         float randomOffset = distance * UnityEngine.Random.Range(_spinRangePercent.From, _spinRangePercent.To);
         float totalDistance = distance * _spinCount + randomOffset;
-
-        print("distance " + distance);
-        print("totalDistance " + totalDistance);
 
         float previousDistance = 0;
 

@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 905650825881342119}
   - component: {fileID: -6019317019176728663}
-  - component: {fileID: 4504202558253115514}
-  - component: {fileID: 1298811877278385144}
   - component: {fileID: 669403665764818371}
+  - component: {fileID: 1298811877278385144}
   m_Layer: 6
   m_Name: Drillo
   m_TagString: Untagged
@@ -63,45 +62,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!65 &4504202558253115514
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7209484009150214096}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 0.37786105, y: 0.86140525, z: 0.45070666}
-  m_Center: {x: -0.00984399, y: 0.12908334, z: -0.028547466}
---- !u!114 &1298811877278385144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7209484009150214096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0cf562cb01e0204c827e751293d54bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.RotatingAroundAnimation
-  <Entity>k__BackingField:
-    <Source>k__BackingField: {fileID: 8475423309797227073}
-    <Duration>k__BackingField: 3
-    <Ease>k__BackingField: 1
-  <IsAutoStart>k__BackingField: 1
-  _endAngleValue: {x: 360, y: 0, z: 0}
 --- !u!114 &669403665764818371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +80,26 @@ MonoBehaviour:
   _rb: {fileID: -6019317019176728663}
   _timeToDestroy: 5
   _destroySpeed: 0.5
+  _rotationForceAfterFall: -10
   <Force>k__BackingField: 2
+--- !u!114 &1298811877278385144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209484009150214096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cf562cb01e0204c827e751293d54bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.RotatingAroundAnimation
+  <Entity>k__BackingField:
+    <Source>k__BackingField: {fileID: 8475423309797227073}
+    <Duration>k__BackingField: 3
+    <Ease>k__BackingField: 1
+  <IsAutoStart>k__BackingField: 1
+  _endAngleValue: {x: 360, y: 0, z: 0}
 --- !u!1001 &934103248038359030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,6 +245,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f3bf4bbec111b1c4390e3104d55785bb, type: 3}
       propertyPath: m_Name
       value: frutodrillo
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f3bf4bbec111b1c4390e3104d55785bb, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

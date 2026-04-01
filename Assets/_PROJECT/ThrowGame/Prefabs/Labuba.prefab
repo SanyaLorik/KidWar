@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 905650825881342119}
-  - component: {fileID: 1298811877278385144}
-  - component: {fileID: 669403665764818371}
   - component: {fileID: 5051398038672960905}
-  - component: {fileID: 7591509589080192493}
+  - component: {fileID: 669403665764818371}
+  - component: {fileID: 1298811877278385144}
   m_Layer: 6
   m_Name: Labuba
   m_TagString: Untagged
@@ -36,43 +35,6 @@ Transform:
   - {fileID: 5103949768166395652}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1298811877278385144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7209484009150214096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0cf562cb01e0204c827e751293d54bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.RotatingAroundAnimation
-  <Entity>k__BackingField:
-    <Source>k__BackingField: {fileID: 5103949768166395652}
-    <Duration>k__BackingField: 3
-    <Ease>k__BackingField: 1
-  <IsAutoStart>k__BackingField: 1
-  _endAngleValue: {x: 360, y: 0, z: 0}
---- !u!114 &669403665764818371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7209484009150214096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4760ae40f67bd2645be55734ec7b47a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ThrowableObject
-  <PointToFollow>k__BackingField: {fileID: 905650825881342119}
-  _destroyEase: 26
-  _animation: {fileID: 1298811877278385144}
-  _rb: {fileID: 5051398038672960905}
-  _timeToDestroy: 5
-  _destroySpeed: 0.5
-  <Force>k__BackingField: 2
 --- !u!54 &5051398038672960905
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -100,27 +62,44 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!65 &7591509589080192493
-BoxCollider:
+--- !u!114 &669403665764818371
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7209484009150214096}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 0.5554532, y: 0.7539113, z: 0.4589991}
-  m_Center: {x: -0.0018770844, y: 0.10327569, z: -0.011915535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4760ae40f67bd2645be55734ec7b47a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThrowableObject
+  <PointToFollow>k__BackingField: {fileID: 905650825881342119}
+  _destroyEase: 26
+  _animation: {fileID: 1298811877278385144}
+  _rb: {fileID: 5051398038672960905}
+  _timeToDestroy: 5
+  _destroySpeed: 0.5
+  _rotationForceAfterFall: -10
+  <Force>k__BackingField: 2
+--- !u!114 &1298811877278385144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209484009150214096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cf562cb01e0204c827e751293d54bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.RotatingAroundAnimation
+  <Entity>k__BackingField:
+    <Source>k__BackingField: {fileID: 5103949768166395652}
+    <Duration>k__BackingField: 3
+    <Ease>k__BackingField: 1
+  <IsAutoStart>k__BackingField: 1
+  _endAngleValue: {x: 360, y: 0, z: 0}
 --- !u!1001 &934103248038359030
 PrefabInstance:
   m_ObjectHideFlags: 0

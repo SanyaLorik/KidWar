@@ -11,8 +11,11 @@ public class ThrowableObject : MonoBehaviour {
     [SerializeField] private Ease _destroyEase;
     [SerializeField] private DOTweenAnimationBase _animation;
     [SerializeField] private Rigidbody _rb;
+    
+    [Header("Анимация удаления")]
     [SerializeField] private float _timeToDestroy;
     [SerializeField] private float _destroySpeed;
+    [SerializeField] private float _rotationForceAfterFall = -10f;
     [field: SerializeField] public int Force { get; private set; }
     
     private IThrowableModifier _modifier;
@@ -102,6 +105,11 @@ public class ThrowableObject : MonoBehaviour {
 
     private async UniTask DestroyTimer(CancellationToken token) {
         await UniTask.WaitForSeconds(_timeToDestroy, cancellationToken: token);
+        _rb.angularVelocity = new Vector3(
+            Random.Range(-_rotationForceAfterFall, _rotationForceAfterFall),
+            Random.Range(-_rotationForceAfterFall, _rotationForceAfterFall),
+            Random.Range(-_rotationForceAfterFall, _rotationForceAfterFall)
+        );
         transform.DOScale(0f, _destroySpeed)
             .SetEase(_destroyEase)
             .OnComplete(() => Destroy(gameObject));

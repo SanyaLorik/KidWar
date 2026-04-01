@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
 using SanyaBeerExtension;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RouletteSkin : MonoBehaviour
@@ -12,6 +14,7 @@ public class RouletteSkin : MonoBehaviour
     [SerializeField] private PairedValue<float> _spinRangePercent;
 
     [Header("Views")]
+    [SerializeField] private RouletteSkinItem _selectedItem;
     [SerializeField] private RouletteSkinItem[] _items;
 
     [Header("Pets")]
@@ -20,14 +23,20 @@ public class RouletteSkin : MonoBehaviour
     [Header("Other")]
     [SerializeField] private RectTransform _rect;
 
-    private void Start()
+    [ContextMenu("Spin")]
+    private void SpinInInspector()
     {
+        ResetItemPosition();
         FillRandomSkins();
         SpinAsync().Forget();
     }
 
-    public async UniTask SpinAsync()
+    public async UniTask<ThrowableObject> SpinAsync()
     {
+        ThrowableObject throwableObject = GetRandomThrowableObjectByChance();
+
+        print("throwableObject " + throwableObject);
+
         float expendedTime = 0;
 
         float spacing = _items[1].Rect.anchoredPosition.x - _items[0].Rect.anchoredPosition.x;
@@ -61,6 +70,10 @@ public class RouletteSkin : MonoBehaviour
                     _items[i].Rect.anchoredPosition = _items[0].Rect.anchoredPosition.AddX(-spacing);
                     ShiftArray();
                     ChangeInfoAtFirstItem();
+
+                    bool isLastSpin = (totalDistance - currentDistance) <= distance;
+                    if (isLastSpin)
+                        _selectedItem.SetInfo(throwableObject.Info);
                 }
             }
 
@@ -69,6 +82,8 @@ public class RouletteSkin : MonoBehaviour
             await UniTask.Yield(cancellationToken: destroyCancellationToken);
         }
         while (expendedTime < _duration);
+
+        return throwableObject;
     }
 
     public void FillRandomSkins()
@@ -78,6 +93,11 @@ public class RouletteSkin : MonoBehaviour
             InfoThrowableObject randomInfo = _infoThrowableObjects.GetRandomElement().Info;
             item.SetInfo(randomInfo);
         }
+    }
+
+    public void ResetItemPosition()
+    {
+        _items.ForEach(i => i.Rect.anchoredPosition = i.InitialPosition);
     }
 
     private void ShiftArray()
@@ -92,7 +112,30 @@ public class RouletteSkin : MonoBehaviour
     private void ChangeInfoAtFirstItem()
     {
         InfoThrowableObject randomInfo = _infoThrowableObjects.GetRandomElement().Info;
-        RouletteSkinItem randomItem = _items.GetRandomElement();
-        randomItem.SetInfo(randomInfo);
+        RouletteSkinItem item = _items[0];
+        item.SetInfo(randomInfo);
+    }
+
+    private ThrowableObject GetRandomThrowableObjectByChance()
+    {
+        float totalChance = _infoThrowableObjects.Sum(i => i.Info.DropChance);
+        IEnumerable<float> normalizedChances = _infoThrowableObjects.Select(i => i.Info.DropChance / totalChance);
+
+        float cumulativeSum = 0;
+        IReadOnlyList<float> cumulativeChances = normalizedChances.Select(i =>
+        {
+            cumulativeSum += i;
+            return cumulativeSum;
+        }).ToList();
+
+        float randomChance = UnityEngine.Random.value;
+
+        for (int i = 0; i < cumulativeChances.Count; i++)
+        {
+            if (randomChance < cumulativeChances[i])
+                return _infoThrowableObjects[i];
+        }
+
+        throw new Exception("WTF?");
     }
 }

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RouletteSkinItem
   <Rect>k__BackingField: {fileID: 8264760449999593304}
   _icon: {fileID: 4903970284591585179}
-  _damageText: {fileID: 8156582387315594690}
+  _damageText: {fileID: 7532126595859646447}
 --- !u!1 &1928467272955380435
 GameObject:
   m_ObjectHideFlags: 0

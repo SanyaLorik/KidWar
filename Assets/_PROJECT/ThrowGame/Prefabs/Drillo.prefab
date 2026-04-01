@@ -82,6 +82,10 @@ MonoBehaviour:
   _destroySpeed: 0.5
   _rotationForceAfterFall: -10
   <Force>k__BackingField: 2
+  <Info>k__BackingField:
+    <Icon>k__BackingField: {fileID: 21300000, guid: aeacebfc18c29c04ea5d1daa4769c938, type: 3}
+    <Damage>k__BackingField: 4
+    <DropChance>k__BackingField: 0.3
 --- !u!114 &1298811877278385144
 MonoBehaviour:
   m_ObjectHideFlags: 0

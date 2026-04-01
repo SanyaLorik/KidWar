@@ -1,25 +1,28 @@
 using Cysharp.Threading.Tasks;
 using SanyaBeerExtension;
+using System;
 using UnityEngine;
 
 public class RouletteSkin : MonoBehaviour
 {
     [Header("Parametrs")]
+    [SerializeField] private AnimationCurve _behaviourCurve;
     [SerializeField] private int _spinCount;
     [SerializeField] private float _duration;
-    [SerializeField] private AnimationCurve _behaviourCurve;
+    [SerializeField] private PairedValue<float> _spinRangePercent;
 
     [Header("Views")]
     [SerializeField] private RouletteSkinItem[] _items;
 
     [Header("Pets")]
-    [SerializeField] private int TEST;
+    [SerializeField] private ThrowableObject[] _infoThrowableObjects;
 
     [Header("Other")]
     [SerializeField] private RectTransform _rect;
 
     private void Start()
     {
+        FillRandomSkins();
         SpinAsync().Forget();
     }
 
@@ -32,7 +35,8 @@ public class RouletteSkin : MonoBehaviour
         float replaceX = borderX + spacing;
 
         float distance = (_items[^1].Rect.anchoredPosition.x + spacing) - _items[0].Rect.anchoredPosition.x;
-        float totalDistance = distance * _spinCount;
+        float randomOffset = distance * UnityEngine.Random.Range(_spinRangePercent.From, _spinRangePercent.To);
+        float totalDistance = distance * _spinCount + randomOffset;
 
         print("distance " + distance);
         print("totalDistance " + totalDistance);
@@ -56,6 +60,7 @@ public class RouletteSkin : MonoBehaviour
                 {
                     _items[i].Rect.anchoredPosition = _items[0].Rect.anchoredPosition.AddX(-spacing);
                     ShiftArray();
+                    ChangeInfoAtFirstItem();
                 }
             }
 
@@ -66,12 +71,28 @@ public class RouletteSkin : MonoBehaviour
         while (expendedTime < _duration);
     }
 
+    public void FillRandomSkins()
+    {
+        foreach (RouletteSkinItem item in _items)
+        {
+            InfoThrowableObject randomInfo = _infoThrowableObjects.GetRandomElement().Info;
+            item.SetInfo(randomInfo);
+        }
+    }
+
     private void ShiftArray()
     {
-        var last = _items[^1];
+        RouletteSkinItem last = _items[^1];
         for (int i = _items.Length - 1; i >= 1; i--)
             _items[i] = _items[i - 1];
 
         _items[0] = last;
+    }
+
+    private void ChangeInfoAtFirstItem()
+    {
+        InfoThrowableObject randomInfo = _infoThrowableObjects.GetRandomElement().Info;
+        RouletteSkinItem randomItem = _items.GetRandomElement();
+        randomItem.SetInfo(randomInfo);
     }
 }

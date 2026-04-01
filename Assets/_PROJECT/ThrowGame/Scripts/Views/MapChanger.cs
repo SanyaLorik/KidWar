@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using _PROJECT.Scripts.Helpers;
@@ -22,7 +21,8 @@ public class MapChanger : MonoBehaviour {
     
     
     private void Start() {
-        ChooseNextMap();
+        UpdateIndex();
+        SetChoosedMap();
     }
 
 

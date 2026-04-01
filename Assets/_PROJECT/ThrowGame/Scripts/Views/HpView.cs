@@ -137,4 +137,8 @@ public class HpView : MonoBehaviour {
         }
         return -xEnd * (1f - percent);
     }
+
+    private void OnDestroy() {
+        UniTaskHelper.DisposeTask(ref _tokenSource);
+    }
 }

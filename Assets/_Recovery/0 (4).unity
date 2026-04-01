@@ -869,18 +869,18 @@ Camera:
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
-  m_GateFitMode: 1
+  m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_Iso: 200
   m_ShutterSpeed: 0.005
-  m_Aperture: 11
+  m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 60
-  m_BladeCount: 6
+  m_FocalLength: 50
+  m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.512
+  m_BarrelClipping: 0.25
   m_Anamorphism: 0
-  m_SensorSize: {x: 70, y: 52.63}
+  m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -890,7 +890,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 312
-  field of view: 50
+  field of view: 47.36291
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -916,7 +916,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1311484, y: -0.00000005635309, z: 0.000000007455008, w: 0.99136275}
+  m_LocalRotation: {x: 0.13387403, y: 1.4501219e-15, z: -1.9589703e-16, w: 0.9909984}
   m_LocalPosition: {x: -3.5, y: 6.0942903, z: -8.029615}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1097,22 +1097,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1131067824}
     m_Modifications:
-    - target: {fileID: 103812477461505064, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
-      propertyPath: TrackerSettings.PositionDamping.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 103812477461505064, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
-      propertyPath: TrackerSettings.PositionDamping.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 103812477461505064, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
-      propertyPath: TrackerSettings.PositionDamping.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3233720598023956395, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
-      propertyPath: StandbyUpdate
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3233720598023956395, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
@@ -1131,19 +1115,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4310157209622667228, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99136275
+      value: 0.9909984
       objectReference: {fileID: 0}
     - target: {fileID: 4310157209622667228, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13114837
+      value: 0.13387401
       objectReference: {fileID: 0}
     - target: {fileID: 4310157209622667228, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000056353088
+      value: 1.4628924e-15
       objectReference: {fileID: 0}
     - target: {fileID: 4310157209622667228, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000007455006
+      value: -2.9043095e-16
       objectReference: {fileID: 0}
     - target: {fileID: 4310157209622667228, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1185,9 +1169,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4443227316252589338, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1100837934}
-    - targetCorrespondingSourceObject: {fileID: 4443227316252589338, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1100837939}
   m_SourcePrefab: {fileID: 100100000, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
 --- !u!4 &402641650 stripped
 Transform:
@@ -2894,22 +2875,6 @@ MonoBehaviour:
   _walkPoint: {fileID: 1553375255}
   _orbitalFollow: {fileID: 402641651}
   _cameraSaveDelay: 1
-  _dampningWhlePlay: {x: 4, y: 0, z: 4}
---- !u!114 &1100837939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100837930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollowZoom
-  Width: 2
-  Damping: 10
-  FovRange: {x: 50, y: 108.2578}
 --- !u!1 &1105847653
 GameObject:
   m_ObjectHideFlags: 0
@@ -5141,8 +5106,8 @@ MonoBehaviour:
   - {fileID: 5123427090692961069}
   - {fileID: 522207908}
   - {fileID: 972953661}
-  _timeToChangeMaps: 60
-  _changeRandomMap: 1
+  _timeToChangeMaps: 1
+  _changeRandomMap: 0
 --- !u!1 &2052816075
 GameObject:
   m_ObjectHideFlags: 0
@@ -10151,14 +10116,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 846283726500613230, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 846283726500613230, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.32
-      objectReference: {fileID: 0}
     - target: {fileID: 3127794887736637378, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
@@ -10170,14 +10127,6 @@ PrefabInstance:
     - target: {fileID: 4343414195835875579, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7015306905465675791, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 7015306905465675791, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 5.32
       objectReference: {fileID: 0}
     - target: {fileID: 7315791491920274858, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
       propertyPath: m_LocalPosition.y

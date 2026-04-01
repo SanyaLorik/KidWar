@@ -23,13 +23,15 @@ public class ThrowableModifierAim : IThrowableModifier {
             Vector3 newPos = Vector3.Lerp(ThrowableObject.InitialPos, ThrowableObject.TargetPos, progress);
             float currentHeight = ThrowableObject.Height * ThrowableObject.ThrowCurve.Evaluate(progress);
             newPos.y += currentHeight;
-            ThrowableObject.transform.position = newPos;
+            // ThrowableObject.transform.position = newPos;
+            ThrowableObject.Rb.MovePosition(newPos);
         }
         else {
             Vector3 newPos = Vector3.Lerp(ThrowableObject.InitialPos, ThrowableObject.EnemyPose, progress);
             float currentHeight = ThrowableObject.Height * ThrowableObject.ThrowCurve.Evaluate(progress);
             newPos.y += currentHeight;
-            ThrowableObject.transform.position = newPos;
+            // ThrowableObject.transform.position = newPos;
+            ThrowableObject.Rb.MovePosition(newPos);
         }
     }
 }

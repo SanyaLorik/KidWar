@@ -15,6 +15,7 @@ public class CameraOrbitalController : MonoBehaviour {
 
     [SerializeField] private CinemachineOrbitalFollow _orbitalFollow;
     [SerializeField] private float _cameraSaveDelay = 1f;
+    [SerializeField] private Vector3 _dampningWhlePlay;
 
     private Action _rotationHandler;
 
@@ -49,15 +50,29 @@ public class CameraOrbitalController : MonoBehaviour {
     [Inject] private IDeviceTypeProvider _deviceType;
     [Inject] private IInputActivity _inputActivity;
     [Inject] private BattleManager _battleManager;
+    [Inject] private ThrowGameStarter _gameStarter;
 
 
     private void OnEnable()  {
         _settings.CameraZoomChanged += ChangeCameraZoomPercent;
         SystemEvents.WindowOpened += ForbidRotate;
         SystemEvents.ForbidZoomChanged += ForbidZoom;
+        _gameStarter.GameStarted += OnGameStarted;
+    }
+    
+    
+
+    private void OnGameStarted(bool started) {
+        if(!_battleManager.MainPlayerPlay) return;
+        if (started) {
+            _orbitalFollow.TrackerSettings.PositionDamping = _dampningWhlePlay;
+        }
+        else {
+            _orbitalFollow.TrackerSettings.PositionDamping = Vector3.zero;
+        }
     }
 
-    
+
     // Будет менеджер кидать чей ход точку
     private float _zoomBeforeGame;
     public void SetCameraToPlayThrow(Transform point) {
@@ -84,6 +99,9 @@ public class CameraOrbitalController : MonoBehaviour {
     
     private void Start() {
         ChangeCameraZoomPercent(_settings.CameraZoomValue);
+        
+        _orbitalFollow.TrackerSettings.PositionDamping = Vector3.zero;
+        
         _walkZoom = CurrentFovPercent;
         if (IsMobile)
             _rotationHandler = HandleJoystickOrbit;

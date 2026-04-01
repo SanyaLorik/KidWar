@@ -17,7 +17,8 @@ public class ThrowableObject : MonoBehaviour {
     private CancellationTokenSource _token;
     private bool _ignoreColliders;
     private float _elapsedTime;
-    
+
+    public Rigidbody Rb => _rb;
     public Vector3 InitialPos { get; private set; }
     public Vector3 TargetPos { get; private set; }
     public Vector3 EnemyPose { get; private set; }

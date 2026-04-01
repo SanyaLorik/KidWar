@@ -33,13 +33,16 @@ public class ThrowableModifierDouble : IThrowableModifier {
         Vector3 newPos = Vector3.Lerp(ThrowableObject.InitialPos, ThrowableObject.TargetPos, progress);
         float currentHeight = ThrowableObject.Height * ThrowableObject.ThrowCurve.Evaluate(progress);
         newPos.y += currentHeight;
-        ThrowableObject.transform.position = newPos;
+        // ThrowableObject.transform.position = newPos;
+        ThrowableObject.Rb.MovePosition(newPos);
         
         // + полет второго обьекта
         newPos = Vector3.Lerp(ThrowableObject.InitialPos, ThrowableObject.TargetPos, progress);
         currentHeight = ThrowableObject.Height * _heightMultiplier * ThrowableObject.ThrowCurve.Evaluate(progress);
         newPos.y += currentHeight;
-        _secondThrowableObject.transform.position = newPos;
+        // _secondThrowableObject.transform.position = newPos;
+        ThrowableObject.Rb.MovePosition(newPos);
+        
     }
 
     private IEnumerator DeleteAsync() {

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Local Save
   m_EditorClassIdentifier: Assembly-CSharp::GameSaveSO
   Save:
-    Money: 0
+    Money: 1000
     IsBoughtPurchase: 0
-    Skins: []
-    SkinWearId: 
+    Skins:
+    - Id: creeper_skin
+    SkinWearId: creeper_skin
     Bonuses:
     - Id: health_bonus
       Count: 4
@@ -24,3 +25,6 @@ MonoBehaviour:
       Count: 5
     - Id: reset_bonus
       Count: 6
+    DailyRewardSave:
+      LastDateTimeReceived: 
+      LastDayNumber: -1

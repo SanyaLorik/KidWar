@@ -12,7 +12,6 @@ using Zenject;
 
 public class BattleManager : MonoBehaviour {
     // Будет выбираться рулеткой шо кинуть может
-    [SerializeField] private ThrowableObject _labuba;
     [SerializeField] private int _secondsInStep;
     [SerializeField] private BotObjectThrower _bot1;
     [SerializeField] private BotObjectThrower _bot2;
@@ -22,7 +21,6 @@ public class BattleManager : MonoBehaviour {
     
     public IThrowGamePlayer FirstThrower { get; private set; }
     public IThrowGamePlayer SecondThrower { get; private set; }
-    
     
     private bool _stepIsOver;
     private bool GameIsOver => FirstThrower.ObjectThrower.CurrentLifesCount == 0 ||  SecondThrower.ObjectThrower.CurrentLifesCount == 0;
@@ -44,6 +42,7 @@ public class BattleManager : MonoBehaviour {
     [Inject] WindChooseView _windChooser;
     [Inject] StartBattleView _startBattleView;
     [Inject] PlayersStepView _playersStepView;
+    [Inject] ThrowObjectsIniter _throwObjectsIniter;
 
     
     public int GetCurrentPlayerLifesCount() {
@@ -86,7 +85,7 @@ public class BattleManager : MonoBehaviour {
         Debug.Log("secondPlayerBot " + secondPlayerBot);
 
         MainPlayerPlay = !firstPlayerBot;
-        
+
         if (!firstPlayerBot) {
             FirstThrower = _mainPlayer;
             GetReadyPlayer(_mainPlayer, true);
@@ -109,7 +108,8 @@ public class BattleManager : MonoBehaviour {
         SecondThrower.ObjectThrower.InitToNewGame(false);
         SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
         SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
-
+        
+        
         GoBattle(firstPlayerBot, secondPlayerBot).Forget();
     }
 
@@ -156,7 +156,6 @@ public class BattleManager : MonoBehaviour {
         Debug.Log("Игра закончилась !");
     }
 
-    
     private async UniTask PlayerStepAsync(ObjectThrower thrower, Transform pointToCameraFocus, bool isFirstThrowerStep) {
         if(GameIsOver) return;
         Debug.Log("NewPlayerTurn, BotTurnNow = " + !thrower.PlayerHandle);
@@ -193,11 +192,13 @@ public class BattleManager : MonoBehaviour {
         if (FirstThrower != null && FirstThrower.IsPlaying) {
             FirstThrower.SetPlayStatus(false);
             FirstThrower.ObjectThrower.SetAllowToThrow(false);
+            FirstThrower.ObjectThrower.SetUnshielded();
         }
 
         if (SecondThrower != null && SecondThrower.IsPlaying) {
             SecondThrower.SetPlayStatus(false);
             SecondThrower.ObjectThrower.SetAllowToThrow(false);
+            SecondThrower.ObjectThrower.SetUnshielded();
         }
         
         if (MainPlayerPlay) {
@@ -218,7 +219,12 @@ public class BattleManager : MonoBehaviour {
         // Чтоб не в ноги летело а в тело
         enemyPoint.y += 1f;
         
-        _throwerCalculator.ThrowNewObject(thrower.AngleToThrow, _labuba, thrower.ThrowPoint, enemyPoint);
+        _throwerCalculator.ThrowNewObject(
+            thrower.AngleToThrow, 
+            _throwObjectsIniter.GetRandomToy, 
+            thrower.ThrowPoint, enemyPoint
+        );
+        
         _stepIsOver = false;
     }
     

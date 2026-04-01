@@ -10,12 +10,13 @@ public class ThrowableModifierAim : IThrowableModifier {
     public void SetThrowableObject(ThrowableObject throwableObject) {
         ThrowableObject = throwableObject;
         ThrowableObject.ChangeTimeDuration(ThrowableObject.FlightDurationToEnemy);
-        
     }
 
     public void ExtensionBehaviour() { }
+
     public void OnPlayerContact() { }
 
+    
     public void CalculatePose(float elapsedTime) {
         float progress = elapsedTime / ThrowableObject.FlightDurationToEnemy;
         

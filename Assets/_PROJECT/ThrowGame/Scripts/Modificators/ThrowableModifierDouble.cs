@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using SanyaBeerExtension;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -17,13 +16,12 @@ public class ThrowableModifierDouble : IThrowableModifier {
 
     public void ExtensionBehaviour() {
         _secondThrowableObject = Object.Instantiate(ThrowableObject);
-        ThrowableObject.StartCoroutine(DeleteAsync());
-        _secondThrowableObject.SetGravity(true);
+        _secondThrowableObject.StartDestroyTimer(true);
     }
 
 
     public void OnPlayerContact() {
-        _secondThrowableObject.SetGravity(true);
+        _secondThrowableObject.StartDestroyTimer(true);
     }
     
     public void CalculatePose(float elapsedTime) {
@@ -41,7 +39,7 @@ public class ThrowableModifierDouble : IThrowableModifier {
         currentHeight = ThrowableObject.Height * _heightMultiplier * ThrowableObject.ThrowCurve.Evaluate(progress);
         newPos.y += currentHeight;
         // _secondThrowableObject.transform.position = newPos;
-        ThrowableObject.Rb.MovePosition(newPos);
+        _secondThrowableObject.Rb.MovePosition(newPos);
         
     }
 

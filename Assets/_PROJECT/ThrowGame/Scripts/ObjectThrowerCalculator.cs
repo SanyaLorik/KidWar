@@ -49,7 +49,6 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     
     private float _initialDistance;
     private CancellationTokenSource _tokenSource;
-    private List<ThrowableObject> _throwInstances = new();
     
     
     public event Action<Transform> ObjectThrowed;
@@ -77,9 +76,6 @@ public class ObjectThrowerCalculator : MonoBehaviour {
 
     private async UniTask WaitFewFramesToDelete(CancellationToken token) {
         await UniTask.WaitForSeconds(.5f, cancellationToken: token);
-        _throwInstances.ForEach(obj => Destroy(obj.gameObject));
-        _throwInstances.Clear();
-        
     }
 
     private void Start() {
@@ -203,7 +199,6 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         ObjectInFly = true;
         ThrowableObject throwInstance = Instantiate(throwObject);
         throwInstance.transform.position = initialPos;
-        _throwInstances.Add(throwInstance);
         
         throwInstance.SetupAndLaunch(
             initialPos,  
@@ -215,7 +210,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
             _throwCurve,
             _modifierManager.CurrentModifier
         );
-        ObjectThrowed?.Invoke(throwInstance.transform);
+        ObjectThrowed?.Invoke(throwInstance.PointToFollow);
         await throwInstance.StartFlight(token);
         
         Debug.Log("Обьект упал! " + throwInstance.transform.position);

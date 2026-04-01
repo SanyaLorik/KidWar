@@ -10,4 +10,9 @@ public class LocalizationData : LocalizationDataBase
     public string[] BotsPhrases;
 
     public string Timer;
+    public string Enemy;
+    // Battle info
+    public string PlayerHit;
+    public string PlayerWinner;
+    
 }

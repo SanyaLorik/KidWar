@@ -29,3 +29,6 @@ MonoBehaviour:
   - "\u041A\u0430"
   BotsPhrases: []
   Timer: "\u041D\u0430\u0447\u0430\u043B\u043E \u0447\u0435\u0440\u0435\u0437 {0}..."
+  Enemy: "\u0412\u0440\u0430\u0433"
+  PlayerHit: "{0} \u043F\u043E\u043F\u0430\u043B!"
+  PlayerWinner: "{0} \u0432\u044B\u0438\u0433\u0440\u0430\u043B!"

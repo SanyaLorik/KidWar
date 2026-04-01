@@ -24,6 +24,7 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
     private NavMeshAgent _agent;
 
     public bool IsPlaying { get; private set; }
+    public string Nickname => _botMonolog.NickName;
     
     public BotState State { get; private set; }
     

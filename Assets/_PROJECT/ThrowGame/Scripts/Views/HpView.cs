@@ -16,7 +16,9 @@ public class HpView : MonoBehaviour {
     [Inject] private ThrowGameStarter _throwGameStarter;
     [Inject] private BattleManager _battleManager;
     [Inject] private GameData _gameData;
-    
+
+
+    public event Action PlayerHit; 
     
     private int MaxHp => _gameData.PlayerMaxHp;
 
@@ -31,7 +33,7 @@ public class HpView : MonoBehaviour {
 
 
     public void ChangeHp(float hp, bool stayInLeft) {
-        float percent = (float) hp / MaxHp;
+        float percent = hp / MaxHp;
         if (stayInLeft) {
             // left
             ChangeLeftPlayerHp(percent);
@@ -43,11 +45,18 @@ public class HpView : MonoBehaviour {
     }
 
     private void ChangeLeftPlayerHp(float percent) {
+        // Костыль ну пока похуй, аптечка не хиллит фул хп
+        if (percent != 1f) {
+            PlayerHit?.Invoke();
+        }
         Debug.Log("ChangeLeftPlayerHp " + percent);
         SetFillAmountInRight(_leftHp, _parentLeftHp, percent);
     }
     
     private void ChangeRightPlayerHp(float percent) {
+        if (percent != 1f) {
+            PlayerHit?.Invoke();
+        }
         Debug.Log("ChangeRightPlayerHp" + percent);
         SetFillAmountInLeft(_rightHp, _parentRightHp, percent);
     }

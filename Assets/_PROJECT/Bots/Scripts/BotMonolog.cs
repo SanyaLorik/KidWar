@@ -8,8 +8,11 @@ public class BotMonolog : MonoBehaviour {
     [SerializeField] private GameObject _monologCloud;
     [SerializeField] private TMP_Text _monologText;
     [SerializeField] private TMP_Text _botNicknameText;
-    
- 
+
+
+    public string NickName { get; private set; }
+
+
     [Inject] private LocalizationData _localization; 
     [Inject] private NicknameRandomizer _nicknameRandomizer; 
     
@@ -19,7 +22,8 @@ public class BotMonolog : MonoBehaviour {
     }
 
     public void ChangeNickname() {
-        _botNicknameText.text = _nicknameRandomizer.GetRandomName();
+        NickName = _nicknameRandomizer.GetRandomName();
+        _botNicknameText.text = NickName;
     }
 
 

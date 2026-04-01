@@ -23,7 +23,7 @@ public class ThrowableModifierExplosion : IThrowableModifier {
     }
 
     private void Explode() {
-        ThrowableObject.transform.DOScale(_scaling, exposionDuration)
+        ThrowableObject.PointToFollow.transform.DOScale(_scaling, exposionDuration)
             .SetEase(_ease)
             .OnComplete(ThrowableObject.Destroy);
     }

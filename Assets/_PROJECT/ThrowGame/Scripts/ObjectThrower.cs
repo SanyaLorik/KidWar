@@ -26,6 +26,7 @@ public class ObjectThrower : MonoBehaviour {
     public Transform ThrowPoint =>  ThrowVisualize.ThrowPoint;
 
     public IDamageable Damageable => _playerHp;
+    public string Nickname { get;  private set; }
     
     
     public float AngleToThrow { get; private set; }
@@ -37,14 +38,16 @@ public class ObjectThrower : MonoBehaviour {
     [Inject] private BattleManager _battleManager;
     [Inject] private ObjectThrowerCalculator _calculator;
     [Inject] private InputThrowGame _inputThrowGame;
-    [Inject] private HpView _hpView;
     [Inject] private GameData _gameData;
 
         
     private void OnEnable() {
         _inputThrowGame.OnUpped += Throw;
     }
-    
+
+    public void SetNickname(string nickname) {
+        Nickname = nickname;
+    }
     
     public void SetBotBehaviour(BotObjectThrower botObjectThrower, ObjectThrower enemyObjectThrower, bool isBot) {
         _botObjectThrower = botObjectThrower;
@@ -57,13 +60,16 @@ public class ObjectThrower : MonoBehaviour {
         _playerHp.InitPosition(StayInLeft);
         _playerHp.SetMaxHp();
         _playerHp.SetShielded(false);
-        
     }
 
     public void SetDead() {
         _playerHp.SetDead();
     }
 
+
+    public void SetUnshielded() {
+        _playerHp.SetShielded(false);
+    }
 
     private void Throw() {
         // Нажали

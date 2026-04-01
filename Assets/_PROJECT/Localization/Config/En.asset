@@ -29,3 +29,6 @@ MonoBehaviour:
   - "\u041A\u0430"
   BotsPhrases: []
   Timer: Start in {0}...
+  Enemy: Enemy
+  PlayerHit: '{0} scores! '
+  PlayerWinner: '{0} wins! '

@@ -36,6 +36,7 @@ public class BotsMainManager : IInitializable, IDisposable {
         foreach (var bot in _bots) {
             bot.SetBotSkin(_skins.GetRandomElement());
             bot.InitAnimator();
+            // Установка ников
         }
     }
     
@@ -46,6 +47,7 @@ public class BotsMainManager : IInitializable, IDisposable {
             var bot = _bots.GetRandomElement();
             if (!bot.IsPlaying) {
                 bot.SetPlayStatusSilent(true);
+                bot.ObjectThrower.SetNickname(bot.Nickname);
                 return bot;
             }
         }

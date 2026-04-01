@@ -12,6 +12,7 @@ public class ThrowGameStarter : MonoBehaviour  {
     // Шарит за всю инфу по игре, где кто находится 
     [Header("Время")]
     [SerializeField] private float _timerDuration;
+    [SerializeField] private float _durationAfterGameOver;
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private GameObject _timerCanvas;
     [SerializeField] private Button _afkButton;
@@ -47,10 +48,20 @@ public class ThrowGameStarter : MonoBehaviour  {
         GameIsStarted = false;
         // Ну наверное начинать сразу...
         if (!_startGamePressed) {
-            StartTimer(_timerDuration);
+            StartWaitBeforeNewTimer();
         }
     }
-    
+
+    private void StartWaitBeforeNewTimer() {
+        UniTaskHelper.DisposeTask(ref _tokenSource);
+        _tokenSource = new CancellationTokenSource();
+        UniTaskHelper.TimerAction(
+            _durationAfterGameOver,
+            () => StartTimer(_timerDuration),
+            _tokenSource.Token
+        ).Forget();
+    }
+
 
     private void OnEnable() {
         _afkButton.onClick.AddListener(() => ChangeAfkStatus(!_afkPressed));

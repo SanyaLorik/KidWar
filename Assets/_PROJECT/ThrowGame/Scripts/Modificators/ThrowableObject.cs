@@ -1,22 +1,25 @@
 using System.Threading;
+using _PROJECT.Scripts.Helpers;
 using Architecture_M;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using SanyaBeerExtension;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class ThrowableObject : MonoBehaviour {
+    [field: SerializeField] public Transform PointToFollow { get; private set; }
+    [SerializeField] private Ease _destroyEase;
     [SerializeField] private DOTweenAnimationBase _animation;
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private float _bounceForce = .5f;
-    [SerializeField] private float _rotationForceAfterFall = -5f;
+    [SerializeField] private float _timeToDestroy;
+    [SerializeField] private float _destroySpeed;
     [field: SerializeField] public int Force { get; private set; }
-    
     
     private IThrowableModifier _modifier;
     private CancellationTokenSource _token;
     private bool _ignoreColliders;
     private float _elapsedTime;
+    private CancellationTokenSource _tokenSource;
 
     public Rigidbody Rb => _rb;
     public Vector3 InitialPos { get; private set; }
@@ -26,12 +29,31 @@ public class ThrowableObject : MonoBehaviour {
     public float FlightDurationToEnemy { get; private set; }
     public float Height { get; private set; }
     public AnimationCurve ThrowCurve { get; private set; }
-    public bool ObjectIsFalled { get; private set; }
-
+    
+    
     /// <summary>
     /// Если был контакт с коллайдером или игроком то не наносить больше урона
     /// </summary>
-    public bool ContactPlayer { get; private set; }
+    private bool _contactPlayer;
+    
+    public void TriggerCheck(Collider collider) {
+        if(!collider.TryGetComponent(out IDamageable player) || _contactPlayer) return;
+        if (_modifier != null) {
+            _modifier.OnPlayerContact();
+            StartDestroyTimer(true);
+        }
+        player.TakeDamage(Force);
+        _contactPlayer = true;
+    }
+    
+    
+    public void CollisionCheck(Collision other) {
+        StartDestroyTimer(true);
+        if (!other.gameObject.TryGetComponent(out ObjectThrower _) && !_ignoreColliders) {
+            // Об землю ударилось, сё низя урон наносить
+            _contactPlayer = true;
+        }
+    }
     
     public void SetupAndLaunch( 
         Vector3 initialPos, 
@@ -58,43 +80,33 @@ public class ThrowableObject : MonoBehaviour {
         _elapsedTime = 0f;
         Debug.Log($"TargetPos = {TargetPos}, модификатор: {_modifier.GetType()}");
         _modifier.ExtensionBehaviour();
-        while (!token.IsCancellationRequested && _elapsedTime < FlightDuration && !ContactPlayer) {
+        while (!token.IsCancellationRequested && _elapsedTime < FlightDuration && !_contactPlayer) {
             _elapsedTime += Time.deltaTime;
             _modifier.CalculatePose(_elapsedTime); 
             await UniTask.WaitForFixedUpdate();
         }
-        SetGravity(true);
+        StartDestroyTimer(true);
+    }
+    
+
+    /// <summary>
+    /// Запускает 1 раз таймер удаления с анимашкой
+    /// </summary>
+    /// <param name="state"></param>
+    public void StartDestroyTimer(bool state) {
+        if (_rb.useGravity == state) return;
+        _rb.useGravity = state;
+        _tokenSource = new CancellationTokenSource();
+        DestroyTimer(_tokenSource.Token).Forget();
     }
 
-    public void SetFallStatus(bool state) {
-        ObjectIsFalled = state;
+    private async UniTask DestroyTimer(CancellationToken token) {
+        await UniTask.WaitForSeconds(_timeToDestroy, cancellationToken: token);
+        transform.DOScale(0f, _destroySpeed)
+            .SetEase(_destroyEase)
+            .OnComplete(() => Destroy(gameObject));
     }
     
-    
-    private void OnTriggerEnter(Collider collider) {
-        if(!collider.TryGetComponent(out IDamageable player) || ContactPlayer) return;
-        if (_modifier != null) {
-            _modifier.OnPlayerContact();
-        }
-        player.TakeDamage(Force);
-        ContactPlayer = true;
-    }
-    
-    
-    private void OnCollisionEnter(Collision other) {
-        EnablePhysicsAfterHit(other);
-        if (!other.gameObject.TryGetComponent(out ObjectThrower _) && !_ignoreColliders) {
-            // Об землю ударилось, сё низя урон наносить
-            ContactPlayer = true;
-        }
-    }
-
-    public void SetGravity(bool state) {
-        if (_rb.useGravity != state) {
-            _rb.useGravity = state;
-        }
-    }
-
     
 
     /// <summary>
@@ -114,23 +126,6 @@ public class ThrowableObject : MonoBehaviour {
         FlightDuration =  duration;
     }
     
-    private void EnablePhysicsAfterHit(Collision collision) {
-        // Включаем гравитацию
-        SetGravity(true);
-        // Отталкиваемся от точки столкновения
-        ContactPoint contact = collision.contacts[0];
-        Vector3 bounceDir = Vector3.Reflect(_rb.linearVelocity, contact.normal);
-        bounceDir.y = Mathf.Abs(bounceDir.y) + 2f; // Добавляем отскок вверх
-
-        _rb.linearVelocity = bounceDir * _bounceForce; // Отскок с силой 3
-        
-        // Добавляем вращение
-        _rb.angularVelocity = new Vector3(
-            Random.Range(-_rotationForceAfterFall, _rotationForceAfterFall),
-            Random.Range(-_rotationForceAfterFall, _rotationForceAfterFall),
-            Random.Range(-_rotationForceAfterFall, _rotationForceAfterFall)
-        );
-    }
 
     public void Destroy() {
         _elapsedTime = FlightDuration;
@@ -141,5 +136,8 @@ public class ThrowableObject : MonoBehaviour {
     public void ObjectIsFall() {
         _animation.Kill();
     }
-    
+
+    private void OnDestroy() {
+        UniTaskHelper.DisposeTask(ref _tokenSource);
+    }
 }

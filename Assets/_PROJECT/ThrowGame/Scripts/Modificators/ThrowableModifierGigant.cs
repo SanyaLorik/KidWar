@@ -16,12 +16,11 @@ public class ThrowableModifierGigant : IThrowableModifier {
     }
 
     public void ExtensionBehaviour() {
-        ThrowableObject.transform.DOScale(_scaling, _duration)
+        ThrowableObject.PointToFollow.transform.DOScale(_scaling, _duration)
             .SetEase(_ease);
     }
-    
+
     public void OnPlayerContact() { }
-    
 
 
     public void CalculatePose(float elapsedTime) {

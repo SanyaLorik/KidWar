@@ -15,6 +15,8 @@ public class ThrowInstaller : MonoInstaller {
         Container.Bind<ModifierManager>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<BonusManager>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<BonusesLoader>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<ThrowObjectsIniter>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<BattleInformator>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 
 

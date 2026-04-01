@@ -16,8 +16,9 @@ public class ThrowableModifierGigant : IThrowableModifier {
     }
 
     public void ExtensionBehaviour() {
-        ThrowableObject.PointToFollow.transform.DOScale(_scaling, _duration)
-            .SetEase(_ease);
+        ThrowableObject.transform.DOScale(_scaling, _duration)
+            .SetEase(_ease)
+            .SetUpdate(UpdateType.Fixed);
     }
 
     public void OnPlayerContact() { }

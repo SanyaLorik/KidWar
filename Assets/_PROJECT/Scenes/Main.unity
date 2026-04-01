@@ -10272,37 +10272,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 846283726500613230, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 846283726500613230, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 3127794887736637378, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4343414195835875579, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
       propertyPath: m_Name
       value: Playground
-      objectReference: {fileID: 0}
-    - target: {fileID: 4343414195835875579, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7015306905465675791, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 7015306905465675791, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 5.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 7315791491920274858, guid: 97dd70a5ec067624ba81c12446c68854, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

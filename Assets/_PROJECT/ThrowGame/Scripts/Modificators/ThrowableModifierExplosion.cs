@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 [Serializable]
 public class ThrowableModifierExplosion : IThrowableModifier {
@@ -23,9 +24,10 @@ public class ThrowableModifierExplosion : IThrowableModifier {
     }
 
     private void Explode() {
-        ThrowableObject.PointToFollow.transform.DOScale(_scaling, exposionDuration)
+        ThrowableObject.transform.DOScale(_scaling, exposionDuration)
             .SetEase(_ease)
-            .OnComplete(ThrowableObject.Destroy);
+            .SetUpdate(UpdateType.Fixed)
+            .OnComplete(() => Object.Destroy(ThrowableObject.gameObject));
     }
 
     public void OnPlayerContact() {

@@ -7,7 +7,6 @@ using SanyaBeerExtension;
 using UnityEngine;
 
 public class ThrowableObject : MonoBehaviour {
-    [field: SerializeField] public Transform PointToFollow { get; private set; }
     [SerializeField] private Ease _destroyEase;
     [SerializeField] private DOTweenAnimationBase _animation;
     [SerializeField] private Rigidbody _rb;
@@ -16,7 +15,6 @@ public class ThrowableObject : MonoBehaviour {
     [SerializeField] private float _timeToDestroy;
     [SerializeField] private float _destroySpeed;
     [SerializeField] private float _rotationForceAfterFall = -10f;
-    [field: SerializeField] public int Force { get; private set; }
 
     [field: Header("Игровая информация")]
     [field: SerializeField] public InfoThrowableObject Info { get; private set; }
@@ -35,6 +33,8 @@ public class ThrowableObject : MonoBehaviour {
     public float FlightDurationToEnemy { get; private set; }
     public float Height { get; private set; }
     public AnimationCurve ThrowCurve { get; private set; }
+
+    public Transform PointToFollow => transform;
     
     
     /// <summary>
@@ -42,18 +42,18 @@ public class ThrowableObject : MonoBehaviour {
     /// </summary>
     private bool _contactPlayer;
     
-    public void TriggerCheck(Collider collider) {
+    public void OnTriggerEnter(Collider collider) {
         if(!collider.TryGetComponent(out IDamageable player) || _contactPlayer) return;
         if (_modifier != null) {
             _modifier.OnPlayerContact();
             StartDestroyTimer(true);
         }
-        player.TakeDamage(Force);
+        player.TakeDamage(Info.Damage);
         _contactPlayer = true;
     }
     
     
-    public void CollisionCheck(Collision other) {
+    public void OnCollisionEnter(Collision other) {
         StartDestroyTimer(true);
         if (!other.gameObject.TryGetComponent(out ObjectThrower _) && !_ignoreColliders) {
             // Об землю ударилось, сё низя урон наносить
@@ -136,6 +136,9 @@ public class ThrowableObject : MonoBehaviour {
         Debug.Log($"Смена FlightDuration с {FlightDuration} на {duration}");
         FlightDuration =  duration;
     }
+    
+    
+    
     
 
     public void Destroy() {

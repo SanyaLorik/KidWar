@@ -1,11 +1,14 @@
 using Architecture_M;
+using LuringPlayer_M;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [Serializable]
-public class GameSave : GameSaveBase {
+public class GameSave : GameSaveBase,
+    IDailyRewardSaveLoader
+{
     public long Money;
     public bool IsBoughtPurchase = false;
     
@@ -15,8 +18,10 @@ public class GameSave : GameSaveBase {
     
     // Bonuses
     public List<BonuseItem> Bonuses = new ();
-    
-    
+
+    // Daily Rewards
+    public DailyRewardSave DailyRewardSave;
+
     public void AddNewSkin(string id) {
         if(Skins.Any(s => s.Id == id)) return;
         Skins.Add(new SkinItem {
@@ -53,6 +58,11 @@ public class GameSave : GameSaveBase {
         else {
             Debug.LogError("У игрока нет такого бонуса, ошибка в коде");
         }
+    }
+
+    public DailyRewardSave Load()
+    {
+        return DailyRewardSave;
     }
 }
 

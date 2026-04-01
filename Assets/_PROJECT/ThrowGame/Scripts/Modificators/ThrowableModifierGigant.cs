@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -16,6 +17,12 @@ public class ThrowableModifierGigant : IThrowableModifier {
     }
 
     public void ExtensionBehaviour() {
+        GiantBeingAsync().Forget();
+    }
+
+
+    private async UniTask GiantBeingAsync() {
+        await UniTask.WaitForSeconds(1f);
         ThrowableObject.transform.DOScale(_scaling, _duration)
             .SetEase(_ease)
             .SetUpdate(UpdateType.Fixed);

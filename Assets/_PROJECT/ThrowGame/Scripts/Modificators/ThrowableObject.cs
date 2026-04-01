@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using _PROJECT.Scripts.Helpers;
 using Architecture_M;
@@ -10,6 +11,7 @@ public class ThrowableObject : MonoBehaviour {
     [SerializeField] private Ease _destroyEase;
     [SerializeField] private DOTweenAnimationBase _animation;
     [SerializeField] private Rigidbody _rb;
+    [SerializeField] private List<Collider> _colliders;
     
     [Header("Анимация удаления")]
     [SerializeField] private float _timeToDestroy;
@@ -86,12 +88,24 @@ public class ThrowableObject : MonoBehaviour {
         _elapsedTime = 0f;
         Debug.Log($"TargetPos = {TargetPos}, модификатор: {_modifier.GetType()}");
         _modifier.ExtensionBehaviour();
+        _colliders.ForEach(c => c.enabled = false);
+        SetStateCollidersAsync(true).Forget();
         while (!token.IsCancellationRequested && _elapsedTime < FlightDuration && !_contactPlayer) {
             _elapsedTime += Time.deltaTime;
             _modifier.CalculatePose(_elapsedTime); 
             await UniTask.WaitForFixedUpdate();
         }
         StartDestroyTimer(true);
+    }
+    
+    
+    /// <summary>
+    /// Подождать пока коллайдер типа не будет задевать ничего
+    /// </summary>
+    /// <param name="state"></param>
+    private async UniTask SetStateCollidersAsync(bool state) {
+        await UniTask.WaitForSeconds(.7f);
+        _colliders.ForEach(c => c.enabled = state);
     }
     
 

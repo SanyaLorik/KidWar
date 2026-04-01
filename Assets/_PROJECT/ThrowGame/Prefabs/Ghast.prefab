@@ -79,10 +79,12 @@ MonoBehaviour:
   _destroyEase: 26
   _animation: {fileID: 1298811877278385144}
   _rb: {fileID: -6019317019176728663}
+  _colliders:
+  - {fileID: 5587626227446852492}
+  - {fileID: 6056368932035272531}
   _timeToDestroy: 5
   _destroySpeed: 0.5
   _rotationForceAfterFall: -10
-  <Force>k__BackingField: 2
   <Info>k__BackingField:
     <Icon>k__BackingField: {fileID: 21300000, guid: 0c2fa39cd33a77641994cc65ca79324a, type: 3}
     <Damage>k__BackingField: 5

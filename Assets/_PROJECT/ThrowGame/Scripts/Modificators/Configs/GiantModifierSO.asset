@@ -21,6 +21,6 @@ MonoBehaviour:
     - rid: 8231486814680514642
       type: {class: ThrowableModifierGigant, ns: , asm: Assembly-CSharp}
       data:
-        _scaling: 5
-        _duration: 1
+        _scaling: 7
+        _duration: 2
         _ease: 30

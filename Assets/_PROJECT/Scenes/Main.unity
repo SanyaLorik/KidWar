@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
-  _chanceToBeatPlayer: 0.4
+  _chanceToBeatPlayer: 1
   _delayBeforeUseModifier:
     <From>k__BackingField: 0.7
     <To>k__BackingField: 1.5
@@ -342,16 +342,16 @@ MonoBehaviour:
   _modifierValues:
   - Item:
       rid: 8231486814680514627
-    Weight: 0.059
+    Weight: 0
   - Item:
       rid: 8231486814680514628
-    Weight: 0.172
+    Weight: 0
   - Item:
       rid: 8231486814680514629
-    Weight: 0.377
+    Weight: 0.685
   - Item:
       rid: 8231486814680514630
-    Weight: 0.608
+    Weight: 0.765
   references:
     version: 2
     RefIds:
@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
-  _chanceToBeatPlayer: 0.4
+  _chanceToBeatPlayer: 1
   _delayBeforeUseModifier:
     <From>k__BackingField: 0.7
     <To>k__BackingField: 1.5

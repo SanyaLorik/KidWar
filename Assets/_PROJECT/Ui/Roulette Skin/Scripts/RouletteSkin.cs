@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class RouletteSkin : MonoBehaviour
 {
-    [SerializeField] private int _count;
+    [SerializeField] private int _spinCount;
     [SerializeField] private float _duration;
-    [SerializeField] private AnimationCurve _behaviour;
+    [SerializeField] private AnimationCurve _behaviourCurve;
     [SerializeField] private RectTransform _rect;
     [SerializeField] private RectTransform[] _items;
 
-    private float _spacing;
-
     private void Start()
     {
-        _spacing = _items[1].anchoredPosition.x - _items[0].anchoredPosition.x;
-
         SpinAsync().Forget();
     }
 
@@ -32,18 +28,33 @@ public class RouletteSkin : MonoBehaviour
     {
         float expendedTime = 0;
 
+        float spacing = _items[1].anchoredPosition.x - _items[0].anchoredPosition.x;
         float borderX = _rect.anchoredPosition.x + _rect.rect.width;
-        float replaceX = borderX + _spacing;
+        float replaceX = borderX + spacing;
+
+        float distance = (_items[^1].anchoredPosition.x + spacing) - _items[0].anchoredPosition.x;
+        float totalDistance = distance * _spinCount;
+
+        print("distance " + distance);
+        print("totalDistance " + totalDistance);
+
+        float previousDistance = 0;
 
         do
         {
+            float lerpTime = expendedTime / _duration;
+            float evaluated = _behaviourCurve.Evaluate(lerpTime);
+            float currentDistance = Mathf.Lerp(0, totalDistance, evaluated);
+            float xOffset = currentDistance - previousDistance;
+            previousDistance = currentDistance;
+
             for (int i = 0; i < _items.Length; i++)
             {
-                _items[i].anchoredPosition = _items[i].anchoredPosition.AddX(200 * Time.deltaTime);
+                _items[i].anchoredPosition = _items[i].anchoredPosition.AddX(xOffset);
 
                 if (replaceX < _items[i].anchoredPosition.x)
                 {
-                    _items[i].anchoredPosition = _items[0].anchoredPosition.AddX(-_spacing);
+                    _items[i].anchoredPosition = _items[0].anchoredPosition.AddX(-spacing);
                     ShiftArray();
                 }
             }

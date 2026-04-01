@@ -17,7 +17,10 @@ public class ThrowableObject : MonoBehaviour {
     [SerializeField] private float _destroySpeed;
     [SerializeField] private float _rotationForceAfterFall = -10f;
     [field: SerializeField] public int Force { get; private set; }
-    
+
+    [field: Header("Игровая информация")]
+    [field: SerializeField] public InfoThrowableObject Info { get; private set; }
+
     private IThrowableModifier _modifier;
     private CancellationTokenSource _token;
     private bool _ignoreColliders;

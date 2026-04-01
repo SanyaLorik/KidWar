@@ -11,9 +11,9 @@ public class RouletteSkinItem : MonoBehaviour
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _damageText;
 
-    public void SetInfo(Sprite icon, int damage)
+    public void SetInfo(InfoThrowableObject infoThrowableObject)
     {
-        _icon.sprite = icon;
-        _damageText.text = damage.ToString();
+        _icon.sprite = infoThrowableObject.Icon;
+        _damageText.text = infoThrowableObject.Damage.ToString();
     }
 }

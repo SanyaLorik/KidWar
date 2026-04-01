@@ -17,6 +17,7 @@ public class ThrowableModifierGigant : IThrowableModifier {
     }
 
     public void ExtensionBehaviour() {
+        ThrowableObject.SetIgnoreOtherColliders();
         GiantBeingAsync().Forget();
     }
 

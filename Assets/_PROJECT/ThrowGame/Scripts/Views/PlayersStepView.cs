@@ -9,15 +9,14 @@ public class PlayersStepView : MonoBehaviour {
     [Header("Большой")]
     [SerializeField] private Transform _playerStepBigContainer;
     [SerializeField] private Transform _enemyStepBigContainer;
-    [Header("Маленький")]
-    [SerializeField] private RectTransform _yourStepSmall;
-    [SerializeField] private RectTransform _enemyStepSmall;
     [Header("Настройка времени и анимаций")]
     [SerializeField] private PairedValue<Ease> _showBigEases;
     [SerializeField] private float _timeToShowBig;
     [SerializeField] private float _timeToHideBig;
     [SerializeField] private Ease _hideEase;
-
+    [Header("Маленький")]
+    [SerializeField] private RectTransform _yourStepSmall;
+    [SerializeField] private RectTransform _enemyStepSmall;
     
     public bool AnimationIsShowing { get; private set; }
 

@@ -17,10 +17,11 @@ MonoBehaviour:
     IsBoughtPurchase: 0
     Skins:
     - Id: creeper_skin
+    - Id: tits_skin
     SkinWearId: creeper_skin
     Bonuses:
     - Id: health_bonus
-      Count: 4
+      Count: 3
     - Id: shield_bonus
       Count: 5
     - Id: reset_bonus

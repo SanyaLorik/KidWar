@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using SanyaBeerExtension;
@@ -10,8 +11,8 @@ using Random = UnityEngine.Random;
 public class BotsMainManager : IInitializable, IDisposable {
     private readonly List<BotStateManager> _bots;
     private readonly List<SkinItemConfig> _skins;
-    private readonly PlayerStateManager _playerStateManager;
     private readonly GameData _gameData;
+    private readonly PlayerCopyBotController _playerCopyBot;
 
     
     private CancellationTokenSource _tokenSource;
@@ -19,14 +20,14 @@ public class BotsMainManager : IInitializable, IDisposable {
     private List<BotStateManager> _speakingBots = new();
 
     public BotsMainManager(List<BotStateManager> bots, 
-        PlayerStateManager playerStateManager, 
         GameData gameData, 
-        List<SkinItemConfig> skins) {
+        List<SkinItemConfig> skins,
+        PlayerCopyBotController playerCopyBot) 
+    {
         _bots = bots;
         _skins = skins;
         _gameData = gameData;
-        _playerStateManager = playerStateManager;
-        // Debug.Log("Bot count: " + _bots.Count);
+        _playerCopyBot = playerCopyBot;
     }
 
     
@@ -40,12 +41,22 @@ public class BotsMainManager : IInitializable, IDisposable {
         }
     }
     
-    public BotStateManager GetRandomBotToBattle() {
+    public void SetBotSkin(BotStateManager bot, string id) {
+        SkinItemConfig skin = _skins.Find(s => s.Id == id);
+        bot.SetBotSkin(skin);
+        bot.InitAnimator();
+    }
+    
+    public BotStateManager GetRandomBotToBattle(bool playerCopy) {
+        if (playerCopy) {
+            return _playerCopyBot.GetBotToBattle();
+        }
+        
         int countIters = 500;
         while (countIters > 0) {
             countIters--;
             var bot = _bots.GetRandomElement();
-            if (!bot.IsPlaying) {
+            if (!bot.IsPlaying && !bot.IsPlayerCopy) {
                 bot.SetPlayStatusSilent(true);
                 bot.ObjectThrower.SetNickname(bot.Nickname);
                 return bot;

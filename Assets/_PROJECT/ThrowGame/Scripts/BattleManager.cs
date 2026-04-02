@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using _PROJECT.Scripts.Helpers;
 using Cysharp.Threading.Tasks;
+using SanyaBeerExtension;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +19,9 @@ public class BattleManager : MonoBehaviour {
     
     [SerializeField] private Transform _rightCameraFocus;
     [SerializeField] private Transform _leftCameraFocus;
+    [SerializeField] private RouletteSkin _roulette;
+    
+    private ThrowableObject _newThrowableObjectInRoulette;
     
     public IThrowGamePlayer FirstThrower { get; private set; }
     public IThrowGamePlayer SecondThrower { get; private set; }
@@ -91,14 +95,14 @@ public class BattleManager : MonoBehaviour {
             GetReadyPlayer(_mainPlayer, true);
         }
         else {
-            FirstThrower = _botsMainManager.GetRandomBotToBattle();
+            FirstThrower = _botsMainManager.GetRandomBotToBattle(false);
             GetReadyPlayer(FirstThrower, true);
             // Это битва 2х ботов
             // - сделать аим у ботов 100%
         }
 
         // Второй игрок всегда ботяра, ток с настроенным поведением
-        SecondThrower = _botsMainManager.GetRandomBotToBattle();
+        SecondThrower = _botsMainManager.GetRandomBotToBattle(!secondPlayerBot);
         GetReadyPlayer(SecondThrower, false);
         
         
@@ -110,7 +114,7 @@ public class BattleManager : MonoBehaviour {
         SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
         
         
-        GoBattle(firstPlayerBot, secondPlayerBot).Forget();
+        GoBattle().Forget();
     }
 
     public void SetGameOver() {
@@ -135,12 +139,12 @@ public class BattleManager : MonoBehaviour {
     
 
 
-    private async UniTask GoBattle(bool firstPlayerBot, bool secondPlayerBot) {
+    private async UniTask GoBattle() {
         Debug.Log("GoBattle");
-        if (!firstPlayerBot) {
+        if (MainPlayerPlay) {
             FocusCamera(_leftCameraFocus);
             _startBattleView.StartBattleAnimation(); 
-            await UniTask.WaitWhile(() => _startBattleView.AnimationPlayNow);
+            await UniTask.WaitWhile(() => _startBattleView.AnimationPlayNow);            
         }        
         
         
@@ -158,6 +162,9 @@ public class BattleManager : MonoBehaviour {
 
     private async UniTask PlayerStepAsync(ObjectThrower thrower, Transform pointToCameraFocus, bool isFirstThrowerStep) {
         if(GameIsOver) return;
+        
+
+
         Debug.Log("NewPlayerTurn, BotTurnNow = " + !thrower.PlayerHandle);
         BotTurnNow = !thrower.PlayerHandle;
         // Анимация шага игрока
@@ -165,6 +172,10 @@ public class BattleManager : MonoBehaviour {
         if (MainPlayerPlay) {
             _playersStepView.ShowPlayerStep(isFirstThrowerStep);
             await UniTask.WaitWhile(() => _playersStepView.AnimationIsShowing);
+            await WaitThrowableObjectGet();
+        }
+        else {
+            _newThrowableObjectInRoulette = _throwObjectsIniter.GetRandomToyForBot;
         }
         IsFirstThrowerStep = isFirstThrowerStep;
         NewPlayerTurn?.Invoke();
@@ -184,6 +195,15 @@ public class BattleManager : MonoBehaviour {
         if (!thrower.PlayerHandle) {
             BotTurnNow = false;
         }
+    }
+
+    private async UniTask WaitThrowableObjectGet() {
+        _roulette.gameObject.ActiveSelf();
+        await UniTask.NextFrame();
+        _roulette.ResetItemPosition();
+        _roulette.FillRandomSkins();
+        _newThrowableObjectInRoulette = await _roulette.SpinAsync();
+        _roulette.gameObject.DisactiveSelf();
     }
 
 
@@ -221,7 +241,7 @@ public class BattleManager : MonoBehaviour {
         
         _throwerCalculator.ThrowNewObject(
             thrower.AngleToThrow, 
-            _throwObjectsIniter.GetRandomToy, 
+            _newThrowableObjectInRoulette, 
             thrower.ThrowPoint, enemyPoint
         );
         

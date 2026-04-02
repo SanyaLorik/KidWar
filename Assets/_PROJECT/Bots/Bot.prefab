@@ -109,6 +109,9 @@ MonoBehaviour:
   _skinInstance: {fileID: 7053059051747391328}
   _botCollider: {fileID: 839309783632820333}
   _thrower: {fileID: 8836954011182606223}
+  _botWander: {fileID: 1402330233937831249}
+  _botMonolog: {fileID: 7393878432037271427}
+  _agent: {fileID: 1212541108296832897}
 --- !u!1 &734268474806474848
 GameObject:
   m_ObjectHideFlags: 0

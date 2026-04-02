@@ -1,4 +1,5 @@
 using System.Collections;
+using SanyaBeerExtension;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,24 +17,23 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
     [SerializeField] private ObjectThrower _thrower;
     private Vector3 _posBeforeTeleport;
     
+    [SerializeField] private BotWander _botWander;
+    [SerializeField] private BotMonolog _botMonolog;
+    [SerializeField] private NavMeshAgent _agent;
     
-    private BotWander _botWander;
-    private BotMonolog _botMonolog;
     
     private IBotBehaviour _currentBotBehaviour;
-    private NavMeshAgent _agent;
 
     public bool IsPlaying { get; private set; }
     public string Nickname => _botMonolog.NickName;
     
     public BotState State { get; private set; }
     
+    public bool IsPlayerCopy { get; private set; }
+    
     public ObjectThrower ObjectThrower => _thrower;
 
     private void Awake() {
-        _botWander = GetComponent<BotWander>();
-        _botMonolog = GetComponent<BotMonolog>();
-        _agent = GetComponent<NavMeshAgent>();
         _botCollider.enabled = false;
         Destroy(_skinInstance);
     }
@@ -41,6 +41,7 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
     
     
     public void SetPlayStatus(bool goPlay) {
+        
         Debug.Log("SetPlayStatus: " + goPlay);
         Debug.Log("_posBeforeTeleport: " + _posBeforeTeleport);
         IsPlaying = goPlay;
@@ -57,7 +58,7 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
     }
 
     public void SetPlayStatusSilent(bool goPlay) {
-        IsPlaying =  goPlay;
+        IsPlaying = goPlay;
     }
 
 
@@ -79,16 +80,13 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
         }
     }
 
-    public void ReturnToWandering() {
-        
-    }
-
     private void Start() {
         ChangeBotState(BotState.Wandering);
     }
 
 
     public void ChangeBotState(BotState newState) {
+        if(IsPlayerCopy) return;
         _currentBotBehaviour?.Exit();
         
         State = newState;
@@ -106,13 +104,16 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
     }
 
 
-
+    private bool _previousBotState;
     public void InitAnimator() {
         _botAnimator.InitAnimator(_botWander);
     }
     public void SetBotSkin(SkinItemConfig skinItemConfig) {
+        _previousBotState = gameObject.activeSelf;
+        gameObject.ActiveSelf();
         StartCoroutine(ChangeSkinRoutine(skinItemConfig));
     }
+
     
     private IEnumerator ChangeSkinRoutine(SkinItemConfig skin) {
         if (_skinInstance != null) {
@@ -124,6 +125,19 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
         _skinInstance = Instantiate(skin.SkinPrefab, _skinParent);
         var skinItem = _skinInstance.GetComponent<SkinElementsController>();
         _botAnimator.SetModelData(skin.Avatar, skinItem);
+        gameObject.SetActive(_previousBotState);
+    }
+
+
+    
+    public void SetPlayerCopyBehavior() {
+        IsPlayerCopy = true;
+        _botMonolog.HideNickname();
+    }
+
+    public void EnableBot(bool state) {
+        _agent.enabled = state;
+        _agent.gameObject.SetActive(state);
     }
     
 

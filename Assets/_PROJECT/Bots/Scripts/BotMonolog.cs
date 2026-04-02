@@ -26,6 +26,9 @@ public class BotMonolog : MonoBehaviour {
         _botNicknameText.text = NickName;
     }
 
+    public void HideNickname() {
+        _botNicknameText.DisactiveSelf();
+    }
 
     public void SaySomething() {
         _monologCloud.ActiveSelf();

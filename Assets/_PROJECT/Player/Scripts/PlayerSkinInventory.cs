@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Architecture_M;
+using SanyaBeerExtension;
 using UnityEngine;
 using Zenject;
 
@@ -25,6 +26,10 @@ public class PlayerSkinInventory : IInitializable {
     
     public bool SkinIsBought(string id) 
         => _saver.GetSave<GameSave>().Skins.Any(s => s.Id == id);
+
+
+    public string GetRandomPlayerBoughtSkinId()
+        => _saver.GetSave<GameSave>().Skins.GetRandomElement().Id;
     
     
     public void UnlockSkin(SkinItemConfig skinItemConfig) {

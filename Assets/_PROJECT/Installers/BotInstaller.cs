@@ -7,6 +7,7 @@ public class BotInstaller: MonoInstaller {
     public override void InstallBindings() {
         BindBotStateManager();
         BindWalkPoints();
+        BindPlayerCopyBot();
     }
 
     private void BindBotStateManager() {
@@ -23,6 +24,13 @@ public class BotInstaller: MonoInstaller {
             .WithId("WalkPoints")
             .FromInstance(_pointsToWalk)
             .AsSingle().NonLazy();
+    }
+
+    private void BindPlayerCopyBot() {
+        Container.BindInterfacesAndSelfTo<PlayerCopyBotController>()
+            .FromComponentsInHierarchy()
+            .AsSingle()
+            .NonLazy();
     }
 
 }

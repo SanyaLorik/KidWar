@@ -33,7 +33,9 @@ public class BattleManager : MonoBehaviour {
     public bool MainPlayerPlay { get; private set; }
 
     public bool IsPvbMode => FirstThrower.ObjectThrower.PlayerHandle && !SecondThrower.ObjectThrower.PlayerHandle;
-    
+
+    public bool AllowToPlay { get; private set; }
+
     public event Action NewPlayerTurn;
 
     
@@ -47,6 +49,7 @@ public class BattleManager : MonoBehaviour {
     [Inject] StartBattleView _startBattleView;
     [Inject] PlayersStepView _playersStepView;
     [Inject] ThrowObjectsIniter _throwObjectsIniter;
+    [Inject] GameOverShower _gameOverShower;
 
     
     public int GetCurrentPlayerLifesCount() {
@@ -88,6 +91,7 @@ public class BattleManager : MonoBehaviour {
         Debug.Log("firstPlayerBot " + firstPlayerBot);
         Debug.Log("secondPlayerBot " + secondPlayerBot);
 
+        AllowToPlay = false;
         MainPlayerPlay = !firstPlayerBot;
 
         if (!firstPlayerBot) {
@@ -148,11 +152,17 @@ public class BattleManager : MonoBehaviour {
         }        
         
         
+        
         FirstThrower.ObjectThrower.SetAllowToThrow(false);
         SecondThrower.ObjectThrower.SetAllowToThrow(false);
         while(!GameIsOver) {
             await PlayerStepAsync(FirstThrower.ObjectThrower, _leftCameraFocus, true);
             await PlayerStepAsync(SecondThrower.ObjectThrower, _rightCameraFocus, false);
+        }
+
+        if (MainPlayerPlay) {
+            _gameOverShower.ShowResults();
+            await UniTask.WaitWhile(() => _gameOverShower.ResultWindowShowing);
         }
 
         SetSpawnState();
@@ -162,8 +172,6 @@ public class BattleManager : MonoBehaviour {
 
     private async UniTask PlayerStepAsync(ObjectThrower thrower, Transform pointToCameraFocus, bool isFirstThrowerStep) {
         if(GameIsOver) return;
-        
-
 
         Debug.Log("NewPlayerTurn, BotTurnNow = " + !thrower.PlayerHandle);
         BotTurnNow = !thrower.PlayerHandle;
@@ -177,6 +185,8 @@ public class BattleManager : MonoBehaviour {
         else {
             _newThrowableObjectInRoulette = _throwObjectsIniter.GetRandomToyForBot;
         }
+        
+        AllowToPlay = true;
         IsFirstThrowerStep = isFirstThrowerStep;
         NewPlayerTurn?.Invoke();
         _stepIsOver = false;
@@ -188,6 +198,7 @@ public class BattleManager : MonoBehaviour {
         
         thrower.Damageable.SetInvinsible(true);
         await UniTask.WaitUntil(() => _stepIsOver || GameIsOver);
+        AllowToPlay = false;
         thrower.Damageable.SetInvinsible(false);
         
         

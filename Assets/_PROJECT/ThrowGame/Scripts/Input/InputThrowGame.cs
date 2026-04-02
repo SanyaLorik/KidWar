@@ -26,7 +26,7 @@ public class InputThrowGame : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if(_battleManager.BotTurnNow) return;
+        if(_battleManager.BotTurnNow || !_battleManager.AllowToPlay) return;
         UniTaskHelper.DisposeTask(ref _tokenSource);
         if (_chargeTime >= _requiredHoldTime) {
             OnUpped?.Invoke();
@@ -36,7 +36,7 @@ public class InputThrowGame : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(_battleManager.BotTurnNow) return;
+        if(_battleManager.BotTurnNow || !_battleManager.AllowToPlay) return;
         // Нажал хуем на экран
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();
@@ -46,7 +46,7 @@ public class InputThrowGame : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     
     public void OnDrag(PointerEventData eventData)
     {
-        if(_battleManager.BotTurnNow) return;
+        if(_battleManager.BotTurnNow || !_battleManager.AllowToPlay) return;
         DragDelta = eventData.delta;
         OnDragged?.Invoke(DragDelta);
     }

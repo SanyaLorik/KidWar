@@ -43,6 +43,7 @@ public class ModifierManager : MonoBehaviour {
 
     public void TrySetModifier(IThrowableModifier modifier, ModifierChanger modifierChanger) {
         if(_battleManager.MainPlayerPlay && _battleManager.BotTurnNow) return;
+        if(!_battleManager.AllowToPlay) return;
         // Проверка на соответствие игрока и запроса
         if (IsLeftPlayerModifier(modifierChanger)) {
             if (_battleManager.IsFirstThrowerStep == true) {

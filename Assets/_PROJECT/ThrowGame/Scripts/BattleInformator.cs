@@ -52,7 +52,7 @@ public class BattleInformator : MonoBehaviour {
         }
     }
 
-    private string GetWinnerName() {
+    public string GetWinnerName() {
         string winnerName = 
             _battleManager.IsFirstThrowerStep  
             ?

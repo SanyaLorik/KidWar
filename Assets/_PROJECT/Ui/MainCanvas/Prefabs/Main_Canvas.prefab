@@ -12107,7 +12107,7 @@ GameObject:
   - component: {fileID: 385831092975871342}
   - component: {fileID: 4761575839083146192}
   m_Layer: 0
-  m_Name: 'Contrinue '
+  m_Name: ContinueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

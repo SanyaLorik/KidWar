@@ -46,6 +46,7 @@ public class BonusManager : MonoBehaviour {
     }
 
     private void TryUseBonus(IBonus bonus, BonusChanger bonusChanger) {
+        if(!_battleManager.AllowToPlay) return;
         Debug.Log("_battleManager.IsFirstThrowerStep = " + _battleManager.IsFirstThrowerStep);
         Debug.Log("IsLeftPlayerBonus(bonusChanger) = " + IsLeftPlayerBonus(bonusChanger));
         //  Вызвал свой бонус в свой ход левый игрок

@@ -19,20 +19,10 @@ public class ThrowableModifierAim : IThrowableModifier {
     
     public void CalculatePose(float elapsedTime) {
         float progress = elapsedTime / ThrowableObject.FlightDurationToEnemy;
-        
-        if (progress < _percentageToStart) {
-            Vector3 newPos = Vector3.Lerp(ThrowableObject.InitialPos, ThrowableObject.TargetPos, progress);
-            float currentHeight = ThrowableObject.Height * ThrowableObject.ThrowCurve.Evaluate(progress);
-            newPos.y += currentHeight;
-            // ThrowableObject.transform.position = newPos;
-            ThrowableObject.Rb.MovePosition(newPos);
-        }
-        else {
-            Vector3 newPos = Vector3.Lerp(ThrowableObject.InitialPos, ThrowableObject.EnemyPose, progress);
-            float currentHeight = ThrowableObject.Height * ThrowableObject.ThrowCurve.Evaluate(progress);
-            newPos.y += currentHeight;
-            // ThrowableObject.transform.position = newPos;
-            ThrowableObject.Rb.MovePosition(newPos);
-        }
+        Vector3 newPos = Vector3.Lerp(ThrowableObject.InitialPos, ThrowableObject.EnemyPose, progress);
+        float currentHeight = ThrowableObject.Height * ThrowableObject.ThrowCurve.Evaluate(progress);
+        newPos.y += currentHeight;
+        // ThrowableObject.transform.position = newPos;
+        ThrowableObject.Rb.MovePosition(newPos);
     }
 }

@@ -40,6 +40,7 @@ public class GameSave : GameSaveBase,
             return;
         }
         bonus.Count += count;
+        Debug.Log($"Added {count} bonus: {bonus.GetType()}");
     }
 
     public int GetBonusCount(string id) {

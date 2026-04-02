@@ -13,6 +13,9 @@ public class DelayedTrigger : MonoBehaviour {
     
     private CancellationTokenSource _tokenSource;
 
+    private void Start() {
+        _progress.fillAmount = 1f;
+    }
 
     public void DelayedTriggerAction(Action action) {
         _tokenSource?.Cancel();

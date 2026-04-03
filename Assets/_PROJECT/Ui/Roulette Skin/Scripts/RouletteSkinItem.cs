@@ -9,6 +9,7 @@ public class RouletteSkinItem : MonoBehaviour
 
     [field: Header("View")]
     [SerializeField] private Image _icon;
+    [SerializeField] private Image _rare;
     [SerializeField] private TextMeshProUGUI _damageText;
 
     [field: Header("Debug")]
@@ -18,6 +19,7 @@ public class RouletteSkinItem : MonoBehaviour
     {
         _icon.sprite = infoThrowableObject.Icon;
         _damageText.text = infoThrowableObject.Damage.ToString();
+        _rare.color = infoThrowableObject.RareColor;
     }
 
     public void StorePosition()

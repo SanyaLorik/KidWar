@@ -89,6 +89,7 @@ MonoBehaviour:
     <Icon>k__BackingField: {fileID: 21300000, guid: b62d7dd456c5732468663ba679d7c1b2, type: 3}
     <Damage>k__BackingField: 1
     <DropChance>k__BackingField: 0.5
+    <RareColor>k__BackingField: {r: 0.29063714, g: 1, b: 0, a: 1}
 --- !u!114 &1298811877278385144
 MonoBehaviour:
   m_ObjectHideFlags: 0

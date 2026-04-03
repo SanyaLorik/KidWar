@@ -52,7 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RouletteSkinItem
   <Rect>k__BackingField: {fileID: 8264760449999593304}
   _icon: {fileID: 4903970284591585179}
+  _rare: {fileID: 5878934462143326834}
   _damageText: {fileID: 7532126595859646447}
+  <InitialPosition>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!1 &1928467272955380435
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.71732825, b: 0.45882356, a: 1}
+  m_Color: {r: 1, g: 0.9479376, b: 0.23137254, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

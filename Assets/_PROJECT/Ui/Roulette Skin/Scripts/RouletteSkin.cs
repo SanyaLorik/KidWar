@@ -22,13 +22,30 @@ public class RouletteSkin : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] private RectTransform _rect;
+    [SerializeField] private RectTransform _finish;
 
-    [ContextMenu("Spin")]
-    private void SpinInInspector()
+    private float _spacing;
+    private float _distance;
+
+    private void Awake()
     {
-        ResetItemPosition();
-        FillRandomSkins();
-        SpinAsync().Forget();
+        _spacing = _items[1].Rect.anchoredPosition.x - _items[0].Rect.anchoredPosition.x;
+        _distance = (_items[^1].Rect.anchoredPosition.x + _spacing) - _items[0].Rect.anchoredPosition.x;
+
+        _items.ForEach(i => i.StorePosition());
+
+        //UniTask.Create(async () =>
+        //{
+        //    while (destroyCancellationToken.IsCancellationRequested == false)
+        //    {
+        //        FillRandomSkins();
+        //        await SpinAsync();
+
+        //        ResetItemPositions();
+
+        //        await UniTask.Delay(2000);
+        //    }
+        //});
     }
 
     public async UniTask<ThrowableObject> SpinAsync()
@@ -39,13 +56,11 @@ public class RouletteSkin : MonoBehaviour
 
         float expendedTime = 0;
 
-        float spacing = _items[1].Rect.anchoredPosition.x - _items[0].Rect.anchoredPosition.x;
-        float borderX = _rect.anchoredPosition.x + _rect.rect.width;
-        float replaceX = borderX + spacing;
+        float randomOffset = _distance * UnityEngine.Random.Range(_spinRangePercent.From, _spinRangePercent.To);
+        float totalDistance = _distance * _spinCount + randomOffset;
 
-        float distance = (_items[^1].Rect.anchoredPosition.x + spacing) - _items[0].Rect.anchoredPosition.x;
-        float randomOffset = distance * UnityEngine.Random.Range(_spinRangePercent.From, _spinRangePercent.To);
-        float totalDistance = distance * _spinCount + randomOffset;
+        print("_distance: " + _distance);
+        print("totalDistance: " + totalDistance);
 
         float previousDistance = 0;
 
@@ -62,13 +77,14 @@ public class RouletteSkin : MonoBehaviour
             {
                 _items[i].Rect.anchoredPosition = _items[i].Rect.anchoredPosition.AddX(xOffset);
 
-                if (replaceX < _items[i].Rect.anchoredPosition.x)
+                if (_finish.anchoredPosition.x <= _items[i].Rect.anchoredPosition.x)
                 {
-                    _items[i].Rect.anchoredPosition = _items[0].Rect.anchoredPosition.AddX(-spacing);
-                    ShiftArray();
-                    ChangeInfoAtFirstItem();
+                    int indexNextItem = (i + 1) % _items.Length;
+                    _items[i].Rect.anchoredPosition = _items[indexNextItem].Rect.anchoredPosition.AddX(-_spacing);
 
-                    bool isLastSpin = (totalDistance - currentDistance) <= distance;
+                    ChangeInfo(_items[i]);
+
+                    bool isLastSpin = (totalDistance - currentDistance) <= _distance;
                     if (isLastSpin)
                         _selectedItem.SetInfo(throwableObject.Info);
                 }
@@ -94,23 +110,13 @@ public class RouletteSkin : MonoBehaviour
 
     public void ResetItemPosition()
     {
-        _items.ForEach(i => i.Rect.anchoredPosition = i.InitialPosition);
+        _items.ForEach(i => i.ResetPosition());
     }
 
-    private void ShiftArray()
-    {
-        RouletteSkinItem last = _items[^1];
-        for (int i = _items.Length - 1; i >= 1; i--)
-            _items[i] = _items[i - 1];
-
-        _items[0] = last;
-    }
-
-    private void ChangeInfoAtFirstItem()
+    private void ChangeInfo(RouletteSkinItem rouletteSkinItem)
     {
         InfoThrowableObject randomInfo = _infoThrowableObjects.GetRandomElement().Info;
-        RouletteSkinItem item = _items[0];
-        item.SetInfo(randomInfo);
+        rouletteSkinItem.SetInfo(randomInfo);
     }
 
     private ThrowableObject GetRandomThrowableObjectByChance()

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameDataSO
   <Data>k__BackingField:
     <MinimumDelaySave>k__BackingField: 1
-    <InterstitialAdStartDelay>k__BackingField: 70
-    <InterstitialDelay>k__BackingField: 70
+    <InterstitialAdStartDelay>k__BackingField: 80
+    <InterstitialDelay>k__BackingField: 80
     <AdTimerInitial>k__BackingField: 2
     <AdTimerFinal>k__BackingField: 0
     <WalkSpeed>k__BackingField: 10

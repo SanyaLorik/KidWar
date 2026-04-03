@@ -9,6 +9,7 @@ using UnityEngine;
 public class ThrowableModifierGigant : IThrowableModifier {
     [SerializeField] private float _scaling = 4f;
     [SerializeField] private float _duration = 1f;
+    [SerializeField] private float _durationBeforeScaling = 1f;
     [SerializeField] private Ease _ease = Ease.OutBounce;
     public ThrowableObject ThrowableObject { get; private set; }
 
@@ -23,7 +24,7 @@ public class ThrowableModifierGigant : IThrowableModifier {
 
 
     private async UniTask GiantBeingAsync() {
-        await UniTask.WaitForSeconds(1f);
+        await UniTask.WaitForSeconds(_durationBeforeScaling);
         ThrowableObject.transform.DOScale(_scaling, _duration)
             .SetEase(_ease)
             .SetUpdate(UpdateType.Fixed);

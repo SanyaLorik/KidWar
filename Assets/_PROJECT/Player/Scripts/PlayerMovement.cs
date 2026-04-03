@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
     [Inject] private IInputJumping _inputJumping;
     [Inject] private GameData _gameData;
     [Inject] private PlayerStateManager _stateManager;
-    [Inject] private IInterstitialDelaying _interstitialDelaying;
+    [Inject] private AdvTimerStarter _advTimerStarter;
     
     // Для гравитации и прыжков
     private float _verticalVelocity;
@@ -85,12 +85,12 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
         if (!goPlay) {
             TpInPoint(_spawnPoint.position);
             _inputActivity.Enable();
-            _interstitialDelaying.EnableTimer();
+            _advTimerStarter.EnableTimer();
             SetCharacterControllerState(true);
             IsPlaying = false;
         }
         else {
-            _interstitialDelaying.DisableTimer();
+            _advTimerStarter.DisableTimer();
             _inputActivity.Disable();
             if (_controllerOffRoutine != null) {
                 StopCoroutine(_controllerOffRoutine);

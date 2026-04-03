@@ -30,6 +30,7 @@ public class BonusShopView : MonoBehaviour {
     
     [Inject] private BonusManager _bonusManager;
     [Inject] private IGameSave _save;
+    [Inject] private AdvTimerStarter _advTimerStarter;
     
     
     private void OnEnable() {
@@ -53,11 +54,13 @@ public class BonusShopView : MonoBehaviour {
     private void OnTriggerEnter(Collider collider) {
         if(!collider.TryGetComponent(out PlayerMovement _)) return;
         _trigger.DelayedTriggerAction(OpenBonusCanvasAnimation);
+        _advTimerStarter.DisableTimer();
     }
     
     private void OnTriggerExit(Collider collider) {
         if(!collider.TryGetComponent(out PlayerMovement _)) return;
         _trigger.CancelTriggerAction();
+        _advTimerStarter.EnableTimer();
     }
 
     private void OpenBonusCanvasAnimation() {

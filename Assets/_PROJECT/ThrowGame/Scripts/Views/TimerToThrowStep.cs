@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using _PROJECT.Scripts.Helpers;
 using Cysharp.Threading.Tasks;
+using SanyaBeerExtension;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -10,6 +11,7 @@ public class TimerToThrowStep : MonoBehaviour {
     [SerializeField] private RectTransform _progress;
     [SerializeField] private RectTransform _progressParent;
     [SerializeField] private TextMeshProUGUI _timerText;
+    [SerializeField] private GameObject _timer;
     
     
     public event Action TimeIsOver;
@@ -17,8 +19,14 @@ public class TimerToThrowStep : MonoBehaviour {
     private CancellationTokenSource _tokenSource;
 
     [Inject] private LocalizationData _localization;
-    
+
+    private void Start() {
+        _timer.DisactiveSelf();
+    }
+
+
     public void StartTimer(int time) {
+        _timer.ActiveSelf();
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();
         StartTimerAsync(time, _tokenSource.Token).Forget();
@@ -27,6 +35,7 @@ public class TimerToThrowStep : MonoBehaviour {
 
     public void StopTimer() {
         UniTaskHelper.DisposeTask(ref _tokenSource);
+        _timer.DisactiveSelf();
     }
     
 

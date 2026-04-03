@@ -22,6 +22,7 @@ public class ThrowGameStarter : MonoBehaviour  {
 
     [Inject] private BattleManager _battleManager;
     [Inject] private LocalizationData _localization;
+    [Inject] private AdvTimerStarter _advTimerStarter;
 
     private bool _afkPressed;
     private bool _startGamePressed;
@@ -31,7 +32,9 @@ public class ThrowGameStarter : MonoBehaviour  {
     public event Action<bool> GameStarted;
     private bool _firstPlayerBot;
     private bool _secondPlayerBot = true;
+    public bool FirstPlayerBot => _firstPlayerBot;
 
+    
     public bool GameIsStarted { get; private set; }
     
     
@@ -91,12 +94,17 @@ public class ThrowGameStarter : MonoBehaviour  {
         StartTimer(.1f);
     }
     
-    public void ChangeAfkStatus(bool state) {
+    public void ChangeAfkStatus(bool afk) {
         Debug.Log("ChangeAfkStatus");
-        _afkPressed = state;
+        _afkPressed = afk;
         _firstPlayerBot = _afkPressed;
         _secondPlayerBot = true;
         _afkStatusText.SetActive(_afkPressed);
+        // Ушел в афк врубаем таймер
+        if (afk) {
+            _advTimerStarter.EnableTimer();
+        }
+
     }
     
 
@@ -108,6 +116,10 @@ public class ThrowGameStarter : MonoBehaviour  {
     private void StartTimer(float time) {
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();
+        // Таймер стартанул где игрок будет играть, вырубаем таймер нахуй
+        if (!_afkPressed) {
+            _advTimerStarter.DisableTimer();
+        }
         NewGameTimer(time, _tokenSource.Token).Forget();
     }
     

@@ -1,35 +1,56 @@
 ﻿using System.Collections;
+using System.Threading;
+using _PROJECT.Scripts.Helpers;
 using Architecture_M;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
 public class AdvTimerStarter : MonoBehaviour {
-    // [Inject] private TutorialCompiller _tutorialCompiller;
+    [SerializeField] private float _timeToWait = 3f;
+
+    
     [Inject] private PlayerStateManager _stateManager;
     [Inject] private IInterstitialDelaying  _interstitialDelaying;
     [Inject] private BattleManager  _battleManager;
+    [Inject] private ThrowGameStarter  _throwGameStarter;
 
+    private void OnEnable() {
+        SystemEvents.WindowOpened += OnWindowOpened;
+    }
     
-    private Coroutine _timerCoroutine;
-    public void EnableTimer() {
-        if (_timerCoroutine != null) {
-            StopCoroutine(_timerCoroutine);
+    private void OnDisable() {
+        SystemEvents.WindowOpened -= OnWindowOpened;
+    }
+
+    private void OnWindowOpened(bool open) {
+        if (open) {
+            DisableTimer();
         }
-        _timerCoroutine =  StartCoroutine(EnableTimerAsync());
+        else {
+            EnableTimer();
+        }
+    }
+
+    private CancellationTokenSource _tokenSource;
+    public void EnableTimer() {
+        UniTaskHelper.DisposeTask(ref _tokenSource);
+        _tokenSource = new CancellationTokenSource();
+        EnableTimerAsync(_tokenSource.Token).Forget();
     }
 
     public void DisableTimer() {
-        if (_timerCoroutine != null) {
-            StopCoroutine(_timerCoroutine);
-        }
+        UniTaskHelper.DisposeTask(ref _tokenSource);
         _interstitialDelaying.DisableTimer();
-
+        Debug.Log("DisableTimer");
     }
     
-    private IEnumerator EnableTimerAsync() {
-        yield return new WaitForSeconds(3f);
-        if (!_battleManager.MainPlayerPlay) {
+    private async UniTask EnableTimerAsync(CancellationToken token) {
+        await UniTask.WaitForSeconds(_timeToWait, cancellationToken: token);
+        // Условие на непоказ рекламы например если играет или если туториал
+        if (_throwGameStarter.FirstPlayerBot) {
             _interstitialDelaying.EnableTimer();
+            Debug.Log("EnableTimer");
         }
     }
 }

@@ -35,3 +35,7 @@ MonoBehaviour:
   TaskTranslates:
   - <Id>k__BackingField: 0
     name: Hit enemy {0} times.
+  DailyReward:
+    <ShowAsAllowReceive>k__BackingField: Get
+    <ShowAsReceived>k__BackingField: Gotten
+    <ShowAsBlockedForReceive>k__BackingField: Soon...

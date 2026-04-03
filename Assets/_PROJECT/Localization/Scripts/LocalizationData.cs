@@ -1,10 +1,12 @@
+using Architecture_M;
+using LuringPlayer_M;
 using System;
 using System.Collections.Generic;
-using Architecture_M;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Architecture_M/Localization/Localization Data")]
-public class LocalizationData : LocalizationDataBase
+public class LocalizationData : LocalizationDataBase,
+    IDailyRewardLocalization
 {
     [Header("Для  больших чисел")]
     public string[] Suffixies = {"", "K", "M", "B", "T", "Кв", "Ка"};
@@ -19,10 +21,11 @@ public class LocalizationData : LocalizationDataBase
     
     // LISTS
     public List<TaskTranslate> TaskTranslates;
-    
-    
-    
-    
+
+    public DailyRewardLocaliation DailyReward;
+
+    DailyRewardLocaliation IDailyRewardLocalization.DailyReward => DailyReward;
+
     public string GetTranslatedName<TId, TItem>(TId id, IEnumerable<TItem> arr)
         where TItem : IIdName<TId>
     {

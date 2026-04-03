@@ -32,3 +32,6 @@ MonoBehaviour:
   Enemy: Enemy
   PlayerHit: '{0} scores! '
   PlayerWinner: '{0} wins! '
+  TaskTranslates:
+  - <Id>k__BackingField: 0
+    name: Hit enemy {0} times.

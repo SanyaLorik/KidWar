@@ -7,7 +7,6 @@ public class PlayerInstaller : MonoInstaller {
     [SerializeField] private List<SkinItemConfig> _skinItemConfigs;
 
     
-    
     public override void InstallBindings() {
         BindPlayerSingletones();
         BindPlayerSkin();
@@ -16,6 +15,7 @@ public class PlayerInstaller : MonoInstaller {
     private void BindPlayerSingletones() {
         Container.BindInterfacesAndSelfTo<PlayerMovement>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<PlayerStateManager>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<PlayerBank>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
     
     private void BindPlayerSkin() {
@@ -32,4 +32,5 @@ public class PlayerInstaller : MonoInstaller {
             .NonLazy();
         
     }
+
 }

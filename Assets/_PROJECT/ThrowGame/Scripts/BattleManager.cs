@@ -13,7 +13,6 @@ using Zenject;
 
 public class BattleManager : MonoBehaviour {
     // Будет выбираться рулеткой шо кинуть может
-    [SerializeField] private int _secondsInStep;
     [SerializeField] private BotObjectThrower _bot1;
     [SerializeField] private BotObjectThrower _bot2;
     
@@ -192,7 +191,7 @@ public class BattleManager : MonoBehaviour {
         _stepIsOver = false;
         thrower.SetAllowToThrow(true);
         
-        _timerToThrowStep.StartTimer(_secondsInStep);
+        _timerToThrowStep.StartTimer();
         _windChooser.UpdateWind();
         
         

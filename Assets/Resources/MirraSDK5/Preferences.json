@@ -27,6 +27,29 @@
                     }
                 ]
             }
+        },
+        {
+            "key": "EditorConfiguration",
+            "group": {
+                "boolCollection": [
+                    {
+                        "key": "ILanguage.Visible",
+                        "value": true
+                    },
+                    {
+                        "key": "ILanguage.Override",
+                        "value": true
+                    }
+                ],
+                "intCollection": [],
+                "floatCollection": [],
+                "stringCollection": [
+                    {
+                        "key": "PrototypeLanguageInfo_Configuration",
+                        "value": "{\"<CurrentName>k__BackingField\":\"Russian\"}"
+                    }
+                ]
+            }
         }
     ]
 }

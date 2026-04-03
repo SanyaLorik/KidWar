@@ -7,6 +7,7 @@ public class SingleInstaller : MonoInstaller {
         BindValuteFormatter();
         BindNicknameRandomizer();
         Container.Bind<AdvTimerStarter>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<TasksManager>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 
     private void BindCamera() {

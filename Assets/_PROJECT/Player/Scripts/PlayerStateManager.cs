@@ -18,6 +18,7 @@ public class PlayerStateManager : MonoBehaviour{
     [SerializeField] private GameObject _playContainer;
     [SerializeField] private GameObject[] _objectsToShowInPlay;
     [SerializeField] private GameObject[] _objectsToHideInPlay;
+    [SerializeField] private GameObject[] _canvases;
 
     
     [Inject] private IInterstitialDelaying  _interstitialDelaying;
@@ -39,6 +40,7 @@ public class PlayerStateManager : MonoBehaviour{
 
     public void SetupCanvases(bool playerGoPlay) {
         ChangePlayerState(playerGoPlay ? PlayerState.Play : PlayerState.InSpawn);
+        _canvases.DisactiveSelf();
         if (playerGoPlay) {
             _playContainer.ActiveSelf();
             _objectsToShowInPlay.ActiveSelf();

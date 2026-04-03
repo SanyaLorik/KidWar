@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
         // игрок не учавствовал в бою
         // Вернулся
         if (!goPlay) {
-            TpInPoint(_spawnPoint.position);
+            TeleportInSpawn();
             _inputActivity.Enable();
             _advTimerStarter.EnableTimer();
             SetCharacterControllerState(true);
@@ -99,6 +99,9 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
         }
     }
 
+    public void TeleportInSpawn() {
+        TpInPoint(_spawnPoint.position);
+    }
 
 
     public ObjectThrower ObjectThrower => _thrower;

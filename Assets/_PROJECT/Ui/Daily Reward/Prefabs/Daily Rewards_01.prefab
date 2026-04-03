@@ -60,6 +60,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1175328252777829114, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: <NumberOfDay>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258100928269947460, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: <NumberOfDay>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323591745453556445, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: <NumberOfDay>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2850691511728212991, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -175,6 +187,14 @@ PrefabInstance:
     - target: {fileID: 4876943737369543958, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_Name
       value: Daily Rewards_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: <NumberOfDay>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: <NumberOfDay>k__BackingField
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8113417347826512565, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_AnchorMax.y

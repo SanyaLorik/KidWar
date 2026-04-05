@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5196605020053657598}
   - component: {fileID: 1392151143791389642}
   m_Layer: 0
-  m_Name: Contaienr Mask Image
+  m_Name: Containter Mask Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

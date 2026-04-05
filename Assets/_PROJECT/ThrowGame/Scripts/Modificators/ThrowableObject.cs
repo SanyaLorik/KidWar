@@ -50,7 +50,7 @@ public class ThrowableObject : MonoBehaviour {
             _modifier.OnPlayerContact();
             StartDestroyTimer(true);
         }
-        player.TakeDamage(Info.Damage);
+        player.AddDamage(Info.Damage);
         _contactPlayer = true;
     }
     
@@ -86,7 +86,7 @@ public class ThrowableObject : MonoBehaviour {
 
     public async UniTask StartFlight(CancellationToken token) {
         _elapsedTime = 0f;
-        Debug.Log($"TargetPos = {TargetPos}, модификатор: {_modifier.GetType()}");
+        // Debug.Log($"TargetPos = {TargetPos}, модификатор: {_modifier.GetType()}");
         _modifier.ExtensionBehaviour();
         _colliders.ForEach(c => c.enabled = false);
         SetStateCollidersAsync(true).Forget();

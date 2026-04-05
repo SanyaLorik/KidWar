@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Architecture_M;
+using MirraSDK_M;
 using SanyaBeerExtension;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +15,16 @@ public enum TaskType {
    WinCount,
    UseHealCount,
    ShieldCount,
-   HealsLifesCount,
+   HealsLifesCount,  
    Parkour,
 }
 
 [Serializable]
 public class TaskInfo {
-    public float FullValue;
+    public int FullValue;
     public int TaskMoney;
     public TaskType TaskType;
+    public string TaskId => TaskType.ToString();
 }
 
 
@@ -34,6 +38,7 @@ public class TasksManager : MonoBehaviour {
     [SerializeField] private GameObject _canvas;
     [SerializeField] private Button _openCanvasButton;
     [SerializeField] private Button _closeCanvasButton;
+    [SerializeField] private Button _resetButton;
     [Header("Синглтоны")]
     [SerializeField] private ParkourCompleteTrigger _parkourCompleteTrigger;
     
@@ -48,11 +53,11 @@ public class TasksManager : MonoBehaviour {
     private int _parkour;
     private int _winCount;
     private int _useHealCount;
-    private int _shieldCount;
     private int _healsLifesCount;
+    private int _shieldCount;
   
     public event Action TaskComplete;
-    
+    private GameSave Saver => _gameSave.GetSave<GameSave>();
 
     [Inject] private PlayerMovement _playerMovement;
     [Inject] private PlayerStateManager _playerStateManager;
@@ -63,56 +68,121 @@ public class TasksManager : MonoBehaviour {
     [Inject] private ThrowGameStarter _throwGameStarter; 
     [Inject] private GameOverShower _gameOverShower; 
     [Inject] private HpView _hpSystem; 
-    
-    
-    
-    private void Awake() {
-        CreateTaskInfoDictionary();
-        CreateTaskVisualDictionary();
-    }
+    [Inject] private IGameSave _gameSave; 
+    [Inject] private AdvertisingMonetizationMirra _advertisingMonetization;
 
+    
     private void OnEnable() {
         _openCanvasButton.onClick.AddListener(() => _canvas.ActiveSelf());
         _closeCanvasButton.onClick.AddListener(() => _canvas.DisactiveSelf());
-        
+        _resetButton.onClick.AddListener(ShowAdv);
         
         _hpSystem.PlayerHit += UpdatePlayerHit;
+        _hpSystem.MainPlayerHeal += OnPlayerHeal;
+        _hpSystem.PlayerShielded += OnPlayerShielded;
         _parkourCompleteTrigger.ParkourCompleted += UpdateParkourTask;
         _gameOverShower.PlayerWon += PlayerWinCheck;
     }
-
-    private void PlayerWinCheck(bool winner) {
-        if (winner) {
-            _winCount++;
-            UpdateTaskProgress(TaskType.WinCount);
-        }
-        
-    }
-
-    private void UpdateParkourTask() {
-        _parkour = 1;
-        UpdateTaskProgress(TaskType.Parkour);
-    }
-
-    private void UpdatePlayerHit() {
-        if (_battleManager.MainPlayerPlay && _battleManager.IsFirstThrowerStep) {
-            _hitCount++;
-            UpdateTaskProgress(TaskType.HitCount);
-        }
-    }
-
+    
+    
     private void Start() {
+        CreateTaskInfoDictionary();
+        CreateTaskVisualDictionary();
         TableInitialize();
         _parkourCompleteTrigger.SetParkourRewardText(_taskTypeToInfoDictionary[TaskType.Parkour].TaskMoney);
     }
+
+
+    private void ShowAdv() {
+        _advertisingMonetization.InvokeRewarded(
+            null,
+            (isSuccess) => 
+            {
+                if (isSuccess) {
+                    ResetCompletedTasks();
+                }
+            }
+        );
+    }
+    
+    private void ResetCompletedTasks() {
+        foreach (var taskVisual in _taskTypeToVisualDictionary) {
+            TaskInfo taskInfo = GetTaskInfoByType(taskVisual.Value.TaskType);
+            
+            if (Saver.GetTaskInfo(taskInfo.TaskId).IsGetReward) {
+                SetPlayerValue(taskVisual.Value.TaskType, 0);
+                taskVisual.Value.EnableTask(taskInfo);
+            }
+        }
+        _gameSave.Save();
+    }
+
+    private TaskInfo GetTaskInfoByType(TaskType taskType)
+        => _tasksInfo.First(t => t.TaskType == taskType);
+    
+    
+    private void OnPlayerShielded() {
+        if (_battleManager.PlayerStepInPvb) {
+            ++_shieldCount;
+            Debug.Log($"Игрок использовал щит {_shieldCount} раз");
+            UpdateTaskProgress(TaskType.ShieldCount);
+        }        
+    }
+
+    
+    private void OnPlayerHeal(int count) {
+        ++_useHealCount;
+        UpdateTaskProgress(TaskType.UseHealCount);
+        
+        _healsLifesCount += count;
+        UpdateTaskProgress(TaskType.HealsLifesCount);
+        Debug.Log($"Игрок использовал аптечку  {_useHealCount} раз, излечил {_healsLifesCount} здоровья");
+    }
+
+    
+    private void PlayerWinCheck(bool winner) {
+        if (winner) {
+            ++_winCount;
+            UpdateTaskProgress(TaskType.WinCount);
+            Debug.Log($"Игрок выиграл {_winCount} раз");
+        }
+    }
+
+    
+    private void UpdateParkourTask() {
+        _parkour = 1;
+        UpdateTaskProgress(TaskType.Parkour);
+        Debug.Log($"Игрок прошел паркур");
+    }
+
+    
+    private void UpdatePlayerHit() {
+        if (_battleManager.MainPlayerPlay && _battleManager.IsFirstThrowerStep) {
+            ++_hitCount;
+            UpdateTaskProgress(TaskType.HitCount);
+            Debug.Log($"Игрок попал {_hitCount} раз");
+        }
+    }
+    
     
     private void TableInitialize() {
         foreach (var taskVisual in _taskTypeToVisualDictionary) {
             TaskInfo taskInfo = _taskTypeToInfoDictionary[taskVisual.Key];
+            TaskItem taskSaveInfo = Saver.GetTaskInfo(taskInfo.TaskId);
             _taskTypeToVisualDictionary[taskVisual.Key].SetTaskLocalizationText();
-            _taskTypeToVisualDictionary[taskVisual.Key].SetTaskVisual(taskInfo.TaskMoney, 0, taskInfo.FullValue);
+            if (!taskSaveInfo.IsGetReward) {
+                _taskTypeToVisualDictionary[taskVisual.Key].SetTaskVisual(taskInfo, taskSaveInfo.Count);
+                SetPlayerValue(taskInfo.TaskType, taskSaveInfo.Count);
+            }
+            else {
+                Debug.Log($"Задача {taskSaveInfo.Id} загрузилась как выполненная");
+                _taskTypeToVisualDictionary[taskVisual.Key].DisableTask();
+            }
         }
+
     }
+
+   
 
     private void CreateTaskInfoDictionary() {
         foreach (var task in _tasksInfo) {
@@ -150,11 +220,39 @@ public class TasksManager : MonoBehaviour {
         }
     }
 
+    private void SetPlayerValue(TaskType taskType, int count) {
+        string id = _tasksInfo.Find(t => t.TaskType == taskType).TaskId;
+        Saver.UpdateTaskInfo(id, count, false);
+        switch (taskType) {
+            case TaskType.HitCount:
+                 _hitCount = count;
+                break;
+            case TaskType.Parkour:
+                 _parkour = count;
+                break;
+            case TaskType.WinCount:
+                _winCount = count;
+                break;
+            case TaskType.UseHealCount:
+                 _useHealCount = count;
+                break;
+            case TaskType.ShieldCount:
+                 _shieldCount = count;
+                break;
+            case TaskType.HealsLifesCount:
+                 _healsLifesCount = count;
+                break;
+        }
+    }
+
     
     private void UpdateTaskProgress(TaskType type) {
         int currentValue = GetPlayerValue(type);
         TaskInfo taskInfo = _taskTypeToInfoDictionary[type];
         TaskVisual taskVisual = _taskTypeToVisualDictionary[type];
+        
+        Saver.UpdateTaskInfo(taskInfo.TaskId, currentValue, false );
+        _gameSave.Save();
         
         if (currentValue >= taskInfo.FullValue && !taskVisual.TaskIsComplete) {
             taskVisual.SetTaskCompleteVisual(currentValue, taskInfo.FullValue);
@@ -164,11 +262,12 @@ public class TasksManager : MonoBehaviour {
             taskVisual.UpdateTaskScoreVisual(currentValue, taskInfo.FullValue);
         }
     }
-
+    
 
     public void SetCompleteTask(TaskType taskType) {
         // Обновляем данные
         TaskInfo taskInfo = _taskTypeToInfoDictionary[taskType];
+        Saver.UpdateTaskInfo(taskInfo.TaskId, taskInfo.FullValue, true);
         _bank.AddMoney(taskInfo.TaskMoney);
     }
 

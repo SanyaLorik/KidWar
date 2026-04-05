@@ -18,7 +18,11 @@ public class GameSave : GameSaveBase,
     
     // Bonuses
     public List<BonuseItem> Bonuses = new ();
+    
+    // Task
+    public List<TaskItem> Tasks = new ();
 
+    
     // Daily Rewards
     public DailyRewardSave DailyRewardSave;
     public WheelFortuneSave WheelFortuneSave;
@@ -55,11 +59,41 @@ public class GameSave : GameSaveBase,
         BonuseItem bonus = Bonuses.FirstOrDefault(b => b.Id == id);
         if (bonus!=null) {
             --bonus.Count;
-            Debug.Log($"Минус 1 бонус {id}, всего их {bonus.Count}");
+            // Debug.Log($"Минус 1 бонус {id}, всего их {bonus.Count}");
         }
         else {
-            Debug.LogError("У игрока нет такого бонуса, ошибка в коде");
+            // Debug.LogError("У игрока нет такого бонуса, ошибка в коде");
         }
+    }
+
+    // Tasks--------------------------------
+    public void UpdateTaskInfo(string id, int count, bool isGetReward) {
+        TaskItem task = Tasks.FirstOrDefault(t => t.Id == id);
+        if (task != null) {
+            task.Count = count;
+            task.IsGetReward = isGetReward;
+        }
+        else {
+            Debug.LogError("Задача не была инициализирована");
+        }
+    }
+    
+    /// <summary>
+    /// Используется для получения таски, если игрок играет впервые то инициализирует оную
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public TaskItem GetTaskInfo(string id) {
+        TaskItem task = Tasks.FirstOrDefault(t => t.Id == id);
+        if (task == null) {
+            task = new TaskItem() {
+                Id = id,
+                Count = 0,
+                IsGetReward = false
+            };
+            Tasks.Add(task);
+        }
+        return task;
     }
 
     public DailyRewardSave Load()
@@ -83,4 +117,11 @@ public class SkinItem {
 public class BonuseItem {
     public string Id = "";
     public int Count = 0;
+}
+
+[Serializable]
+public class TaskItem {
+    public string Id = "";
+    public int Count = 0;
+    public bool IsGetReward = false;
 }

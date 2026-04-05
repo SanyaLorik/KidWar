@@ -12,13 +12,18 @@ public class HpView : MonoBehaviour {
     [SerializeField] private RectTransform _parentRightHp;
     [SerializeField] private float _changeHpDuration = 1f;
     
+    private CancellationTokenSource _tokenSource;
+    
     
     [Inject] private ThrowGameStarter _throwGameStarter;
     [Inject] private BattleManager _battleManager;
     [Inject] private GameData _gameData;
 
-
+    
     public event Action PlayerHit; 
+    public event Action<int> MainPlayerHeal; 
+    
+    public event Action PlayerShielded; 
     
     private int MaxHp => _gameData.PlayerMaxHp;
 
@@ -31,9 +36,33 @@ public class HpView : MonoBehaviour {
         if(!_battleManager.MainPlayerPlay) return;
     }
 
+    
+    public void UsePlayerShield() {
+        if (_battleManager.PlayerStepInPvb) {
+            PlayerShielded?.Invoke();   
+        }
+    }
 
-    public void ChangeHp(float hp, bool stayInLeft) {
-        float percent = hp / MaxHp;
+    public void SetMaxHp(int hp, bool stayInLeft) {
+        ChangeHp(hp, stayInLeft);
+    }
+
+    public void AddHp(int hp, bool stayInLeft, int newHp) {
+        ChangeHp(hp, stayInLeft);
+        if (_battleManager.PlayerStepInPvb)  {
+            MainPlayerHeal?.Invoke(newHp);
+        }
+    }
+
+    public void MinusHp(int hp, bool stayInLeft) {
+        if (_battleManager.PlayerStepInPvb) {
+            PlayerHit?.Invoke();
+        }
+        ChangeHp(hp, stayInLeft);
+    }
+
+    private void ChangeHp(int hp, bool stayInLeft) {
+        float percent = (float) hp / MaxHp;
         if (stayInLeft) {
             // left
             ChangeLeftPlayerHp(percent);
@@ -43,21 +72,15 @@ public class HpView : MonoBehaviour {
             ChangeRightPlayerHp(percent);
         }
     }
+    
 
     private void ChangeLeftPlayerHp(float percent) {
-        // Костыль ну пока похуй, аптечка не хиллит фул хп
-        if (percent != 1f) {
-            PlayerHit?.Invoke();
-        }
-        Debug.Log("ChangeLeftPlayerHp " + percent);
+        // Debug.Log("ChangeLeftPlayerHp " + percent);
         SetFillAmountInRight(_leftHp, _parentLeftHp, percent);
     }
     
     private void ChangeRightPlayerHp(float percent) {
-        if (percent != 1f) {
-            PlayerHit?.Invoke();
-        }
-        Debug.Log("ChangeRightPlayerHp" + percent);
+        // Debug.Log("ChangeRightPlayerHp" + percent);
         SetFillAmountInLeft(_rightHp, _parentRightHp, percent);
     }
     
@@ -65,7 +88,6 @@ public class HpView : MonoBehaviour {
 
 
 
-    private CancellationTokenSource _tokenSource;
     
     
     /// <summary>

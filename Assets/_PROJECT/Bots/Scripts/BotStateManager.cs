@@ -42,8 +42,8 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
     
     public void SetPlayStatus(bool goPlay) {
         
-        Debug.Log("SetPlayStatus: " + goPlay);
-        Debug.Log("_posBeforeTeleport: " + _posBeforeTeleport);
+        // Debug.Log("SetPlayStatus: " + goPlay);
+        // Debug.Log("_posBeforeTeleport: " + _posBeforeTeleport);
         IsPlaying = goPlay;
         if (goPlay) {
             _currentBotBehaviour?.Exit();
@@ -64,7 +64,7 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
 
     public void TpInPoint(Vector3 pos) {
         _posBeforeTeleport = transform.position;
-        Debug.Log("TpInPoint bot");
+        // Debug.Log("TpInPoint bot");
         // _agent.enabled = false;
         if (NavMesh.SamplePosition(pos, out var hit, 5f, NavMesh.AllAreas)) {
             _agent.Warp(hit.position);

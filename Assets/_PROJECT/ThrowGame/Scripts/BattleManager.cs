@@ -33,6 +33,8 @@ public class BattleManager : MonoBehaviour {
 
     public bool IsPvbMode => FirstThrower.ObjectThrower.PlayerHandle && !SecondThrower.ObjectThrower.PlayerHandle;
 
+    public bool PlayerStepInPvb => IsFirstThrowerStep  && IsPvbMode;
+        
     public bool AllowToPlay { get; private set; }
 
     public event Action NewPlayerTurn;
@@ -82,13 +84,13 @@ public class BattleManager : MonoBehaviour {
 
     private void FocusCamera(Transform obj) {
         if(!MainPlayerPlay) return;
-        Debug.Log("Focus camera");
+        // Debug.Log("Focus camera");
         _camera.SetCameraToPlayThrow(obj);
     }
 
     public void InitForNewGame(bool firstPlayerBot, bool secondPlayerBot) {
-        Debug.Log("firstPlayerBot " + firstPlayerBot);
-        Debug.Log("secondPlayerBot " + secondPlayerBot);
+        // Debug.Log("firstPlayerBot " + firstPlayerBot);
+        // Debug.Log("secondPlayerBot " + secondPlayerBot);
 
         AllowToPlay = false;
         MainPlayerPlay = !firstPlayerBot;
@@ -172,7 +174,7 @@ public class BattleManager : MonoBehaviour {
     private async UniTask PlayerStepAsync(ObjectThrower thrower, Transform pointToCameraFocus, bool isFirstThrowerStep) {
         if(GameIsOver) return;
 
-        Debug.Log("NewPlayerTurn, BotTurnNow = " + !thrower.PlayerHandle);
+        // Debug.Log("NewPlayerTurn, BotTurnNow = " + !thrower.PlayerHandle);
         BotTurnNow = !thrower.PlayerHandle;
         // Анимация шага игрока
         FocusCamera(pointToCameraFocus);

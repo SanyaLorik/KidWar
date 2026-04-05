@@ -88,10 +88,10 @@ public class ModifierManager : MonoBehaviour {
         ModifierChanger modifierChanger = modifierChangersList.Find(m => m.Modifier.GetType() == modifier.GetType());
         if (modifierChanger.IsAvailable) {
             SetModifierAfterCheck(modifierChanger.Modifier, modifierChanger);
-            Debug.Log("Выбран модификатор: " + modifierChanger.Modifier.GetType());
+            // Debug.Log("Выбран модификатор: " + modifierChanger.Modifier.GetType());
             return true;
         }
-        Debug.Log("НЕ Выбран модификатор: is not available" + modifierChanger.Modifier.GetType());
+        // Debug.Log("НЕ Выбран модификатор: is not available" + modifierChanger.Modifier.GetType());
         return false;
     }
 
@@ -142,7 +142,7 @@ public class ModifierManager : MonoBehaviour {
     }
 
     private void NewStep() {
-        Debug.Log("Установка дефолт модификатора");
+        // Debug.Log("Установка дефолт модификатора");
         CurrentModifier = _defaultModifier;
         if (_choosedModifierChanger != null) {
             _choosedModifierChanger.HidePointer();

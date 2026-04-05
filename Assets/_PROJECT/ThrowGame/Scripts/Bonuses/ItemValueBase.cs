@@ -16,7 +16,7 @@ public static class ItemValueBase {
         foreach (var modifierValue in itemWeight) {
             accumulated += modifierValue.Weight;
             if (accumulated > choosedWeight) {
-                Debug.Log($"Выбивание веса {choosedWeight}, айтем: {modifierValue.Item.GetType()}");
+                // Debug.Log($"Выбивание веса {choosedWeight}, айтем: {modifierValue.Item.GetType()}");
                 return modifierValue.Item;
             }
         }

@@ -1,4 +1,5 @@
-﻿using SanyaBeerExtension;
+﻿using System;
+using SanyaBeerExtension;
 using UnityEngine;
 using Zenject;
 
@@ -23,7 +24,7 @@ public class PlayerHp : MonoBehaviour, IDamageable {
         _stayInLeft = stayInLeft;
     }
     
-    public void TakeDamage(int hp) {
+    public void AddDamage(int hp) {
         Debug.Log("IsInvinsible = " + IsInvinsible);
         if (IsInvinsible) {
             Debug.Log("Сам по себе попал...");
@@ -36,37 +37,37 @@ public class PlayerHp : MonoBehaviour, IDamageable {
         CurrentHp -= hp;
         CurrentHp = Mathf.Max(0, CurrentHp);
         Debug.Log($"Попал! Минус {hp} хп, щас HP = {CurrentHp} ");
-        ChangeHpView();
+        _hpView.MinusHp(CurrentHp, _stayInLeft);
     }
 
 
-    public void AddHp(int hp) {
-        CurrentHp += hp;
-        Debug.Log($"Добавление хп {hp} хп, щас HP = {CurrentHp} ");
+    public void AddHp(int newHp) {
+        int needRecoverHp = MaxHp - CurrentHp;
+        newHp = Math.Clamp(newHp, 0, needRecoverHp);
+        CurrentHp += newHp;
         CurrentHp = Mathf.Min(CurrentHp, MaxHp);
-        ChangeHpView();
+        Debug.Log($"Добавление хп {newHp} хп, щас HP = {CurrentHp} ");
+        _hpView.AddHp(CurrentHp, _stayInLeft, newHp);
     }
 
     public void SetInvinsible(bool state) {
         IsInvinsible = state;
     }
 
-    public void SetShielded(bool state) {
-        Debug.Log("Включение щита: " + state);
-        IsShielded = state;
-        _shieldAnimator.ShieldEnableAnimate(state, _shield);
+    public void SetShielded(bool enable) {
+        // Debug.Log("Включение щита: " + state);
+        IsShielded = enable;
+        _shieldAnimator.ShieldEnableAnimate(enable, _shield);
+        if (enable) {
+            _hpView.UsePlayerShield();
+        }
     }
-
-    
 
     public void SetMaxHp() {
         CurrentHp = MaxHp;
-        ChangeHpView();
+        _hpView.SetMaxHp(CurrentHp, _stayInLeft);
     }
-    
-    private void ChangeHpView() {
-        _hpView.ChangeHp(CurrentHp, _stayInLeft);
-    }
+
     
     public void SetDead() {
         CurrentHp = 0;

@@ -9,10 +9,11 @@ public class TaskVisual : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _rewardMoneyText;
     [SerializeField] private TextMeshProUGUI _taskText;
     [SerializeField] private TextMeshProUGUI _progressText;
-    [SerializeField] private Button _takeRewardButton;
     [SerializeField] private RectTransform _parentRectTransform;
     [SerializeField] private RectTransform _progressRectTransform;
     [field: SerializeField] public TaskType TaskType { get; private set; }
+    [SerializeField] private Button _takeRewardButton;
+    
     public bool TaskIsComplete { get; private set; }
     private string _taskLocalizationText;
     
@@ -24,26 +25,44 @@ public class TaskVisual : MonoBehaviour {
 
     private void Start() {
         _takeRewardButton.onClick.AddListener(GetTaskRewardByClick);
-        _takeRewardButton.DisactiveSelf();
     }
 
     private void GetTaskRewardByClick() {
         _tasksManager.SetCompleteTask(TaskType);
+        DisableTask();
+    }
+
+    
+    public void EnableTask(TaskInfo taskInfo) {
+        gameObject.ActiveSelf();
+        _takeRewardButton.DisactiveSelf();
+        SetTaskVisual(taskInfo, 0);
+        SetTaskLocalizationText();
+    }
+
+    public void DisableTask() {
+        gameObject.DisactiveSelf();
         _takeRewardButton.DisactiveSelf();
     }
 
+    
     public void SetTaskLocalizationText() {
         _taskLocalizationText = _localization.GetTranslatedName(TaskType,  _localization.TaskTranslates);
     }
 
-    public void SetTaskVisual(float rewardMoney, float playerValue, float fullValue) {
-        _rewardMoneyText.text = _formatter.ValuteFormatter(rewardMoney);
-        _taskText.text = string.Format(_taskLocalizationText, _formatter.ValuteFormatter(fullValue));
-        
-        
-        _takeRewardButton.gameObject.DisactiveSelf();
-        TaskIsComplete = false;
-        UpdateTaskScoreVisual(playerValue, fullValue);
+    public void SetTaskVisual(TaskInfo taskInfo, int playerValue) {
+        _rewardMoneyText.text = _formatter.ValuteFormatter(taskInfo.TaskMoney);
+        _taskText.text = string.Format(_taskLocalizationText, _formatter.ValuteFormatter(taskInfo.FullValue));
+
+        if (playerValue >= taskInfo.FullValue) {
+            _takeRewardButton.gameObject.ActiveSelf();
+            TaskIsComplete = true;
+        }
+        else {
+            _takeRewardButton.gameObject.DisactiveSelf();
+            TaskIsComplete = false;
+        }
+        UpdateTaskScoreVisual(playerValue, taskInfo.FullValue);
     }
 
     public void UpdateTaskScoreVisual(float currentValue, float fullValue) {

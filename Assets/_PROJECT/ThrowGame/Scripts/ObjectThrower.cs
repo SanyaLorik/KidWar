@@ -82,7 +82,7 @@ public class ObjectThrower : MonoBehaviour {
 
     public void BotThrow(float newAngleToThrow) {
         AngleToThrow = newAngleToThrow;
-        Debug.Log("ВЫСТРЕЛ БОТА!");
+        // Debug.Log("ВЫСТРЕЛ БОТА!");
         _battleManager.DoStep(this);
     }
 
@@ -90,7 +90,7 @@ public class ObjectThrower : MonoBehaviour {
     
     public void SetAllowToThrow(bool state) {
         ThrowVisualize.SetAllowToChooseAngle(state);
-        Debug.Log("SetAllowToThrow " + state);
+        // Debug.Log("SetAllowToThrow " + state);
         _allowToThrow = state;
         ThrowVisualize.SetActiveTrajectoryVisual(state);
         // Сам по себе не бьёт

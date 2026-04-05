@@ -216,7 +216,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         ObjectThrowed?.Invoke(throwInstance.PointToFollow);
         await throwInstance.StartFlight(token);
         
-        Debug.Log("Обьект упал! " + throwInstance.transform.position);
+        // Debug.Log("Обьект упал! " + throwInstance.transform.position);
         throwInstance.ObjectIsFall();
         await UniTask.WaitForSeconds(1f, cancellationToken: token);
         ObjectInFly = false;

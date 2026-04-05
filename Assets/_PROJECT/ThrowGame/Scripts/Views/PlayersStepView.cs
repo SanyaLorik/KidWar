@@ -73,7 +73,7 @@ public class PlayersStepView : MonoBehaviour {
         );
         // Вниз убегатывание
         
-        Debug.Log("_targetToContiner.transform.position = " + _targetToContiner.transform.position);
+        // Debug.Log("_targetToContiner.transform.position = " + _targetToContiner.transform.position);
         
         sequence.Join(rectTransformContainer
             .DOMove(_targetToContiner.transform.position, _timeToHideBig)

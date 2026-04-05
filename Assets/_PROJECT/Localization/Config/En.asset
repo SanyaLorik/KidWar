@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LocalizationData
   <Real>k__BackingField: 1
   <Substitutes>k__BackingField: 01000000
-  <HourTime>k__BackingField: 
-  <MinuteTime>k__BackingField: 
-  <SecondTime>k__BackingField: 
+  <HourTime>k__BackingField: h
+  <MinuteTime>k__BackingField: m
+  <SecondTime>k__BackingField: s
   <AdsInterstitial>k__BackingField: 
   <LabelProgressNarrator>k__BackingField: 
   Suffixies:

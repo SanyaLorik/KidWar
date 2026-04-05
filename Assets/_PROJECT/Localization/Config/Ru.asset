@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LocalizationData
   <Real>k__BackingField: 2
   <Substitutes>k__BackingField: 02000000
-  <HourTime>k__BackingField: 
-  <MinuteTime>k__BackingField: 
-  <SecondTime>k__BackingField: 
+  <HourTime>k__BackingField: "\u0447"
+  <MinuteTime>k__BackingField: "\u043C"
+  <SecondTime>k__BackingField: "\u0441"
   <AdsInterstitial>k__BackingField: 
   <LabelProgressNarrator>k__BackingField: 
   Suffixies:
@@ -49,3 +49,7 @@ MonoBehaviour:
       \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F"
   - <Id>k__BackingField: 5
     name: "\u041F\u0440\u043E\u0439\u0434\u0438 \u043F\u0430\u0440\u043A\u0443\u0440"
+  DailyReward:
+    <ShowAsAllowReceive>k__BackingField: "\u0417\u0430\u0431\u0440\u0430\u0442\u044C"
+    <ShowAsReceived>k__BackingField: "\u0417\u0430\u0431\u0440\u0430\u043D\u043E"
+    <ShowAsBlockedForReceive>k__BackingField: "\u0421\u043A\u043E\u0440\u043E"

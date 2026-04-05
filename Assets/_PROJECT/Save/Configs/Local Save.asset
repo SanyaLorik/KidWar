@@ -29,3 +29,6 @@ MonoBehaviour:
     DailyRewardSave:
       LastDateTimeReceived: 
       LastDayNumber: -1
+    WheelFortuneSave:
+      CountSpinAllow: 1
+      LastDateTimeSpined: 05.04.2026 14:24:31

@@ -118,11 +118,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4522543086122087626, guid: e87ccbc974b3602478e8340e7ace42d2, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 2280
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4776916561034974978, guid: e87ccbc974b3602478e8340e7ace42d2, type: 3}
       propertyPath: m_Size
-      value: 0.3219298
+      value: 0.32588655
       objectReference: {fileID: 0}
     - target: {fileID: 5238699893082136155, guid: e87ccbc974b3602478e8340e7ace42d2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -143,14 +143,6 @@ PrefabInstance:
     - target: {fileID: 5238699893082136155, guid: e87ccbc974b3602478e8340e7ace42d2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5994517564901002426, guid: e87ccbc974b3602478e8340e7ace42d2, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6690374109631875462, guid: e87ccbc974b3602478e8340e7ace42d2, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7213807107626361858, guid: e87ccbc974b3602478e8340e7ace42d2, type: 3}
       propertyPath: m_Name
@@ -362,10 +354,10 @@ MonoBehaviour:
   _rewardMoneyText: {fileID: 4712154745578877508}
   _taskText: {fileID: 925094206740951324}
   _progressText: {fileID: 7745765642800121129}
-  _takeRewardButton: {fileID: 5346242210804126856}
   _parentRectTransform: {fileID: 3199884112385438067}
   _progressRectTransform: {fileID: 8856842640218548713}
   <TaskType>k__BackingField: 1
+  _takeRewardButton: {fileID: 5346242210804126856}
 --- !u!224 &7194182102567213664 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5420517576173747092, guid: 49034401099e1c9428d88af55869ddd6, type: 3}
@@ -535,10 +527,10 @@ MonoBehaviour:
   _rewardMoneyText: {fileID: 6746316143052944682}
   _taskText: {fileID: 1165813587970750066}
   _progressText: {fileID: 8612335903345984071}
-  _takeRewardButton: {fileID: 6254092475790316518}
   _parentRectTransform: {fileID: 3500159657876878877}
   _progressRectTransform: {fileID: 7355089004825636487}
   <TaskType>k__BackingField: 2
+  _takeRewardButton: {fileID: 6254092475790316518}
 --- !u!114 &6254092475790316518 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7124404831745799548, guid: 49034401099e1c9428d88af55869ddd6, type: 3}
@@ -730,10 +722,10 @@ MonoBehaviour:
   _rewardMoneyText: {fileID: 6069791368867540410}
   _taskText: {fileID: 1841493507762712290}
   _progressText: {fileID: 9090137620653300439}
-  _takeRewardButton: {fileID: 6875165008785787766}
   _parentRectTransform: {fileID: 4120953589329096333}
   _progressRectTransform: {fileID: 8048222416539809303}
   <TaskType>k__BackingField: 3
+  _takeRewardButton: {fileID: 6875165008785787766}
 --- !u!114 &6069791368867540410 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7605380494871712688, guid: 49034401099e1c9428d88af55869ddd6, type: 3}
@@ -952,10 +944,10 @@ MonoBehaviour:
   _rewardMoneyText: {fileID: 3256896117707663730}
   _taskText: {fileID: 6953740629577230890}
   _progressText: {fileID: 515735640905670175}
-  _takeRewardButton: {fileID: 2767344263625428926}
   _parentRectTransform: {fileID: 4629273396517038661}
   _progressRectTransform: {fileID: 1639289861782663903}
   <TaskType>k__BackingField: 5
+  _takeRewardButton: {fileID: 2767344263625428926}
 --- !u!224 &4629273396517038661 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 326254925074092167, guid: 49034401099e1c9428d88af55869ddd6, type: 3}
@@ -1076,6 +1068,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Quest Mask Image_6
       objectReference: {fileID: 0}
+    - target: {fileID: 8854239235268761116, guid: 49034401099e1c9428d88af55869ddd6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1147,10 +1143,10 @@ MonoBehaviour:
   _rewardMoneyText: {fileID: 2572982158373952869}
   _taskText: {fileID: 7928417982323793469}
   _progressText: {fileID: 697920169744050696}
-  _takeRewardButton: {fileID: 2945447157131885481}
   _parentRectTransform: {fileID: 5672771672823570002}
   _progressRectTransform: {fileID: 1745194431514412744}
   <TaskType>k__BackingField: 4
+  _takeRewardButton: {fileID: 2945447157131885481}
 --- !u!224 &5672771672823570002 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 326254925074092167, guid: 49034401099e1c9428d88af55869ddd6, type: 3}

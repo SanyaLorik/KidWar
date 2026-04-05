@@ -39,8 +39,10 @@ public class TasksManager : MonoBehaviour {
     [SerializeField] private Button _openCanvasButton;
     [SerializeField] private Button _closeCanvasButton;
     [SerializeField] private Button _resetButton;
+
     [Header("Синглтоны")]
     [SerializeField] private ParkourCompleteTrigger _parkourCompleteTrigger;
+    [SerializeField] private TaskCompleteCountView _taskCountView;
     
     
     // Инфа по заданию и росту
@@ -48,6 +50,7 @@ public class TasksManager : MonoBehaviour {
     private readonly Dictionary<TaskType, TaskVisual> _taskTypeToVisualDictionary = new ();
         
 
+    
     // Стата игрока в данный момент 
     private int _hitCount;
     private int _parkour;
@@ -59,8 +62,6 @@ public class TasksManager : MonoBehaviour {
     public event Action TaskComplete;
     private GameSave Saver => _gameSave.GetSave<GameSave>();
 
-    [Inject] private PlayerMovement _playerMovement;
-    [Inject] private PlayerStateManager _playerStateManager;
     [Inject] private PlayerBank _bank;
     [Inject] private NumberFormatter _formatter; 
     [Inject] private LocalizationData _localization; 
@@ -172,6 +173,9 @@ public class TasksManager : MonoBehaviour {
             _taskTypeToVisualDictionary[taskVisual.Key].SetTaskLocalizationText();
             if (!taskSaveInfo.IsGetReward) {
                 _taskTypeToVisualDictionary[taskVisual.Key].SetTaskVisual(taskInfo, taskSaveInfo.Count);
+                if (taskSaveInfo.Count >= taskInfo.FullValue) {
+                    _taskCountView.PlusOne();
+                }
                 SetPlayerValue(taskInfo.TaskType, taskSaveInfo.Count);
             }
             else {
@@ -179,7 +183,6 @@ public class TasksManager : MonoBehaviour {
                 _taskTypeToVisualDictionary[taskVisual.Key].DisableTask();
             }
         }
-
     }
 
    
@@ -256,6 +259,7 @@ public class TasksManager : MonoBehaviour {
         
         if (currentValue >= taskInfo.FullValue && !taskVisual.TaskIsComplete) {
             taskVisual.SetTaskCompleteVisual(currentValue, taskInfo.FullValue);
+            _taskCountView.PlusOne();
             ShowNotification(taskInfo);
         }
         else {
@@ -269,6 +273,7 @@ public class TasksManager : MonoBehaviour {
         TaskInfo taskInfo = _taskTypeToInfoDictionary[taskType];
         Saver.UpdateTaskInfo(taskInfo.TaskId, taskInfo.FullValue, true);
         _bank.AddMoney(taskInfo.TaskMoney);
+        _taskCountView.MinusOne();
     }
 
     private void ShowNotification(TaskInfo taskInfo) {

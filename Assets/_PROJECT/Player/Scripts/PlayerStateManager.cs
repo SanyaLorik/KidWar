@@ -30,7 +30,7 @@ public class PlayerStateManager : MonoBehaviour{
     [InjectOptional] private IActivityButtonPC _activityButtonPC;
     [Inject] private ThrowGameStarter _throwGameManager;
     
-    public event Action<PlayerState> ChangeState;
+    public event Action<PlayerState> StateChanged;
     
     private void OnEnable() {
         _playerMovement.Floored += PlayerMovementOnFloored;
@@ -39,7 +39,6 @@ public class PlayerStateManager : MonoBehaviour{
     }
 
     public void SetupCanvases(bool playerGoPlay) {
-        ChangePlayerState(playerGoPlay ? PlayerState.Play : PlayerState.InSpawn);
         _canvases.DisactiveSelf();
         if (playerGoPlay) {
             _playContainer.ActiveSelf();
@@ -51,6 +50,7 @@ public class PlayerStateManager : MonoBehaviour{
             _objectsToHideInPlay.ActiveSelf();
             _playContainer.DisactiveSelf();
         }
+        ChangePlayerState(playerGoPlay ? PlayerState.Play : PlayerState.InSpawn);
     }
     
     
@@ -80,7 +80,7 @@ public class PlayerStateManager : MonoBehaviour{
         if(newState == CurrentState) return;
         BeforeState = CurrentState;
         CurrentState = newState;
-        ChangeState?.Invoke(newState);
+        StateChanged?.Invoke(newState);
     }
 
     // будет настройка канваса для игрока

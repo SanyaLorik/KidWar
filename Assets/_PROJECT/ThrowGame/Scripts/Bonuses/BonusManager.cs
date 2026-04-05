@@ -52,6 +52,9 @@ public class BonusManager : MonoBehaviour {
         //  Вызвал свой бонус в свой ход левый игрок
         if (IsLeftPlayerBonus(bonusChanger)) {
             if (_battleManager.IsFirstThrowerStep == true) {
+                if (bonus is HealBonus && ThrowerHaveFullHp(_battleManager.FirstThrower)) {
+                    return;
+                }
                 bonus.Use(_battleManager.FirstThrower.ObjectThrower.Damageable);
                 bonusChanger.GetOneBonus(_battleManager.IsPvbMode);
                 _leftBonusChangers.ForEach(b => b.SetUnvailable());
@@ -60,6 +63,9 @@ public class BonusManager : MonoBehaviour {
         //  Вызвал свой бонус в свой ход правый игрок
         else {
             if (_battleManager.IsFirstThrowerStep == false) {
+                if (bonus is HealBonus && ThrowerHaveFullHp(_battleManager.SecondThrower)) {
+                    return;
+                }
                 bonus.Use(_battleManager.SecondThrower.ObjectThrower.Damageable);
                 bonusChanger.GetOneBonus();
                 bonusChanger.SetUnvailable();
@@ -68,7 +74,11 @@ public class BonusManager : MonoBehaviour {
         }
 
     }
+
+    private bool ThrowerHaveFullHp(IThrowGamePlayer thrower) 
+        => thrower.ObjectThrower.CurrentLifesCount == _data.PlayerMaxHp;
     
+
     public void UseBonusForBot() {
         List<BonusChanger> bonusesChangersList = _battleManager.IsFirstThrowerStep ? 
             _leftBonusChangers 

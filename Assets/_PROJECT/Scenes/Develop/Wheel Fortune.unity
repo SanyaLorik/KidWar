@@ -532,10 +532,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wheel Fortune
       objectReference: {fileID: 0}
-    - target: {fileID: 333449345517826449, guid: 2ca8277968254f447b51e95ca827034c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

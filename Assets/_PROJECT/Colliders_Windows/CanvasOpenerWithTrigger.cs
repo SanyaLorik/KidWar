@@ -9,8 +9,13 @@ public class CanvasOpenerWithTrigger : TriggerBehaviourBase {
     [SerializeField] private Button _closeButton;
 
     private void OnEnable() {
-        _openButton.onClick.AddListener(_canvas.ActiveSelf);
-        _closeButton.onClick.AddListener(_canvas.DisactiveSelf);
+        if (_openButton != null) {
+            _openButton.onClick.AddListener(_canvas.ActiveSelf);
+        }
+
+        if (_closeButton != null) {
+            _closeButton.onClick.AddListener(_canvas.DisactiveSelf);
+        }
     }
 
     protected override void PlayerBehaviourOnEnter() {

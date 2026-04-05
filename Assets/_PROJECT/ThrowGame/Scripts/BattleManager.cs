@@ -173,6 +173,8 @@ public class BattleManager : MonoBehaviour {
 
     private async UniTask PlayerStepAsync(ObjectThrower thrower, Transform pointToCameraFocus, bool isFirstThrowerStep) {
         if(GameIsOver) return;
+        IsFirstThrowerStep = isFirstThrowerStep;
+        NewPlayerTurn?.Invoke();
 
         // Debug.Log("NewPlayerTurn, BotTurnNow = " + !thrower.PlayerHandle);
         BotTurnNow = !thrower.PlayerHandle;
@@ -188,8 +190,6 @@ public class BattleManager : MonoBehaviour {
         }
         
         AllowToPlay = true;
-        IsFirstThrowerStep = isFirstThrowerStep;
-        NewPlayerTurn?.Invoke();
         _stepIsOver = false;
         thrower.SetAllowToThrow(true);
         

@@ -18,13 +18,21 @@ public abstract class UsableItemBase : MonoBehaviour {
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _availableImage.fillAmount = 0f;
     }
-    
+
     public void SetUnvailable(bool startCooldown = false) {
         IsAvailable = false;
         _availableImage.fillAmount = 1f;
         if (startCooldown) {
             StartColldown();
         }
+    }
+
+    /// <summary>
+    /// Чтоб визуально показать игроку что он не может тыкать на модификаторы другого игрока
+    /// </summary>
+    public void SetVisualGray(bool set) {
+        if(!IsAvailable) return;
+        _availableImage.fillAmount = set ? 1f : 0f;
     }
     
     private void StartColldown() {

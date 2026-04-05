@@ -23,7 +23,6 @@ public class BonusManager : MonoBehaviour {
 
     private void OnEnable() {
         _battleManager.NewPlayerTurn += OnNewPlayerTurn;
-        _battleManager.NewPlayerTurn += OnNewPlayerTurn;
     }
     
     private void Start() {
@@ -36,6 +35,16 @@ public class BonusManager : MonoBehaviour {
     }
 
     private void OnNewPlayerTurn() {
+        if(!_battleManager.MainPlayerPlay) return;
+        
+        if (_battleManager.IsFirstThrowerStep) { 
+            _leftBonusChangers.ForEach(b => b.SetAvailable());
+            _rightBonusChangers.ForEach(b => b.SetUnvailable());
+        }
+        else {
+            _rightBonusChangers.ForEach(b => b.SetAvailable());
+            _leftBonusChangers.ForEach(b => b.SetUnvailable());
+        }
         _leftBonusChangers.ForEach(b => b.CheckAvailable());
         _rightBonusChangers.ForEach(b => b.CheckAvailable());
     }

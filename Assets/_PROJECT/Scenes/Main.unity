@@ -918,8 +918,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9304bfa1b86447ddbf873a6fdd73a9d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskCompleteCountView
-  _countCompleteTasksText: {fileID: 1253732974}
   _countCompleteTasksContainer: {fileID: 1967753931}
+  _countCompleteTasksText: {fileID: 1253732974}
 --- !u!224 &308560744 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7957418432731825930, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -5055,7 +5055,7 @@ MonoBehaviour:
   _progressParent: {fileID: 1835327163}
   _timerText: {fileID: 81327182}
   _timer: {fileID: 505451330}
-  _secondsToThrowStep: 20
+  _secondsToThrowStep: 15
 --- !u!224 &1644241261 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 56916295074559995, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}

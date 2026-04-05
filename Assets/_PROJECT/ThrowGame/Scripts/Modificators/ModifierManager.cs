@@ -22,6 +22,7 @@ public class ModifierManager : MonoBehaviour {
     public IThrowableModifier CurrentModifier { get; private set; }
 
     private void OnEnable() {
+        _battleManager.NewPlayerTurn += OnNewPlayerTurn;
         _gameStarter.GameStarted += GameStarted;
         _battleManager.NewPlayerTurn += NewStep;
         _calculator.ObjectThrowed += OnObjectThrowed;
@@ -29,6 +30,15 @@ public class ModifierManager : MonoBehaviour {
 
     private void Start() {
         CalculateValueDivider();
+    }
+    
+    
+    private void OnNewPlayerTurn() {
+        if(!_battleManager.MainPlayerPlay) return;
+        
+        _leftModifierChanger.ForEach(b => b.SetVisualGray(!_battleManager.IsFirstThrowerStep));
+        _rightModifierChanger.ForEach(b => b.SetVisualGray(_battleManager.IsFirstThrowerStep));
+        
     }
 
     private void CalculateValueDivider() {

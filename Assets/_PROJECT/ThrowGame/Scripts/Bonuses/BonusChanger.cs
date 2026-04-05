@@ -44,9 +44,6 @@ public class BonusChanger : UsableItemBase {
         if (_bonusCounts == 0) {
             SetUnvailable();
         }
-        else {
-            SetAvailable();
-        }
     }
 
     

@@ -22,9 +22,9 @@ public class ForceChooseView : MonoBehaviour {
     [SerializeField] private GameObject[] _forceTiles;
 
     [Inject] private ObjectThrowerCalculator _objectThrowerCalculator;
-    [Inject] private ThrowGameStarter _throwGameStarter;
-    [Inject] private InputThrowGame _inputThrowGame;
     [Inject] private ThrowGameStarter _gameStarter;
+    [Inject] private InputThrowGame _inputThrowGame;
+    [Inject] private BattleManager _battleManager;
     
     private float _currentForcePercent;
     private CancellationTokenSource _tokenSource;
@@ -37,20 +37,15 @@ public class ForceChooseView : MonoBehaviour {
         _objectThrowerCalculator.PlayerPressThrow += StopChooser;
         // Скрою опять мало ли игрок решит еще раз на экран нажать
         _objectThrowerCalculator.ObjectFalled += StopChooser;
-        _throwGameStarter.GameStarted += ThrowGameStarterOnGameStarted;
+        _gameStarter.GameStarted += ThrowGameStarterOnGameStarted;
+        _battleManager.NewPlayerTurn += StopChooser;
         // Опять же если бот то игрок не сможет скрыть
         _inputThrowGame.OnDowned += ShowForceView;
-        _inputThrowGame.OnUpped += HideForceView;
+        _inputThrowGame.OnUpped += StopChooser;
         // Убираем поинтер
         _pointer.DisactiveSelf();
     }
-
-    private void HideForceView() {
-        // Проверка что ход не бота еще сделать
-        _canvas.DisactiveSelf();
-        StopChooser();
-    }
-
+    
     private void ShowForceView() {
         if(_objectThrowerCalculator.ObjectInFly) return;
         _canvas.ActiveSelf();
@@ -64,6 +59,7 @@ public class ForceChooseView : MonoBehaviour {
 
     private void StopChooser() {
         UniTaskHelper.DisposeTask(ref _tokenSource);
+        _canvas.DisactiveSelf();
     }
     
     private void StartChooser() {
@@ -72,23 +68,19 @@ public class ForceChooseView : MonoBehaviour {
         StartForceChooserAsync(_tokenSource.Token).Forget();
     }
 
-    private async UniTask StartForceChooserAsync(CancellationToken token) 
-    {
+    private async UniTask StartForceChooserAsync(CancellationToken token) {
         float elapsedTime = 0f;
-        while (!token.IsCancellationRequested) 
-        {
+        while (!token.IsCancellationRequested) {
             elapsedTime += Time.deltaTime;
             float pingPongValue = Mathf.PingPong(elapsedTime, _timeToFullCycle) / _timeToFullCycle;
         
             float curvedT;
             // Проверяем направление: возрастает или убывает
-            if (pingPongValue < _timeToFullCycle)
-            {
+            if (pingPongValue < _timeToFullCycle) {
                 // Идем от 0 к _timeToFullCycle -> _currentForcePercent от 0 к 1
                 curvedT = _forwardCurve.Evaluate(pingPongValue);
             }
-            else
-            {
+            else {
                 // Идем от _timeToFullCycle к 0 -> pingPongValue от 1 к 0
                 curvedT = _backwardCurve.Evaluate(1f - pingPongValue);
             }
@@ -146,16 +138,14 @@ public class ForceChooseView : MonoBehaviour {
     }
     
     
-    private void UpdateTiles(float forcePercent) 
-    {
+    private void UpdateTiles(float forcePercent) {
         // forcePercent от 0 до 1
         // Сколько плиток должно быть активно (0..n)
         int activeCount = Mathf.FloorToInt(forcePercent * _forceTiles.Length);
         activeCount = Mathf.Clamp(activeCount, 0, _forceTiles.Length);
     
         // Включаем/выключаем плитки
-        for (int i = 0; i < _forceTiles.Length; i++)
-        {
+        for (int i = 0; i < _forceTiles.Length; i++) {
             _forceTiles[i].SetActive(i <= activeCount);
         }
     }

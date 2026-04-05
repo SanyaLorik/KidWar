@@ -35,14 +35,14 @@ public class TaskVisual : MonoBehaviour {
     
     public void EnableTask(TaskInfo taskInfo) {
         gameObject.ActiveSelf();
-        _takeRewardButton.DisactiveSelf();
+        _takeRewardButton.interactable = false;
         SetTaskVisual(taskInfo, 0);
         SetTaskLocalizationText();
     }
 
     public void DisableTask() {
         gameObject.DisactiveSelf();
-        _takeRewardButton.DisactiveSelf();
+        _takeRewardButton.interactable = false;
     }
 
     
@@ -55,11 +55,11 @@ public class TaskVisual : MonoBehaviour {
         _taskText.text = string.Format(_taskLocalizationText, _formatter.ValuteFormatter(taskInfo.FullValue));
 
         if (playerValue >= taskInfo.FullValue) {
-            _takeRewardButton.gameObject.ActiveSelf();
+            _takeRewardButton.interactable = true;
             TaskIsComplete = true;
         }
         else {
-            _takeRewardButton.gameObject.DisactiveSelf();
+            _takeRewardButton.interactable = false;
             TaskIsComplete = false;
         }
         UpdateTaskScoreVisual(playerValue, taskInfo.FullValue);
@@ -75,7 +75,7 @@ public class TaskVisual : MonoBehaviour {
 
     
     public void SetTaskCompleteVisual(float currentValue, float fullValue) {
-        _takeRewardButton.gameObject.ActiveSelf();
+        _takeRewardButton.interactable = true;
         _progressText.text = $"{Math.Min(currentValue, fullValue)}/{fullValue}";
         Debug.Log($"Обновление значения задачи {TaskType}:  {currentValue}/{fullValue}");
         RectTransformHelper.SetFillAmount(_progressRectTransform, _parentRectTransform, 1);

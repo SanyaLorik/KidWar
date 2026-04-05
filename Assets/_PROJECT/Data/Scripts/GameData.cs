@@ -27,6 +27,9 @@ public class GameData : GameDataBase
     [field: SerializeField] public float VerticalAxisValueToThrow { get; private set; }
     [field: Header("Приближение во время перекидывания")]
     [field: SerializeField, Range(0,1)] public float ZoomPercentInThrowGame { get; private set; }
+    [field: SerializeField] public PairedValue<float> LeftPlayerWinnerAxis { get; private set; }
+    [field: SerializeField] public PairedValue<float> RightPlayerWinnerAxis { get; private set; }
+    [field: SerializeField, Range(0,1)] public float ZoomToWinnerView { get; private set; }
     
     
     

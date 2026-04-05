@@ -16,6 +16,7 @@ public class CameraOrbitalController : MonoBehaviour {
     [SerializeField] private CinemachineOrbitalFollow _orbitalFollow;
     [SerializeField] private float _cameraSaveDelay = 1f;
     [SerializeField] private Vector3 _dampningWhlePlay;
+    [SerializeField] private Vector3 _dampningInWinnerWindow;
 
     private Action _rotationHandler;
 
@@ -40,7 +41,8 @@ public class CameraOrbitalController : MonoBehaviour {
     private float Sensitivity => Mathf.Clamp(_settings.CameraSensValue, _gameData.MinSensValue, 1f); 
     private float _walkZoom;
     
-    
+    // Будет менеджер кидать чей ход точку
+    private float _zoomBeforeGame;
     
     // [Inject] private PlayerStateManager _playerStateManager;
     [Inject] private SettingsManager _settings;
@@ -61,29 +63,53 @@ public class CameraOrbitalController : MonoBehaviour {
     }
     
     
+    private void Update() {
+        _rotationHandler.Invoke();
+    }
 
     private void OnGameStarted(bool started) {
         if(!_battleManager.MainPlayerPlay) return;
         if (started) {
-            _orbitalFollow.TrackerSettings.PositionDamping = _dampningWhlePlay;
+            SetDamping(_dampningWhlePlay);
         }
         else {
-            _orbitalFollow.TrackerSettings.PositionDamping = Vector3.zero;
+            SetDamping(Vector3.zero);
         }
     }
 
+    private void SetDamping(Vector3 newDamping) {
+        _orbitalFollow.TrackerSettings.PositionDamping = newDamping;
+    }
 
-    // Будет менеджер кидать чей ход точку
-    private float _zoomBeforeGame;
+
     public void SetCameraToPlayThrow(Transform point) {
         _zoomBeforeGame = CurrentFovPercent;
         SetFollowPoint(point);
-        _orbitalFollow.HorizontalAxis.Value = _gameData.HorizontalAxisValueToThrow;
-        _orbitalFollow.VerticalAxis.Value = _gameData.VerticalAxisValueToThrow;
+        SetAxisToFollow(_gameData.HorizontalAxisValueToThrow, _gameData.VerticalAxisValueToThrow);
         ChangeCameraZoomPercent(_gameData.ZoomPercentInThrowGame);
         
         // ForbidRotate(true);
         // ForbidZoom(true);
+    }
+
+    private void SetAxisToFollow(float horizontal, float vertical) {
+        _orbitalFollow.HorizontalAxis.Value = horizontal;
+        _orbitalFollow.VerticalAxis.Value = vertical;
+    }
+
+    public void SetLeftPlayerWinnerAxises(bool leftWinner) {
+        if (leftWinner) {
+            SetAxisToFollow(_gameData.LeftPlayerWinnerAxis.From, _gameData.LeftPlayerWinnerAxis.To);
+        }
+        else {
+            SetAxisToFollow(_gameData.RightPlayerWinnerAxis.From, _gameData.RightPlayerWinnerAxis.To);
+        }
+        ChangeCameraZoomPercent(_gameData.ZoomToWinnerView);
+    }
+    
+    public void GoToWinner(Transform point) {
+        SetFollowPoint(point);
+        SetDamping(_dampningInWinnerWindow);
     }
 
     public void ResetCameraBeforePlay() {
@@ -133,9 +159,7 @@ public class CameraOrbitalController : MonoBehaviour {
         _orbitalFollow.VerticalAxis.Value = _defaultY; 
     }
     
-    private void Update() {
-        _rotationHandler.Invoke();
-    }
+
 
     private void HandleMouseOrbit() {
         // Проверяем нажатие правой кнопки мыши

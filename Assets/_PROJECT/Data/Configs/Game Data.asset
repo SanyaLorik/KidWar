@@ -23,7 +23,7 @@ MonoBehaviour:
     <SecondJumpForce>k__BackingField: 16
     <RotateSpeed>k__BackingField: 16
     <GravityScale>k__BackingField: 4
-    <PlayerMaxHp>k__BackingField: 5
+    <PlayerMaxHp>k__BackingField: 1
     <MobileCameraFov>k__BackingField: 0.452
     <DesktopCameraFov>k__BackingField: 0.474
     <FlightCameraFov>k__BackingField: 0
@@ -32,6 +32,13 @@ MonoBehaviour:
     <HorizontalAxisValueToThrow>k__BackingField: -84.62
     <VerticalAxisValueToThrow>k__BackingField: 8.823097
     <ZoomPercentInThrowGame>k__BackingField: 0.5
+    <LeftPlayerWinnerAxis>k__BackingField:
+      <From>k__BackingField: 207
+      <To>k__BackingField: 23.4
+    <RightPlayerWinnerAxis>k__BackingField:
+      <From>k__BackingField: -27
+      <To>k__BackingField: 23.4
+    <ZoomToWinnerView>k__BackingField: 0.201
     <JoystickSensivityMultiplier>k__BackingField: 500
     <MouseSensivityMultiplier>k__BackingField: 0.4
     <ZoomDiapasone>k__BackingField:

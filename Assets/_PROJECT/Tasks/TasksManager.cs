@@ -61,6 +61,7 @@ public class TasksManager : MonoBehaviour {
     [Inject] private LocalizationData _localization; 
     [Inject] private BattleManager _battleManager; 
     [Inject] private ThrowGameStarter _throwGameStarter; 
+    [Inject] private GameOverShower _gameOverShower; 
     [Inject] private HpView _hpSystem; 
     
     
@@ -71,10 +72,21 @@ public class TasksManager : MonoBehaviour {
     }
 
     private void OnEnable() {
-        _hpSystem.PlayerHit += OnPlayerHit;
         _openCanvasButton.onClick.AddListener(() => _canvas.ActiveSelf());
         _closeCanvasButton.onClick.AddListener(() => _canvas.DisactiveSelf());
+        
+        
+        _hpSystem.PlayerHit += UpdatePlayerHit;
         _parkourCompleteTrigger.ParkourCompleted += UpdateParkourTask;
+        _gameOverShower.PlayerWon += PlayerWinCheck;
+    }
+
+    private void PlayerWinCheck(bool winner) {
+        if (winner) {
+            _winCount++;
+            UpdateTaskProgress(TaskType.WinCount);
+        }
+        
     }
 
     private void UpdateParkourTask() {
@@ -82,7 +94,7 @@ public class TasksManager : MonoBehaviour {
         UpdateTaskProgress(TaskType.Parkour);
     }
 
-    private void OnPlayerHit() {
+    private void UpdatePlayerHit() {
         if (_battleManager.MainPlayerPlay && _battleManager.IsFirstThrowerStep) {
             _hitCount++;
             UpdateTaskProgress(TaskType.HitCount);

@@ -33,6 +33,9 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     [Header("Минимальное время в воздухе")] 
     [SerializeField] private float _minFlightDuration;
     
+    [Header("Минимальная дистанция")] 
+    [SerializeField] private float _minDistance;
+    
     [field: Header("Инфа по уровню")]
     [field: SerializeField] public Transform LeftPoint { get; private set; }
     [field: SerializeField] public Transform RightPoint { get; private set; }
@@ -123,7 +126,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         _angleRatio = CalculateAngleRatio(angle);
         _throwDistance = _initialDistance * _force.CurrentForce * _angleRatio + _wind.CurrentWindForce * windSign;
         Debug.Log("distance " + _throwDistance);
-        return _throwDistance;
+        return Mathf.Max(_throwDistance, _minDistance);
     }
 
     /// <summary>

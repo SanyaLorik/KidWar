@@ -4049,6 +4049,18 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -1.19
       objectReference: {fileID: 0}
+    - target: {fileID: 1402330233937831249, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
+      propertyPath: _walkingParticles
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402330233937831249, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
+      propertyPath: _landParticleController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402330233937831249, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
+      propertyPath: _jumpParticlesController
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3667074117147502011, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.53
@@ -4414,16 +4426,16 @@ MonoBehaviour:
     <To>k__BackingField: 1
   _readyText: {fileID: 1443486436}
   _readyTextScaleTimes:
-    <From>k__BackingField: 1.5
-    <To>k__BackingField: 1
+    <From>k__BackingField: 0.7
+    <To>k__BackingField: 0.5
   _getReadyEases:
     <From>k__BackingField: 27
     <To>k__BackingField: 26
   _goText: {fileID: 790649489}
   _preBattleContainer: {fileID: 308560744}
-  _goTextScaleDuration: 1
+  _goTextScaleDuration: 0.7
   _goTextScaleEase: 27
-  _conatinerGoBottomDuration: 1.2
+  _conatinerGoBottomDuration: 0.7
   _goBottomScreenEase: 0
 --- !u!1 &1372354755
 GameObject:
@@ -4975,7 +4987,7 @@ MonoBehaviour:
   _parentLeftHp: {fileID: 703476381}
   _rightHp: {fileID: 1988619422}
   _parentRightHp: {fileID: 1775815826}
-  _changeHpDuration: 2
+  _changeHpDuration: 0.5
 --- !u!224 &1491452725 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3588737382116405803, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}

@@ -476,7 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.ScaleDownUpAnimation
   <Entity>k__BackingField:
     <Source>k__BackingField: {fileID: 5759316603221923472}
-    <Duration>k__BackingField: 1.2
+    <Duration>k__BackingField: 0.8
     <Ease>k__BackingField: 1
   <IsAutoStart>k__BackingField: 1
   _upScale: {x: 1.1, y: 1.1, z: 1.1}
@@ -641,7 +641,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _spinCount: 2
-  _duration: 4
+  _duration: 2
   _spinRangePercent:
     <From>k__BackingField: -0.05
     <To>k__BackingField: 0.05
@@ -9080,7 +9080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.ScaleDownUpAnimation
   <Entity>k__BackingField:
     <Source>k__BackingField: {fileID: 56916295074559995}
-    <Duration>k__BackingField: 1.2
+    <Duration>k__BackingField: 0.8
     <Ease>k__BackingField: 1
   <IsAutoStart>k__BackingField: 1
   _upScale: {x: 1, y: 1, z: 1}

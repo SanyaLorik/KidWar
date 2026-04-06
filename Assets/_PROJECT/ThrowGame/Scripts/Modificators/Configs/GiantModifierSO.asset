@@ -25,3 +25,4 @@ MonoBehaviour:
         _duration: 1
         _durationBeforeScaling: 1
         _ease: 30
+        _extraDamage: 5

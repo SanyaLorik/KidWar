@@ -22,3 +22,4 @@ MonoBehaviour:
       type: {class: ThrowableModifierDouble, ns: , asm: Assembly-CSharp}
       data:
         _heightMultiplier: 1.3
+        _extraDamage: 3

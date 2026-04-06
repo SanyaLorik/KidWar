@@ -25,3 +25,4 @@ MonoBehaviour:
         exposionDuration: 1
         _scaling: 6
         _ease: 30
+        _extraDamage: 10

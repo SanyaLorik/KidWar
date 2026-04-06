@@ -22,3 +22,4 @@ MonoBehaviour:
       type: {class: ThrowableModifierAim, ns: , asm: Assembly-CSharp}
       data:
         _percentageToStart: 0.6
+        _extraDamage: -3

@@ -1,11 +1,12 @@
 using System;
 using Architecture_M;
+using SanyaBeerExtension;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
 public class PlayerBank : MonoBehaviour {
-    [SerializeField] private TextMeshProUGUI _moneyText;
+    [SerializeField] private TextMeshProUGUI[] _moneyTexts;
     public event Action<long> BankNewMoneyPlus;
     public event Action<long> BankNewMoneyMinus;
 
@@ -16,12 +17,12 @@ public class PlayerBank : MonoBehaviour {
         get => _gameSave.GetSave<GameSave>().Money;
         private set {
             _gameSave.GetSave<GameSave>().Money = value;
-            _moneyText.text = _formatter.ValuteFormatter(value);
+            _moneyTexts.ForEach(t => t.text = _formatter.ValuteFormatter(PlayerCapital));
         }
     }
 
     private void Start() {
-        _moneyText.text = _formatter.ValuteFormatter(PlayerCapital);
+        _moneyTexts.ForEach(t => t.text = _formatter.ValuteFormatter(PlayerCapital));
     }
 
     public void AddMoney(long amount) {

@@ -1169,7 +1169,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8909080348241039252, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3072173570123440653}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4876943737369543958, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7078947111260934240}
   m_SourcePrefab: {fileID: 100100000, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
 --- !u!224 &1970475314493547304 stripped
 RectTransform:
@@ -1191,3 +1194,21 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6070860337768829394, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
   m_PrefabInstance: {fileID: 4135693866114607264}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8848040366624976310 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4876943737369543958, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+  m_PrefabInstance: {fileID: 4135693866114607264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7078947111260934240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848040366624976310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e5d551ed0179140baed77a4596a6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CanvasWindowNotifier
+  _allowCameraZoom: 0

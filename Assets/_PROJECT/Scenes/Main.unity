@@ -888,6 +888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb96b677f5d5dc34c9e352127d07ddf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraInstaller
+  _canvasToHide: {fileID: 574559062}
 --- !u!1 &271583256
 GameObject:
   m_ObjectHideFlags: 0
@@ -5604,19 +5605,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 612599191597666270, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1536376279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1536376277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16e5d551ed0179140baed77a4596a6ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CanvasWindowNotifier
-  _allowCameraZoom: 0
 --- !u!1 &1553375254
 GameObject:
   m_ObjectHideFlags: 0
@@ -6519,19 +6507,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5262964279867118062, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1874546626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874546624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16e5d551ed0179140baed77a4596a6ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CanvasWindowNotifier
-  _allowCameraZoom: 0
 --- !u!114 &1880339771 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5630054485868908104, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -8541,18 +8516,12 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5262964279867118062, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1874546626}
     - targetCorrespondingSourceObject: {fileID: 4928627403195636240, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1174206114}
     - targetCorrespondingSourceObject: {fileID: 1732263699532266779, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2383758755132589764}
-    - targetCorrespondingSourceObject: {fileID: 612599191597666270, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1536376279}
     - targetCorrespondingSourceObject: {fileID: 1582578230404782095, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 765983298}

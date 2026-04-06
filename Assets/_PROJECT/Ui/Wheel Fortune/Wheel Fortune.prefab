@@ -407,5 +407,26 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4952793004601827260, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2085254740650575257}
   m_SourcePrefab: {fileID: 100100000, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+--- !u!1 &333449345517826449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4952793004601827260, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+  m_PrefabInstance: {fileID: 4619422829093973549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2085254740650575257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333449345517826449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e5d551ed0179140baed77a4596a6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CanvasWindowNotifier
+  _allowCameraZoom: 0

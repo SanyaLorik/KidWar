@@ -1,6 +1,9 @@
+using UnityEngine;
 using Zenject;
 
 public class SingleInstaller : MonoInstaller {
+    [SerializeField] private GameObject _canvasToHide;
+    
     public override void InstallBindings() {
         BindCamera();
         BindSettings();
@@ -8,6 +11,7 @@ public class SingleInstaller : MonoInstaller {
         BindNicknameRandomizer();
         Container.Bind<AdvTimerStarter>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<TasksManager>().FromComponentInHierarchy().AsSingle().NonLazy();
+        BindCanvasToHide();
     }
 
     private void BindCamera() {
@@ -24,6 +28,14 @@ public class SingleInstaller : MonoInstaller {
     
     private void BindNicknameRandomizer() {
         Container.BindInterfacesAndSelfTo<NicknameRandomizer>().AsSingle().NonLazy();
+    }
+    
+    
+    private void BindCanvasToHide() {
+        Container.Bind<GameObject>()
+            .WithId("CanvasToHide")
+            .FromInstance(_canvasToHide)
+            .AsSingle().NonLazy();
     }
     
 

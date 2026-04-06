@@ -59,7 +59,7 @@ public class ObjectThrower : MonoBehaviour {
         StayInLeft = stayInLeft;
         _playerHp.InitPosition(StayInLeft);
         _playerHp.SetMaxHp();
-        _playerHp.SetShielded(false);
+        _playerHp.DisableShield();
     }
 
     public void SetDead() {
@@ -68,7 +68,7 @@ public class ObjectThrower : MonoBehaviour {
 
 
     public void SetUnshielded() {
-        _playerHp.SetShielded(false);
+        _playerHp.DisableShield();
     }
 
     private void Throw() {

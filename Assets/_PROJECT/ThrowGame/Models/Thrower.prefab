@@ -532,7 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423fb77e9d1840fe8f53b3cbad5304bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHp
-  _shield: {fileID: 745575082545884}
+  _shieldVisual: {fileID: 7909889104556468824}
 --- !u!1001 &3956825187521094549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -595,3 +595,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3957487129104331081, guid: 09814512b0d92554cae7eab6abcb2bd7, type: 3}
   m_PrefabInstance: {fileID: 3956825187521094549}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7909889104556468824 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6569878501800888781, guid: 09814512b0d92554cae7eab6abcb2bd7, type: 3}
+  m_PrefabInstance: {fileID: 3956825187521094549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56420cc03d0949f8b4df2936772ff38c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShieldVisual

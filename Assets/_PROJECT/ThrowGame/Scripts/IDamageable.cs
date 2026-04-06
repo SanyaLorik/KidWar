@@ -6,6 +6,6 @@
     public void AddDamage(int hp);
     public void AddHp(int hp);
     public void SetInvinsible(bool state);
-    public void SetShielded(bool state);
+    public void EnableShield(int hp);
     public void SetMaxHp();
 }

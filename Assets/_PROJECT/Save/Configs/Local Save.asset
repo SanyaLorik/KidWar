@@ -23,9 +23,9 @@ MonoBehaviour:
     - Id: health_bonus
       Count: 3
     - Id: shield_bonus
-      Count: 3
-    - Id: reset_bonus
       Count: 6
+    - Id: reset_bonus
+      Count: 5
     Tasks:
     - Id: Parkour
       Count: 0
@@ -34,13 +34,13 @@ MonoBehaviour:
       Count: 0
       IsGetReward: 0
     - Id: HitCount
-      Count: 0
+      Count: 3
       IsGetReward: 0
     - Id: UseHealCount
       Count: 0
       IsGetReward: 0
     - Id: ShieldCount
-      Count: 1
+      Count: 8
       IsGetReward: 0
     - Id: HealsLifesCount
       Count: 0

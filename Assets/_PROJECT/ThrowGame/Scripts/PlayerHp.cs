@@ -4,20 +4,23 @@ using UnityEngine;
 using Zenject;
 
 public class PlayerHp : MonoBehaviour, IDamageable {
-    [SerializeField] private Transform _shield;
+    [SerializeField] private ShieldVisual _shieldVisual;
     private bool _stayInLeft;
+    private int _shieldMaxHp;
     public int MaxHp => _data.PlayerMaxHp;
     public int CurrentHp { get; private set; }
     public bool IsInvinsible { get; private set; }
     public bool IsShielded { get; private set; }
 
+    public int CurrentShieldHp { get; private set; }
+
 
     [Inject] private HpView _hpView;
     [Inject] private GameData _data;
-    [Inject] private ShieldAnimationLikeBubble _shieldAnimator;
+    [Inject] 
 
     private void Start() {
-        _shield.DisactiveSelf();
+        _shieldVisual.gameObject.DisactiveSelf();
     }
 
     public void InitPosition(bool stayInLeft) {
@@ -31,8 +34,7 @@ public class PlayerHp : MonoBehaviour, IDamageable {
             return;
         }
         if (IsShielded) {
-            SetShielded(false);
-            return;
+            hp = SetShieldDamage(hp);
         }
         CurrentHp -= hp;
         CurrentHp = Mathf.Max(0, CurrentHp);
@@ -54,14 +56,44 @@ public class PlayerHp : MonoBehaviour, IDamageable {
         IsInvinsible = state;
     }
 
-    public void SetShielded(bool enable) {
+    public void EnableShield(int shieldHp) {
+        // Пока так, каждый раз запоминаем одно и тоже число
+        _shieldMaxHp = shieldHp;
+        CurrentShieldHp = shieldHp;
+        
         // Debug.Log("Включение щита: " + state);
-        IsShielded = enable;
-        _shieldAnimator.ShieldEnableAnimate(enable, _shield);
-        if (enable) {
-            _hpView.UsePlayerShield();
-        }
+        IsShielded = true;
+        _shieldVisual.gameObject.ActiveSelf();
+        _shieldVisual.ShieldEnableAnimate(true, CurrentShieldHp);
+        _hpView.UsePlayerShield();
+        
+
     }
+    
+    public void DisableShield() {
+        IsShielded = false;
+        _shieldVisual.ShieldEnableAnimate(false, 0);
+    }
+
+    /// <summary>
+    /// Урон сначала проходит по щиту, снимает его хп и возвращает хп сколько снеслось игроку
+    /// </summary>
+    /// <param name="damage"></param>
+    public int SetShieldDamage(int damage) {
+        if (damage < CurrentShieldHp) {
+            CurrentShieldHp -= damage;
+            Debug.Log($"Щит выдержал осталось у щита {CurrentShieldHp}хп");
+            _shieldVisual.SetShieldPercentage((float)CurrentShieldHp/_shieldMaxHp, CurrentShieldHp);
+            return 0;
+        }
+        Debug.Log("Щит сломался");
+        CurrentShieldHp = 0;
+        _shieldVisual.SetShieldPercentage(0, CurrentShieldHp);
+        IsShielded = false;
+        return damage - CurrentShieldHp;
+    }
+
+
 
     public void SetMaxHp() {
         CurrentHp = MaxHp;

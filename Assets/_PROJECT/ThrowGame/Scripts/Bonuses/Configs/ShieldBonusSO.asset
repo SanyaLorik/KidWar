@@ -20,4 +20,5 @@ MonoBehaviour:
     RefIds:
     - rid: 8231486814680514637
       type: {class: ShieldBonus, ns: , asm: Assembly-CSharp}
-      data: 
+      data:
+        _shieldHp: 15

@@ -3492,7 +3492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1212541108296832897, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
       propertyPath: m_Speed
-      value: 7
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3667074117147502011, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4243,7 +4243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1212541108296832897, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
       propertyPath: m_Speed
-      value: 7
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1402330233937831249, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
       propertyPath: _walkingParticles
@@ -5389,7 +5389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1212541108296832897, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
       propertyPath: m_Speed
-      value: 7
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3667074117147502011, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6755,7 +6755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1212541108296832897, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
       propertyPath: m_Speed
-      value: 7
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3667074117147502011, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8607,7 +8607,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1212541108296832897, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
       propertyPath: m_Speed
-      value: 7
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3667074117147502011, guid: 12049685913cfbb43b6b01f917270f73, type: 3}
       propertyPath: m_LocalPosition.x

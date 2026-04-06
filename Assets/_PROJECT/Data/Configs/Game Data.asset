@@ -53,7 +53,7 @@ MonoBehaviour:
       <To>k__BackingField: 7
     <ChanseToChangeSkin>k__BackingField: 0
     <ChanseToChangeNickname>k__BackingField: 0
-    <RotationSpeed>k__BackingField: 5
+    <RotationSpeed>k__BackingField: 10
     <ChanceToJump>k__BackingField: 0.374
     <ChanseToGoPlayer>k__BackingField: 0.1
     <StoppingDistance>k__BackingField:

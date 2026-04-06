@@ -87,8 +87,8 @@ MonoBehaviour:
   _rotationForceAfterFall: -10
   <Info>k__BackingField:
     <Icon>k__BackingField: {fileID: 21300000, guid: 9f628188a69b45c4d87bdc403b5efa3e, type: 3}
-    <Damage>k__BackingField: 5
-    <DropChance>k__BackingField: 0.2
+    <Damage>k__BackingField: 15
+    <DropChance>k__BackingField: 0.3
     <RareColor>k__BackingField: {r: 1, g: 0.5922419, b: 0.23137254, a: 1}
 --- !u!114 &1298811877278385144
 MonoBehaviour:

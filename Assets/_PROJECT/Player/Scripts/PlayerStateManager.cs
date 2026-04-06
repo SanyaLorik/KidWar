@@ -15,7 +15,6 @@ public class PlayerStateManager : MonoBehaviour{
     [SerializeField] private JumpParticlesController _jumpParticlesController;
     
     [Header("Player")]
-    [SerializeField] private GameObject _playContainer;
     [SerializeField] private GameObject[] _objectsToShowInPlay;
     [SerializeField] private GameObject[] _objectsToHideInPlay;
     [SerializeField] private GameObject[] _canvases;
@@ -41,14 +40,14 @@ public class PlayerStateManager : MonoBehaviour{
     public void SetupCanvases(bool playerGoPlay) {
         _canvases.DisactiveSelf();
         if (playerGoPlay) {
-            _playContainer.ActiveSelf();
-            _objectsToShowInPlay.ActiveSelf();
-            _objectsToHideInPlay.DisactiveSelf();
+            // _playContainer.ActiveSelf();
+            if(_objectsToShowInPlay.Length != 0) _objectsToShowInPlay.ActiveSelf();
+            if(_objectsToHideInPlay.Length != 0) _objectsToHideInPlay.DisactiveSelf();
         }
         else {
-            _objectsToShowInPlay.DisactiveSelf();
-            _objectsToHideInPlay.ActiveSelf();
-            _playContainer.DisactiveSelf();
+            if(_objectsToShowInPlay.Length != 0) _objectsToShowInPlay.DisactiveSelf();
+            if(_objectsToHideInPlay.Length != 0) _objectsToHideInPlay.ActiveSelf();
+            // _playContainer.DisactiveSelf();
         }
         ChangePlayerState(playerGoPlay ? PlayerState.Play : PlayerState.InSpawn);
     }
@@ -83,9 +82,6 @@ public class PlayerStateManager : MonoBehaviour{
         StateChanged?.Invoke(newState);
     }
 
-    // будет настройка канваса для игрока
-    private void HideFlightMobileView(bool state) {
-        
-    }
-
 }
+
+

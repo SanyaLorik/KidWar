@@ -50,7 +50,7 @@ public class ThrowableObject : MonoBehaviour {
             _modifier.OnPlayerContact();
             StartDestroyTimer(true);
         }
-        player.AddDamage(Info.Damage);
+        player.AddDamage(Info.Damage + _modifier.ExtraDamage);
         _contactPlayer = true;
     }
     

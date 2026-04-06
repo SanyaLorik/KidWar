@@ -3,6 +3,8 @@ using UnityEngine;
 
 [Serializable]
 public class ThrowableModifierDefault : IThrowableModifier {
+    [SerializeField] private int _extraDamage;
+    
     public ThrowableObject ThrowableObject { get; private set; }
 
     public void SetThrowableObject(ThrowableObject throwableObject) {
@@ -10,6 +12,7 @@ public class ThrowableModifierDefault : IThrowableModifier {
     }
 
     public void ExtensionBehaviour() {}
+    public int ExtraDamage => _extraDamage;
 
     public void OnPlayerContact() { }
     

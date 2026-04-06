@@ -11,8 +11,13 @@ public class ThrowableModifierGigant : IThrowableModifier {
     [SerializeField] private float _duration = 1f;
     [SerializeField] private float _durationBeforeScaling = 1f;
     [SerializeField] private Ease _ease = Ease.OutBounce;
+    [SerializeField] private int _extraDamage;
+
     public ThrowableObject ThrowableObject { get; private set; }
 
+    public int ExtraDamage => _extraDamage;
+    
+    
     public void SetThrowableObject(ThrowableObject throwableObject) {
         ThrowableObject = throwableObject;
     }

@@ -6,8 +6,12 @@ using Object = UnityEngine.Object;
 [Serializable]
 public class ThrowableModifierDouble : IThrowableModifier {
     [SerializeField] private float _heightMultiplier = 1.3f;
+    [SerializeField] private int _extraDamage;
+
 
     public ThrowableObject ThrowableObject { get; private set; }
+    public int ExtraDamage => _extraDamage;
+
 
     private ThrowableObject _secondThrowableObject;
     public void SetThrowableObject(ThrowableObject throwableObject) {

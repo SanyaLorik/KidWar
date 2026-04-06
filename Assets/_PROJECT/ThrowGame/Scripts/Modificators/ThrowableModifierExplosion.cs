@@ -9,10 +9,14 @@ public class ThrowableModifierExplosion : IThrowableModifier {
     [SerializeField] private float exposionDuration = 1f;
     [SerializeField] private float _scaling = 6f;
     [SerializeField] private Ease _ease = Ease.OutBounce;
+    [SerializeField] private int _extraDamage;
 
     private bool _isExploded; 
     
     public ThrowableObject ThrowableObject { get; private set; }
+    
+    public int ExtraDamage => _extraDamage;
+
     
     public void SetThrowableObject(ThrowableObject throwableObject) {
         ThrowableObject = throwableObject;

@@ -4,6 +4,7 @@ using UnityEngine;
 [Serializable]
 public class ThrowableModifierAim : IThrowableModifier {
     [SerializeField] private float _percentageToStart = .6f;
+    [SerializeField] private int _extraDamage;
 
     public ThrowableObject ThrowableObject { get; private set; }
 
@@ -13,6 +14,7 @@ public class ThrowableModifierAim : IThrowableModifier {
     }
 
     public void ExtensionBehaviour() { }
+    public int ExtraDamage => _extraDamage;
 
     public void OnPlayerContact() { }
 

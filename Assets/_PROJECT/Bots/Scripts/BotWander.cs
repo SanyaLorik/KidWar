@@ -149,7 +149,7 @@ public class BotWander : MonoBehaviour, IBotBehaviour {
 
     private Vector3 ChooseNextTarget() {
         float rv = Random.value;
-        if (_playerStateManager.CurrentState == PlayerState.Play &&  rv < _gameData.ChanseToGoPlayer)
+        if (_playerStateManager.CurrentState == PlayerState.InSpawn &&  rv < _gameData.ChanseToGoPlayer)
             return _playerMovement.transform.position;
 
         // Иначе выбираем случайный куб

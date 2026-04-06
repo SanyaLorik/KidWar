@@ -478,6 +478,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a5be8e26a249842bb3118721bd5648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModifierChanger
+--- !u!1 &183706447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 183706448}
+  - component: {fileID: 183706449}
+  m_Layer: 0
+  m_Name: PurchaseInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &183706448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183706447}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1410479887}
+  - {fileID: 1117280027}
+  - {fileID: 2026101003}
+  m_Father: {fileID: 823211788}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &183706449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183706447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd02b6f68dc5044dbaf2653ef1a171f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.PurchaseInstaller
+  _purchasesBase: {fileID: 5363244089110065937, guid: b5754cfbfe07e164587b56f1b506eeb5, type: 3}
+  _purchaseSlots:
+  - {fileID: 1410479886}
+  - {fileID: 1117280028}
+  - {fileID: 2026101002}
+  _purchaseSlotViiews:
+  - {fileID: 1880339773}
+  - {fileID: 1880339772}
+  - {fileID: 1880339771}
 --- !u!114 &190698461 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2734107831689208544, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -2717,6 +2773,7 @@ Transform:
   - {fileID: 1105847654}
   - {fileID: 1463497113}
   - {fileID: 848365568}
+  - {fileID: 183706448}
   m_Father: {fileID: 1131067824}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &823211789
@@ -2740,6 +2797,7 @@ MonoBehaviour:
   - {fileID: 1463497114}
   - {fileID: 848365569}
   - {fileID: 8665682}
+  - {fileID: 183706449}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -3553,6 +3611,61 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f1416c90591bab9449442d3ae7308f75, type: 2}
   - {fileID: 11400000, guid: a1d1cb4e2c05c374ba79e03ca879dfb1, type: 2}
   - {fileID: 11400000, guid: 65915b1ab0deaef4d954c98e2d3a5f95, type: 2}
+--- !u!1 &1117280026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1117280027}
+  - component: {fileID: 1117280028}
+  m_Layer: 0
+  m_Name: 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1117280027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117280026}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 183706448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1117280028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117280026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23373e5ea421c3b4b8fec0520ba591ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PurchaseSlotKW
+  <Id>k__BackingField: 2
+  <PurchaseInfo>k__BackingField:
+    <Id>k__BackingField: 
+    <PriceInteger>k__BackingField: 0
+    <PriceFloat>k__BackingField: 0
+    <Currency>k__BackingField: 
+  <HasPurchaseInfo>k__BackingField: 0
+  _purshaseItems: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1131067823
 GameObject:
   m_ObjectHideFlags: 0
@@ -4417,6 +4530,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2505bd4cb240e4caaca8ac5d1b2250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DelayedTrigger
+--- !u!1 &1410479885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1410479887}
+  - component: {fileID: 1410479886}
+  m_Layer: 0
+  m_Name: 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1410479886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410479885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23373e5ea421c3b4b8fec0520ba591ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PurchaseSlotKW
+  <Id>k__BackingField: 1
+  <PurchaseInfo>k__BackingField:
+    <Id>k__BackingField: 
+    <PriceInteger>k__BackingField: 0
+    <PriceFloat>k__BackingField: 0
+    <Currency>k__BackingField: 
+  <HasPurchaseInfo>k__BackingField: 0
+  _purshaseItems: []
+  references:
+    version: 2
+    RefIds: []
+--- !u!4 &1410479887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410479885}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 183706448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1423316925
 GameObject:
   m_ObjectHideFlags: 0
@@ -6055,6 +6223,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CanvasWindowNotifier
   _allowCameraZoom: 0
+--- !u!114 &1880339771 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5630054485868908104, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 611408ef5a702e94e88d1d1cefbc15cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.PurchaseSlotView
+--- !u!114 &1880339772 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1192304545371801911, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 611408ef5a702e94e88d1d1cefbc15cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.PurchaseSlotView
+--- !u!114 &1880339773 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7664189951273008536, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 611408ef5a702e94e88d1d1cefbc15cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.PurchaseSlotView
 --- !u!114 &1891382203 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 625980383716066636, guid: 4618323e71e227f4d92fcd9561fc8042, type: 3}
@@ -6281,6 +6482,61 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3802191914496544834, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2026101001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2026101003}
+  - component: {fileID: 2026101002}
+  m_Layer: 0
+  m_Name: 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2026101002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026101001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23373e5ea421c3b4b8fec0520ba591ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PurchaseSlotKW
+  <Id>k__BackingField: 3
+  <PurchaseInfo>k__BackingField:
+    <Id>k__BackingField: 
+    <PriceInteger>k__BackingField: 0
+    <PriceFloat>k__BackingField: 0
+    <Currency>k__BackingField: 
+  <HasPurchaseInfo>k__BackingField: 0
+  _purshaseItems: []
+  references:
+    version: 2
+    RefIds: []
+--- !u!4 &2026101003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026101001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 183706448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2049513008
 GameObject:
   m_ObjectHideFlags: 0
@@ -6601,6 +6857,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -23
       objectReference: {fileID: 0}
+    - target: {fileID: 1192304545371801911, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: _purchaseSlot
+      value: 
+      objectReference: {fileID: 1117280028}
     - target: {fileID: 1284203175182184237, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -7213,6 +7473,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -30
       objectReference: {fileID: 0}
+    - target: {fileID: 5630054485868908104, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: _purchaseSlot
+      value: 
+      objectReference: {fileID: 2026101002}
     - target: {fileID: 5646868227618997240, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -7429,6 +7693,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7664189951273008536, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: _purchaseSlot
+      value: 
+      objectReference: {fileID: 1410479886}
     - target: {fileID: 7683806247356973827, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
       value: 1

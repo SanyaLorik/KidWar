@@ -103,7 +103,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7731351712379308557}
-  - component: {fileID: 767385845040966396}
   m_Layer: 0
   m_Name: Skin_1
   m_TagString: Untagged
@@ -134,25 +133,6 @@ RectTransform:
   m_AnchoredPosition: {x: 194, y: -194}
   m_SizeDelta: {x: 356, y: 356}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &767385845040966396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2211434877637635595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 284456eeb10e76140b265b193faa4aa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LuringPlayer_M.DailyItemAward
-  <NumberOfDay>k__BackingField: 1
-  _getButton: {fileID: 6837294339934406919}
-  _getText: {fileID: 8434529325870783083}
-  _awardReceivers: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!1 &2248639950042573730
 GameObject:
   m_ObjectHideFlags: 0

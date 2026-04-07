@@ -23,9 +23,9 @@ MonoBehaviour:
     - Id: health_bonus
       Count: 3
     - Id: shield_bonus
-      Count: 6
+      Count: 10
     - Id: reset_bonus
-      Count: 5
+      Count: 11
     Tasks:
     - Id: Parkour
       Count: 0
@@ -49,5 +49,5 @@ MonoBehaviour:
       LastDateTimeReceived: 
       LastDayNumber: -1
     WheelFortuneSave:
-      CountSpinAllow: 3
-      LastDateTimeSpined: 05.04.2026 14:57:47
+      CountSpinAllow: 5
+      LastDateTimeSpined: 07.04.2026 22:43:20

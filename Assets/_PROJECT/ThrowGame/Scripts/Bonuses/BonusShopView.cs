@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Architecture_M;
 using DG.Tweening;
+using MirraSDK_M;
 using SanyaBeerExtension;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,17 +32,30 @@ public class BonusShopView : MonoBehaviour {
     [Inject] private BonusManager _bonusManager;
     [Inject] private IGameSave _save;
     [Inject] private AdvTimerStarter _advTimerStarter;
-    
+    [Inject] private AdvertisingMonetizationMirra _advertisingMonetization;
+
     
     private void OnEnable() {
         _closeButton.onClick.AddListener(CloseCanvas);
         _bonusButtons.ForEach(b => b.BonusButton.onClick.AddListener(() => BuyOneItem(b)));
-        _randomByAdv.onClick.AddListener(BuyRandom);
+        _randomByAdv.onClick.AddListener(WatchAdv);
     }
 
     private void BuyOneItem(BonusButtonItem bonusButtonItem) {
         _save.GetSave<GameSave>().AddNewBonusCounts(bonusButtonItem.BonuseItem.Id,1);
         _save.Save();
+    }
+
+    private void WatchAdv() {
+        _advertisingMonetization.InvokeRewarded(
+            null,
+            (isSuccess) => 
+            {
+                if (isSuccess) {
+                    BuyRandom();
+                }
+            }
+        );
     }
     
     private void BuyRandom() { 

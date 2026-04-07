@@ -31,6 +31,8 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
     
     public bool IsPlayerCopy { get; private set; }
     
+    public string SkinId { get; private set; }
+    
     public ObjectThrower ObjectThrower => _thrower;
 
     private void Awake() {
@@ -109,6 +111,7 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
         _botAnimator.InitAnimator(_botWander);
     }
     public void SetBotSkin(SkinItemConfig skinItemConfig) {
+        SkinId = skinItemConfig.Id;
         _previousBotState = gameObject.activeSelf;
         gameObject.ActiveSelf();
         StartCoroutine(ChangeSkinRoutine(skinItemConfig));

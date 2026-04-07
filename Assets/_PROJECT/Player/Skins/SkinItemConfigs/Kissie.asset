@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Kissie
   m_EditorClassIdentifier: Assembly-CSharp::SkinItem
   <Id>k__BackingField: kissie_skin
-  <Price>k__BackingField: 0
+  <Price>k__BackingField: 1000000
+  <CountAdvToUnlock>k__BackingField: 0
   <SkinPrefab>k__BackingField: {fileID: 5194921409329958626, guid: e7ed7f90ab3057e4e9de13823310825f, type: 3}
   <SkinElementsController>k__BackingField: {fileID: 2286371093910534174, guid: e7ed7f90ab3057e4e9de13823310825f, type: 3}
   <Avatar>k__BackingField: {fileID: 9000000, guid: 37b777ab0dc18ec48894b69d8ad0b21d, type: 3}
   <SkinGetType>k__BackingField: 0
+  <SkinSprite>k__BackingField: {fileID: 21300000, guid: 1a6928a2690200d46b2c64d58e366329, type: 3}

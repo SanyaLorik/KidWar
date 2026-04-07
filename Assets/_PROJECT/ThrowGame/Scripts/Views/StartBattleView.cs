@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using SanyaBeerExtension;
 using UnityEngine;
@@ -24,8 +25,14 @@ public class StartBattleView : MonoBehaviour {
     [SerializeField] float _conatinerGoBottomDuration;
     [SerializeField] Ease _goBottomScreenEase;
 
+    [Header("Авы ботов!")]
+    [SerializeField] private Image _leftAva;
+    [SerializeField] private Image _rightAva;
     
+    [Inject] List<SkinItemConfig> _skins;
     [Inject] ThrowGameStarter _throwGameStarter;
+    [Inject] BattleManager _battleManager;
+
     
     private float _bootomScreenMoveDistance;
     private float _startContainerPose;
@@ -39,8 +46,16 @@ public class StartBattleView : MonoBehaviour {
         _bootomScreenMoveDistance = _startContainerPose - _preBattleContainer.rect.height; 
     }
 
+    private void InitAvatars(ObjectThrower left, ObjectThrower right) {
+        _leftAva.sprite = _skins.Find(s => s.Id == left.SkinId).SkinSprite;
+        _rightAva.sprite = _skins.Find(s => s.Id == right.SkinId).SkinSprite;
+    }
+    
 
-    public void StartBattleAnimation() {
+    public void StartBattleAnimation(ObjectThrower leftPlayer, ObjectThrower rightPlayer) {
+        if (_battleManager.MainPlayerPlay) {
+            InitAvatars(leftPlayer, rightPlayer);
+        }
         Debug.Log("StartBattleAnimation");
         SetAnimationPlayNow(true);
        

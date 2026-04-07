@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Tung
   m_EditorClassIdentifier: Assembly-CSharp::SkinItem
   <Id>k__BackingField: tung_skin
-  <Price>k__BackingField: 0
+  <Price>k__BackingField: 200000
+  <CountAdvToUnlock>k__BackingField: 0
   <SkinPrefab>k__BackingField: {fileID: 5194921409329958626, guid: e57b0f8a4f63a754693c69a74e31cca3, type: 3}
   <SkinElementsController>k__BackingField: {fileID: 2286371093910534174, guid: e57b0f8a4f63a754693c69a74e31cca3, type: 3}
   <Avatar>k__BackingField: {fileID: 9000000, guid: 2d50d4eb28c327943b870bf4d69fb7e3, type: 3}
   <SkinGetType>k__BackingField: 0
+  <SkinSprite>k__BackingField: {fileID: 21300000, guid: cf374f9b5c5957445a74469df0141997, type: 3}

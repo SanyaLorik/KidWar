@@ -10,6 +10,7 @@ public class BotAnimator : MonoBehaviour {
 
     private BotWander _botWander;
     private SkinElementsController _skinController;
+    private CancellationTokenSource _tokenSource;
     
     public void SetModelData(Avatar avatar, SkinElementsController controller) {
         _animator.avatar = avatar;
@@ -34,7 +35,6 @@ public class BotAnimator : MonoBehaviour {
         }
     }
 
-    private CancellationTokenSource _tokenSource;
     private void OnStartWandering(bool isRunning) {
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();

@@ -55,7 +55,9 @@ public class ObjectThrower : MonoBehaviour {
         PlayerHandle = !isBot;
     }
     
-    public void InitToNewGame(bool stayInLeft) {
+    public string SkinId { get; private set; }
+    public void InitToNewGame(bool stayInLeft, string skinId) {
+        SkinId = skinId;
         StayInLeft = stayInLeft;
         _playerHp.InitPosition(StayInLeft);
         _playerHp.SetMaxHp();

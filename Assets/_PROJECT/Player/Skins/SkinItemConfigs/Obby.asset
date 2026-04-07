@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Obby
   m_EditorClassIdentifier: Assembly-CSharp::SkinItem
   <Id>k__BackingField: obby_skin
-  <Price>k__BackingField: 0
+  <Price>k__BackingField: 100
+  <CountAdvToUnlock>k__BackingField: 0
   <SkinPrefab>k__BackingField: {fileID: 5194921409329958626, guid: 8576fca35b1243d4eabc909b5029eb12, type: 3}
   <SkinElementsController>k__BackingField: {fileID: 2286371093910534174, guid: 8576fca35b1243d4eabc909b5029eb12, type: 3}
   <Avatar>k__BackingField: {fileID: 9000000, guid: 4037f195225adf243ab66dad426ec896, type: 3}
   <SkinGetType>k__BackingField: 0
+  <SkinSprite>k__BackingField: {fileID: 21300000, guid: 3c75768c744d9b342a03fd9ff8d93f6b, type: 3}

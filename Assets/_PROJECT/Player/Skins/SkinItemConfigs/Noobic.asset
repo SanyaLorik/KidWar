@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Noobic
   m_EditorClassIdentifier: Assembly-CSharp::SkinItem
   <Id>k__BackingField: noobic_skin
-  <Price>k__BackingField: 0
+  <Price>k__BackingField: 100
+  <CountAdvToUnlock>k__BackingField: 3
   <SkinPrefab>k__BackingField: {fileID: 5194921409329958626, guid: c773b7461ab40c24ea8615bc677ec80c, type: 3}
   <SkinElementsController>k__BackingField: {fileID: 2286371093910534174, guid: c773b7461ab40c24ea8615bc677ec80c, type: 3}
   <Avatar>k__BackingField: {fileID: 9000000, guid: 7c8b67ec6cc25f4469dcae5923d696b1, type: 3}
-  <SkinGetType>k__BackingField: 0
+  <SkinGetType>k__BackingField: 1
+  <SkinSprite>k__BackingField: {fileID: 21300000, guid: 3246684f2caa54644bdf3856c8952dec, type: 3}

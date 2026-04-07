@@ -8,19 +8,19 @@ using Zenject;
 public class PlayerSkinInventory : IInitializable {
     public event Action<SkinItemConfig> SkinUnlocked;
     public event Action<SkinItemConfig> SkinEquipped;
-    private readonly SkinItemConfig _defaultSkinConfig; 
+    public readonly SkinItemConfig DefaultSkinConfig; 
     
     [Inject] private IGameSave _saver; 
 
     public PlayerSkinInventory(SkinItemConfig defaultSkinConfig) {
-        _defaultSkinConfig = defaultSkinConfig;
+        DefaultSkinConfig = defaultSkinConfig;
     }
     
     public void Initialize() {
         // Если никого скина нет вообще
-        if (!SkinIsBought(_defaultSkinConfig.Id)) {
-            _saver.GetSave<GameSave>().AddNewSkin(_defaultSkinConfig.Id);
-            EquipSkin(_defaultSkinConfig);
+        if (!SkinIsBought(DefaultSkinConfig.Id)) {
+            _saver.GetSave<GameSave>().AddNewSkin(DefaultSkinConfig.Id);
+            EquipSkin(DefaultSkinConfig);
         }
     }
     

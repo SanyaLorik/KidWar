@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Tralalelo
   m_EditorClassIdentifier: Assembly-CSharp::SkinItem
   <Id>k__BackingField: tralalelo_skin
-  <Price>k__BackingField: 0
+  <Price>k__BackingField: 100
+  <CountAdvToUnlock>k__BackingField: 0
   <SkinPrefab>k__BackingField: {fileID: 5194921409329958626, guid: 3e888dc724becc344bf5ef7ecc6f96dc, type: 3}
   <SkinElementsController>k__BackingField: {fileID: 2286371093910534174, guid: 3e888dc724becc344bf5ef7ecc6f96dc, type: 3}
   <Avatar>k__BackingField: {fileID: 9000000, guid: f645746a65369cd4da1a1cee0ce8a7c4, type: 3}
   <SkinGetType>k__BackingField: 0
+  <SkinSprite>k__BackingField: {fileID: 21300000, guid: 708f819b9a900de4faef5df9ce85ba3a, type: 3}

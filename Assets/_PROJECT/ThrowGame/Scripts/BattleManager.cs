@@ -51,6 +51,7 @@ public class BattleManager : MonoBehaviour {
     [Inject] PlayersStepView _playersStepView;
     [Inject] ThrowObjectsIniter _throwObjectsIniter;
     [Inject] GameOverShower _gameOverShower;
+    [Inject] PlayerSkinInventory _skinInventory;
 
     
     public int GetCurrentPlayerLifesCount() {
@@ -95,26 +96,35 @@ public class BattleManager : MonoBehaviour {
         AllowToPlay = false;
         MainPlayerPlay = !firstPlayerBot;
 
+        string firstSkinId = _skinInventory.DefaultSkinConfig.Id;
+        string secondSkinId = _skinInventory.DefaultSkinConfig.Id;
+        
+        
         if (!firstPlayerBot) {
             FirstThrower = _mainPlayer;
+            firstSkinId = _skinInventory.CurrentSkinId;
             GetReadyPlayer(_mainPlayer, true);
         }
         else {
-            FirstThrower = _botsMainManager.GetRandomBotToBattle(false);
+            BotStateManager bot = _botsMainManager.GetRandomBotToBattle(false);
+            FirstThrower = bot;
+            firstSkinId = bot.SkinId;
             GetReadyPlayer(FirstThrower, true);
             // Это битва 2х ботов
             // - сделать аим у ботов 100%
         }
 
         // Второй игрок всегда ботяра, ток с настроенным поведением
-        SecondThrower = _botsMainManager.GetRandomBotToBattle(!secondPlayerBot);
+        BotStateManager bot2 = _botsMainManager.GetRandomBotToBattle(!secondPlayerBot);
+        SecondThrower = bot2;
+        secondSkinId = bot2.SkinId;
         GetReadyPlayer(SecondThrower, false);
         
         
-        FirstThrower.ObjectThrower.InitToNewGame(true);
+        FirstThrower.ObjectThrower.InitToNewGame(true, firstSkinId);
         FirstThrower.ObjectThrower.SetBotBehaviour(_bot1, SecondThrower.ObjectThrower, firstPlayerBot);
         
-        SecondThrower.ObjectThrower.InitToNewGame(false);
+        SecondThrower.ObjectThrower.InitToNewGame(false, secondSkinId);
         SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
         SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
         
@@ -148,7 +158,7 @@ public class BattleManager : MonoBehaviour {
         Debug.Log("GoBattle");
         if (MainPlayerPlay) {
             FocusCamera(_leftCameraFocus);
-            _startBattleView.StartBattleAnimation(); 
+            _startBattleView.StartBattleAnimation(FirstThrower.ObjectThrower, SecondThrower.ObjectThrower); 
             await UniTask.WaitWhile(() => _startBattleView.AnimationPlayNow);            
         }        
         

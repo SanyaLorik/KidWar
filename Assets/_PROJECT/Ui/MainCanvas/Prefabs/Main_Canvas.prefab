@@ -17241,6 +17241,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2887163088129981156, guid: 36c06ce9c1212944d984cd9e0e98526f, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115004431593368189, guid: 36c06ce9c1212944d984cd9e0e98526f, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115004431593368189, guid: 36c06ce9c1212944d984cd9e0e98526f, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115004431593368189, guid: 36c06ce9c1212944d984cd9e0e98526f, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503945
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115004431593368189, guid: 36c06ce9c1212944d984cd9e0e98526f, type: 3}
+      propertyPath: 'managedReferences[1210044605646503945]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115004431593368189, guid: 36c06ce9c1212944d984cd9e0e98526f, type: 3}
+      propertyPath: managedReferences[1210044605646503945]._count
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115004431593368189, guid: 36c06ce9c1212944d984cd9e0e98526f, type: 3}
+      propertyPath: managedReferences[1210044605646503945]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 4164ca232dae75048851cc0e0b2df030, type: 2}
     - target: {fileID: 3673833463365777492, guid: 36c06ce9c1212944d984cd9e0e98526f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -17360,6 +17388,10 @@ PrefabInstance:
     - target: {fileID: 5392975004206729868, guid: 36c06ce9c1212944d984cd9e0e98526f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -170
+      objectReference: {fileID: 0}
+    - target: {fileID: 5985598529541920933, guid: 36c06ce9c1212944d984cd9e0e98526f, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8766046362765711368, guid: 36c06ce9c1212944d984cd9e0e98526f, type: 3}
       propertyPath: m_AnchoredPosition.x

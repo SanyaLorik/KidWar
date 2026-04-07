@@ -93,9 +93,33 @@ PrefabInstance:
       value: +2
       objectReference: {fileID: 0}
     - target: {fileID: 2558524862707648754, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558524862707648754, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: <Chance>k__BackingField
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 2558524862707648754, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558524862707648754, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503936
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558524862707648754, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[1210044605646503936]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558524862707648754, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503936]._count
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558524862707648754, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503936]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 4164ca232dae75048851cc0e0b2df030, type: 2}
     - target: {fileID: 2938404039146615447, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: m_SizeDelta.y
       value: 128
@@ -121,17 +145,65 @@ PrefabInstance:
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3212196624706120436, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212196624706120436, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: <Chance>k__BackingField
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 3212196624706120436, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212196624706120436, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503941
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212196624706120436, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[1210044605646503941]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212196624706120436, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503941]._count
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212196624706120436, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503941]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 4164ca232dae75048851cc0e0b2df030, type: 2}
     - target: {fileID: 3401248093677234779, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 94.4
       objectReference: {fileID: 0}
     - target: {fileID: 3848394193335861222, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848394193335861222, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: <Chance>k__BackingField
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3848394193335861222, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848394193335861222, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503943
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848394193335861222, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[1210044605646503943]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848394193335861222, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503943]._count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848394193335861222, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503943]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 30304a6164c5a1845ab7d39016723efb, type: 2}
     - target: {fileID: 4512404536470679795, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: m_SizeDelta.y
       value: 156
@@ -269,9 +341,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 515f9281a67ee2d40b7bb84c93d5104d, type: 3}
     - target: {fileID: 4998231248907560108, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998231248907560108, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: <Chance>k__BackingField
       value: 0.45
       objectReference: {fileID: 0}
+    - target: {fileID: 4998231248907560108, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998231248907560108, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503942
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998231248907560108, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[1210044605646503942]'
+      value: Assembly-CSharp SpinReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998231248907560108, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503942]._count
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998231248907560108, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503942]._wheelFortune
+      value: 
+      objectReference: {fileID: 1521335515720132505}
     - target: {fileID: 5453417136701809931, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: m_text
       value: +2
@@ -303,6 +399,30 @@ PrefabInstance:
     - target: {fileID: 5517933551848062387, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: m_SizeDelta.y
       value: -256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671828572282590847, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671828572282590847, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: <Chance>k__BackingField
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671828572282590847, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671828572282590847, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503937
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671828572282590847, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[1210044605646503937]'
+      value: Assembly-CSharp MoneyReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671828572282590847, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503937]._newMoney
+      value: 50000000
       objectReference: {fileID: 0}
     - target: {fileID: 5931891691803324441, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: m_text
@@ -337,9 +457,33 @@ PrefabInstance:
       value: 0.86
       objectReference: {fileID: 0}
     - target: {fileID: 7572295625577241180, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572295625577241180, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: <Chance>k__BackingField
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 7572295625577241180, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572295625577241180, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503940
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572295625577241180, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[1210044605646503940]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572295625577241180, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503940]._count
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572295625577241180, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503940]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 8185d71f400cf184daa223e183b1e07c, type: 2}
     - target: {fileID: 7873421227897097965, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -376,10 +520,54 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -7
       objectReference: {fileID: 0}
+    - target: {fileID: 8325801965514255998, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325801965514255998, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325801965514255998, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503939
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325801965514255998, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[1210044605646503939]'
+      value: Assembly-CSharp MoneyReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325801965514255998, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503939]._newMoney
+      value: 10000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456627563826092014, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8456627563826092014, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: <Chance>k__BackingField
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 8456627563826092014, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456627563826092014, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503938
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456627563826092014, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: 'managedReferences[1210044605646503938]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456627563826092014, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503938]._count
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456627563826092014, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: managedReferences[1210044605646503938]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 30304a6164c5a1845ab7d39016723efb, type: 2}
     - target: {fileID: 8460622664366931005, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -430,3 +618,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CanvasWindowNotifier
   _allowCameraZoom: 0
+--- !u!114 &1521335515720132505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6127043946692921780, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+  m_PrefabInstance: {fileID: 4619422829093973549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333449345517826449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8be7e06993689124a93cffe094245d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LuringPlayer_M.WheelFortuneBase

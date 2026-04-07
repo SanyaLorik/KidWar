@@ -701,25 +701,85 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1175328252777829114, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1175328252777829114, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1175328252777829114, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: <NumberOfDay>k__BackingField
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1175328252777829114, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503951
+      objectReference: {fileID: 0}
+    - target: {fileID: 1175328252777829114, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[1210044605646503951]'
+      value: Assembly-CSharp MoneyReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 1175328252777829114, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503951]._newMoney
+      value: 30000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258100928269947460, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1258100928269947460, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: <NumberOfDay>k__BackingField
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1258100928269947460, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503948
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258100928269947460, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[1210044605646503948]'
+      value: Assembly-CSharp MoneyReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258100928269947460, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503948]._newMoney
+      value: 25000000
+      objectReference: {fileID: 0}
     - target: {fileID: 1273908832489769027, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_text
-      value: "+5\u041A"
+      value: "+100\u041A"
       objectReference: {fileID: 0}
     - target: {fileID: 1273908832489769027, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_fontSize
       value: 63.2
       objectReference: {fileID: 0}
     - target: {fileID: 1323591745453556445, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323591745453556445, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323591745453556445, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: <NumberOfDay>k__BackingField
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1323591745453556445, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503956
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323591745453556445, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[1210044605646503956]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323591745453556445, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503956]._count
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323591745453556445, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503956]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 4164ca232dae75048851cc0e0b2df030, type: 2}
     - target: {fileID: 1727983077158473936, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -957,9 +1017,49 @@ PrefabInstance:
       value: -32
       objectReference: {fileID: 0}
     - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: <NumberOfDay>k__BackingField
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503949
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: '_awardReceivers.Array.data[1]'
+      value: 1210044605646503950
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[1210044605646503949]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[1210044605646503950]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503949]._count
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503950]._count
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503949]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 4164ca232dae75048851cc0e0b2df030, type: 2}
+    - target: {fileID: 5331335816433164102, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503950]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 30304a6164c5a1845ab7d39016723efb, type: 2}
     - target: {fileID: 5591256754862863209, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_Name
       value: Icon Image_2
@@ -1017,9 +1117,65 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: <NumberOfDay>k__BackingField
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503952
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: '_awardReceivers.Array.data[1]'
+      value: 1210044605646503953
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: '_awardReceivers.Array.data[2]'
+      value: 1210044605646503954
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[1210044605646503952]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[1210044605646503953]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[1210044605646503954]'
+      value: Assembly-CSharp BonusReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503952]._count
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503953]._count
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503954]._count
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503952]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 4164ca232dae75048851cc0e0b2df030, type: 2}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503953]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 30304a6164c5a1845ab7d39016723efb, type: 2}
+    - target: {fileID: 7358841923311419648, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503954]._bonusItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 8185d71f400cf184daa223e183b1e07c, type: 2}
     - target: {fileID: 7593054019043559639, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_SizeDelta.x
       value: -185.9265
@@ -1044,13 +1200,29 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 63.2
       objectReference: {fileID: 0}
+    - target: {fileID: 7671303134713982981, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7671303134713982981, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503947
+      objectReference: {fileID: 0}
+    - target: {fileID: 7671303134713982981, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[1210044605646503947]'
+      value: Assembly-CSharp MoneyReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 7671303134713982981, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503947]._newMoney
+      value: 10000000
+      objectReference: {fileID: 0}
     - target: {fileID: 7686950750628358658, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_text
-      value: "+50\u041A"
+      value: "+250\u041A"
       objectReference: {fileID: 0}
     - target: {fileID: 7752874235603921596, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_text
-      value: "+100\u041A"
+      value: "+300\u041A"
       objectReference: {fileID: 0}
     - target: {fileID: 7896878976709394339, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1148,6 +1320,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8962323903857806873, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962323903857806873, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: _awardReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962323903857806873, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: '_awardReceivers.Array.data[0]'
+      value: 1210044605646503955
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962323903857806873, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: 'managedReferences[1210044605646503955]'
+      value: Assembly-CSharp SkinReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962323903857806873, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
+      propertyPath: managedReferences[1210044605646503955]._skinInStore
+      value: 
+      objectReference: {fileID: 11400000, guid: e5ce4979a2202c243b7d8a307e28a19b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

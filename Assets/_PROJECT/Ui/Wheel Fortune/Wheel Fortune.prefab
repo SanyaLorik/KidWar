@@ -93,6 +93,10 @@ PrefabInstance:
       value: +2
       objectReference: {fileID: 0}
     - target: {fileID: 2558524862707648754, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: <Icon>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: f7c4f45c961e0e5408a7fb03314199f5, type: 3}
+    - target: {fileID: 2558524862707648754, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: 'managedReferences[-2]'
       value: 
       objectReference: {fileID: 0}
@@ -145,6 +149,10 @@ PrefabInstance:
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3212196624706120436, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: <Icon>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: f7c4f45c961e0e5408a7fb03314199f5, type: 3}
+    - target: {fileID: 3212196624706120436, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: 'managedReferences[-2]'
       value: 
       objectReference: {fileID: 0}
@@ -176,6 +184,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 94.4
       objectReference: {fileID: 0}
+    - target: {fileID: 3848394193335861222, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: <Icon>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: 64523bbe72960b54488c9a78ab7a2b05, type: 3}
     - target: {fileID: 3848394193335861222, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: 'managedReferences[-2]'
       value: 
@@ -341,6 +353,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 515f9281a67ee2d40b7bb84c93d5104d, type: 3}
     - target: {fileID: 4998231248907560108, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: <Icon>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f05086c2bfad674bb0694de06a20fdc, type: 3}
+    - target: {fileID: 4998231248907560108, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: 'managedReferences[-2]'
       value: 
       objectReference: {fileID: 0}
@@ -401,6 +417,10 @@ PrefabInstance:
       value: -256
       objectReference: {fileID: 0}
     - target: {fileID: 5671828572282590847, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: <Icon>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: 9ec872d66be6b4648b25f10068191ec7, type: 3}
+    - target: {fileID: 5671828572282590847, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: 'managedReferences[-2]'
       value: 
       objectReference: {fileID: 0}
@@ -456,6 +476,10 @@ PrefabInstance:
       propertyPath: m_PixelsPerUnitMultiplier
       value: 0.86
       objectReference: {fileID: 0}
+    - target: {fileID: 7572295625577241180, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: <Icon>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: f89b0340a32e52e439a7f47892d08586, type: 3}
     - target: {fileID: 7572295625577241180, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: 'managedReferences[-2]'
       value: 
@@ -521,6 +545,10 @@ PrefabInstance:
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 8325801965514255998, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: <Icon>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: 9ec872d66be6b4648b25f10068191ec7, type: 3}
+    - target: {fileID: 8325801965514255998, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: 'managedReferences[-2]'
       value: 
       objectReference: {fileID: 0}
@@ -540,6 +568,10 @@ PrefabInstance:
       propertyPath: managedReferences[1210044605646503939]._newMoney
       value: 10000000
       objectReference: {fileID: 0}
+    - target: {fileID: 8456627563826092014, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
+      propertyPath: <Icon>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: 64523bbe72960b54488c9a78ab7a2b05, type: 3}
     - target: {fileID: 8456627563826092014, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: 'managedReferences[-2]'
       value: 

@@ -41,9 +41,20 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
     }
     
     
+    private void Start() {
+        ChangeBotState(BotState.Wandering);
+    }
+    
     
     public void SetPlayStatus(bool goPlay) {
-        
+        if (!IsPlayerCopy) {
+            if (goPlay) {
+                _botMonolog.HideNickname();
+            }
+            else {
+                _botMonolog.ShowNickname();
+            }
+        }
         // Debug.Log("SetPlayStatus: " + goPlay);
         // Debug.Log("_posBeforeTeleport: " + _posBeforeTeleport);
         IsPlaying = goPlay;
@@ -80,10 +91,6 @@ public class BotStateManager : MonoBehaviour, IThrowGamePlayer {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = targetRotation;
         }
-    }
-
-    private void Start() {
-        ChangeBotState(BotState.Wandering);
     }
 
 

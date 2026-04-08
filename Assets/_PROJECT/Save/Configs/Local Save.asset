@@ -32,19 +32,19 @@ MonoBehaviour:
       Count: 0
       IsGetReward: 0
     - Id: WinCount
-      Count: 6
+      Count: 9
       IsGetReward: 0
     - Id: HitCount
-      Count: 10
+      Count: 13
       IsGetReward: 0
     - Id: UseHealCount
-      Count: 8
+      Count: 10
       IsGetReward: 0
     - Id: ShieldCount
       Count: 8
       IsGetReward: 0
     - Id: HealsLifesCount
-      Count: 85
+      Count: 105
       IsGetReward: 0
     DailyRewardSave:
       LastDateTimeReceived: 

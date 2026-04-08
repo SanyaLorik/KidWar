@@ -49,14 +49,17 @@ public class StartBattleView : MonoBehaviour {
 
     public void StartBattle() {
         Debug.Log("StartBattle");
-        SetAnimationPlayNow(true);
+        if (_tutorialManager.TutorialPassed) {
+            SetAnimationPlayNow(true);
+        }
         StartBattleAnimation().Forget();
     }
 
     private async UniTask StartBattleAnimation() {
         if (!_tutorialManager.TutorialPassed) {
+            AnimationPlayNow = true;
             await UniTask.WaitForSeconds(_timeToStartTutorialWait);
-            SetAnimationPlayNow(false);
+            AnimationPlayNow = false;
             return;
         }
 

@@ -1355,7 +1355,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 312
-  field of view: 50
+  field of view: 47.36291
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -1381,7 +1381,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1311484, y: -0.00000005635309, z: 0.000000007455008, w: 0.99136275}
+  m_LocalRotation: {x: 0.13387406, y: -0.00000006238473, z: 0.000000008427558, w: 0.9909984}
   m_LocalPosition: {x: -3.5, y: 6.0942903, z: -8.029615}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1605,19 +1605,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4310157209622667228, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99136275
+      value: 0.9909984
       objectReference: {fileID: 0}
     - target: {fileID: 4310157209622667228, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13114837
+      value: 0.13387404
       objectReference: {fileID: 0}
     - target: {fileID: 4310157209622667228, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000056353088
+      value: -0.00000006238472
       objectReference: {fileID: 0}
     - target: {fileID: 4310157209622667228, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000007455006
+      value: 0.000000008427556
       objectReference: {fileID: 0}
     - target: {fileID: 4310157209622667228, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3305,6 +3305,7 @@ MonoBehaviour:
   _rightCameraFocus: {fileID: 1085738096}
   _leftCameraFocus: {fileID: 1532480889}
   _roulette: {fileID: 84340740}
+  _timeToWaitAfterGameOver: 2
 --- !u!1 &906176968
 GameObject:
   m_ObjectHideFlags: 0
@@ -3849,7 +3850,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100837930}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
   m_Name: 
@@ -6479,8 +6480,6 @@ MonoBehaviour:
   _screenFinger: {fileID: 69908105}
   _healFinger: {fileID: 323772999}
   _explosionFinger: {fileID: 1174461659}
-  _textScaleDuration: 1
-  _textScaleEase: 27
   _fingerDuration: 0.6
   _fingerEase: 1
   _screenFingerDeltaY: 100

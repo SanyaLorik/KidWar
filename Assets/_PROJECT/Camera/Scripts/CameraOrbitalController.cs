@@ -92,6 +92,11 @@ public class CameraOrbitalController : MonoBehaviour {
         // ForbidZoom(true);
     }
 
+    public void WatchToPoint(Transform point) {
+        _zoomBeforeGame = CurrentFovPercent;
+        SetFollowPoint(point);
+    }
+
     private void SetAxisToFollow(float horizontal, float vertical) {
         _orbitalFollow.HorizontalAxis.Value = horizontal;
         _orbitalFollow.VerticalAxis.Value = vertical;

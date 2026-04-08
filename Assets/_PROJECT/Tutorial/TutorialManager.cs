@@ -168,6 +168,7 @@ public class TutorialManager : MonoBehaviour {
         AimOn = true;
         Debug.Log("Аим включен");
         _inputThrowGame.SetAllowToThrowWhileTutorial(true);
+        _narrator.ShowScreenFinger();
         await UniTask.WaitWhile(() => !_calculator.ObjectInFly);
         _narrator.Disactive();
     }

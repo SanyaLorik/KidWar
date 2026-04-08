@@ -19,6 +19,7 @@ public class BattleManager : MonoBehaviour {
     [SerializeField] private Transform _rightCameraFocus;
     [SerializeField] private Transform _leftCameraFocus;
     [SerializeField] private RouletteSkin _roulette;
+    [SerializeField] private float _timeToWaitAfterGameOver;
     
     private ThrowableObject _newThrowableObjectInRoulette;
     
@@ -168,6 +169,8 @@ public class BattleManager : MonoBehaviour {
         }
 
         if (MainPlayerPlay) {
+            await UniTask.WaitForSeconds(_timeToWaitAfterGameOver);
+            _camera.WatchToPoint(IsFirstThrowerStep ? _leftCameraFocus : _rightCameraFocus);
             _gameOverShower.ShowResults();
             await UniTask.WaitWhile(() => _gameOverShower.ResultWindowShowing);
         }

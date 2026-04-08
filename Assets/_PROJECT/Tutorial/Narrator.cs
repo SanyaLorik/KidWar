@@ -11,12 +11,7 @@ public class Narrator : MonoBehaviour {
     [SerializeField] private Transform _screenFinger;
     [SerializeField] private Transform _healFinger;
     [SerializeField] private Transform _explosionFinger;
-    
-    [Header("Текст")]
-    [SerializeField] private float _textScaleDuration;
-    [SerializeField] private Ease _textScaleEase;
-    
-    
+
     [Header("Анимация пальчика")]
     [SerializeField] private float _fingerDuration;
     [SerializeField] private Ease _fingerEase;

@@ -93,8 +93,10 @@ public class CameraOrbitalController : MonoBehaviour {
     }
 
     public void WatchToPoint(Transform point) {
+        Debug.Log("WatchToPoint " + point.position);
         _zoomBeforeGame = CurrentFovPercent;
         SetFollowPoint(point);
+        SetDamping(_dampningInWinnerWindow);
     }
 
     private void SetAxisToFollow(float horizontal, float vertical) {

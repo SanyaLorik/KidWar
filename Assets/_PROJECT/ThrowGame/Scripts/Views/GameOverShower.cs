@@ -45,11 +45,14 @@ public class GameOverShower : MonoBehaviour {
         _continue2xButton.onClick.AddListener(CloseResultWindow);
     }
 
-
+    public void HidePlayCanvas() {
+        _playgroundContainer.DisactiveSelf();
+    } 
+    
     public void ShowResults() {
         ResultWindowShowing = true;
         MoveCameraToWinner();
-        _playgroundContainer.DisactiveSelf();
+        HidePlayCanvas();
         _allContainer.ActiveSelf();
         // PVP
         if (_battleManager.SecondThrower.ObjectThrower.PlayerHandle) {

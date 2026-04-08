@@ -169,8 +169,9 @@ public class BattleManager : MonoBehaviour {
         }
 
         if (MainPlayerPlay) {
+            // _gameOverShower.HidePlayCanvas();
+            _camera.WatchToPoint(IsFirstThrowerStep ? _rightCameraFocus : _leftCameraFocus);
             await UniTask.WaitForSeconds(_timeToWaitAfterGameOver);
-            _camera.WatchToPoint(IsFirstThrowerStep ? _leftCameraFocus : _rightCameraFocus);
             _gameOverShower.ShowResults();
             await UniTask.WaitWhile(() => _gameOverShower.ResultWindowShowing);
         }

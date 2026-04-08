@@ -13,22 +13,24 @@ public class InputThrowGame : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     
     private CancellationTokenSource _tokenSource;
     private float _chargeTime = 0f;
-    private bool _isDownInvoked;
     
-    [Inject] private BattleManager _battleManager;
-
+    public bool Downed { get; private set; }
+    public bool AllowToThrowWhileTutorial { get; private set; } = true;
     
     public event Action OnUpped;
     public event Action OnDowned;
     public event Action<Vector2> OnDragged;
-
     public Vector2 DragDelta { get; private set; } = Vector2.zero;
+    
+    
+    [Inject] private BattleManager _battleManager;
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if(_battleManager.BotTurnNow || !_battleManager.AllowToPlay) return;
+        if(_battleManager.BotTurnNow || !_battleManager.AllowToPlay || !AllowToThrowWhileTutorial) return;
         UniTaskHelper.DisposeTask(ref _tokenSource);
         if (_chargeTime >= _requiredHoldTime) {
+            Downed = false;
             OnUpped?.Invoke();
         }
         _chargeTime = 0f;
@@ -36,7 +38,7 @@ public class InputThrowGame : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(_battleManager.BotTurnNow || !_battleManager.AllowToPlay) return;
+        if(_battleManager.BotTurnNow || !_battleManager.AllowToPlay || !AllowToThrowWhileTutorial) return;
         // Нажал хуем на экран
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();
@@ -46,19 +48,26 @@ public class InputThrowGame : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     
     public void OnDrag(PointerEventData eventData)
     {
-        if(_battleManager.BotTurnNow || !_battleManager.AllowToPlay) return;
+        if(_battleManager.BotTurnNow || !_battleManager.AllowToPlay || !AllowToThrowWhileTutorial) return;
         DragDelta = eventData.delta;
         OnDragged?.Invoke(DragDelta);
     }
+    
 
+    public void SetAllowToThrowWhileTutorial(bool allow) 
+    {
+        AllowToThrowWhileTutorial = allow;
+    }
+    
+    
     private async UniTask ChargeTimerAsync(CancellationToken token) 
     {
-        _isDownInvoked = false;
+        Downed = false;
         while (!token.IsCancellationRequested) {
             _chargeTime += Time.deltaTime;
-            if (_chargeTime >= _requiredHoldTime && !_isDownInvoked) {
+            if (_chargeTime >= _requiredHoldTime && !Downed) {
                 OnDowned?.Invoke();
-                _isDownInvoked = true;
+                Downed = true;
             }
             await UniTask.Yield();
         }

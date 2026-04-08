@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using SanyaBeerExtension;
 using UnityEngine;
 using Zenject;
 
 public class ModifierManager : MonoBehaviour {
     [SerializeField] private List<ModifierChanger> _leftModifierChanger;
     [SerializeField] private List<ModifierChanger> _rightModifierChanger;
+    [SerializeField] private GameObject[] _allModifiersObjects;
     [Range(0,1), SerializeField] private float _chanseToTryAgainFindModifierBot;
     [SerializeField] private List<ItemValueBase<IThrowableModifier>> _modifierValues;
     
@@ -13,13 +16,17 @@ public class ModifierManager : MonoBehaviour {
     private readonly ThrowableModifierDefault _defaultModifier = new();
     
     private float _totalWeight;
+    private bool _showModifiers = true;
+    public IThrowableModifier CurrentModifier { get; private set; }
+    public event Action<IThrowableModifier> ModifierChoosed;
+
 
     [Inject] private ThrowGameStarter _gameStarter;
     [Inject] private ObjectThrowerCalculator _calculator;
     [Inject] private BattleManager _battleManager;
+    [Inject] private TutorialManager _tutorialManager;
 
         
-    public IThrowableModifier CurrentModifier { get; private set; }
 
     private void OnEnable() {
         _battleManager.NewPlayerTurn += OnNewPlayerTurn;
@@ -32,9 +39,28 @@ public class ModifierManager : MonoBehaviour {
         CalculateValueDivider();
     }
     
+    public void SetModifiersEnable(bool state) {
+        _allModifiersObjects.ForEach(m => m.gameObject.SetActive(state));
+        _showModifiers = state;
+    } 
+    
+    public void SetPlayerEnableOnlyExplosion() {
+        _leftModifierChanger.ForEach(b => b.SetUnvailable());
+        _rightModifierChanger.ForEach(b => b.SetUnvailable());
+        foreach (var leftModifier in _leftModifierChanger) {
+            if (leftModifier.Modifier is ThrowableModifierExplosion) {
+                leftModifier.SetAvailable();
+            }
+            else {
+                leftModifier.SetUnvailable();
+            }
+        }
+    }
+    
     
     private void OnNewPlayerTurn() {
         if(!_battleManager.MainPlayerPlay) return;
+        if(!_showModifiers) return;
         
         _leftModifierChanger.ForEach(b => b.SetVisualGray(!_battleManager.IsFirstThrowerStep));
         _rightModifierChanger.ForEach(b => b.SetVisualGray(_battleManager.IsFirstThrowerStep));
@@ -59,22 +85,28 @@ public class ModifierManager : MonoBehaviour {
             if (_battleManager.IsFirstThrowerStep == true) {
                 Debug.Log("Установка или снятие модификатора для левого игрока");
                 SetModifierAfterCheck(modifier, modifierChanger);
+                ModifierChoosed?.Invoke(modifier);
+                // Даем игроку выбрать модифиактор и офаем его, чтоб он не мог отжать
+                if (!_tutorialManager.TutorialPassed) {
+                    modifierChanger.SetUnvailable();
+                }
             }
         }
         else {
             if (_battleManager.IsFirstThrowerStep == false) {
                 Debug.Log("Установка или снятие модификатора для правого игрока");
                 SetModifierAfterCheck(modifier, modifierChanger);
+                ModifierChoosed?.Invoke(modifier);
             }
         }
     }
 
     public void UseModifierForBot() {
+        if(!_tutorialManager.TutorialPassed) return;
         List<ModifierChanger> modifierChangersList = _battleManager.IsFirstThrowerStep ? 
             _leftModifierChanger 
             : 
             _rightModifierChanger;
-
         // Фаза 1
         if (TryUseRandomModifierForBot(modifierChangersList)) return;
         // Фаза 2, модифиактор на перезарядке

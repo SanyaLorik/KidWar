@@ -1,5 +1,3 @@
-using System;
-using Architecture_M;
 using DG.Tweening;
 using SanyaBeerExtension;
 using UnityEngine;
@@ -11,19 +9,22 @@ public class PlayersStepView : MonoBehaviour {
     [SerializeField] private Transform _enemyStepBigContainer;
     [Header("Настройка времени и анимаций")]
     [SerializeField] private PairedValue<Ease> _showBigEases;
-    [SerializeField] private float _timeToShowBig;
-    [SerializeField] private float _timeToHideBig;
+
+    [field: SerializeField] public float TimeToShowBig { get; private set; } = .7f;
+    [field:  SerializeField] public float TimeToHideBig { get; private set; } = .7f;
     [SerializeField] private Ease _hideEase;
     [Header("Маленький")]
     [SerializeField] private RectTransform _yourStepSmall;
     [SerializeField] private RectTransform _enemyStepSmall;
+    [SerializeField] private Transform _targetToContiner;
     
     public bool AnimationIsShowing { get; private set; }
 
     private Vector3 _startPos;
-    [SerializeField] private Transform _targetToContiner;
+    private bool _firstTimeShow = true;
     
-
+    [Inject] TutorialManager _tutorialManager;
+    
 
     private void Start() {
         _startPos = _playerStepBigContainer.position;
@@ -34,6 +35,11 @@ public class PlayersStepView : MonoBehaviour {
     }
 
     public void ShowPlayerStep(bool isFirstThrowerStep) {
+        if (!_tutorialManager.TutorialPassed) {
+            TutorialAnimate(isFirstThrowerStep);
+            return;
+        }
+        
         // Leftning
         if (isFirstThrowerStep) {
             // Pulse
@@ -49,6 +55,18 @@ public class PlayersStepView : MonoBehaviour {
         }
     }
 
+    
+    private void TutorialAnimate(bool isFirstThrowerStep) {
+        if (_firstTimeShow) {
+            _firstTimeShow = false;
+            _yourStepSmall.gameObject.DisactiveSelf();
+            _enemyStepSmall.gameObject.DisactiveSelf();
+            return;
+        }
+        AnimateBigAttention(isFirstThrowerStep ? _playerStepBigContainer : _enemyStepBigContainer);
+    }
+    
+
     private void AnimateBigAttention(Transform rectTransformContainer) {
         AnimationIsShowing = true;
         // Вернуть обратно
@@ -59,16 +77,16 @@ public class PlayersStepView : MonoBehaviour {
         Sequence sequence = DOTween.Sequence();
         // Появление
         sequence.Append(rectTransformContainer
-            .DOScale(1, _timeToShowBig)
+            .DOScale(1, TimeToShowBig)
             .SetEase(_showBigEases.From)
         );
         // sequence.Join(rectTransformContainer
-        //     .DOMove(_startPos, _timeToShowBig)
+        //     .DOMove(_startPos, TimeToShowBig)
         //     .SetEase(_showBigEases.From)
         // );
         // Уменьшение
         sequence.Append(rectTransformContainer
-            .DOScale(0f, _timeToHideBig)
+            .DOScale(0f, TimeToHideBig)
             .SetEase(_showBigEases.To)
         );
         // Вниз убегатывание
@@ -76,7 +94,7 @@ public class PlayersStepView : MonoBehaviour {
         // Debug.Log("_targetToContiner.transform.position = " + _targetToContiner.transform.position);
         
         sequence.Join(rectTransformContainer
-            .DOMove(_targetToContiner.transform.position, _timeToHideBig)
+            .DOMove(_targetToContiner.transform.position, TimeToHideBig)
             .SetEase(_hideEase)
             .OnComplete(() => AnimationIsShowing = false)
         );

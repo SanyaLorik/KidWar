@@ -25,8 +25,9 @@ public class BotObjectThrower : MonoBehaviour {
     [Inject] private ForceChooseView _forceView;
     [Inject] private ModifierManager _modifierManager;
     [Inject] private BonusManager _bonusManager;
-    
-    
+    [Inject] private TutorialManager _tutorialManager;
+
+
     private ObjectThrower _currentThrower;
     private ObjectThrower _enemyThrower;
     private CancellationTokenSource _tokenSource;
@@ -46,9 +47,12 @@ public class BotObjectThrower : MonoBehaviour {
     /// </summary>
     public void TransferControl() {
         float distance = Vector3.Distance(_currentThrower.PointToBeat.position, _enemyThrower.PointToBeat.position);
-        // не попасть по игроку
-        if (Random.value > _chanceToBeatPlayer) {
-            // тут поидее тоже с прикольчиком будет типо боту слева над знак менять
+
+        // Если тутор - бот попадает 100%
+        float chanceToBeatPlayer = _tutorialManager.TutorialPassed ? _chanceToBeatPlayer : 1f;
+
+        Debug.Log("chanceToBeatPlayer =  " + chanceToBeatPlayer);
+        if (Random.value > chanceToBeatPlayer) {
             distance += Random.Range(_diapasoneNearPlayer.From, _diapasoneNearPlayer.To);
         }
         WaitToForceAsync(distance).Forget();
@@ -59,27 +63,30 @@ public class BotObjectThrower : MonoBehaviour {
         _tokenSource = new CancellationTokenSource();
         // Ждем время перед выстрелом
 
+        
+        // Если тутор пройден бот может юзнуть модификатор
         float waitTime;
         // Сначала выбор модификатора 
         if (Random.value <  _useModifierFirst) {
             waitTime = Random.Range(_delayBeforeUseModifier.From, _delayBeforeUseModifier.To);
             await UniTask.WaitForSeconds(waitTime, cancellationToken: _tokenSource.Token);
             _modifierManager.UseModifierForBot();
-            
+        
             waitTime = Random.Range(_delayBeforeUseBonus.From, _delayBeforeUseBonus.To);
             await UniTask.WaitForSeconds(waitTime, cancellationToken: _tokenSource.Token);
             _bonusManager.UseBonusForBot();
         }
+        // Сначала выбор бонуса
         else {
             waitTime = Random.Range(_delayBeforeUseBonus.From, _delayBeforeUseBonus.To);
             await UniTask.WaitForSeconds(waitTime, cancellationToken: _tokenSource.Token);
             _bonusManager.UseBonusForBot();
-            
+        
             waitTime = Random.Range(_delayBeforeUseModifier.From, _delayBeforeUseModifier.To);
             await UniTask.WaitForSeconds(waitTime, cancellationToken: _tokenSource.Token);
             _modifierManager.UseModifierForBot();
         }
-        // Сначала выбор бонуса
+        
         
         
         _currentThrower.ThrowVisualize.SetActiveTrajectoryLine(true);

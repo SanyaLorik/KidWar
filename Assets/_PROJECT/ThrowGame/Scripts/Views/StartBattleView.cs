@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using SanyaBeerExtension;
 using UnityEngine;
@@ -25,13 +26,12 @@ public class StartBattleView : MonoBehaviour {
     [SerializeField] float _conatinerGoBottomDuration;
     [SerializeField] Ease _goBottomScreenEase;
 
-    [Header("Авы ботов!")]
-    [SerializeField] private Image _leftAva;
-    [SerializeField] private Image _rightAva;
-    
-    [Inject] List<SkinItemConfig> _skins;
+    [Header("Время ожидания если туториал")]
+    [SerializeField] private float _timeToStartTutorialWait = 2f;
+
     [Inject] ThrowGameStarter _throwGameStarter;
     [Inject] BattleManager _battleManager;
+    [Inject] TutorialManager _tutorialManager;
 
     
     private float _bootomScreenMoveDistance;
@@ -46,56 +46,58 @@ public class StartBattleView : MonoBehaviour {
         _bootomScreenMoveDistance = _startContainerPose - _preBattleContainer.rect.height; 
     }
 
-    private void InitAvatars(ObjectThrower left, ObjectThrower right) {
-        _leftAva.sprite = _skins.Find(s => s.Id == left.SkinId).SkinSprite;
-        _rightAva.sprite = _skins.Find(s => s.Id == right.SkinId).SkinSprite;
-    }
-    
 
-    public void StartBattleAnimation(ObjectThrower leftPlayer, ObjectThrower rightPlayer) {
-        if (_battleManager.MainPlayerPlay) {
-            InitAvatars(leftPlayer, rightPlayer);
-        }
-        Debug.Log("StartBattleAnimation");
+    public void StartBattle() {
+        Debug.Log("StartBattle");
         SetAnimationPlayNow(true);
-       
-       // Появился черный экран
-       Sequence sequence = DOTween.Sequence();
-       sequence.Append(_background
-           .DOFade(1f, _backgroundFadeTimes.From)
-           .SetEase(_backgroundEases.From)
-       );
-       
-       // Из нуля вылезает текст "Приготовься"
-       sequence.Append(_readyText
-           .DOScale(1f, _readyTextScaleTimes.From)
-           .SetEase(_getReadyEases.From)
-       );
-       // С другой скоростью опять бежит в 0
-       sequence.Append(_readyText
-           .DOScale(0f, _readyTextScaleTimes.To)
-           .SetEase(_getReadyEases.To)
-       );
-       // Исчезает бэкграунд
-       sequence.Append(_background
-           .DOFade(0f, _backgroundFadeTimes.To)
-           .SetEase(_backgroundEases.From)
-       );
-       
-       
-       // Появляется Вперёд!
-       sequence.Append(_goText
-           .DOScale(1f, _goTextScaleDuration)
-           .SetEase(_goTextScaleEase)
-       );
-       sequence.Append(_preBattleContainer
-           .DOAnchorPosY(_bootomScreenMoveDistance, _conatinerGoBottomDuration)
-           .SetEase(_goBottomScreenEase)
-           .OnComplete(() => SetAnimationPlayNow(false))
-       );
-   }
+        StartBattleAnimation().Forget();
+    }
 
-    
+    private async UniTask StartBattleAnimation() {
+        if (!_tutorialManager.TutorialPassed) {
+            await UniTask.WaitForSeconds(_timeToStartTutorialWait);
+            SetAnimationPlayNow(false);
+            return;
+        }
+
+        
+        // Появился черный экран
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(_background
+            .DOFade(1f, _backgroundFadeTimes.From)
+            .SetEase(_backgroundEases.From)
+        );
+       
+        // Из нуля вылезает текст "Приготовься"
+        sequence.Append(_readyText
+            .DOScale(1f, _readyTextScaleTimes.From)
+            .SetEase(_getReadyEases.From)
+        );
+        // С другой скоростью опять бежит в 0
+        sequence.Append(_readyText
+            .DOScale(0f, _readyTextScaleTimes.To)
+            .SetEase(_getReadyEases.To)
+        );
+        // Исчезает бэкграунд
+        sequence.Append(_background
+            .DOFade(0f, _backgroundFadeTimes.To)
+            .SetEase(_backgroundEases.From)
+        );
+       
+       
+        // Появляется Вперёд!
+        sequence.Append(_goText
+            .DOScale(1f, _goTextScaleDuration)
+            .SetEase(_goTextScaleEase)
+        );
+        sequence.Append(_preBattleContainer
+            .DOAnchorPosY(_bootomScreenMoveDistance, _conatinerGoBottomDuration)
+            .SetEase(_goBottomScreenEase)
+            .OnComplete(() => SetAnimationPlayNow(false))
+        );
+    }
+
+
     private void SetAnimationPlayNow(bool animationPlayNow) {
         Debug.Log("animationPlayNow = " + animationPlayNow);
         _container.SetActive(animationPlayNow);

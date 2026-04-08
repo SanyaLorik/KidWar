@@ -47,7 +47,7 @@ public class TaskVisual : MonoBehaviour {
 
     
     public void SetTaskLocalizationText() {
-        _taskLocalizationText = _localization.GetTranslatedName(TaskType,  _localization.TaskTranslates);
+        _taskLocalizationText = _localization.GetTranslatedText(TaskType,  _localization.TaskTranslates);
     }
 
     public void SetTaskVisual(TaskInfo taskInfo, int playerValue) {

@@ -23,6 +23,7 @@ public class ThrowGameStarter : MonoBehaviour  {
     [Inject] private BattleManager _battleManager;
     [Inject] private LocalizationData _localization;
     [Inject] private AdvTimerStarter _advTimerStarter;
+    [Inject] private TutorialManager _tutorialManager;
 
     private bool _afkPressed;
     private bool _startGamePressed;
@@ -39,9 +40,8 @@ public class ThrowGameStarter : MonoBehaviour  {
     
     
     private void Start() {
-        _firstPlayerBot = false;
-        _secondPlayerBot = true;
-        StartTimer(_timerDuration);
+        float timeToStart = _tutorialManager.TutorialPassed ? _timerDuration : 0f;
+        StartTimer(timeToStart);
         _afkStatusText.DisactiveSelf();
     }
     
@@ -124,7 +124,6 @@ public class ThrowGameStarter : MonoBehaviour  {
     }
     
     
-    // По таймеру играем PVB
     private async UniTaskVoid NewGameTimer(float time, CancellationToken token) {
         Debug.Log("NewGameTimer");
         float elapsedTime = 0f;
@@ -145,7 +144,6 @@ public class ThrowGameStarter : MonoBehaviour  {
         }
     }
 
-    // Пока просто с ботиком 
     private void StartGame() {
         GameIsStarted = true;
         _battleManager.InitForNewGame(_firstPlayerBot, _secondPlayerBot);

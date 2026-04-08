@@ -81,13 +81,7 @@ public class BattleManager : MonoBehaviour {
     private void StepIsOver() {
         _stepIsOver = true;
     }
-
-
-    private void FocusCamera(Transform obj) {
-        if(!MainPlayerPlay) return;
-        // Debug.Log("Focus camera");
-        _camera.SetCameraToPlayThrow(obj);
-    }
+    
 
     public void InitForNewGame(bool firstPlayerBot, bool secondPlayerBot) {
         // Debug.Log("firstPlayerBot " + firstPlayerBot);
@@ -131,6 +125,7 @@ public class BattleManager : MonoBehaviour {
         
         GoBattle().Forget();
     }
+    
 
     public void SetGameOver() {
         Debug.Log("SetGameOver");
@@ -151,21 +146,22 @@ public class BattleManager : MonoBehaviour {
         }
         player.SetPlayStatus(true);
     }
-    
 
 
+    public event Action GameStarted;
     private async UniTask GoBattle() {
         Debug.Log("GoBattle");
         if (MainPlayerPlay) {
             FocusCamera(_leftCameraFocus);
-            _startBattleView.StartBattleAnimation(FirstThrower.ObjectThrower, SecondThrower.ObjectThrower); 
+            _startBattleView.StartBattle(); 
             await UniTask.WaitWhile(() => _startBattleView.AnimationPlayNow);            
         }        
         
-        
-        
         FirstThrower.ObjectThrower.SetAllowToThrow(false);
         SecondThrower.ObjectThrower.SetAllowToThrow(false);
+        
+        
+        GameStarted?.Invoke();
         while(!GameIsOver) {
             await PlayerStepAsync(FirstThrower.ObjectThrower, _leftCameraFocus, true);
             await PlayerStepAsync(SecondThrower.ObjectThrower, _rightCameraFocus, false);
@@ -264,10 +260,18 @@ public class BattleManager : MonoBehaviour {
         _throwerCalculator.ThrowNewObject(
             thrower.AngleToThrow, 
             _newThrowableObjectInRoulette, 
-            thrower.ThrowPoint, enemyPoint
+            thrower.ThrowPoint, 
+            enemyPoint
         );
         
         _stepIsOver = false;
+    }
+    
+    
+    private void FocusCamera(Transform obj) {
+        if(!MainPlayerPlay) return;
+        // Debug.Log("Focus camera");
+        _camera.SetCameraToPlayThrow(obj);
     }
     
     

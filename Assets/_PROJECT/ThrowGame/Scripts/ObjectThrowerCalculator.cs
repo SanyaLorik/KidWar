@@ -46,9 +46,6 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     [Header("Задержка перед броском в секундах")]
     [SerializeField] private float _durationBeforeThrow = .3f;
 
-
-    
-    
     
     private float _initialDistance;
     private CancellationTokenSource _tokenSource;
@@ -65,6 +62,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     [Inject] WindChooseView _wind;
     [Inject] ForceChooseView _force;
     [Inject] ModifierManager _modifierManager;
+    [Inject] TutorialManager _tutorialManager;
 
     private void OnEnable() {
         _gameStarter.GameStarted += BattleManagerOnGameIsStarted;
@@ -123,6 +121,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     
 
     private float CalculateThrowDistance(float angle, float windSign) {
+        if (_tutorialManager.AimOn) {
+            return DistanceBeforePlayers;
+        }
+        
         _angleRatio = CalculateAngleRatio(angle);
         _throwDistance = _initialDistance * _force.CurrentForce * _angleRatio + _wind.CurrentWindForce * windSign;
         Debug.Log("distance " + _throwDistance);
@@ -203,9 +205,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         ThrowableObject throwInstance = Instantiate(throwObject);
         throwInstance.transform.position = initialPos;
         
+        
         throwInstance.SetupAndLaunch(
             initialPos,  
-            targetPos,
+            _tutorialManager.AimOn ? enemyPoint : targetPos,
             enemyPoint,
             _flightDuration, 
             _flightDurationToEnemy,
@@ -213,6 +216,10 @@ public class ObjectThrowerCalculator : MonoBehaviour {
             _throwCurve,
             _modifierManager.CurrentModifier
         );
+        if (_tutorialManager.AimOn) {
+            throwInstance.SetOneTapMode();
+        }
+
         ObjectThrowed?.Invoke(throwInstance.PointToFollow);
         await throwInstance.StartFlight(token);
         

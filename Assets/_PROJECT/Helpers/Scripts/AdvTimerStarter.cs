@@ -14,6 +14,7 @@ public class AdvTimerStarter : MonoBehaviour {
     [Inject] private IInterstitialDelaying  _interstitialDelaying;
     [Inject] private BattleManager  _battleManager;
     [Inject] private ThrowGameStarter  _throwGameStarter;
+    [Inject] private TutorialManager  _tutorialManager;
 
     private void OnEnable() {
         SystemEvents.WindowOpened += OnWindowOpened;
@@ -48,7 +49,7 @@ public class AdvTimerStarter : MonoBehaviour {
     private async UniTask EnableTimerAsync(CancellationToken token) {
         await UniTask.WaitForSeconds(_timeToWait, cancellationToken: token);
         // Условие на непоказ рекламы например если играет или если туториал
-        if (_throwGameStarter.FirstPlayerBot) {
+        if (_throwGameStarter.FirstPlayerBot && _tutorialManager.TutorialPassed) {
             _interstitialDelaying.EnableTimer();
             Debug.Log("EnableTimer");
         }

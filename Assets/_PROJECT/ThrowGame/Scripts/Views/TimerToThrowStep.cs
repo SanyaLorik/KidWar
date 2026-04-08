@@ -14,6 +14,7 @@ public class TimerToThrowStep : MonoBehaviour {
     [SerializeField] private GameObject _timer;
     [SerializeField] private int _secondsToThrowStep;
     
+    [Inject] TutorialManager _tutorialManager;
     
     public event Action TimeIsOver;
     
@@ -22,8 +23,6 @@ public class TimerToThrowStep : MonoBehaviour {
     [Inject] private LocalizationData _localization;
     [Inject] private ThrowGameStarter _gameStarter;
 
-    
-    
     
     private void OnEnable() {
         _gameStarter.GameStarted += OnGameStarted;
@@ -41,6 +40,8 @@ public class TimerToThrowStep : MonoBehaviour {
 
 
     public void StartTimer() {
+        if(!_tutorialManager.TutorialPassed) return;
+        
         _timer.ActiveSelf();
         UniTaskHelper.DisposeTask(ref _tokenSource);
         _tokenSource = new CancellationTokenSource();

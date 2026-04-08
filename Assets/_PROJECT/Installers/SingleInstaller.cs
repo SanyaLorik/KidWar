@@ -11,7 +11,12 @@ public class SingleInstaller : MonoInstaller {
         BindNicknameRandomizer();
         Container.Bind<AdvTimerStarter>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<TasksManager>().FromComponentInHierarchy().AsSingle().NonLazy();
+        BindTurorial();
         BindCanvasToHide();
+    }
+
+    private void BindTurorial() {
+        Container.Bind<TutorialManager>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 
     private void BindCamera() {

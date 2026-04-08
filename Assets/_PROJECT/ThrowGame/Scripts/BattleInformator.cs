@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using System.Threading;
 using _PROJECT.Scripts.Helpers;
 using Cysharp.Threading.Tasks;
 using SanyaBeerExtension;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class BattleInformator : MonoBehaviour {
@@ -12,9 +14,13 @@ public class BattleInformator : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _secondPlayerNickname;
     [SerializeField] private float _timeToShowInfo;
 
+    [Header("Авы ботов!")]
+    [SerializeField] private Image _leftAva;
+    [SerializeField] private Image _rightAva;
+    
     private CancellationTokenSource _tokenSource;
     
-    
+    [Inject] List<SkinItemConfig> _skins;
     [Inject] private BattleManager _battleManager;
     [Inject] private ThrowGameStarter _gameStarter;
     [Inject] private LocalizationData _localization;
@@ -23,21 +29,14 @@ public class BattleInformator : MonoBehaviour {
     
     private void OnEnable() {
         _gameStarter.GameStarted += OnGameStarted;
-        _hpView.PlayerHit += HpViewOnPlayerHit;
+        _hpView.PlayerHit += OnPlayerHit;
     }
 
     private void OnGameStarted(bool started) {
         // Игра началась выводим имена
-        if (started) {
-            if (_battleManager.MainPlayerPlay) {
-                // По сути просто если там бот то подставляем его ник, если игра 1 на 1 то оставляем просто "Враг"
-                if (_battleManager.SecondThrower.ObjectThrower.PlayerHandle) {
-                    _secondPlayerNickname.text = _localization.Enemy;
-                }
-                else {
-                    _secondPlayerNickname.text = _battleManager.SecondThrower.ObjectThrower.Nickname;
-                }
-            }
+        if (started && _battleManager.MainPlayerPlay) {
+            ShowNicknames();
+            InitAvatars();
         }
         // Игра кончилась епта выводим инфу о победителе по кол-ву хп видимо...
         else {
@@ -51,6 +50,24 @@ public class BattleInformator : MonoBehaviour {
             }
         }
     }
+    
+    private void InitAvatars() {
+        ObjectThrower left = _battleManager.FirstThrower.ObjectThrower;
+        ObjectThrower right = _battleManager.SecondThrower.ObjectThrower;
+        _leftAva.sprite = _skins.Find(s => s.Id == left.SkinId).SkinSprite;
+        _rightAva.sprite = _skins.Find(s => s.Id == right.SkinId).SkinSprite;
+    }
+
+    private void ShowNicknames() {
+       
+            // По сути просто если там бот то подставляем его ник, если игра 1 на 1 то оставляем просто "Враг"
+            if (_battleManager.SecondThrower.ObjectThrower.PlayerHandle) {
+                _secondPlayerNickname.text = _localization.Enemy;
+            }
+            else {
+                _secondPlayerNickname.text = _battleManager.SecondThrower.ObjectThrower.Nickname;
+            }
+    }
 
     public string GetWinnerName() {
         string winnerName = 
@@ -63,7 +80,7 @@ public class BattleInformator : MonoBehaviour {
     }
 
 
-    private void HpViewOnPlayerHit() {
+    private void OnPlayerHit() {
         if (_battleManager.MainPlayerPlay) return;
 
         string playerName = _battleManager.IsFirstThrowerStep

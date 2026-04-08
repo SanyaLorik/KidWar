@@ -26,6 +26,7 @@ public class ThrowableObject : MonoBehaviour {
     private bool _ignoreColliders;
     private float _elapsedTime;
     private CancellationTokenSource _tokenSource;
+    private bool _oneTapKill;
 
     public Rigidbody Rb => _rb;
     public Vector3 InitialPos { get; private set; }
@@ -38,7 +39,6 @@ public class ThrowableObject : MonoBehaviour {
 
     public Transform PointToFollow => transform;
     
-    
     /// <summary>
     /// Если был контакт с коллайдером или игроком то не наносить больше урона
     /// </summary>
@@ -49,7 +49,14 @@ public class ThrowableObject : MonoBehaviour {
         if (_modifier != null) {
             _modifier.OnPlayerContact();
             StartDestroyTimer(true);
-            player.AddDamage(Info.Damage + _modifier.ExtraDamage);
+            if (_oneTapKill) {
+                player.AddDamage(Info.Damage * 10000 + _modifier.ExtraDamage);
+                Debug.Log($"Попал, хп снёс + {Info.Damage * 10000 + _modifier.ExtraDamage}");
+            }
+            else {
+                player.AddDamage(Info.Damage + _modifier.ExtraDamage);
+                Debug.Log($"Попал, хп снёс + {Info.Damage + _modifier.ExtraDamage}");
+            }
             _contactPlayer = true;
         }
     }
@@ -82,6 +89,10 @@ public class ThrowableObject : MonoBehaviour {
         ThrowCurve = throwCurve;
         _modifier = modifier;
         _modifier.SetThrowableObject(this);
+    }
+
+    public void SetOneTapMode() {
+        _oneTapKill = true;
     }
 
     public async UniTask StartFlight(CancellationToken token) {
@@ -150,8 +161,6 @@ public class ThrowableObject : MonoBehaviour {
         Debug.Log($"Смена FlightDuration с {FlightDuration} на {duration}");
         FlightDuration =  duration;
     }
-    
-    
     
     
 

@@ -6482,7 +6482,7 @@ MonoBehaviour:
   _explosionFinger: {fileID: 1174461659}
   _fingerDuration: 0.6
   _fingerEase: 1
-  _screenFingerDeltaY: 100
+  _screenFingerDeltaY: 228
   _healFingerDeltaY: -80
   _explosionFingerDeltaY: 80
 --- !u!1 &1810716606

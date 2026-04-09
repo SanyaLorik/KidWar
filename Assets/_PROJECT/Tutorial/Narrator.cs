@@ -1,4 +1,5 @@
 using System;
+using Architecture_M;
 using DG.Tweening;
 using SanyaBeerExtension;
 using TMPro;
@@ -15,6 +16,7 @@ public class Narrator : MonoBehaviour {
     [Header("Анимация пальчика")]
     [SerializeField] private float _fingerDuration;
     [SerializeField] private Ease _fingerEase;
+    [SerializeField] private ScaleDownUpAnimation[] _fingersInfinitAnimations;
     
     [Header("Высота подьема пальчика")]
     [SerializeField] private float _screenFingerDeltaY;
@@ -23,21 +25,33 @@ public class Narrator : MonoBehaviour {
     
     
     private Transform _currentFinger;
+    private Vector2 _screenFingerStartPosition;
+    
     
     [Inject] private LocalizationData _localization;
     [Inject] private TutorialManager _tutorialManager;
     
 
     private void OnEnable() {
+        Debug.Log("OnEnable");
         if (_tutorialManager.TutorialPassed) {
             _narratorContainer.DisactiveSelf();
         }
         else {
             _tutorialManager.NewTutorialStep += CheckToDestroyCurrentFinger;
+            Debug.Log("_screenFinger.localPosition = " + _screenFinger.localPosition);
+            _screenFingerStartPosition = _screenFinger.localPosition;
         }
     }
 
-    
+    private void Start() {
+        if (!_tutorialManager.TutorialPassed) {
+            Debug.Log("screenFinger.localPosition = " + _screenFinger.localPosition);
+            _screenFingerStartPosition = _screenFinger.localPosition;
+        }
+    }
+
+
     public void Disactive() {
         _narratorContainer.DisactiveSelf();
         _screenFinger.DisactiveSelf();
@@ -49,6 +63,7 @@ public class Narrator : MonoBehaviour {
     public void DisableNarrator() {
         Disactive();
         _tutorialManager.NewTutorialStep -= CheckToDestroyCurrentFinger;
+        _fingersInfinitAnimations.ForEach(a => a.Kill());
     }
 
     
@@ -59,7 +74,8 @@ public class Narrator : MonoBehaviour {
     
     public void CheckToDestroyCurrentFinger() {
         if (_currentFinger != null && _currentFinger.gameObject.activeSelf) {
-            _currentFinger.DisactiveSelf();
+            DOTween.Kill(_currentFinger); // Останавливаем анимацию
+            _currentFinger.gameObject.DisactiveSelf();
         }
     }
     
@@ -71,6 +87,7 @@ public class Narrator : MonoBehaviour {
 
 
     public void ShowScreenFinger() {
+        _screenFinger.localPosition = _screenFingerStartPosition;
         _screenFinger.ActiveSelf();
         AnimateFinger(_screenFinger, _screenFingerDeltaY);
     }

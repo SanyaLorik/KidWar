@@ -6482,7 +6482,7 @@ MonoBehaviour:
   _explosionFinger: {fileID: 1174461659}
   _fingerDuration: 0.6
   _fingerEase: 1
-  _screenFingerDeltaY: 228
+  _screenFingerDeltaY: 100
   _healFingerDeltaY: -80
   _explosionFingerDeltaY: 80
 --- !u!1 &1810716606
@@ -7822,7 +7822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1520620395730448806, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1732263699532266779, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
@@ -8865,10 +8865,6 @@ PrefabInstance:
     - target: {fileID: 7484516855891067931, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7493480620952473539, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -78
       objectReference: {fileID: 0}
     - target: {fileID: 7656390119414581763, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_AnchorMax.y

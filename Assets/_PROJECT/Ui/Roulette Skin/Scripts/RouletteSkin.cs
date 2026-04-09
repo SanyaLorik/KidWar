@@ -34,18 +34,18 @@ public class RouletteSkin : MonoBehaviour
 
         _items.ForEach(i => i.StorePosition());
 
-        //UniTask.Create(async () =>
-        //{
-        //    while (destroyCancellationToken.IsCancellationRequested == false)
-        //    {
-        //        FillRandomSkins();
-        //        await SpinAsync();
+        UniTask.Create(async () =>
+        {
+            while (destroyCancellationToken.IsCancellationRequested == false)
+            {
+                FillRandomSkins();
+                await SpinAsync();
 
-        //        ResetItemPositions();
+                await UniTask.Delay(2000);
 
-        //        await UniTask.Delay(2000);
-        //    }
-        //});
+                ResetItemPosition();
+            }
+        });
     }
 
     public async UniTask<ThrowableObject> SpinAsync()
@@ -70,13 +70,12 @@ public class RouletteSkin : MonoBehaviour
             float evaluated = _behaviourCurve.Evaluate(lerpTime);
             float currentDistance = Mathf.Lerp(0, totalDistance, evaluated);
             float xOffset = currentDistance - previousDistance;
+            print(xOffset + " " + _spacing);
 
             previousDistance = currentDistance;
 
             for (int i = 0; i < _items.Length; i++)
             {
-                _items[i].Rect.anchoredPosition = _items[i].Rect.anchoredPosition.AddX(xOffset);
-
                 if (_finish.anchoredPosition.x <= _items[i].Rect.anchoredPosition.x)
                 {
                     int indexNextItem = (i + 1) % _items.Length;
@@ -88,9 +87,11 @@ public class RouletteSkin : MonoBehaviour
                     if (isLastSpin)
                         _selectedItem.SetInfo(throwableObject.Info);
                 }
+
+                _items[i].Rect.anchoredPosition = _items[i].Rect.anchoredPosition.AddX(xOffset);
             }
 
-            expendedTime += Time.deltaTime;
+            expendedTime += Time.fixedDeltaTime;
 
             await UniTask.Yield(cancellationToken: destroyCancellationToken);
         }

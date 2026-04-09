@@ -644,8 +644,8 @@ MonoBehaviour:
   _spinCount: 2
   _duration: 2
   _spinRangePercent:
-    <From>k__BackingField: -0.05
-    <To>k__BackingField: 0.05
+    <From>k__BackingField: -0.04
+    <To>k__BackingField: -0.12
   _selectedItem: {fileID: 3217164623007002980}
   _items:
   - {fileID: 7758401254106461616}

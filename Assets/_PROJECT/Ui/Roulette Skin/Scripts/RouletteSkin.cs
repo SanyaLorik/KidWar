@@ -70,7 +70,6 @@ public class RouletteSkin : MonoBehaviour
             float evaluated = _behaviourCurve.Evaluate(lerpTime);
             float currentDistance = Mathf.Lerp(0, totalDistance, evaluated);
             float xOffset = currentDistance - previousDistance;
-            print(xOffset + " " + _spacing);
 
             previousDistance = currentDistance;
 

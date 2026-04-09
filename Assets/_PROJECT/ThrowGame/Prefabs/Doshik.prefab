@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThrowableObject
   _destroyEase: 26
-  _animation: {fileID: 1298811877278385144}
+  <Animation>k__BackingField: {fileID: 1298811877278385144}
   _rb: {fileID: 5929244231476390376}
   _colliders:
   - {fileID: 5721361543484987008}

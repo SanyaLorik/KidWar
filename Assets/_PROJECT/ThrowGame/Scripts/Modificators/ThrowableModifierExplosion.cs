@@ -28,10 +28,15 @@ public class ThrowableModifierExplosion : IThrowableModifier {
     }
 
     private void Explode() {
+        GameEvents.ObjectExplodeInvoke();
         ThrowableObject.transform.DOScale(_scaling, exposionDuration)
             .SetEase(_ease)
             .SetUpdate(UpdateType.Fixed)
-            .OnComplete(() => Object.Destroy(ThrowableObject.gameObject));
+            .OnComplete(DestroyAfterExplode);
+    }
+
+    private void DestroyAfterExplode() {
+        Object.Destroy(ThrowableObject.gameObject);
     }
 
     public void OnPlayerContact() {

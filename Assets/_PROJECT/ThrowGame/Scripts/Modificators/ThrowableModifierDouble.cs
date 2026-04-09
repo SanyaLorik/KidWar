@@ -8,25 +8,25 @@ public class ThrowableModifierDouble : IThrowableModifier {
     [SerializeField] private float _heightMultiplier = 1.3f;
     [SerializeField] private int _extraDamage;
 
+    private ThrowableObject _secondThrowableObject;
 
     public ThrowableObject ThrowableObject { get; private set; }
     public int ExtraDamage => _extraDamage;
 
 
-    private ThrowableObject _secondThrowableObject;
     public void SetThrowableObject(ThrowableObject throwableObject) {
         ThrowableObject = throwableObject;
     }
 
     public void ExtensionBehaviour() {
         _secondThrowableObject = Object.Instantiate(ThrowableObject);
-        _secondThrowableObject.StartDestroyTimer(true);
+        _secondThrowableObject.SetDefaultModifier();
     }
-
 
     public void OnPlayerContact() {
         _secondThrowableObject.StartDestroyTimer(true);
     }
+
     
     public void CalculatePose(float elapsedTime) {
         // Обычыный полет
@@ -47,10 +47,4 @@ public class ThrowableModifierDouble : IThrowableModifier {
         
     }
 
-    private IEnumerator DeleteAsync() {
-        yield return new WaitForSeconds(5f);
-        if (_secondThrowableObject != null) {
-            Object.Destroy(_secondThrowableObject.gameObject);
-        }
-    }
 }

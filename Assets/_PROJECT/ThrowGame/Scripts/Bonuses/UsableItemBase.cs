@@ -50,5 +50,6 @@ public abstract class UsableItemBase : MonoBehaviour {
             await UniTask.Yield();
         }
         IsAvailable = true;
+        GameEvents.ModifierReloadedInvoke();
     }
 }

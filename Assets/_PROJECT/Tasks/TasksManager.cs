@@ -82,7 +82,7 @@ public class TasksManager : MonoBehaviour {
         _hpSystem.MainPlayerHeal += OnPlayerHeal;
         _hpSystem.PlayerShielded += OnPlayerShielded;
         _parkourCompleteTrigger.ParkourCompleted += UpdateParkourTask;
-        _gameOverShower.PlayerWon += PlayerWinCheck;
+        _gameOverShower.PlayerWin += PlayerWinCheck;
     }
     
     

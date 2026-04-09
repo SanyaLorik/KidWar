@@ -85,9 +85,6 @@ public class BattleManager : MonoBehaviour {
     
 
     public void InitForNewGame(bool firstPlayerBot, bool secondPlayerBot) {
-        // Debug.Log("firstPlayerBot " + firstPlayerBot);
-        // Debug.Log("secondPlayerBot " + secondPlayerBot);
-
         AllowToPlay = false;
         MainPlayerPlay = !firstPlayerBot;
 
@@ -105,8 +102,6 @@ public class BattleManager : MonoBehaviour {
             FirstThrower = bot;
             firstSkinId = bot.SkinId;
             GetReadyPlayer(FirstThrower, true);
-            // Это битва 2х ботов
-            // - сделать аим у ботов 100%
         }
 
         // Второй игрок всегда ботяра, ток с настроенным поведением

@@ -58,6 +58,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     public bool ObjectInFly { get; private set; }
 
 
+    [Inject] BattleManager _battleManager;
     [Inject] ThrowGameStarter _gameStarter;
     [Inject] WindChooseView _wind;
     [Inject] ForceChooseView _force;

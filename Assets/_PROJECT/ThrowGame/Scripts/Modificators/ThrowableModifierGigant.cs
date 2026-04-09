@@ -30,12 +30,14 @@ public class ThrowableModifierGigant : IThrowableModifier {
 
     private async UniTask GiantBeingAsync() {
         await UniTask.WaitForSeconds(_durationBeforeScaling);
+        GameEvents.GiantModifierInvoke();
         ThrowableObject.transform.DOScale(_scaling, _duration)
             .SetEase(_ease)
             .SetUpdate(UpdateType.Fixed);
     }
 
     public void OnPlayerContact() { }
+    public void OnFloorContact() { }
 
 
     public void CalculatePose(float elapsedTime) {

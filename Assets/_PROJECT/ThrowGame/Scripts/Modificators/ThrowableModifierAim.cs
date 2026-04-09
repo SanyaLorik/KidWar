@@ -18,7 +18,7 @@ public class ThrowableModifierAim : IThrowableModifier {
 
     public void OnPlayerContact() { }
 
-    
+
     public void CalculatePose(float elapsedTime) {
         float progress = elapsedTime / ThrowableObject.FlightDurationToEnemy;
         Vector3 newPos = Vector3.Lerp(ThrowableObject.InitialPos, ThrowableObject.EnemyPose, progress);

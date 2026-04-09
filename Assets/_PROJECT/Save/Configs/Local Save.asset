@@ -31,29 +31,29 @@ MonoBehaviour:
     SkinWearId: deer_skin
     Bonuses:
     - Id: health_bonus
-      Count: 2
+      Count: 5
     - Id: shield_bonus
-      Count: 3
+      Count: 5
     - Id: reset_bonus
-      Count: 3
+      Count: 5
     Tasks:
     - Id: Parkour
       Count: 1
       IsGetReward: 0
     - Id: WinCount
-      Count: 19
-      IsGetReward: 0
-    - Id: HitCount
-      Count: 30
-      IsGetReward: 0
-    - Id: UseHealCount
       Count: 20
       IsGetReward: 0
+    - Id: HitCount
+      Count: 46
+      IsGetReward: 0
+    - Id: UseHealCount
+      Count: 23
+      IsGetReward: 0
     - Id: ShieldCount
-      Count: 9
+      Count: 12
       IsGetReward: 0
     - Id: HealsLifesCount
-      Count: 225
+      Count: 275
       IsGetReward: 0
     DailyRewardSave:
       LastDateTimeReceived: 

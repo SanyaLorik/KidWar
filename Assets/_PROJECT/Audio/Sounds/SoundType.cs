@@ -1,0 +1,19 @@
+﻿public enum SoundType {
+    MainBackground,
+    PlayBackground,
+    Jump,
+    Step,
+    Win,
+    Loose,
+    Money,
+    Unlock,
+    UIButton,
+    Throw,
+    HitFloor,
+    HitPlayer,
+    Explosion,
+    Giant,
+    ReloadModifier,
+    BonusUse,
+    NextStep
+}

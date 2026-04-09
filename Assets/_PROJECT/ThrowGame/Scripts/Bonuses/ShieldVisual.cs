@@ -35,9 +35,9 @@ public class ShieldVisual : MonoBehaviour {
         Vector2 initPos = _bar.offsetMax;
         Vector2 targetPos = new Vector2(GetXPoseByPercent(percentage, _barParent), 0);
         
-        Debug.Log("percentage = " + percentage);
-        Debug.Log("initPos = " + initPos);
-        Debug.Log("targetPos = " + targetPos);
+        // Debug.Log("percentage = " + percentage);
+        // Debug.Log("initPos = " + initPos);
+        // Debug.Log("targetPos = " + targetPos);
         
         
         while (!token.IsCancellationRequested && elapsedTime < _changeBarDuration) {
@@ -45,7 +45,7 @@ public class ShieldVisual : MonoBehaviour {
             float progress = elapsedTime / _changeBarDuration;
             Vector2 interp = Vector2.Lerp(initPos, targetPos, progress);
             _bar.offsetMax = interp;
-            Debug.Log("interp = " + interp);
+            // Debug.Log("interp = " + interp);
             await UniTask.Yield();
         }
         _bar.offsetMax = targetPos;

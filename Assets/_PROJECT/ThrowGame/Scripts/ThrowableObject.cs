@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class ThrowableObject : MonoBehaviour {
     [SerializeField] private Ease _destroyEase;
-    [SerializeField] private DOTweenAnimationBase _animation;
+    [field: SerializeField] public DOTweenAnimationBase Animation { get; private set; }
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private List<Collider> _colliders;
     
@@ -21,11 +21,11 @@ public class ThrowableObject : MonoBehaviour {
     [field: Header("Игровая информация")]
     [field: SerializeField] public InfoThrowableObject Info { get; private set; }
 
-    private IThrowableModifier _modifier;
-    private CancellationTokenSource _token;
+    private IThrowableModifier Modifier;
+    private CancellationTokenSource _tokenSource;
     private bool _ignoreColliders;
     private float _elapsedTime;
-    private CancellationTokenSource _tokenSource;
+    private bool _contactPlayer;
     private bool _oneTapKill;
 
     public Rigidbody Rb => _rb;
@@ -38,24 +38,25 @@ public class ThrowableObject : MonoBehaviour {
     public AnimationCurve ThrowCurve { get; private set; }
 
     public Transform PointToFollow => transform;
-    
+
     /// <summary>
     /// Если был контакт с коллайдером или игроком то не наносить больше урона
     /// </summary>
-    private bool _contactPlayer;
+
     
     public void OnTriggerEnter(Collider collider) {
+        StartDestroyTimer(true);
         if(!collider.TryGetComponent(out IDamageable player) || _contactPlayer) return;
-        if (_modifier != null) {
-            _modifier.OnPlayerContact();
-            StartDestroyTimer(true);
+        if (Modifier != null) {
+            GameEvents.PlayerHitInvoke();
+            Modifier.OnPlayerContact();
             if (_oneTapKill) {
-                player.AddDamage(Info.Damage * 10000 + _modifier.ExtraDamage);
-                Debug.Log($"Попал, хп снёс + {Info.Damage * 10000 + _modifier.ExtraDamage}");
+                player.AddDamage(Info.Damage * 10000 + Modifier.ExtraDamage);
+                Debug.Log($"Попал, хп снёс + {Info.Damage * 10000 + Modifier.ExtraDamage}");
             }
             else {
-                player.AddDamage(Info.Damage + _modifier.ExtraDamage);
-                Debug.Log($"Попал, хп снёс + {Info.Damage + _modifier.ExtraDamage}");
+                player.AddDamage(Info.Damage + Modifier.ExtraDamage);
+                Debug.Log($"Попал, хп снёс + {Info.Damage + Modifier.ExtraDamage}");
             }
             _contactPlayer = true;
         }
@@ -64,9 +65,11 @@ public class ThrowableObject : MonoBehaviour {
     
     public void OnCollisionEnter(Collision other) {
         StartDestroyTimer(true);
+        GameEvents.FloorInvoke();
         if (!other.gameObject.TryGetComponent(out ObjectThrower _) && !_ignoreColliders) {
             // Об землю ударилось, сё низя урон наносить
             _contactPlayer = true;
+            
         }
     }
     
@@ -87,36 +90,40 @@ public class ThrowableObject : MonoBehaviour {
         FlightDurationToEnemy = flightDurationToEnemy;
         Height = height;
         ThrowCurve = throwCurve;
-        _modifier = modifier;
-        _modifier.SetThrowableObject(this);
+        Modifier = modifier;
+        Modifier.SetThrowableObject(this);
     }
 
+    
     public void SetOneTapMode() {
         _oneTapKill = true;
     }
 
+    
     public async UniTask StartFlight(CancellationToken token) {
         _elapsedTime = 0f;
         // Debug.Log($"TargetPos = {TargetPos}, модификатор: {_modifier.GetType()}");
-        _modifier.ExtensionBehaviour();
-        _colliders.ForEach(c => c.enabled = false);
-        SetStateCollidersAsync(true).Forget();
+        Modifier.ExtensionBehaviour();
+        SetCollidersTemporaryDisabledAsync(true).Forget();
         while (!token.IsCancellationRequested && _elapsedTime < FlightDuration && !_contactPlayer) {
             _elapsedTime += Time.deltaTime;
-            _modifier.CalculatePose(_elapsedTime); 
+            Modifier.CalculatePose(_elapsedTime); 
             await UniTask.WaitForFixedUpdate();
         }
+        Modifier.OnPlayerContact();
         StartDestroyTimer(true);
     }
-    
+
     
     /// <summary>
     /// Подождать пока коллайдер типа не будет задевать ничего
     /// </summary>
     /// <param name="state"></param>
-    private async UniTask SetStateCollidersAsync(bool state) {
+    private async UniTask SetCollidersTemporaryDisabledAsync(bool state) {
+        if (Modifier is ThrowableModifierGigant) return;
+        _colliders.ForEach(c => c.enabled = false);
         await UniTask.WaitForSeconds(.7f);
-        _colliders.ForEach(c => c.enabled = state);
+        _colliders.ForEach(c => c.enabled = true);
     }
     
 
@@ -127,10 +134,15 @@ public class ThrowableObject : MonoBehaviour {
     public void StartDestroyTimer(bool state) {
         if (_rb.useGravity == state) return;
         _rb.useGravity = state;
+        Animation.Kill();
         _tokenSource = new CancellationTokenSource();
         DestroyTimer(_tokenSource.Token).Forget();
     }
 
+    public void SetDefaultModifier() {
+        Modifier = new ThrowableModifierDefault();
+    }
+    
     private async UniTask DestroyTimer(CancellationToken token) {
         await UniTask.WaitForSeconds(_timeToDestroy, cancellationToken: token);
         _rb.angularVelocity = new Vector3(
@@ -142,7 +154,6 @@ public class ThrowableObject : MonoBehaviour {
             .SetEase(_destroyEase)
             .OnComplete(() => Destroy(gameObject));
     }
-    
     
 
     /// <summary>
@@ -161,17 +172,9 @@ public class ThrowableObject : MonoBehaviour {
         Debug.Log($"Смена FlightDuration с {FlightDuration} на {duration}");
         FlightDuration =  duration;
     }
-    
-    
-
-    public void Destroy() {
-        _elapsedTime = FlightDuration;
-        // Полное удаление делает менеджер Calculator он их спавнит и удаляет
-        gameObject.DisactiveSelf();
-    }
 
     public void ObjectIsFall() {
-        _animation.Kill();
+        StartDestroyTimer(true);
     }
 
     private void OnDestroy() {

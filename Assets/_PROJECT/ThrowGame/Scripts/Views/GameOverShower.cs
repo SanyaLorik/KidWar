@@ -27,7 +27,7 @@ public class GameOverShower : MonoBehaviour {
     [SerializeField] private Button _continue2xButton;
 
     public bool ResultWindowShowing { get; private set; }
-    public event Action<bool> PlayerWon;
+    public event Action<bool> PlayerWin;
 
     [Inject] private ThrowGameStarter _gameStarter;
     [Inject] private BattleManager _battleManager;
@@ -71,7 +71,7 @@ public class GameOverShower : MonoBehaviour {
         _winContainer.SetActive(mainPlayerWin);
         _loseContainer.SetActive(!mainPlayerWin);
         
-        PlayerWon?.Invoke(mainPlayerWin);
+        PlayerWin?.Invoke(mainPlayerWin);
     }
     
     private void SetResultState(int winnerNumber) {

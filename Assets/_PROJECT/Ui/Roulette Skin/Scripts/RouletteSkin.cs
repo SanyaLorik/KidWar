@@ -34,18 +34,18 @@ public class RouletteSkin : MonoBehaviour
 
         _items.ForEach(i => i.StorePosition());
 
-        UniTask.Create(async () =>
-        {
-            while (destroyCancellationToken.IsCancellationRequested == false)
-            {
-                FillRandomSkins();
-                await SpinAsync();
+        //UniTask.Create(async () =>
+        //{
+        //    while (destroyCancellationToken.IsCancellationRequested == false)
+        //    {
+        //        FillRandomSkins();
+        //        await SpinAsync();
 
-                await UniTask.Delay(2000);
+        //        await UniTask.Delay(2000);
 
-                ResetItemPosition();
-            }
-        });
+        //        ResetItemPosition();
+        //    }
+        //});
     }
 
     public async UniTask<ThrowableObject> SpinAsync()
@@ -78,8 +78,12 @@ public class RouletteSkin : MonoBehaviour
             {
                 if (_finish.anchoredPosition.x <= _items[i].Rect.anchoredPosition.x)
                 {
+                    float x = 0;
+                    if (i == _items.Length - 1)
+                        x = xOffset;
+
                     int indexNextItem = (i + 1) % _items.Length;
-                    _items[i].Rect.anchoredPosition = _items[indexNextItem].Rect.anchoredPosition.AddX(-_spacing);
+                    _items[i].Rect.anchoredPosition = _items[indexNextItem].Rect.anchoredPosition.AddX(-_spacing - x);
 
                     ChangeInfo(_items[i]);
 
@@ -91,7 +95,7 @@ public class RouletteSkin : MonoBehaviour
                 _items[i].Rect.anchoredPosition = _items[i].Rect.anchoredPosition.AddX(xOffset);
             }
 
-            expendedTime += Time.fixedDeltaTime;
+            expendedTime += Time.deltaTime;
 
             await UniTask.Yield(cancellationToken: destroyCancellationToken);
         }

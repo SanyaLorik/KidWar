@@ -13,29 +13,21 @@ MonoBehaviour:
   m_Name: Local Save
   m_EditorClassIdentifier: Assembly-CSharp::GameSaveSO
   Save:
-    Money: 1286850000
+    Money: 150000
     IsBoughtPurchase: 0
     TutorialPassed: 1
     Skins:
-    - Id: creeper_skin
-    - Id: tits_skin
     - Id: obby_skin
-    - Id: noobic_skin
-    - Id: gihun_skin
     - Id: guard_skin
-    - Id: freddie_skin
-    - Id: foxie_skin
-    - Id: huggie_skin
-    - Id: kissie_skin
-    - Id: deer_skin
-    SkinWearId: deer_skin
+    - Id: gihun_skin
+    SkinWearId: guard_skin
     Bonuses:
     - Id: health_bonus
-      Count: 5
+      Count: 9
     - Id: shield_bonus
-      Count: 5
+      Count: 8
     - Id: reset_bonus
-      Count: 5
+      Count: 7
     Tasks:
     - Id: Parkour
       Count: 1
@@ -44,7 +36,7 @@ MonoBehaviour:
       Count: 20
       IsGetReward: 0
     - Id: HitCount
-      Count: 46
+      Count: 47
       IsGetReward: 0
     - Id: UseHealCount
       Count: 23

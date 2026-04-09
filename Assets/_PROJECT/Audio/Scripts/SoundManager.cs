@@ -71,8 +71,7 @@ public class SoundManager : MonoBehaviour {
         _playerMovement.Floored += PlayerMovementOnFloored;
         // BANK / WEAR
         _bank.BankNewMoneyPlus += OnMoneyPlus;
-        // Траты, пока уберу
-        // _bank.BankNewMoneyMinus += OnMoneyPlus;
+        _bank.BankNewMoneyMinus += OnMoneyPlus;
         _playerSkinInventory.SkinEquipped += SkinAction;
         // Settings
         _settings.MusicValueChanged += SettingsOnMusicValueChanged;
@@ -173,8 +172,6 @@ public class SoundManager : MonoBehaviour {
         if(!_battleManager.MainPlayerPlay) return;
         PlaySoundByType(SoundType.NextStep);
     }
-    
-    
 
 
     private AudioSource CreateNewAudioSource() {
@@ -191,6 +188,7 @@ public class SoundManager : MonoBehaviour {
             Debug.Log("Нет звука с типом " + type);
             return;
         }
+        Debug.Log("Приогрывание " + type);
         AudioClip clip = GetSource(config);
         AudioSource source = GetFreeSource(type);
         
@@ -234,13 +232,16 @@ public class SoundManager : MonoBehaviour {
     
     private void OnMoneyPlus(long _) {
         PlaySoundByType(SoundType.Money);
+        Debug.Log("OnMoneyPlus");
     }
     
     private void BuyOrUnlock(long _) {
         if(!_allowToSound) return;
         Debug.Log("BuyOrUnlock sound");
-        PlaySoundByType(SoundType.Unlock);
+        PlaySoundByType(SoundType.Money);
         StartCoroutine(WaitForSoundDelay(_soundDelay));
+        Debug.Log("BuyOrUnlock");
+        
     }
     
     private IEnumerator WaitForSoundDelay(float time) {

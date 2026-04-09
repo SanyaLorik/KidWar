@@ -15,6 +15,7 @@ MonoBehaviour:
   <Id>k__BackingField: shield_bonus
   Bonus:
     rid: 8231486814680514637
+  <Price>k__BackingField: 10000
   references:
     version: 2
     RefIds:

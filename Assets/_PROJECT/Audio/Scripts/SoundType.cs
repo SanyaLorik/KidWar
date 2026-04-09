@@ -6,7 +6,6 @@
     Win,
     Loose,
     Money,
-    Unlock,
     UIButton,
     Throw,
     HitFloor,

@@ -173,17 +173,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2704156621552904005, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &29698367 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3462083700196093511, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
-  m_PrefabInstance: {fileID: 2383758755132589753}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!114 &31191445 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8956883204128278861, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -226,17 +215,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 331404067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &38735590 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9122304113805549094, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
-  m_PrefabInstance: {fileID: 2383758755132589753}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &52667759 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6842893774470078504, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -678,17 +656,6 @@ MonoBehaviour:
   - {fileID: 1880339773}
   - {fileID: 1880339772}
   - {fileID: 1880339771}
---- !u!114 &190698461 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2734107831689208544, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
-  m_PrefabInstance: {fileID: 2383758755132589753}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &203431244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,6 +1806,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &432759001 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4175323843360786797, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0154568316644ab0adffc107bbeafd3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusCardItem
 --- !u!1 &441681443 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8095395718853766938, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -3902,7 +3880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45840b7ee878d8649994ffa40e57a0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInstaller
-  _defaultSkinConfig: {fileID: 11400000, guid: e5ce4979a2202c243b7d8a307e28a19b, type: 2}
+  _defaultSkinConfig: {fileID: 11400000, guid: dae37eac3293152449de203bcee10ca7, type: 2}
   _skinItemConfigs:
   - {fileID: 11400000, guid: e5ce4979a2202c243b7d8a307e28a19b, type: 2}
   - {fileID: 11400000, guid: b2f9c41f63270f0459adc881c35ab261, type: 2}
@@ -4115,18 +4093,12 @@ MonoBehaviour:
   _trigger: {fileID: 5123427090692961070}
   _canvas: {fileID: 2383758755132589759}
   _closeButton: {fileID: 2383758755132589758}
-  _healthCard: {fileID: 2383758755132589757}
-  _shieldCard: {fileID: 2383758755132589756}
-  _resetCard: {fileID: 2383758755132589755}
   _easeToShowCards: 27
   _showCardsDuration: 0.5
-  _bonusButtons:
-  - BonusButton: {fileID: 29698367}
-    BonuseItem: {fileID: 11400000, guid: 30304a6164c5a1845ab7d39016723efb, type: 2}
-  - BonusButton: {fileID: 38735590}
-    BonuseItem: {fileID: 11400000, guid: 4164ca232dae75048851cc0e0b2df030, type: 2}
-  - BonusButton: {fileID: 190698461}
-    BonuseItem: {fileID: 11400000, guid: 8185d71f400cf184daa223e183b1e07c, type: 2}
+  _bonusCards:
+  - {fileID: 432759001}
+  - {fileID: 2383758755132589756}
+  - {fileID: 2102505463}
   _randomByAdv: {fileID: 271187136}
 --- !u!65 &1171393073
 BoxCollider:
@@ -6462,7 +6434,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4cecd2d07b6476a4ba189bc4220dfc77, type: 2}
   - {fileID: 11400000, guid: a47d96522b56cb140bc31bbbd7daccbd, type: 2}
   - {fileID: 11400000, guid: ec997e2f20157994abbfd5edfd376c88, type: 2}
-  - {fileID: 11400000, guid: d7187d2124544e440bd7e069e831ce61, type: 2}
   - {fileID: 11400000, guid: a86ea1bd8054a1441acafccdc60fd099, type: 2}
   - {fileID: 11400000, guid: 5f1ecde1cc11b354ca948eb79997f35a, type: 2}
   _poolSize: 15
@@ -7738,6 +7709,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 331404067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2102505463 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3173895034941752778, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0154568316644ab0adffc107bbeafd3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusCardItem
 --- !u!4 &2122266236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1594451367915086953, guid: 4618323e71e227f4d92fcd9561fc8042, type: 3}
@@ -9277,6 +9259,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3173895034941752778, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <Bonus>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 8185d71f400cf184daa223e183b1e07c, type: 2}
     - target: {fileID: 3191538355415666682, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -9849,6 +9835,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4175323843360786797, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <Bonus>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 30304a6164c5a1845ab7d39016723efb, type: 2}
     - target: {fileID: 4175594556527710219, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -11987,6 +11977,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8602613489154947340, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <Bonus>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 4164ca232dae75048851cc0e0b2df030, type: 2}
     - target: {fileID: 8646977186367643422, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -12284,21 +12278,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523b312e96c51e246996412beab12357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.AlertAd
---- !u!224 &2383758755132589755 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6254323968667104930, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+--- !u!114 &2383758755132589756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8602613489154947340, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &2383758755132589756 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4841819150281374213, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
-  m_PrefabInstance: {fileID: 2383758755132589753}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &2383758755132589757 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 982555850475899492, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
-  m_PrefabInstance: {fileID: 2383758755132589753}
-  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0154568316644ab0adffc107bbeafd3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusCardItem
 --- !u!114 &2383758755132589758 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3058000819977656872, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}

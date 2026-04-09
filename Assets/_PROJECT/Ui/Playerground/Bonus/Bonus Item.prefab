@@ -1268,6 +1268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7548156604177354729}
+  - component: {fileID: 1297127146095639681}
   m_Layer: 0
   m_Name: Bonus Item
   m_TagString: Untagged
@@ -1297,3 +1298,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 460, y: 696}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1297127146095639681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9049425561430011273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0154568316644ab0adffc107bbeafd3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusCardItem
+  <Bonus>k__BackingField: {fileID: 0}
+  <BuyButton>k__BackingField: {fileID: 2015961604531510187}
+  Card: {fileID: 7548156604177354729}
+  _priceText: {fileID: 616066905927385909}
+  _nameText: {fileID: 3432266269228088020}
+  _countText: {fileID: 7737764887155298512}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82936931e992644aaf1500c865c36a7, type: 3}
   m_Name: FloorHit
   m_EditorClassIdentifier: Assembly-CSharp::SoundConfig
-  <SoundType>k__BackingField: 10
+  <SoundType>k__BackingField: 9
   <AudioClips>k__BackingField:
   - {fileID: 8300000, guid: a0d9b37dda7ae7b46bb9c738eedb5842, type: 3}
   <Volume>k__BackingField: 0.672

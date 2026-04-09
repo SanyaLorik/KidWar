@@ -15,6 +15,7 @@ MonoBehaviour:
   <Id>k__BackingField: health_bonus
   Bonus:
     rid: 8231486814680514639
+  <Price>k__BackingField: 5000
   references:
     version: 2
     RefIds:

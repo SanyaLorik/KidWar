@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82936931e992644aaf1500c865c36a7, type: 3}
   m_Name: ChangePlayerMove
   m_EditorClassIdentifier: Assembly-CSharp::SoundConfig
-  <SoundType>k__BackingField: 16
+  <SoundType>k__BackingField: 15
   <AudioClips>k__BackingField:
   - {fileID: 8300000, guid: 5f9df040ec48745409218cd7efc743ea, type: 3}
   <Volume>k__BackingField: 1

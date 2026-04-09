@@ -19,6 +19,7 @@ public class ShopSkinItem : MonoBehaviour  {
     [Inject] PlayerBank _playerBank;
     [Inject] private AdvertisingMonetizationMirra _advertisingMonetization;
     [Inject] private NumberFormatter _formatter;
+    [Inject] private PlayerBank _bank;
 
     
     private void Awake() {
@@ -78,6 +79,9 @@ public class ShopSkinItem : MonoBehaviour  {
         ShowButton(_getButton);
         HideButton(_selectedButton);
         HideButton(_canButton);
+        if (!_skinItemConfig.IsAdv) {
+            _getButton.interactable = _bank.CanBuy(_skinItemConfig.Price);
+        }
     }
 
     private void SetSelected() {
@@ -110,6 +114,7 @@ public class ShopSkinItem : MonoBehaviour  {
         _playerSkinInventory.UnlockSkin(_skinItemConfig);
         _playerBank.SpendMoney(_skinItemConfig.Price);
         SetCan();
+        _initer.CheckAllStatuses();
     }
 
 

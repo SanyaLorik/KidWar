@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82936931e992644aaf1500c865c36a7, type: 3}
   m_Name: BonusUse
   m_EditorClassIdentifier: Assembly-CSharp::SoundConfig
-  <SoundType>k__BackingField: 15
+  <SoundType>k__BackingField: 14
   <AudioClips>k__BackingField:
   - {fileID: 8300000, guid: f46792824171e1543ad46f0558264f2f, type: 3}
   <Volume>k__BackingField: 0.365

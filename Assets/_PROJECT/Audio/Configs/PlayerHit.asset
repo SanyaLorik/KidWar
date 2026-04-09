@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82936931e992644aaf1500c865c36a7, type: 3}
   m_Name: PlayerHit
   m_EditorClassIdentifier: Assembly-CSharp::SoundConfig
-  <SoundType>k__BackingField: 11
+  <SoundType>k__BackingField: 10
   <AudioClips>k__BackingField:
   - {fileID: 8300000, guid: e8c097ab0ae38e241a74682980a9fb47, type: 3}
   - {fileID: 8300000, guid: 38aca3cd9b6d8f843aadcabd9f5bc629, type: 3}

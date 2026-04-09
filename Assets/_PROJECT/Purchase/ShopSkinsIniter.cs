@@ -27,6 +27,7 @@ public class ShopSkinsIniter : MonoBehaviour  {
         }
     }
 
+
     private void InjectItems() {
         foreach (var shopSkinItem in _shopSkinItems) {
             _diContainer.QueueForInject(shopSkinItem);

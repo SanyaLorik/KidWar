@@ -22,6 +22,7 @@ public class LocalizationData : LocalizationDataBase,
     // LISTS
     public List<TaskTranslate> TaskTranslates;
     public List<TutorialTranslate> TutorialTranslates;
+    public List<BonusesTranslate> BonusesTranslates;
 
     public DailyRewardLocaliation DailyReward;
 
@@ -58,5 +59,12 @@ public class TaskTranslate : IIdName<TaskType> {
 public class TutorialTranslate : IIdName<TutorialStep> {
     [field: SerializeField] public TutorialStep Id { get; set; }
     [TextArea] [SerializeField] private string _text;
+    public string Text => _text;
+}
+
+[Serializable]
+public class BonusesTranslate : IIdName<string> {
+    [field: SerializeField] public string Id { get; set; }
+    [SerializeField] private string _text;
     public string Text => _text;
 }

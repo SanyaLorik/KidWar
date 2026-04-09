@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Architecture_M;
 using SanyaBeerExtension;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +10,7 @@ public class PlayerSkinInventory : IInitializable {
     public event Action<SkinItemConfig> SkinUnlocked;
     public event Action<SkinItemConfig> SkinEquipped;
     public readonly SkinItemConfig DefaultSkinConfig; 
+    private GameSave Saves => _saver.GetSave<GameSave>();
     
     [Inject] private IGameSave _saver; 
 
@@ -19,33 +21,34 @@ public class PlayerSkinInventory : IInitializable {
     public void Initialize() {
         // Если никого скина нет вообще
         if (!SkinIsBought(DefaultSkinConfig.Id)) {
-            _saver.GetSave<GameSave>().AddNewSkin(DefaultSkinConfig.Id);
+            Saves.AddNewSkin(DefaultSkinConfig.Id);
             EquipSkin(DefaultSkinConfig);
         }
     }
     
     public bool SkinIsBought(string id) 
-        => _saver.GetSave<GameSave>().Skins.Any(s => s.Id == id);
+        => Saves.Skins.Any(s => s.Id == id);
 
 
     public string GetRandomPlayerBoughtSkinId()
-        => _saver.GetSave<GameSave>().Skins.GetRandomElement().Id;
+        => Saves.Skins.GetRandomElement().Id;
     
     
     public void UnlockSkin(SkinItemConfig skinItemConfig) {
-        _saver.GetSave<GameSave>().AddNewSkin(skinItemConfig.Id);
+        Saves.AddNewSkin(skinItemConfig.Id);
         _saver.Save();
         SkinUnlocked?.Invoke(skinItemConfig);
     }
     
     
     public void EquipSkin(SkinItemConfig skinItemConfig) {
-        _saver.GetSave<GameSave>().SkinWearId = skinItemConfig.Id;
+        Saves.SkinWearId = skinItemConfig.Id;
         _saver.Save();
         SkinEquipped?.Invoke(skinItemConfig);
+        Debug.Log("SkinEquipped");
     }
     
     
-    public string CurrentSkinId => _saver.GetSave<GameSave>().SkinWearId;
+    public string CurrentSkinId => Saves.SkinWearId;
     
 }

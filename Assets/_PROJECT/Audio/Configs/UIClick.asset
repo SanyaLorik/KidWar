@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82936931e992644aaf1500c865c36a7, type: 3}
   m_Name: UIClick
   m_EditorClassIdentifier: Assembly-CSharp::SoundConfig
-  <SoundType>k__BackingField: 8
+  <SoundType>k__BackingField: 7
   <AudioClips>k__BackingField:
   - {fileID: 8300000, guid: ba5b0825c3d005841b6f561c36fe96bb, type: 3}
   <Volume>k__BackingField: 1

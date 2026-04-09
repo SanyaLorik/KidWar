@@ -7,7 +7,7 @@ using UnityEngine;
 
 [Serializable]
 public class GameSave : GameSaveBase,
-    IDailyRewardSaveLoader, IWheelFortuneSaveLoader
+    IDailyRewardSaveLoader, IWheelFortuneSaveLoader, IDailyQuestSaveLoader
 {
     public long Money;
     public bool IsBoughtPurchase = false;
@@ -27,6 +27,7 @@ public class GameSave : GameSaveBase,
     // Daily Rewards
     public DailyRewardSave DailyRewardSave;
     public WheelFortuneSave WheelFortuneSave;
+    public DailyQuestSave DailyQuestSave;
 
     public void AddNewSkin(string id) {
         if(Skins.Any(s => s.Id == id)) return;
@@ -112,6 +113,11 @@ public class GameSave : GameSaveBase,
     WheelFortuneSave IWheelFortuneSaveLoader.Load()
     {
         return WheelFortuneSave;
+    }
+
+    DailyQuestSave IDailyQuestSaveLoader.Load()
+    {
+        return DailyQuestSave;
     }
 }
 

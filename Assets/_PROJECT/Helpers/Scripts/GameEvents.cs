@@ -6,8 +6,8 @@ public static class GameEvents {
     public static event Action ObjectExploded;
     public static event Action ObjectGianted;
     public static event Action ModifierReloaded;
+    public static event Action TriggerUsed;
 
-    private static BattleManager _battleManager;
 
     public static void FloorInvoke() {
         FloorHited?.Invoke();
@@ -28,6 +28,10 @@ public static class GameEvents {
 
     public static void ModifierReloadedInvoke() {
         ModifierReloaded?.Invoke();
+    }
+    
+    public static void TriggerUseInvoke() {
+        TriggerUsed?.Invoke();
     }
     
 }

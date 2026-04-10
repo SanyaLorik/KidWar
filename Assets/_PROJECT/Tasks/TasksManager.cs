@@ -49,7 +49,6 @@ public class TasksManager : MonoBehaviour {
     private readonly Dictionary<TaskType, TaskInfo> _taskTypeToInfoDictionary = new ();
     private readonly Dictionary<TaskType, TaskVisual> _taskTypeToVisualDictionary = new ();
         
-
     
     // Стата игрока в данный момент 
     private int _hitCount;
@@ -90,7 +89,6 @@ public class TasksManager : MonoBehaviour {
         CreateTaskInfoDictionary();
         CreateTaskVisualDictionary();
         TableInitialize();
-        _parkourCompleteTrigger.SetParkourRewardText(_taskTypeToInfoDictionary[TaskType.Parkour].TaskMoney);
     }
 
 
@@ -134,7 +132,7 @@ public class TasksManager : MonoBehaviour {
     private void OnPlayerHeal(int count) {
         ++_useHealCount;
         UpdateTaskProgress(TaskType.UseHealCount);
-        
+
         _healsLifesCount += count;
         UpdateTaskProgress(TaskType.HealsLifesCount);
         Debug.Log($"Игрок использовал аптечку  {_useHealCount} раз, излечил {_healsLifesCount} здоровья");
@@ -156,7 +154,7 @@ public class TasksManager : MonoBehaviour {
         Debug.Log($"Игрок прошел паркур");
     }
 
-    
+
     private void UpdatePlayerHit() {
         if (_battleManager.MainPlayerPlay && _battleManager.IsFirstThrowerStep) {
             ++_hitCount;
@@ -164,6 +162,7 @@ public class TasksManager : MonoBehaviour {
             Debug.Log($"Игрок попал {_hitCount} раз");
         }
     }
+    
     
     
     private void TableInitialize() {

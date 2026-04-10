@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
-  _chanceToBeatPlayer: 1
+  _chanceToBeatPlayer: 0.373
   _delayBeforeUseModifier:
     <From>k__BackingField: 0.7
     <To>k__BackingField: 1.5
@@ -496,20 +496,20 @@ MonoBehaviour:
   _allModifiersObjects:
   - {fileID: 735613034}
   - {fileID: 1545851728}
-  _chanseToTryAgainFindModifierBot: 0.439
+  _chanseToTryAgainFindModifierBot: 0
   _modifierValues:
   - Item:
       rid: 8231486814680514627
-    Weight: 0.459
+    Weight: 0.155
   - Item:
       rid: 8231486814680514628
-    Weight: 0.5
+    Weight: 0.533
   - Item:
       rid: 8231486814680514629
-    Weight: 0.407
+    Weight: 0.373
   - Item:
       rid: 8231486814680514630
-    Weight: 0.173
+    Weight: 0.224
   references:
     version: 2
     RefIds:
@@ -993,7 +993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
-  _chanceToBeatPlayer: 1
+  _chanceToBeatPlayer: 0.373
   _delayBeforeUseModifier:
     <From>k__BackingField: 0.7
     <To>k__BackingField: 1.5
@@ -1131,7 +1131,7 @@ MonoBehaviour:
   - FullValue: 5
     TaskMoney: 1000
     TaskType: 4
-  - FullValue: 6
+  - FullValue: 1
     TaskMoney: 1000
     TaskType: 5
   _tasksVisual:
@@ -2580,6 +2580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ParkourCompleteTrigger
   _rewardText: {fileID: 1891382203}
   _delayedTrigger: {fileID: 1743526941}
+  _parkourReward: 5000
 --- !u!65 &685492327
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2667,8 +2668,8 @@ Transform:
   m_GameObject: {fileID: 685492325}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -52.107, y: 81.776, z: 5.0222}
-  m_LocalScale: {x: 3.2838702, y: 3.1535673, z: 3.603755}
+  m_LocalPosition: {x: -51.9754, y: 81.776, z: 5.0001}
+  m_LocalScale: {x: 3.5971994, y: 3.1535673, z: 3.5283394}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1905003235}
@@ -4735,6 +4736,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &1342867200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1342867201}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1342867201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342867200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1584136215}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1345430426 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9171557004430764922, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -5997,6 +6029,7 @@ Transform:
   - {fileID: 5540201212081949084}
   - {fileID: 1457575249}
   - {fileID: 1905003235}
+  - {fileID: 1342867201}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1589046481
@@ -6202,6 +6235,7 @@ Transform:
   - {fileID: 1513578072}
   - {fileID: 2049513009}
   - {fileID: 1423316926}
+  - {fileID: 2036788670}
   m_Father: {fileID: 1584136215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1613162480 stripped
@@ -7410,6 +7444,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 183706448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2036788669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2036788670}
+  - component: {fileID: 2036788671}
+  m_Layer: 0
+  m_Name: Economy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2036788670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036788669}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1605051503}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2036788671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036788669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9acc58d0fe60bf642bcf9db8260258d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EconomyCalculator
 --- !u!1 &2049513008
 GameObject:
   m_ObjectHideFlags: 0

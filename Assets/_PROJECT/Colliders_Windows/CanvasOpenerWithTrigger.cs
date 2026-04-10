@@ -28,5 +28,6 @@ public class CanvasOpenerWithTrigger : TriggerBehaviourBase {
 
     private void TriggerAction() {
         _canvas.ActiveSelf();
+        GameEvents.TriggerUseInvoke();
     }
 }

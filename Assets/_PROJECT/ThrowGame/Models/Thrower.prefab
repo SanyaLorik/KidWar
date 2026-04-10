@@ -428,6 +428,7 @@ GameObject:
   - component: {fileID: 3951249880273504875}
   - component: {fileID: 5175570297498162569}
   - component: {fileID: 3419313491196096615}
+  - component: {fileID: 2120385647744490025}
   m_Layer: 0
   m_Name: Thrower
   m_TagString: Untagged
@@ -516,6 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectThrower
   _playerHp: {fileID: 3419313491196096615}
+  _hitCalculator: {fileID: 2120385647744490025}
   <PointToBeat>k__BackingField: {fileID: 120688126886515098}
   <StayInLeft>k__BackingField: 0
   <ThrowVisualize>k__BackingField: {fileID: 7969541616269673994}
@@ -533,6 +535,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHp
   _shieldVisual: {fileID: 7909889104556468824}
+--- !u!114 &2120385647744490025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7249126386731377980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1d37f8a7166144b974d0e1da3c9223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitPositionCalculator
 --- !u!1001 &3956825187521094549
 PrefabInstance:
   m_ObjectHideFlags: 0

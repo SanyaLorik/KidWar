@@ -88,6 +88,7 @@ public class BonusShopView : MonoBehaviour {
     private void OpenBonusCanvasAnimation() {
         OnOpenCanvas();
         _canvas.ActiveSelf();
+        GameEvents.TriggerUseInvoke();
         _bonusCards.ForEach(c => c.Card.localScale = Vector3.zero);
         
         Sequence sequence = DOTween.Sequence();

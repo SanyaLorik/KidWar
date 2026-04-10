@@ -116,8 +116,10 @@ public class BattleManager : MonoBehaviour {
         
         SecondThrower.ObjectThrower.InitToNewGame(false, secondSkinId);
         SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
-        SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
-        
+
+        if (secondPlayerBot) {
+            SecondThrower.ObjectThrower.SetHitCalculatorState(true);
+        }
         
         GoBattle().Forget();
     }
@@ -162,6 +164,11 @@ public class BattleManager : MonoBehaviour {
             await PlayerStepAsync(FirstThrower.ObjectThrower, _leftCameraFocus, true);
             await PlayerStepAsync(SecondThrower.ObjectThrower, _rightCameraFocus, false);
         }
+        
+        
+        if (!SecondThrower.ObjectThrower.PlayerHandle) {
+            SecondThrower.ObjectThrower.SetHitCalculatorState(false);
+        }
 
         if (MainPlayerPlay) {
             // _gameOverShower.HidePlayCanvas();
@@ -181,8 +188,15 @@ public class BattleManager : MonoBehaviour {
         IsFirstThrowerStep = isFirstThrowerStep;
         NewPlayerTurn?.Invoke();
 
-        // Debug.Log("NewPlayerTurn, BotTurnNow = " + !thrower.PlayerHandle);
+
+        
         BotTurnNow = !thrower.PlayerHandle;
+        
+        // Игрок ходит врубаем боту счетчик
+        if (!SecondThrower.ObjectThrower.PlayerHandle && !BotTurnNow) {
+            SecondThrower.ObjectThrower.SetAllowToCalculateHit(true);
+        }
+        
         // Анимация шага игрока
         FocusCamera(pointToCameraFocus);
         if (MainPlayerPlay) {
@@ -197,6 +211,7 @@ public class BattleManager : MonoBehaviour {
         AllowToPlay = true;
         _stepIsOver = false;
         thrower.SetAllowToThrow(true);
+        
         
         _timerToThrowStep.StartTimer();
         _windChooser.UpdateWind();

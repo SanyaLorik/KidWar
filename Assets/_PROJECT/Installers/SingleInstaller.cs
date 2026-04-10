@@ -11,8 +11,13 @@ public class SingleInstaller : MonoInstaller {
         BindNicknameRandomizer();
         Container.Bind<AdvTimerStarter>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<TasksManager>().FromComponentInHierarchy().AsSingle().NonLazy();
+        BindEconomy();
         BindTurorial();
         BindCanvasToHide();
+    }
+
+    private IfNotBoundBinder BindEconomy() {
+        return Container.Bind<EconomyCalculator>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 
     private void BindTurorial() {

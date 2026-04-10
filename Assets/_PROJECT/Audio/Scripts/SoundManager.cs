@@ -86,6 +86,7 @@ public class SoundManager : MonoBehaviour {
         GameEvents.ObjectExploded += PlayExplode;
         GameEvents.ObjectGianted += PlayGiantModifier;
         GameEvents.ModifierReloaded += ModifierReloaded;
+        GameEvents.TriggerUsed += UiButtonClick;
 
     }
     
@@ -188,7 +189,7 @@ public class SoundManager : MonoBehaviour {
             Debug.Log("Нет звука с типом " + type);
             return;
         }
-        Debug.Log("Приогрывание " + type);
+        // Debug.Log("Приогрывание " + type);
         AudioClip clip = GetSource(config);
         AudioSource source = GetFreeSource(type);
         

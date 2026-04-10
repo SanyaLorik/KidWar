@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +8,8 @@ using Zenject;
 /// </summary>
 public class ObjectThrower : MonoBehaviour {
     [SerializeField] private PlayerHp _playerHp;
+    [SerializeField] private HitPositionCalculator _hitCalculator; 
+    
     [field: SerializeField] public Transform PointToBeat { get; private set; }
     [field: SerializeField] public bool StayInLeft { get; private set; }
 
@@ -28,12 +31,14 @@ public class ObjectThrower : MonoBehaviour {
     public IDamageable Damageable => _playerHp;
     public string Nickname { get;  private set; }
     
-    
     public float AngleToThrow { get; private set; }
 
     private BotObjectThrower _botObjectThrower;
 
-    
+    private void Start() {
+        SetHitCalculatorState(false);
+    }
+
     // Расчет физики полета и тп
     [Inject] private BattleManager _battleManager;
     [Inject] private ObjectThrowerCalculator _calculator;
@@ -54,6 +59,18 @@ public class ObjectThrower : MonoBehaviour {
         _botObjectThrower.SetData(this, enemyObjectThrower);
         PlayerHandle = !isBot;
     }
+
+    
+    public void SetHitCalculatorState(bool state) {
+        _hitCalculator.enabled = state;
+        Debug.Log("SetHitCalculatorState = "+ state);
+    }
+
+    public void SetAllowToCalculateHit(bool state) {
+        _hitCalculator.SetCalculateState(state);
+        Debug.Log("SetAllowToCalculateHit = "+ state);
+    }
+    
     
     public string SkinId { get; private set; }
     public void InitToNewGame(bool stayInLeft, string skinId) {

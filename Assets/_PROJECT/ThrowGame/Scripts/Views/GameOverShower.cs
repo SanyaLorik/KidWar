@@ -1,5 +1,6 @@
 using System;
 using Architecture_M;
+using MirraSDK_M;
 using SanyaBeerExtension;
 using TMPro;
 using UnityEngine;
@@ -9,7 +10,6 @@ using Zenject;
 public class GameOverShower : MonoBehaviour {
     [SerializeField] private GameObject _allContainer;
     [SerializeField] private GameObject _playgroundContainer;
-    
     // PVP
     [Header("PVB")]
     [SerializeField] private GameObject _pvbContainer;
@@ -17,12 +17,8 @@ public class GameOverShower : MonoBehaviour {
     [SerializeField] private GameObject _loseContainer;
     [Header("PVP")]
     [SerializeField] private GameObject _pvpContainer;
-
-    
     
     [SerializeField] private TextMeshProUGUI _winnerNumberText;
-    
-    
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _continue2xButton;
 
@@ -35,17 +31,19 @@ public class GameOverShower : MonoBehaviour {
     [Inject] private BotsMainManager _botsMainManager;
     [Inject] private IGameSave _gameSave;
     [Inject] private CameraOrbitalController _camera;
+    [Inject] private AdvertisingMonetizationMirra _advertisingMonetization;
+    [Inject] private EconomyCalculator _economyCalculator;
 
     private void Start() {
         _allContainer.DisactiveSelf();
     }
 
     private void OnEnable() {
-        _continueButton.onClick.AddListener(CloseResultWindow);
-        _continue2xButton.onClick.AddListener(CloseResultWindow);
+        _continueButton.onClick.AddListener(() => GetReward(false));
+        _continue2xButton.onClick.AddListener(TryShowAdv);
     }
 
-    public void HidePlayCanvas() {
+    private void HidePlayCanvas() {
         _playgroundContainer.DisactiveSelf();
     } 
     
@@ -103,5 +101,22 @@ public class GameOverShower : MonoBehaviour {
         => _battleManager.IsFirstThrowerStep;  
 
         
+    
+    private void TryShowAdv() {
+        _advertisingMonetization.InvokeRewarded(
+            null,
+            (isSuccess) => 
+            {
+                if (isSuccess) {
+                    GetReward(true);
+                }
+            }
+        );
+    }
+
+    private void GetReward(bool doubleReward) {
+        _economyCalculator.GetReward(doubleReward);
+        CloseResultWindow();
+    }
 
 }

@@ -117,13 +117,18 @@ public class BattleManager : MonoBehaviour {
         SecondThrower.ObjectThrower.InitToNewGame(false, secondSkinId);
         SecondThrower.ObjectThrower.SetBotBehaviour(_bot2, FirstThrower.ObjectThrower, secondPlayerBot);
 
-        if (secondPlayerBot) {
-            SecondThrower.ObjectThrower.SetHitCalculatorState(true);
-        }
+        
+        InitHitCalculator(secondPlayerBot);
         
         GoBattle().Forget();
     }
-    
+
+    private void InitHitCalculator(bool secondPlayerBot) {
+        // Он включен в момент боя ТОЛЬКО у правого бота при PVB 
+        FirstThrower.ObjectThrower.SetHitCalculatorState(false);
+        SecondThrower.ObjectThrower.SetHitCalculatorState(secondPlayerBot && MainPlayerPlay);
+    }
+
 
     public void SetGameOver() {
         Debug.Log("SetGameOver");
@@ -192,14 +197,13 @@ public class BattleManager : MonoBehaviour {
         
         BotTurnNow = !thrower.PlayerHandle;
         
-        // Игрок ходит врубаем боту счетчик
-        if (!SecondThrower.ObjectThrower.PlayerHandle && !BotTurnNow) {
-            SecondThrower.ObjectThrower.SetAllowToCalculateHit(true);
-        }
+
         
         // Анимация шага игрока
         FocusCamera(pointToCameraFocus);
         if (MainPlayerPlay) {
+            // Игрок ходит врубаем боту счетчик
+            CheckAllowToCalculateHit();
             _playersStepView.ShowPlayerStep(isFirstThrowerStep);
             await UniTask.WaitWhile(() => _playersStepView.AnimationIsShowing);
             await WaitThrowableObjectGet();
@@ -226,6 +230,12 @@ public class BattleManager : MonoBehaviour {
         thrower.SetAllowToThrow(false);
         if (!thrower.PlayerHandle) {
             BotTurnNow = false;
+        }
+    }
+
+    private void CheckAllowToCalculateHit() {
+        if (!SecondThrower.ObjectThrower.PlayerHandle && !BotTurnNow) {
+            SecondThrower.ObjectThrower.SetAllowToCalculateHit(true);
         }
     }
 

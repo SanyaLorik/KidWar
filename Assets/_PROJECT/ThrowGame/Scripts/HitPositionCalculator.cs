@@ -1,14 +1,19 @@
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(BoxCollider))]
 public class HitPositionCalculator : MonoBehaviour {
     private BoxCollider _collider;
-    private bool _allowCalculate = true;
+    private bool _allowCalculate;
 
-    public float Percentage { get; private set; }
+    [Inject] EconomyCalculator _economyCalculator;
+
+    private float _percentage;
 
 
-    private void Awake() => _collider = GetComponent<BoxCollider>();
+    private void Awake() {
+        _collider = GetComponent<BoxCollider>();
+    }
 
     public void SetCalculateState(bool calculate) {
         _allowCalculate = calculate;
@@ -18,8 +23,9 @@ public class HitPositionCalculator : MonoBehaviour {
         if (!_allowCalculate) return;
         
         ContactPoint contact = collision.GetContact(0);
-        Percentage = CalculateHitPercentage(contact.point);
-        Debug.Log($"Попадание на высоте: {Percentage:F1}%");
+        _percentage = CalculateHitPercentage(contact.point)/100f;
+        Debug.Log($"Попадание на высоте: {_percentage:F1}%");
+        _economyCalculator.AddNewBodyRatio(_percentage);
         
         _allowCalculate = false;
     }
@@ -38,8 +44,4 @@ public class HitPositionCalculator : MonoBehaviour {
         
         return percentage;
     }
-}
-
-public class HitCalculatorEnabler : MonoBehaviour {
-    
 }

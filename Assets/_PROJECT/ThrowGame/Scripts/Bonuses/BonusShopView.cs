@@ -31,7 +31,7 @@ public class BonusShopView : MonoBehaviour {
     private void OnEnable() {
         _closeButton.onClick.AddListener(CloseCanvas);
         _bonusCards.ForEach(c => c.BuyButton.onClick.AddListener(() => BuyOneItem(c.Bonus.Id, c)));
-        _randomByAdv.onClick.AddListener(WatchAdv);
+        _randomByAdv.onClick.AddListener(TryShowAdv);
     }
     
     
@@ -64,7 +64,7 @@ public class BonusShopView : MonoBehaviour {
     }
 
     
-    private void WatchAdv() {
+    private void TryShowAdv() {
         _advertisingMonetization.InvokeRewarded(
             null,
             (isSuccess) => 

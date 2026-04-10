@@ -25,7 +25,7 @@ public class EconomyCalculator : MonoBehaviour {
     
     
 
-    private float _accumulatePercentage;
+    private float _accumulateBodyPercentage;
     private int _rewardMoney;
     
     
@@ -47,7 +47,6 @@ public class EconomyCalculator : MonoBehaviour {
         if(!_battleManager.IsPvbMode) return;
         
         int damage = _gameData.PlayerMaxHp - _battleManager.SecondThrower.ObjectThrower.CurrentLifesCount;
-        Debug.Log($"Игрок выиграл = {playerWin}, урона нанёс {damage}");        
         CalculateRewardAfterBattle(playerWin, damage);
     }
 
@@ -56,7 +55,7 @@ public class EconomyCalculator : MonoBehaviour {
         if (!started) return;
         if(!_battleManager.IsPvbMode) return;
         // NEW BATTLE
-        _accumulatePercentage = 0f;
+        _accumulateBodyPercentage = 0f;
     }
     
     
@@ -69,16 +68,17 @@ public class EconomyCalculator : MonoBehaviour {
             _bodyPartRewards[index].Ratio;
         
         Debug.Log($"Попадание в процентаж {percentage*100}, ratio = {ratio}");
-        _accumulatePercentage += ratio;
+        _accumulateBodyPercentage += ratio;
  
-        Debug.Log("_accumulatePercentage = " + _accumulatePercentage);
+        Debug.Log("_accumulateBodyPercentage = " + _accumulateBodyPercentage);
     }
 
     
     private void CalculateRewardAfterBattle(bool win, int damage) {
         float ratio = win ?  _ratioForWin : _ratioForLoose;
-        _rewardMoney = (int)(damage * _accumulatePercentage * ratio);
-        Debug.Log("Выигрышь игрока: " + _rewardMoney);
+        _rewardMoney = (int)(damage * _accumulateBodyPercentage * ratio);
+        Debug.Log($"Игрок выиграл = {win}, урона нанёс {damage}, процентаж тела {_accumulateBodyPercentage}");
+        Debug.Log($"{damage} * {_accumulateBodyPercentage} * {ratio} = {_rewardMoney} ");
         _rewardText.text = _formatter.ValuteFormatter(_rewardMoney);
         _doubleRewardText.text = _formatter.ValuteFormatter(_rewardMoney*2);
     }

@@ -774,7 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7fccde467c40829f26b92ac0f958bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BonusesLoader
-  _maxRandomCountToBot: 5
+  _maxRandomCountToBot: 3
   _countToPvp: 3
 --- !u!1 &243024002 stripped
 GameObject:
@@ -7517,9 +7517,9 @@ MonoBehaviour:
   _bodyPartRewards:
   - BodyPercentage: 0.3
     Ratio: 0.9
-  - BodyPercentage: 0.7
+  - BodyPercentage: 0.5
     Ratio: 1.1
-  - BodyPercentage: 0.85
+  - BodyPercentage: 0.7
     Ratio: 1.5
 --- !u!1 &2049513008
 GameObject:
@@ -10432,7 +10432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4928627403195636240, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4944206640553063384, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive

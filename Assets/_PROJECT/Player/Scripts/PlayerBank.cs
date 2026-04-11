@@ -7,24 +7,34 @@ using Zenject;
 
 public class PlayerBank : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI[] _moneyTexts;
+    [SerializeField] private int _moneyStartCapital;
     public event Action<long> BankNewMoneyPlus;
     public event Action<long> BankNewMoneyMinus;
 
+    private GameSave Saves => _gameSave.GetSave<GameSave>();
+    
     [Inject] IGameSave _gameSave;
     [Inject] NumberFormatter _formatter;
 
+    
     public long PlayerCapital {
-        get => _gameSave.GetSave<GameSave>().Money;
+        get => Saves.Money;
         private set {
-            _gameSave.GetSave<GameSave>().Money = value;
+            Saves.Money = value;
             _moneyTexts.ForEach(t => t.text = _formatter.ValuteFormatter(PlayerCapital));
+            _gameSave.Save();
         }
     }
+    
 
     private void Start() {
         _moneyTexts.ForEach(t => t.text = _formatter.ValuteFormatter(PlayerCapital));
+        if (!Saves.TutorialPassed) {
+            PlayerCapital += _moneyStartCapital;
+        }
     }
 
+    
     public void AddMoney(long amount) {
         if (amount <= 0) {
             Debug.LogError("Попытка добавить <= 0");

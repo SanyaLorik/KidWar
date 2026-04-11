@@ -21,5 +21,6 @@ public class MoneyReceiver : AwardReceiver {
     {
         await UniTask.WaitUntil(() => _bank != null);
         _bank.AddMoney(_newMoney);
+        _saver.Save();
     }
 }

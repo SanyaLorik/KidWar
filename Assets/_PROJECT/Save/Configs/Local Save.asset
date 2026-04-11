@@ -13,43 +13,18 @@ MonoBehaviour:
   m_Name: Local Save
   m_EditorClassIdentifier: Assembly-CSharp::GameSaveSO
   Save:
-    Money: 806012
+    Money: 0
     IsBoughtPurchase: 0
-    TutorialPassed: 1
-    Skins:
-    - Id: obby
-    SkinWearId: obby
-    Bonuses:
-    - Id: health
-      Count: 11
-    - Id: shield
-      Count: 21
-    - Id: reset
-      Count: 80
-    Tasks:
-    - Id: Parkour
-      Count: 0
-      IsGetReward: 0
-    - Id: WinCount
-      Count: 0
-      IsGetReward: 0
-    - Id: HitCount
-      Count: 2
-      IsGetReward: 0
-    - Id: UseHealCount
-      Count: 0
-      IsGetReward: 0
-    - Id: ShieldCount
-      Count: 0
-      IsGetReward: 0
-    - Id: HealsLifesCount
-      Count: 0
-      IsGetReward: 0
+    TutorialPassed: 0
+    Skins: []
+    SkinWearId: 
+    Bonuses: []
+    Tasks: []
     DailyRewardSave:
-      LastDateTimeReceived: 11.04.2026 15:25:23
-      LastDayNumber: 1
+      LastDateTimeReceived: 
+      LastDayNumber: -1
     WheelFortuneSave:
-      CountSpinAllow: 2
-      LastDateTimeSpined: 11.04.2026 15:25:01
+      CountSpinAllow: 1
+      LastDateTimeSpined: 
     DailyQuestSave:
-      LastDateTimeEntered: 11.04.2026 12:43:35
+      LastDateTimeEntered: 

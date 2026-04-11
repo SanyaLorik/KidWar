@@ -21,7 +21,7 @@ MonoBehaviour:
     - rid: 8231486814680514640
       type: {class: ThrowableModifierExplosion, ns: , asm: Assembly-CSharp}
       data:
-        _percentToExpode: 0.9
+        _percentToExpode: 0.95
         exposionDuration: 0.5
         _scaling: 15
         _extraDamage: 10

@@ -33,12 +33,12 @@ MonoBehaviour:
     <VerticalAxisValueToThrow>k__BackingField: 8.823097
     <ZoomPercentInThrowGame>k__BackingField: 0.5
     <LeftPlayerWinnerAxis>k__BackingField:
-      <From>k__BackingField: 207
-      <To>k__BackingField: 23.4
+      <From>k__BackingField: 171
+      <To>k__BackingField: 6.12
     <RightPlayerWinnerAxis>k__BackingField:
-      <From>k__BackingField: -27
-      <To>k__BackingField: 23.4
-    <ZoomToWinnerView>k__BackingField: 0.201
+      <From>k__BackingField: 9
+      <To>k__BackingField: 6.12
+    <ZoomToWinnerView>k__BackingField: 0.4
     <JoystickSensivityMultiplier>k__BackingField: 500
     <MouseSensivityMultiplier>k__BackingField: 0.4
     <ZoomDiapasone>k__BackingField:

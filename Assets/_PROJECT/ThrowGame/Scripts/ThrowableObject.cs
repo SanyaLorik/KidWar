@@ -31,6 +31,7 @@ public class ThrowableObject : MonoBehaviour {
     private float _elapsedTime;
     private bool _contactPlayer;
     private bool _oneTapKill;
+    private bool _startDestroyTimer;
 
     public Rigidbody Rb => _rb;
     public Vector3 InitialPos { get; private set; }
@@ -49,7 +50,7 @@ public class ThrowableObject : MonoBehaviour {
 
     
     public void OnTriggerEnter(Collider collider) {
-        StartDestroyTimer(true);
+        StartDestroyTimer();
         if(!collider.TryGetComponent(out IDamageable player) || _contactPlayer) return;
         if (Modifier != null) {
             GameEvents.PlayerHitInvoke();
@@ -68,7 +69,7 @@ public class ThrowableObject : MonoBehaviour {
     
     
     public void OnCollisionEnter(Collision other) {
-        StartDestroyTimer(true);
+        StartDestroyTimer();
         GameEvents.FloorInvoke();
         if (!other.gameObject.TryGetComponent(out ObjectThrower _) && !_ignoreColliders) {
             // Об землю ударилось, сё низя урон наносить
@@ -115,7 +116,7 @@ public class ThrowableObject : MonoBehaviour {
             await UniTask.WaitForFixedUpdate();
         }
         Modifier.OnPlayerContact();
-        StartDestroyTimer(true);
+        StartDestroyTimer();
     }
 
     
@@ -129,15 +130,22 @@ public class ThrowableObject : MonoBehaviour {
         await UniTask.WaitForSeconds(.7f);
         _colliders.ForEach(c => c.enabled = true);
     }
-    
+
+    public void DisablePhysCollider() {
+        int physColliderIndex = _colliders.FindIndex(c => !c.isTrigger);
+        if (physColliderIndex == -1) return; 
+        _colliders[physColliderIndex].enabled = false;
+    }
 
     /// <summary>
     /// Запускает 1 раз таймер удаления с анимашкой
     /// </summary>
-    /// <param name="state"></param>
-    public void StartDestroyTimer(bool state) {
-        if (_rb.useGravity == state) return;
-        _rb.useGravity = state;
+    public void StartDestroyTimer() {
+        if (_startDestroyTimer) return;
+        _startDestroyTimer = true;
+        if (Modifier is not ThrowableModifierExplosion) {
+            _rb.useGravity = true;
+        }
         Animation.Kill();
         _tokenSource = new CancellationTokenSource();
         DestroyTimer(_tokenSource.Token).Forget();
@@ -149,6 +157,9 @@ public class ThrowableObject : MonoBehaviour {
     
     private async UniTask DestroyTimer(CancellationToken token) {
         await UniTask.WaitForSeconds(_timeToDestroy, cancellationToken: token);
+        
+        if (Modifier is ThrowableModifierExplosion) return;
+        
         _rb.angularVelocity = new Vector3(
             Random.Range(-_rotationForceAfterFall, _rotationForceAfterFall),
             Random.Range(-_rotationForceAfterFall, _rotationForceAfterFall),
@@ -178,7 +189,7 @@ public class ThrowableObject : MonoBehaviour {
     }
 
     public void ObjectIsFall() {
-        StartDestroyTimer(true);
+        StartDestroyTimer();
     }
 
     private void OnDestroy() {

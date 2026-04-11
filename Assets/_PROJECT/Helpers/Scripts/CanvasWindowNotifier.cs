@@ -6,23 +6,21 @@ using Zenject;
 public class CanvasWindowNotifier : MonoBehaviour {
     [SerializeField] private bool _allowCameraZoom;
     
-    [Inject(Id = "CanvasToHide")] private GameObject _сanvasToHide;
+    [Inject(Id = "CanvasesToHide")] private GameObject[] _сanvasesToHide;
     [Inject] IInputActivity _inputActivity;
-    [Inject] ThrowGameStarter _throwGameStarter;
     
     
     private void OnEnable() {
         SystemEvents.WindowOpen(true);
-        _сanvasToHide.DisactiveSelf();
+        _сanvasesToHide.DisactiveSelf();
         _inputActivity.Disable();
-        _throwGameStarter.ChangeAfkStatus(true);
         if (!_allowCameraZoom) {
             SystemEvents.ForbidZoomChange(true);
         }
     }
     
     private void OnDisable() {
-        _сanvasToHide.ActiveSelf();
+        _сanvasesToHide.ActiveSelf();
         SystemEvents.WindowOpen(false);
         _inputActivity.Enable();
         if (!_allowCameraZoom) {

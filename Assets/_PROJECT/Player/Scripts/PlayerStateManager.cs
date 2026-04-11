@@ -38,7 +38,7 @@ public class PlayerStateManager : MonoBehaviour{
     }
 
     public void SetupCanvases(bool playerGoPlay) {
-        InputHide(playerGoPlay);
+        MobileInputHide(playerGoPlay);
         _canvases.DisactiveSelf();
         if (playerGoPlay) {
             // _playContainer.ActiveSelf();
@@ -53,7 +53,8 @@ public class PlayerStateManager : MonoBehaviour{
         ChangePlayerState(playerGoPlay ? PlayerState.Play : PlayerState.InSpawn);
     }
 
-    private void InputHide(bool hide) {
+    private void MobileInputHide(bool hide) {
+        if (_activityButtonPC == null) return;
         if (hide) {
             _activityButtonPC.HideJumpButton();
             _activityButtonPC.HidOrbitalJoystick();

@@ -37,7 +37,6 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
     [Inject] private IInputJumping _inputJumping;
     [Inject] private GameData _gameData;
     [Inject] private PlayerStateManager _stateManager;
-    [Inject] private AdvTimerStarter _advTimerStarter;
     
     // Для гравитации и прыжков
     private float _verticalVelocity;
@@ -85,12 +84,10 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
         if (!goPlay) {
             TeleportInSpawn();
             _inputActivity.Enable();
-            _advTimerStarter.EnableTimer();
             SetCharacterControllerState(true);
             IsPlaying = false;
         }
         else {
-            _advTimerStarter.DisableTimer();
             _inputActivity.Disable();
             if (_controllerOffRoutine != null) {
                 StopCoroutine(_controllerOffRoutine);

@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
-  _chanceToBeatPlayer: 0.373
+  _chanceToBeatPlayer: 0.3
   _delayBeforeUseModifier:
     <From>k__BackingField: 0.7
     <To>k__BackingField: 1.5
@@ -959,7 +959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb96b677f5d5dc34c9e352127d07ddf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraInstaller
-  _canvasToHide: {fileID: 574559062}
+  _canvasesToHide:
+  - {fileID: 574559062}
 --- !u!1 &271583256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,7 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
-  _chanceToBeatPlayer: 0.373
+  _chanceToBeatPlayer: 0.3
   _delayBeforeUseModifier:
     <From>k__BackingField: 0.7
     <To>k__BackingField: 1.5
@@ -1641,6 +1642,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4443227316252589338, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1100837939}
+    - targetCorrespondingSourceObject: {fileID: 4443227316252589338, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1100837943}
   m_SourcePrefab: {fileID: 100100000, guid: ee00e2868b257f64aa8f0017bb4ba443, type: 3}
 --- !u!4 &402641650 stripped
 Transform:
@@ -2398,7 +2402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685e4e6beb9f015409ef464f3a085501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThrowGameManager
-  _timerDuration: 5
+  _timerDuration: 10
   _durationAfterGameOver: 4
   _timerText: {fileID: 1956258026}
   _timerCanvas: {fileID: 1628438532}
@@ -3845,6 +3849,7 @@ MonoBehaviour:
   _cameraSaveDelay: 1
   _dampningWhlePlay: {x: 4, y: 0, z: 4}
   _dampningInWinnerWindow: {x: 15, y: 5, z: 15}
+  _noise: {fileID: 0}
 --- !u!114 &1100837939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3860,6 +3865,23 @@ MonoBehaviour:
   Width: 2
   Damping: 10
   FovRange: {x: 50, y: 108.2578}
+--- !u!114 &1100837943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100837930}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBasicMultiChannelPerlin
+  NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 1
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1105847653
 GameObject:
   m_ObjectHideFlags: 0
@@ -4212,19 +4234,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4928627403195636240, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1174206114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174206112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16e5d551ed0179140baed77a4596a6ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CanvasWindowNotifier
-  _allowCameraZoom: 0
 --- !u!1 &1174461658 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1444773909659016734, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -5547,7 +5556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputInstaller
   _mobileInputViewPrefab: {fileID: 3967064296492133266, guid: cc9e6dd412bf9004683139a19bb58739, type: 3}
   _mobileContainer: {fileID: 1491452725}
-  _platformDebugType: 2
+  _platformDebugType: 1
 --- !u!114 &1499425432 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4479908961170281836, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -7529,6 +7538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EconomyCalculator
   _rewardText: {fileID: 13238691}
   _doubleRewardText: {fileID: 520645769}
+  _minimalReward: 200
   _ratioForWin: 100
   _ratioForLoose: 50
   _bodyPartRewards:
@@ -12437,9 +12447,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1444773909659016734, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1174461662}
-    - targetCorrespondingSourceObject: {fileID: 4928627403195636240, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1174206114}
     - targetCorrespondingSourceObject: {fileID: 1732263699532266779, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2383758755132589764}

@@ -2,7 +2,7 @@ using UnityEngine;
 using Zenject;
 
 public class SingleInstaller : MonoInstaller {
-    [SerializeField] private GameObject _canvasToHide;
+    [SerializeField] private GameObject[] _canvasesToHide;
     
     public override void InstallBindings() {
         BindCamera();
@@ -42,9 +42,9 @@ public class SingleInstaller : MonoInstaller {
     
     
     private void BindCanvasToHide() {
-        Container.Bind<GameObject>()
-            .WithId("CanvasToHide")
-            .FromInstance(_canvasToHide)
+        Container.Bind<GameObject[]>()
+            .WithId("CanvasesToHide")
+            .FromInstance(_canvasesToHide)
             .AsSingle().NonLazy();
     }
     

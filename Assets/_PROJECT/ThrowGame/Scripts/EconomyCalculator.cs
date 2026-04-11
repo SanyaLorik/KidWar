@@ -15,6 +15,7 @@ public struct BodyPartReward {
 public class EconomyCalculator : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _rewardText;
     [SerializeField] private TextMeshProUGUI _doubleRewardText;
+    [SerializeField] public int _minimalReward;
     
     
     [SerializeField] private float _ratioForWin;
@@ -67,18 +68,19 @@ public class EconomyCalculator : MonoBehaviour {
             :
             _bodyPartRewards[index].Ratio;
         
-        Debug.Log($"Попадание в процентаж {percentage*100}, ratio = {ratio}");
         _accumulateBodyPercentage += ratio;
- 
-        Debug.Log("_accumulateBodyPercentage = " + _accumulateBodyPercentage);
+        // Debug.Log($"Попадание в процентаж {percentage*100}, ratio = {ratio}");
+        // Debug.Log("_accumulateBodyPercentage = " + _accumulateBodyPercentage);
     }
 
     
     private void CalculateRewardAfterBattle(bool win, int damage) {
         float ratio = win ?  _ratioForWin : _ratioForLoose;
         _rewardMoney = (int)(damage * _accumulateBodyPercentage * ratio);
-        Debug.Log($"Игрок выиграл = {win}, урона нанёс {damage}, процентаж тела {_accumulateBodyPercentage}");
-        Debug.Log($"{damage} * {_accumulateBodyPercentage} * {ratio} = {_rewardMoney} ");
+        _rewardMoney = Math.Max(_minimalReward, _rewardMoney);
+        
+        // Debug.Log($"Игрок выиграл = {win}, урона нанёс {damage}, процентаж тела {_accumulateBodyPercentage}");
+        // Debug.Log($"{damage} * {_accumulateBodyPercentage} * {ratio} = {_rewardMoney} ");
         _rewardText.text = _formatter.ValuteFormatter(_rewardMoney);
         _doubleRewardText.text = _formatter.ValuteFormatter(_rewardMoney*2);
     }

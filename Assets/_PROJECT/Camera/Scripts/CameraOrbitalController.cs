@@ -5,7 +5,6 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
-using Input = Architecture_M.Input;
 
 public class CameraOrbitalController : MonoBehaviour {
     [SerializeField] private CinemachineCamera _cinemachineCamera;
@@ -18,7 +17,10 @@ public class CameraOrbitalController : MonoBehaviour {
     [SerializeField] private float _cameraSaveDelay = 1f;
     [SerializeField] private Vector3 _dampningWhlePlay;
     [SerializeField] private Vector3 _dampningInWinnerWindow;
-
+    [SerializeField] private CinemachineBasicMultiChannelPerlin _noise;
+    
+    
+    
     private Action _rotationHandler;
 
     private bool IsMobile => _inputType == InputType.Mobile;
@@ -69,14 +71,35 @@ public class CameraOrbitalController : MonoBehaviour {
         _rotationHandler.Invoke();
     }
 
+    public void ShakeCamera(float intensity, float frequency, float duration)
+    {
+        if (_noise == null) return;
+
+        _noise.AmplitudeGain = intensity;
+        _noise.FrequencyGain = frequency;
+        
+        // Останавливаем тряску через duration секунд
+        CancelInvoke(nameof(StopShake));
+        Invoke(nameof(StopShake), duration);
+    }
+
+    private void StopShake()
+    {
+        if (_noise == null) return;
+        _noise.AmplitudeGain = 0f;
+        _noise.FrequencyGain = 0f;
+    }
+    
+    
     private void OnGameStarted(bool started) {
         if(!_battleManager.MainPlayerPlay) return;
-        if (started) {
-            SetDamping(_dampningWhlePlay);
-        }
-        else {
-            SetDamping(Vector3.zero);
-        }
+        
+        // Запрещалкинсы
+        ForbidRotate(started);
+        ForbidZoom(started);
+
+        // Длительность подлетикса
+        SetDamping(started ? _dampningWhlePlay : Vector3.zero);
     }
 
     private void SetDamping(Vector3 newDamping) {
@@ -89,9 +112,6 @@ public class CameraOrbitalController : MonoBehaviour {
         SetFollowPoint(point);
         SetAxisToFollow(_gameData.HorizontalAxisValueToThrow, _gameData.VerticalAxisValueToThrow);
         ChangeCameraZoomPercent(_gameData.ZoomPercentInThrowGame);
-        
-        // ForbidRotate(true);
-        // ForbidZoom(true);
     }
 
     public void WatchToPoint(Transform point) {
@@ -154,9 +174,6 @@ public class CameraOrbitalController : MonoBehaviour {
         ChangeZoom(zoomValue);
     }
 
-    private void PlayerStateManagerOnChangeState(PlayerState state) {
-       
-    }
 
     private void SetPoint(Transform point) {
         _cinemachineCamera.Follow = point;

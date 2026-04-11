@@ -25,6 +25,7 @@ public class ThrowGameStarter : MonoBehaviour  {
     [Inject] private AdvTimerStarter _advTimerStarter;
     [Inject] private TutorialManager _tutorialManager;
 
+
     private bool _afkPressed;
     private bool _startGamePressed;
     
@@ -49,6 +50,8 @@ public class ThrowGameStarter : MonoBehaviour  {
         Debug.Log("GameOver, _startGamePressed = " + _startGamePressed);
         GameStarted?.Invoke(false);
         GameIsStarted = false;
+        _advTimerStarter.ShowAdvAfterBattle();
+        
         // Ну наверное начинать сразу...
         if (!_startGamePressed) {
             StartWaitBeforeNewTimer();
@@ -70,6 +73,18 @@ public class ThrowGameStarter : MonoBehaviour  {
         _afkButton.onClick.AddListener(() => ChangeAfkStatus(!_afkPressed));
         _duoButton.onClick.AddListener(StartDuoGame);
         _onlineButton.onClick.AddListener(StartOnlineGame);
+        SystemEvents.WindowOpened += EnableAfkWindow;
+    }
+
+    private bool _cachedAfkState;
+    private void EnableAfkWindow(bool windowOpened) {
+        if (windowOpened) {
+            _cachedAfkState = _afkPressed;
+            ChangeAfkStatus(true, false);
+        }
+        else {
+            ChangeAfkStatus(_cachedAfkState, false);
+        }
     }
 
     private void StartDuoGame() {
@@ -94,19 +109,21 @@ public class ThrowGameStarter : MonoBehaviour  {
         StartTimer(.1f);
     }
     
-    public void ChangeAfkStatus(bool afk) {
+    public void ChangeAfkStatus(bool afk, bool changeVisual = true) {
         Debug.Log("ChangeAfkStatus");
         _afkPressed = afk;
         _firstPlayerBot = _afkPressed;
         _secondPlayerBot = true;
-        _afkStatusText.SetActive(_afkPressed);
+        if (changeVisual) {
+            _afkStatusText.SetActive(_afkPressed);
+        }
         // Ушел в афк врубаем таймер
         if (afk) {
             _advTimerStarter.EnableTimer();
         }
 
     }
-    
+
 
     private void StopTimer() {
         UniTaskHelper.DisposeTask(ref _tokenSource);

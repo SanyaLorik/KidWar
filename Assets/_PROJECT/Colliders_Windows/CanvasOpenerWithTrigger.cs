@@ -1,6 +1,7 @@
 ﻿using SanyaBeerExtension;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class CanvasOpenerWithTrigger : TriggerBehaviourBase {
     [SerializeField] private DelayedTrigger _delayedTrigger;
@@ -8,6 +9,8 @@ public class CanvasOpenerWithTrigger : TriggerBehaviourBase {
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
 
+    [Inject] AdvTimerStarter _advTimerStarter;
+    
     private void OnEnable() {
         if (_openButton != null) {
             _openButton.onClick.AddListener(_canvas.ActiveSelf);
@@ -19,10 +22,12 @@ public class CanvasOpenerWithTrigger : TriggerBehaviourBase {
     }
 
     protected override void PlayerBehaviourOnEnter() {
+        _advTimerStarter.DisableTimer();
         _delayedTrigger.DelayedTriggerAction(TriggerAction); 
     }
     
     protected override void PlayerBehaviourOnExit() {
+        _advTimerStarter.EnableTimer();
         _delayedTrigger.CancelTriggerAction();
     }
 

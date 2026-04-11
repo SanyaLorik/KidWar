@@ -24,7 +24,7 @@ public class ThrowableModifierDouble : IThrowableModifier {
     }
 
     public void OnPlayerContact() {
-        _secondThrowableObject.StartDestroyTimer(true);
+        _secondThrowableObject.StartDestroyTimer();
     }
 
     

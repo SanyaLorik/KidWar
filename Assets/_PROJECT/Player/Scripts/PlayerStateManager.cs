@@ -36,6 +36,14 @@ public class PlayerStateManager : MonoBehaviour{
         _playerMovement.JumpPressed += PlayerMovementOnJumpPressed;
         _playerMovement.DoubleJumpPressed += PlayerMovementOnJumpPressed;
     }
+    
+    
+    private void Start() {
+        if (_saver.GetSave<GameSave>().IsBoughtPurchase) {
+            _interstitialActivity.DisableInterstitial();
+        }
+        SetupCanvases(false);
+    }
 
     public void SetupCanvases(bool playerGoPlay) {
         MobileInputHide(playerGoPlay);
@@ -74,14 +82,6 @@ public class PlayerStateManager : MonoBehaviour{
 
     private void PlayerMovementOnFloored() {
         _flooringParticlesController.Play();
-    }
-
-
-    private void Start() {
-        if (_saver.GetSave<GameSave>().IsBoughtPurchase) {
-            _interstitialActivity.DisableInterstitial();
-        }
-        SetupCanvases(false);
     }
 
 

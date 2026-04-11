@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a89a9fb0384466ab71508041080d0f, type: 3}
   m_Name: AimModifierSO
   m_EditorClassIdentifier: Assembly-CSharp::ModifierItemSO
-  <Id>k__BackingField: aim_modifier
+  <Id>k__BackingField: aim
   Modifier:
     rid: 8231486814680514641
   references:

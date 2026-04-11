@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: Local Save
   m_EditorClassIdentifier: Assembly-CSharp::GameSaveSO
   Save:
-    Money: 4012
+    Money: 806012
     IsBoughtPurchase: 0
     TutorialPassed: 1
     Skins:
     - Id: obby
     SkinWearId: obby
     Bonuses:
-    - Id: health_bonus
+    - Id: health
       Count: 11
-    - Id: shield_bonus
+    - Id: shield
       Count: 21
-    - Id: reset_bonus
+    - Id: reset
       Count: 80
     Tasks:
     - Id: Parkour
@@ -34,7 +34,7 @@ MonoBehaviour:
       Count: 0
       IsGetReward: 0
     - Id: HitCount
-      Count: 0
+      Count: 2
       IsGetReward: 0
     - Id: UseHealCount
       Count: 0

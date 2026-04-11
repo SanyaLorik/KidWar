@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a865cbd7bbfcf46b9d961f83cdcf3d, type: 3}
   m_Name: HealthBonusSO
   m_EditorClassIdentifier: Assembly-CSharp::BonusItemSO
-  <Id>k__BackingField: health_bonus
+  <Id>k__BackingField: health
   Bonus:
     rid: 8231486814680514639
   <Price>k__BackingField: 5000

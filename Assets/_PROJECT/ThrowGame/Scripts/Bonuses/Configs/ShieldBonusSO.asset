@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a865cbd7bbfcf46b9d961f83cdcf3d, type: 3}
   m_Name: ShieldBonusSO
   m_EditorClassIdentifier: Assembly-CSharp::BonusItemSO
-  <Id>k__BackingField: shield_bonus
+  <Id>k__BackingField: shield
   Bonus:
     rid: 8231486814680514637
   <Price>k__BackingField: 10000

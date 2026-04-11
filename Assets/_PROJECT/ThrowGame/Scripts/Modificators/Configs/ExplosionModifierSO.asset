@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a89a9fb0384466ab71508041080d0f, type: 3}
   m_Name: ExplosionModifierSO
   m_EditorClassIdentifier: Assembly-CSharp::ModifierItemSO
-  <Id>k__BackingField: explosion_modifier
+  <Id>k__BackingField: explosion
   Modifier:
     rid: 8231486814680514640
   references:

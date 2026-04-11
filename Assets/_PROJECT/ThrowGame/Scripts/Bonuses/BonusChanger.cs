@@ -6,6 +6,7 @@ using Zenject;
 public class BonusChanger : UsableItemBase {
     [field: SerializeField] public BonusItemSO BonusItem { get; private set; }
     [SerializeField] private TextMeshProUGUI _countText;
+    [SerializeField] private TextMeshProUGUI _bonusNameText;
     
     private int _bonusCounts;
     public IBonus Bonus => BonusItem.Bonus;
@@ -14,7 +15,8 @@ public class BonusChanger : UsableItemBase {
     [Inject] private BonusManager _bonusManager;
     [Inject] private DiContainer _diContainer;
     [Inject] private IGameSave _saver; 
-
+    [Inject] LocalizationData _localization;
+    
     
     [Inject]
     private void Init() {
@@ -24,6 +26,8 @@ public class BonusChanger : UsableItemBase {
     
     private void Start() {
         ChangeVisualCount();
+        _bonusNameText.text =
+            _localization.GetTranslatedText(BonusItem.Id, _localization.BonusesTranslates);
     }
 
 

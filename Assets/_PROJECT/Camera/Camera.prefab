@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 6758214022354133621}
   - component: {fileID: 4722997998488252506}
   - component: {fileID: 7269063124229380166}
+  - component: {fileID: 1954807348930321206}
+  - component: {fileID: 3964379760508392754}
+  - component: {fileID: 5662078141319546333}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -29,13 +32,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4443227316252589338}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13387401, y: 1.4628924e-15, z: -2.9043095e-16, w: 0.9909984}
+  m_LocalRotation: {x: 0.13387373, y: 0, z: 0, w: 0.99099845}
   m_LocalPosition: {x: 2.5, y: 7.00529, z: 84.30037}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 4.44, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15.387, y: 0, z: 0}
 --- !u!114 &3233720598023956395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,3 +243,57 @@ MonoBehaviour:
         DecelTime: 0
   PlayerIndex: -1
   AutoEnableInputs: 1
+--- !u!114 &1954807348930321206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443227316252589338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a442e7a36a32fc4f88c0ccdc0b9eded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraOrbitalController
+  _cinemachineCamera: {fileID: 3233720598023956395}
+  _walkPoint: {fileID: 0}
+  _orbitalFollow: {fileID: 103812477461505064}
+  _cameraSaveDelay: 1
+  _dampningWhlePlay: {x: 4, y: 0, z: 4}
+  _dampningInWinnerWindow: {x: 15, y: 5, z: 15}
+  _noise: {fileID: 5662078141319546333}
+  _intensity: 3
+  _frequency: 4
+  _duration: 1
+--- !u!114 &3964379760508392754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443227316252589338}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollowZoom
+  Width: 2
+  Damping: 10
+  FovRange: {x: 50, y: 108.2578}
+--- !u!114 &5662078141319546333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443227316252589338}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBasicMultiChannelPerlin
+  NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 1
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: 0, y: 0, z: 0}

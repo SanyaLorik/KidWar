@@ -71,13 +71,21 @@ MonoBehaviour:
       \u043F\u0435\u0440\u0435\u0434 \u0431\u0440\u043E\u0441\u043A\u043E\u043C -
       \u0443\u0440\u043E\u043D \u0441\u0442\u0430\u043D\u0435\u0442 \u043C\u043E\u0449\u043D\u0435\u0435"
   BonusesTranslates:
-  - <Id>k__BackingField: shield_bonus
+  - <Id>k__BackingField: shield
     _text: "\u0429\u0438\u0442"
-  - <Id>k__BackingField: health_bonus
+  - <Id>k__BackingField: health
     _text: "\u0410\u043F\u0442\u0435\u0447\u043A\u0430"
-  - <Id>k__BackingField: reset_bonus
+  - <Id>k__BackingField: reset
     _text: "\u0417\u0430\u0440\u044F\u0434"
-  ModifiersTranslate: []
+  ModifiersTranslate:
+  - <Id>k__BackingField: explosion
+    _text: "\u0412\u0437\u0440\u044B\u0432"
+  - <Id>k__BackingField: giant
+    _text: "\u0413\u0438\u0433\u0430\u043D\u0442"
+  - <Id>k__BackingField: double
+    _text: X2
+  - <Id>k__BackingField: aim
+    _text: "\u0410\u0432\u0442\u043E"
   SkinTranslates:
   - <Id>k__BackingField: creeper
     _text: "\u041A\u0440\u0438\u043F\u0435\u0440"

@@ -37,8 +37,6 @@ public class BotWander : MonoBehaviour, IBotBehaviour {
 
 
     public void Enter() {
-        _botTokenSource = new CancellationTokenSource();
-        Eblaning = true;
         // Сначала уведомить о начале движения
         // StartWandering?.Invoke(false); // Вызвать ДО старта асинхронных задач
         // _walkingParticles.Play();
@@ -57,8 +55,10 @@ public class BotWander : MonoBehaviour, IBotBehaviour {
     }
 
     private async UniTask StartWanderingCycleAsync() {
+        _botTokenSource = new CancellationTokenSource();
         float durationToStay = Random.Range(_gameData.TimeToStayAfterSpawn.From, _gameData.TimeToStayAfterSpawn.To);
-        await UniTask.WaitForSeconds(durationToStay);
+        await UniTask.WaitForSeconds(durationToStay, cancellationToken: _botTokenSource.Token);
+        Eblaning = true;
         LifeCycleAsync(_botTokenSource.Token).Forget();
         MonitorMovementAsync(_botTokenSource.Token).Forget();
     }

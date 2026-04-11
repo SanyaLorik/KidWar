@@ -1,14 +1,23 @@
+using System;
 using SanyaBeerExtension;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
 public class ModifierChanger : UsableItemBase {
     [SerializeReference] ModifierItemSO _throwableModifier;
     [SerializeField] private GameObject _pointerToModifier;
+    [SerializeField] private TextMeshProUGUI _modifierNameText;
     
     public IThrowableModifier Modifier => _throwableModifier.Modifier;
     
     [Inject] ModifierManager _modifierManager;
+    [Inject] LocalizationData _localization;
+
+    private void Start() {
+        _modifierNameText.text =
+            _localization.GetTranslatedText(_throwableModifier.Id, _localization.ModifiersTranslate);
+    }
 
     public override void TryUse() {
         if (!IsAvailable) {

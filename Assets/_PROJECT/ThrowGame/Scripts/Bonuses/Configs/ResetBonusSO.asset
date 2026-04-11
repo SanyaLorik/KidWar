@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a865cbd7bbfcf46b9d961f83cdcf3d, type: 3}
   m_Name: ResetBonusSO
   m_EditorClassIdentifier: Assembly-CSharp::BonusItemSO
-  <Id>k__BackingField: reset_bonus
+  <Id>k__BackingField: reset
   Bonus:
     rid: 8231486814680514638
   <Price>k__BackingField: 15000

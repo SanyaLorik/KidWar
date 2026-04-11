@@ -250,7 +250,7 @@ LineRenderer:
   m_MaskInteraction: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 4.11, z: 16}
+  - {x: 0, y: 4.11, z: 15.69}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 2
@@ -258,8 +258,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.014408955
-        value: 0.3041368
+        time: 0.038887866
+        value: 0.19372422
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -303,9 +303,9 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 1
-    textureScale: {x: -0.97, y: 1}
-    shadowBias: 0.5
-    generateLightingData: 0
+    textureScale: {x: 1, y: 1}
+    shadowBias: 0
+    generateLightingData: 1
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
@@ -473,7 +473,7 @@ MonoBehaviour:
   maxUpAngle: 90
   maxDownAngle: 0
   _sensitivity: 0.1
-  _lineLength: 6.15
+  _lineLength: 8
   _trajectoryCanvas: {fileID: 86650966132628642}
   _overshootOffset: {x: 15, y: 30}
   _undershootOffset: {x: 10, y: 25}

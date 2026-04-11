@@ -23,6 +23,6 @@ MonoBehaviour:
       data:
         _percentToExpode: 0.9
         exposionDuration: 0.3
-        _scaling: 7
+        _scaling: 10
         _extraDamage: 10
         _explosionSize: 1

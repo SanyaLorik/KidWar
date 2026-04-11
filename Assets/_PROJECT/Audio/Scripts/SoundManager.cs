@@ -117,7 +117,6 @@ public class SoundManager : MonoBehaviour {
         GameEvents.ObjectExploded -= PlayExplode;
         GameEvents.ObjectGianted -= PlayGiantModifier;
         GameEvents.ModifierReloaded -= ModifierReloaded;
-
     }
     
     private void CreateAudioSourceContainer() {

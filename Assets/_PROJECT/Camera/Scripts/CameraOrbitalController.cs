@@ -5,6 +5,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
+using Input = Architecture_M.Input;
 
 public class CameraOrbitalController : MonoBehaviour {
     [SerializeField] private CinemachineCamera _cinemachineCamera;
@@ -20,7 +21,7 @@ public class CameraOrbitalController : MonoBehaviour {
 
     private Action _rotationHandler;
 
-    private bool IsMobile => _deviceType.DeviceType == DeviceTypeEnum.Mobile;
+    private bool IsMobile => _inputType == InputType.Mobile;
 
 
     private Mouse _mouse;
@@ -50,6 +51,7 @@ public class CameraOrbitalController : MonoBehaviour {
 
     [InjectOptional] private IOrbitalRotationInput _orbitalRotationInput;
     [Inject] private IDeviceTypeProvider _deviceType;
+    [Inject] private InputType _inputType;
     [Inject] private IInputActivity _inputActivity;
     [Inject] private BattleManager _battleManager;
     [Inject] private ThrowGameStarter _gameStarter;

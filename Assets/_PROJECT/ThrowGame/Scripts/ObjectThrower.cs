@@ -110,7 +110,6 @@ public class ObjectThrower : MonoBehaviour {
         ThrowVisualize.SetAllowToChooseAngle(state);
         // Debug.Log("SetAllowToThrow " + state);
         _allowToThrow = state;
-        ThrowVisualize.SetActiveTrajectoryVisual(state);
         // Сам по себе не бьёт
 
         // поведение бота, както сымитировать бросок

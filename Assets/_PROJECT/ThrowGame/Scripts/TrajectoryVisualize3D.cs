@@ -22,7 +22,6 @@ public class TrajectoryVisualize3D : MonoBehaviour
     
     [SerializeField] private float _sensitivity = 1f;
     [SerializeField] private float _lineLength;
-    [SerializeField] private GameObject _trajectoryCanvas;
 
     private Vector3 _throwDirection;
     
@@ -35,7 +34,6 @@ public class TrajectoryVisualize3D : MonoBehaviour
 
     
     private void Start() {
-        SetActiveTrajectoryVisual(false);
         _trajectoryLine.DisactiveSelf();
     }
 
@@ -60,7 +58,6 @@ public class TrajectoryVisualize3D : MonoBehaviour
     public void SetAllowToChooseAngle(bool state) {
         AllowToChooseAngle = state;
         _trajectoryLine.gameObject.SetActive(state);
-        _trajectoryCanvas.SetActive(state);
         if (state) {
             UpdateThrowDirectionAndDraw();
         }
@@ -90,10 +87,6 @@ public class TrajectoryVisualize3D : MonoBehaviour
         DrawTrajectory();
     }
 
-    
-    public void SetActiveTrajectoryVisual(bool state) {
-        _trajectoryCanvas.SetActive(state);
-    }
     
 
     private void UpdateThrowDirection(Vector2 screenDelta) {

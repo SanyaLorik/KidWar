@@ -24,7 +24,7 @@ public class PlayerStateManager : MonoBehaviour{
     [Inject] private IInterstitialActivity  _interstitialActivity;
     [Inject] private PlayerMovement _playerMovement;
     [Inject] private BattleManager _battleManager;
-    [Inject] protected IGameSave _saver;
+    [Inject] private IGameSave _saver;
 
     [InjectOptional] private IActivityButtonPC _activityButtonPC;
     [Inject] private ThrowGameStarter _throwGameManager;
@@ -38,6 +38,7 @@ public class PlayerStateManager : MonoBehaviour{
     }
 
     public void SetupCanvases(bool playerGoPlay) {
+        InputHide(playerGoPlay);
         _canvases.DisactiveSelf();
         if (playerGoPlay) {
             // _playContainer.ActiveSelf();
@@ -50,6 +51,17 @@ public class PlayerStateManager : MonoBehaviour{
             // _playContainer.DisactiveSelf();
         }
         ChangePlayerState(playerGoPlay ? PlayerState.Play : PlayerState.InSpawn);
+    }
+
+    private void InputHide(bool hide) {
+        if (hide) {
+            _activityButtonPC.HideJumpButton();
+            _activityButtonPC.HidOrbitalJoystick();
+        }
+        else {
+            _activityButtonPC.ShowJumpButton();
+            _activityButtonPC.ShowOrbitalJoystick();
+        }
     }
     
     

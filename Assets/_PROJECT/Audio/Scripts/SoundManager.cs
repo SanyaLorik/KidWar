@@ -101,8 +101,7 @@ public class SoundManager : MonoBehaviour {
         _playerMovement.Floored -= PlayerMovementOnFloored;
         // BANK / WEAR
         _bank.BankNewMoneyPlus -= OnMoneyPlus;
-        // Траты, пока уберу
-        // _bank.BankNewMoneyMinus -= OnMoneyPlus;
+        _bank.BankNewMoneyMinus -= OnMoneyPlus;
         _playerSkinInventory.SkinEquipped -= SkinAction;
         // Settings
         _settings.MusicValueChanged -= SettingsOnMusicValueChanged;
@@ -117,6 +116,7 @@ public class SoundManager : MonoBehaviour {
         GameEvents.ObjectExploded -= PlayExplode;
         GameEvents.ObjectGianted -= PlayGiantModifier;
         GameEvents.ModifierReloaded -= ModifierReloaded;
+        GameEvents.TriggerUsed -= UiButtonClick;
     }
     
     private void CreateAudioSourceContainer() {

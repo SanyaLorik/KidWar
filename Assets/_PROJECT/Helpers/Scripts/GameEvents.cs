@@ -7,6 +7,7 @@ public static class GameEvents {
     public static event Action ObjectGianted;
     public static event Action ModifierReloaded;
     public static event Action TriggerUsed;
+    public static event Action ShakeCamera;
 
 
     public static void FloorInvoke() {
@@ -32,6 +33,10 @@ public static class GameEvents {
     
     public static void TriggerUseInvoke() {
         TriggerUsed?.Invoke();
+    }
+    
+    public static void ShakeCameraInvoke() {
+        ShakeCamera?.Invoke();
     }
     
 }

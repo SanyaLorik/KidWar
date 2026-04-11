@@ -33,6 +33,7 @@ public class ThrowableModifierExplosion : IThrowableModifier {
     private void Explode() {
         if (_isExploded) return;
         _isExploded = true;
+        GameEvents.ShakeCameraInvoke();
         ThrowableObject.DisablePhysCollider();
         ThrowableObject.Animation.Kill();
         ThrowableObject.ExplosionAnimation.Play();

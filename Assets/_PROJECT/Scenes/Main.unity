@@ -542,6 +542,7 @@ MonoBehaviour:
         _scaling: 6
         _ease: 30
         _extraDamage: 0
+        _explosionSize: 0
     - rid: 8231486814680514630
       type: {class: ThrowableModifierGigant, ns: , asm: Assembly-CSharp}
       data:
@@ -1158,6 +1159,7 @@ MonoBehaviour:
   _resetButton: {fileID: 1859295412}
   _parkourCompleteTrigger: {fileID: 685492326}
   _taskCountView: {fileID: 289875697}
+  _dailyQuest: {fileID: 1536376280}
 --- !u!114 &289875697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5818,6 +5820,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 612599191597666270, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1536376280 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 675011995077980255, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536376277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899d5dfd07c60924c8716d68f9d5f965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LuringPlayer_M.DailyQuest
 --- !u!1 &1545851728 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6491610286027937281, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}

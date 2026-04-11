@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Architecture_M;
+using LuringPlayer_M;
 using MirraSDK_M;
 using SanyaBeerExtension;
 using UnityEngine;
@@ -43,6 +44,8 @@ public class TasksManager : MonoBehaviour {
     [Header("Синглтоны")]
     [SerializeField] private ParkourCompleteTrigger _parkourCompleteTrigger;
     [SerializeField] private TaskCompleteCountView _taskCountView;
+    [SerializeField] private DailyQuest _dailyQuest;
+    
     
     
     // Инфа по заданию и росту
@@ -82,6 +85,7 @@ public class TasksManager : MonoBehaviour {
         _hpSystem.PlayerShielded += OnPlayerShielded;
         _parkourCompleteTrigger.ParkourCompleted += UpdateParkourTask;
         _gameOverShower.PlayerWin += PlayerWinCheck;
+        _dailyQuest.OnTimerPassed += ResetCompletedTasks;
     }
     
     
@@ -89,6 +93,9 @@ public class TasksManager : MonoBehaviour {
         CreateTaskInfoDictionary();
         CreateTaskVisualDictionary();
         TableInitialize();
+        if (_dailyQuest.IsTimePassed) {
+            ResetCompletedTasks();
+        }
     }
 
 
@@ -98,6 +105,7 @@ public class TasksManager : MonoBehaviour {
             (isSuccess) => 
             {
                 if (isSuccess) {
+                    Debug.Log("Обновление тасок");
                     ResetCompletedTasks();
                 }
             }

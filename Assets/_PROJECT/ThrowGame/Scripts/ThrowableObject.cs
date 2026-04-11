@@ -4,6 +4,7 @@ using _PROJECT.Scripts.Helpers;
 using Architecture_M;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using RavingBots.CartoonExplosion;
 using SanyaBeerExtension;
 using UnityEngine;
 
@@ -20,7 +21,10 @@ public class ThrowableObject : MonoBehaviour {
 
     [field: Header("Игровая информация")]
     [field: SerializeField] public InfoThrowableObject Info { get; private set; }
+    [field: SerializeField] public CartoonExplosionFX ExplosionAnimation { get; private set; }
+    [SerializeField] public GameObject _model;
 
+    
     private IThrowableModifier Modifier;
     private CancellationTokenSource _tokenSource;
     private bool _ignoreColliders;
@@ -179,5 +183,9 @@ public class ThrowableObject : MonoBehaviour {
 
     private void OnDestroy() {
         UniTaskHelper.DisposeTask(ref _tokenSource);
+    }
+
+    public void HideModel() {
+        _model.DisactiveSelf();
     }
 }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Architecture_M;
 using DG.Tweening;
+using LuringPlayer_M;
 using MirraSDK_M;
 using SanyaBeerExtension;
 using UnityEngine;
@@ -33,8 +35,8 @@ public class BonusShopView : MonoBehaviour {
         _bonusCards.ForEach(c => c.BuyButton.onClick.AddListener(() => BuyOneItem(c.Bonus.Id, c)));
         _randomByAdv.onClick.AddListener(TryShowAdv);
     }
-    
-    
+
+
     private void OnTriggerEnter(Collider collider) {
         if(!collider.TryGetComponent(out PlayerMovement _)) return;
         _trigger.DelayedTriggerAction(OpenBonusCanvasAnimation);

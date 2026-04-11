@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using SanyaBeerExtension;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -8,8 +9,8 @@ public class ThrowableModifierExplosion : IThrowableModifier {
     [SerializeField] private float _percentToExpode = 0.9f; 
     [SerializeField] private float exposionDuration = 1f;
     [SerializeField] private float _scaling = 6f;
-    [SerializeField] private Ease _ease = Ease.OutBounce;
     [SerializeField] private int _extraDamage;
+    [SerializeField] private float _explosionSize = 2f;
 
     private bool _isExploded; 
     
@@ -25,20 +26,21 @@ public class ThrowableModifierExplosion : IThrowableModifier {
     public void ExtensionBehaviour() {
         _isExploded = false;
         ThrowableObject.SetIgnoreOtherColliders();
+        ThrowableObject.ExplosionAnimation.Size = _explosionSize;
     }
 
+    
     private void Explode() {
+        if (_isExploded) return;
+        _isExploded = true;
+        ThrowableObject.Animation.Kill();
+        ThrowableObject.ExplosionAnimation.Play();
+        ThrowableObject.HideModel();
+        ThrowableObject.transform.localScale = Vector3.one * _scaling;
         GameEvents.ObjectExplodeInvoke();
-        ThrowableObject.transform.DOScale(_scaling, exposionDuration)
-            .SetEase(_ease)
-            .SetUpdate(UpdateType.Fixed)
-            .OnComplete(DestroyAfterExplode);
     }
 
-    private void DestroyAfterExplode() {
-        Object.Destroy(ThrowableObject.gameObject);
-    }
-
+    
     public void OnPlayerContact() {
         Explode();
     }
@@ -48,7 +50,6 @@ public class ThrowableModifierExplosion : IThrowableModifier {
         // Обычыный полет
         float progress = elapsedTime / ThrowableObject.FlightDuration;
         if (progress >= _percentToExpode && !_isExploded) {
-            _isExploded = true;
             Explode();
         }
         else if (!_isExploded){

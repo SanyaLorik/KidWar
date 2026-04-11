@@ -23,33 +23,35 @@ MonoBehaviour:
     SkinWearId: guard_skin
     Bonuses:
     - Id: health_bonus
-      Count: 9
+      Count: 8
     - Id: shield_bonus
       Count: 8
     - Id: reset_bonus
       Count: 7
     Tasks:
     - Id: Parkour
-      Count: 6
-      IsGetReward: 0
+      Count: 0
+      IsGetReward: 1
     - Id: WinCount
       Count: 0
-      IsGetReward: 0
+      IsGetReward: 1
     - Id: HitCount
       Count: 0
-      IsGetReward: 0
+      IsGetReward: 1
     - Id: UseHealCount
       Count: 0
-      IsGetReward: 0
+      IsGetReward: 1
     - Id: ShieldCount
       Count: 0
-      IsGetReward: 0
+      IsGetReward: 1
     - Id: HealsLifesCount
       Count: 0
-      IsGetReward: 0
+      IsGetReward: 1
     DailyRewardSave:
       LastDateTimeReceived: 09.04.2026 23:02:39
       LastDayNumber: -1
     WheelFortuneSave:
       CountSpinAllow: 5
       LastDateTimeSpined: 07.04.2026 22:43:20
+    DailyQuestSave:
+      LastDateTimeEntered: 11.04.2026 12:43:35

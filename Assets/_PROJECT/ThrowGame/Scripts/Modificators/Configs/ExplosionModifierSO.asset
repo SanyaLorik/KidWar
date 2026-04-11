@@ -22,7 +22,7 @@ MonoBehaviour:
       type: {class: ThrowableModifierExplosion, ns: , asm: Assembly-CSharp}
       data:
         _percentToExpode: 0.9
-        exposionDuration: 1
-        _scaling: 15
-        _ease: 30
+        exposionDuration: 0.3
+        _scaling: 7
         _extraDamage: 10
+        _explosionSize: 1

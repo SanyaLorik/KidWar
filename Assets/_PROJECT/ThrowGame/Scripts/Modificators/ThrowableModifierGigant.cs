@@ -36,8 +36,14 @@ public class ThrowableModifierGigant : IThrowableModifier {
             .SetUpdate(UpdateType.Fixed);
     }
 
-    public void OnPlayerContact() { }
-    public void OnFloorContact() { }
+    public void OnPlayerContact() {
+        GameEvents.ShakeCameraInvoke();
+
+    }
+
+    public void OnFloorContact() {
+        GameEvents.ShakeCameraInvoke();
+    }
 
 
     public void CalculatePose(float elapsedTime) {

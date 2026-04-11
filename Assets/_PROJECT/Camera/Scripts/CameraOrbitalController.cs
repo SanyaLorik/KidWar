@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Architecture_M;
+using SanyaBeerExtension;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,7 +19,9 @@ public class CameraOrbitalController : MonoBehaviour {
     [SerializeField] private Vector3 _dampningWhlePlay;
     [SerializeField] private Vector3 _dampningInWinnerWindow;
     [SerializeField] private CinemachineBasicMultiChannelPerlin _noise;
-    
+    [SerializeField] private float _intensity;
+    [SerializeField] private float _frequency;
+    [SerializeField] private float _duration;
     
     
     private Action _rotationHandler;
@@ -64,30 +67,66 @@ public class CameraOrbitalController : MonoBehaviour {
         SystemEvents.WindowOpened += ForbidRotate;
         SystemEvents.ForbidZoomChanged += ForbidZoom;
         _gameStarter.GameStarted += OnGameStarted;
+        GameEvents.ShakeCamera += ShakeCamera;
     }
-    
-    
+
+    private void OnPlayerHited() {
+        // if (_battleManager.MainPlayerPlay) {
+        //     ShakeCamera();
+        // }
+    }
+
+
     private void Update() {
         _rotationHandler.Invoke();
     }
 
-    public void ShakeCamera(float intensity, float frequency, float duration)
-    {
+    public void WatchToPoint(Transform point) {
+        Debug.Log("WatchToPoint " + point.position);
+        _zoomBeforeGame = CurrentFovPercent;
+        SetFollowPoint(point);
+        SetDamping(_dampningInWinnerWindow);
+    }
+    
+    public void ShakeCamera() {
         if (_noise == null) return;
-
-        _noise.AmplitudeGain = intensity;
-        _noise.FrequencyGain = frequency;
+        _noise.enabled = true;
+        _noise.AmplitudeGain = _intensity;
+        _noise.FrequencyGain = _frequency;
         
         // Останавливаем тряску через duration секунд
         CancelInvoke(nameof(StopShake));
-        Invoke(nameof(StopShake), duration);
+        Invoke(nameof(StopShake), _duration);
+    }
+    
+    
+    public void SetLeftPlayerWinnerAxises(bool leftWinner) {
+        if (leftWinner) {
+            SetAxisToFollow(_gameData.LeftPlayerWinnerAxis.From, _gameData.LeftPlayerWinnerAxis.To);
+        }
+        else {
+            SetAxisToFollow(_gameData.RightPlayerWinnerAxis.From, _gameData.RightPlayerWinnerAxis.To);
+        }
+        ChangeCameraZoomPercent(_gameData.ZoomToWinnerView);
+    }
+    
+    public void GoToWinner(Transform point) {
+        SetFollowPoint(point);
+        SetDamping(_dampningInWinnerWindow);
     }
 
-    private void StopShake()
-    {
+    public void ResetCameraBeforePlay() {
+        ForbidRotate(false);
+        ForbidZoom(false);
+        SetFollowPoint(_walkPoint);
+        ChangeCameraZoomPercent(_zoomBeforeGame);
+    }
+
+    private void StopShake() {
         if (_noise == null) return;
         _noise.AmplitudeGain = 0f;
         _noise.FrequencyGain = 0f;
+        _noise.enabled = false;
     }
     
     
@@ -113,40 +152,13 @@ public class CameraOrbitalController : MonoBehaviour {
         SetAxisToFollow(_gameData.HorizontalAxisValueToThrow, _gameData.VerticalAxisValueToThrow);
         ChangeCameraZoomPercent(_gameData.ZoomPercentInThrowGame);
     }
-
-    public void WatchToPoint(Transform point) {
-        Debug.Log("WatchToPoint " + point.position);
-        _zoomBeforeGame = CurrentFovPercent;
-        SetFollowPoint(point);
-        SetDamping(_dampningInWinnerWindow);
-    }
+    
 
     private void SetAxisToFollow(float horizontal, float vertical) {
         _orbitalFollow.HorizontalAxis.Value = horizontal;
         _orbitalFollow.VerticalAxis.Value = vertical;
     }
-
-    public void SetLeftPlayerWinnerAxises(bool leftWinner) {
-        if (leftWinner) {
-            SetAxisToFollow(_gameData.LeftPlayerWinnerAxis.From, _gameData.LeftPlayerWinnerAxis.To);
-        }
-        else {
-            SetAxisToFollow(_gameData.RightPlayerWinnerAxis.From, _gameData.RightPlayerWinnerAxis.To);
-        }
-        ChangeCameraZoomPercent(_gameData.ZoomToWinnerView);
-    }
     
-    public void GoToWinner(Transform point) {
-        SetFollowPoint(point);
-        SetDamping(_dampningInWinnerWindow);
-    }
-
-    public void ResetCameraBeforePlay() {
-        ForbidRotate(false);
-        ForbidZoom(false);
-        SetFollowPoint(_walkPoint);
-        ChangeCameraZoomPercent(_zoomBeforeGame);
-    }
 
     private void SetFollowPoint(Transform target) {
         _cinemachineCamera.Follow = target;

@@ -3849,7 +3849,10 @@ MonoBehaviour:
   _cameraSaveDelay: 1
   _dampningWhlePlay: {x: 4, y: 0, z: 4}
   _dampningInWinnerWindow: {x: 15, y: 5, z: 15}
-  _noise: {fileID: 0}
+  _noise: {fileID: 1100837943}
+  _intensity: 1.2
+  _frequency: 3
+  _duration: 0.8
 --- !u!114 &1100837939
 MonoBehaviour:
   m_ObjectHideFlags: 0

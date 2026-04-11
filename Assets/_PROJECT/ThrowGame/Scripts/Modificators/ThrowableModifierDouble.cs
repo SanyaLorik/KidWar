@@ -7,9 +7,10 @@ using Object = UnityEngine.Object;
 public class ThrowableModifierDouble : IThrowableModifier {
     [SerializeField] private float _heightMultiplier = 1.3f;
     [SerializeField] private int _extraDamage;
+    [SerializeField] private float _secondThrowExtendDistance;
 
     private ThrowableObject _secondThrowableObject;
-
+    private Vector3 _extendDistance;
     public ThrowableObject ThrowableObject { get; private set; }
     public int ExtraDamage => _extraDamage;
 
@@ -21,6 +22,7 @@ public class ThrowableModifierDouble : IThrowableModifier {
     public void ExtensionBehaviour() {
         _secondThrowableObject = Object.Instantiate(ThrowableObject);
         _secondThrowableObject.SetDefaultModifier();
+        _extendDistance = new Vector3(0,0, _secondThrowExtendDistance);
     }
 
     public void OnPlayerContact() {
@@ -39,7 +41,7 @@ public class ThrowableModifierDouble : IThrowableModifier {
         ThrowableObject.Rb.MovePosition(newPos);
         
         // + полет второго обьекта
-        newPos = Vector3.Lerp(ThrowableObject.InitialPos, ThrowableObject.TargetPos, progress);
+        newPos = Vector3.Lerp(ThrowableObject.InitialPos, ThrowableObject.TargetPos + _extendDistance, progress);
         currentHeight = ThrowableObject.Height * _heightMultiplier * ThrowableObject.ThrowCurve.Evaluate(progress);
         newPos.y += currentHeight;
         // _secondThrowableObject.transform.position = newPos;

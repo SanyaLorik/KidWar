@@ -151,6 +151,10 @@ MonoBehaviour:
   _selectedButton: {fileID: 8221758903209137407}
   _canButton: {fileID: 445891543857610478}
   _priceText: {fileID: 8434529325870783083}
+  _getButtonText: {fileID: 8434529325870783083}
+  _selectButtonText: {fileID: 3846436018558316545}
+  _selectedButtonText: {fileID: 3775401575415783236}
+  _skinName: {fileID: 9147503378653611179}
 --- !u!1 &2248639950042573730
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@
 using SanyaBeerExtension;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using Zenject;
 
@@ -11,15 +12,23 @@ public class ShopSkinItem : MonoBehaviour  {
     [SerializeField] private Button _selectedButton;
     [SerializeField] private Button _canButton;
     [SerializeField] private TextMeshProUGUI _priceText;
-
+    [Header("Текст кнопок для перевода")]
+    [SerializeField] private TextMeshProUGUI _getButtonText;
+    [SerializeField] private TextMeshProUGUI _selectButtonText;
+    [SerializeField] private TextMeshProUGUI _selectedButtonText;
+    [Header("Перевод скина")]
+    [SerializeField] private TextMeshProUGUI _skinName;
+    
     private int _countsToShowAdv = 0;
     private ShopSkinsIniter _initer;
     
-    [Inject] PlayerSkinInventory _playerSkinInventory;
-    [Inject] PlayerBank _playerBank;
+    
+    [Inject] private PlayerSkinInventory _playerSkinInventory;
+    [Inject] private PlayerBank _playerBank;
     [Inject] private AdvertisingMonetizationMirra _advertisingMonetization;
     [Inject] private NumberFormatter _formatter;
     [Inject] private PlayerBank _bank;
+    [Inject] private LocalizationData _localization;
 
     
     private void Awake() {
@@ -31,7 +40,8 @@ public class ShopSkinItem : MonoBehaviour  {
         }
         _canButton.onClick.AddListener(WearSkin);
     }
-
+    
+    
     public void Initialize(ShopSkinsIniter initer) {
         _initer = initer;
         if (_skinItemConfig.IsAdv) {
@@ -40,6 +50,17 @@ public class ShopSkinItem : MonoBehaviour  {
         else {
             _priceText.text = _formatter.ValuteFormatter(_skinItemConfig.Price);
         }
+
+        Translate();
+    }
+
+    private void Translate() {
+        _skinName.text = _localization.GetTranslatedText(_skinItemConfig.Id, _localization.SkinTranslates);
+        if (_skinItemConfig.IsAdv) {
+            _getButtonText.text = _localization.GetButton;
+        }
+        _selectButtonText.text = _localization.SelectSkinButton;
+        _selectedButtonText.text = _localization.SelectedSkinButton;
     }
     
     private void WatchAdv() {

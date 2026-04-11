@@ -19,11 +19,23 @@ public class LocalizationData : LocalizationDataBase,
     public string PlayerHit;
     public string PlayerWinner;
     
-    // LISTS
+    [Header("Списки")]
     public List<TaskTranslate> TaskTranslates;
     public List<TutorialTranslate> TutorialTranslates;
     public List<BonusesTranslate> BonusesTranslates;
+    public List<BonusesTranslate> ModifiersTranslate;
+    public List<SkinTranslate> SkinTranslates;
 
+    [Header("Магазин")]
+    public string GetButton;
+    public string SelectSkinButton;
+    public string SelectedSkinButton;
+    public string Money;
+
+    
+    
+    
+    
     public DailyRewardLocaliation DailyReward;
 
     DailyRewardLocaliation IDailyRewardLocalization.DailyReward => DailyReward;
@@ -64,6 +76,21 @@ public class TutorialTranslate : IIdName<TutorialStep> {
 
 [Serializable]
 public class BonusesTranslate : IIdName<string> {
+    [field: SerializeField] public string Id { get; set; }
+    [SerializeField] private string _text;
+    public string Text => _text;
+}
+
+[Serializable]
+public class ModifiersTranslate : IIdName<string> {
+    [field: SerializeField] public string Id { get; set; }
+    [SerializeField] private string _text;
+    public string Text => _text;
+}
+
+
+[Serializable]
+public class SkinTranslate : IIdName<string> {
     [field: SerializeField] public string Id { get; set; }
     [SerializeField] private string _text;
     public string Text => _text;

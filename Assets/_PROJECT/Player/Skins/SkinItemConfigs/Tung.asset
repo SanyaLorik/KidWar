@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce84f230e1152664b9b9ba1ff8d010ad, type: 3}
   m_Name: Tung
   m_EditorClassIdentifier: Assembly-CSharp::SkinItem
-  <Id>k__BackingField: tung_skin
+  <Id>k__BackingField: tung
   <Price>k__BackingField: 200000
   <CountAdvToUnlock>k__BackingField: 0
   <SkinPrefab>k__BackingField: {fileID: 5194921409329958626, guid: e57b0f8a4f63a754693c69a74e31cca3, type: 3}

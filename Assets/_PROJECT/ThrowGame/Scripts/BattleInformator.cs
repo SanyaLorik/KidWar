@@ -85,7 +85,7 @@ public class BattleInformator : MonoBehaviour {
     private void OnPlayerHit() {
         if (_battleManager.MainPlayerPlay) return;
 
-        Debug.Log("OnPlayerHit");
+        // Debug.Log("OnPlayerHit");
         string playerName = _battleManager.IsFirstThrowerStep
             ? _battleManager.FirstThrower.ObjectThrower.Nickname
             : _battleManager.SecondThrower.ObjectThrower.Nickname;

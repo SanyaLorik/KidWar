@@ -53,12 +53,15 @@ MonoBehaviour:
       <To>k__BackingField: 7
     <ChanseToChangeSkin>k__BackingField: 0
     <ChanseToChangeNickname>k__BackingField: 0
+    <TimeToStayAfterSpawn>k__BackingField:
+      <From>k__BackingField: 0
+      <To>k__BackingField: 10
     <RotationSpeed>k__BackingField: 10
     <ChanceToJump>k__BackingField: 0.374
     <ChanseToGoPlayer>k__BackingField: 0.1
     <StoppingDistance>k__BackingField:
-      <From>k__BackingField: 5
-      <To>k__BackingField: 10
-    <TimeToStayOnPoint>k__BackingField:
       <From>k__BackingField: 7
-      <To>k__BackingField: 14
+      <To>k__BackingField: 15
+    <TimeToStayOnPoint>k__BackingField:
+      <From>k__BackingField: 10
+      <To>k__BackingField: 20

@@ -62,12 +62,12 @@ public class ObjectThrower : MonoBehaviour {
     
     public void SetHitCalculatorState(bool state) {
         _hitCalculator.enabled = state;
-        Debug.Log("SetHitCalculatorState = "+ state);
+        // Debug.Log("SetHitCalculatorState = "+ state);
     }
 
     public void SetAllowToCalculateHit(bool state) {
         _hitCalculator.SetCalculateState(state);
-        Debug.Log("SetAllowToCalculateHit = "+ state);
+        // Debug.Log("SetAllowToCalculateHit = "+ state);
     }
     
     

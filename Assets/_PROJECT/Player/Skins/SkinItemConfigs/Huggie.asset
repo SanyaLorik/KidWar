@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce84f230e1152664b9b9ba1ff8d010ad, type: 3}
   m_Name: Huggie
   m_EditorClassIdentifier: Assembly-CSharp::SkinItem
-  <Id>k__BackingField: huggie_skin
+  <Id>k__BackingField: huggie
   <Price>k__BackingField: 100
   <CountAdvToUnlock>k__BackingField: 3
   <SkinPrefab>k__BackingField: {fileID: 5194921409329958626, guid: 0d535bf1d399e2845a23fe3e1187a368, type: 3}

@@ -57,11 +57,11 @@ public class ThrowableObject : MonoBehaviour {
             Modifier.OnPlayerContact();
             if (_oneTapKill) {
                 player.AddDamage(Info.Damage * 10000 + Modifier.ExtraDamage);
-                Debug.Log($"Попал, хп снёс + {Info.Damage * 10000 + Modifier.ExtraDamage}");
+                // Debug.Log($"Попал, хп снёс + {Info.Damage * 10000 + Modifier.ExtraDamage}");
             }
             else {
                 player.AddDamage(Info.Damage + Modifier.ExtraDamage);
-                Debug.Log($"Попал, хп снёс + {Info.Damage + Modifier.ExtraDamage}");
+                // Debug.Log($"Попал, хп снёс + {Info.Damage + Modifier.ExtraDamage}");
             }
             _contactPlayer = true;
         }
@@ -184,7 +184,7 @@ public class ThrowableObject : MonoBehaviour {
     /// </summary>
     /// <param name="duration"></param>
     public void ChangeTimeDuration(float duration) {
-        Debug.Log($"Смена FlightDuration с {FlightDuration} на {duration}");
+        // Debug.Log($"Смена FlightDuration с {FlightDuration} на {duration}");
         FlightDuration =  duration;
     }
 

@@ -28,9 +28,9 @@ public class PlayerHp : MonoBehaviour, IDamageable {
     }
     
     public void AddDamage(int hp) {
-        Debug.Log("IsInvinsible = " + IsInvinsible);
+        // Debug.Log("IsInvinsible = " + IsInvinsible);
         if (IsInvinsible) {
-            Debug.Log("Сам по себе попал...");
+            // Debug.Log("Сам по себе попал...");
             return;
         }
         if (IsShielded) {
@@ -38,7 +38,7 @@ public class PlayerHp : MonoBehaviour, IDamageable {
         }
         CurrentHp -= hp;
         CurrentHp = Mathf.Max(0, CurrentHp);
-        Debug.Log($"Попал! Минус {hp} хп, щас HP = {CurrentHp} ");
+        // Debug.Log($"Попал! Минус {hp} хп, щас HP = {CurrentHp} ");
         _hpView.MinusHp(CurrentHp, _stayInLeft);
     }
 

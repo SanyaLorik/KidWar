@@ -70,12 +70,6 @@ public class CameraOrbitalController : MonoBehaviour {
         GameEvents.ShakeCamera += ShakeCamera;
     }
 
-    private void OnPlayerHited() {
-        // if (_battleManager.MainPlayerPlay) {
-        //     ShakeCamera();
-        // }
-    }
-
 
     private void Update() {
         _rotationHandler.Invoke();
@@ -88,7 +82,8 @@ public class CameraOrbitalController : MonoBehaviour {
         SetDamping(_dampningInWinnerWindow);
     }
     
-    public void ShakeCamera() {
+    private void ShakeCamera() {
+        if (!_battleManager.MainPlayerPlay) return; 
         if (_noise == null) return;
         _noise.enabled = true;
         _noise.AmplitudeGain = _intensity;

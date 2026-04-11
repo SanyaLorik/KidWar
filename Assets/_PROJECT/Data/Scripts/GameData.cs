@@ -48,6 +48,8 @@ public class GameData : GameDataBase
     [field: SerializeField] public PairedValue<float> TimeToSpeak { get; private set; }
     [field: SerializeField, Range(0,1)] public float ChanseToChangeSkin { get; private set; }
     [field: SerializeField, Range(0,1)] public float ChanseToChangeNickname { get; private set; }
+    [field: SerializeField] public PairedValue<float> TimeToStayAfterSpawn { get; private set; }
+
     
     [field: Header("Movement")]
     [field: SerializeField] public float RotationSpeed { get; private set; }

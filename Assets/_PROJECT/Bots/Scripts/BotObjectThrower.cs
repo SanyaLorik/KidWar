@@ -51,7 +51,7 @@ public class BotObjectThrower : MonoBehaviour {
         // Если тутор - бот попадает 100%
         float chanceToBeatPlayer = _tutorialManager.TutorialPassed ? _chanceToBeatPlayer : 1f;
 
-        Debug.Log("chanceToBeatPlayer =  " + chanceToBeatPlayer);
+        // Debug.Log("chanceToBeatPlayer =  " + chanceToBeatPlayer);
         if (Random.value > chanceToBeatPlayer) {
             distance += Random.Range(_diapasoneNearPlayer.From, _diapasoneNearPlayer.To);
         }

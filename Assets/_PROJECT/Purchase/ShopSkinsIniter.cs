@@ -11,6 +11,7 @@ public class ShopSkinsIniter : MonoBehaviour  {
         
         
     [Inject] private DiContainer _diContainer;
+    [Inject] private PlayerBank _bank;
     
     [Inject]
     private void Init() {
@@ -25,6 +26,8 @@ public class ShopSkinsIniter : MonoBehaviour  {
         else {
             WaitWhileNotInjectAsync(CheckAllStatuses).Forget();
         }
+
+        _bank.BankNewMoneyPlus += (amount) => CheckAllStatuses();
     }
 
 

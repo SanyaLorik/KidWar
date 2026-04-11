@@ -33,20 +33,20 @@ public class Narrator : MonoBehaviour {
     
 
     private void OnEnable() {
-        Debug.Log("OnEnable");
+        // Debug.Log("OnEnable");
         if (_tutorialManager.TutorialPassed) {
             _narratorContainer.DisactiveSelf();
         }
         else {
             _tutorialManager.NewTutorialStep += CheckToDestroyCurrentFinger;
-            Debug.Log("_screenFinger.localPosition = " + _screenFinger.localPosition);
+            // Debug.Log("_screenFinger.localPosition = " + _screenFinger.localPosition);
             _screenFingerStartPosition = _screenFinger.localPosition;
         }
     }
 
     private void Start() {
         if (!_tutorialManager.TutorialPassed) {
-            Debug.Log("screenFinger.localPosition = " + _screenFinger.localPosition);
+            // Debug.Log("screenFinger.localPosition = " + _screenFinger.localPosition);
             _screenFingerStartPosition = _screenFinger.localPosition;
         }
     }

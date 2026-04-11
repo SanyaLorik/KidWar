@@ -113,6 +113,7 @@ public class TasksManager : MonoBehaviour {
     }
     
     private void ResetCompletedTasks() {
+        _dailyQuest.ShowDailies();
         foreach (var taskVisual in _taskTypeToVisualDictionary) {
             TaskInfo taskInfo = GetTaskInfoByType(taskVisual.Value.TaskType);
             
@@ -124,6 +125,7 @@ public class TasksManager : MonoBehaviour {
         _gameSave.Save();
     }
 
+    
     private TaskInfo GetTaskInfoByType(TaskType taskType)
         => _tasksInfo.First(t => t.TaskType == taskType);
     
@@ -174,6 +176,7 @@ public class TasksManager : MonoBehaviour {
     
     
     private void TableInitialize() {
+        int countNotReady = 0;
         foreach (var taskVisual in _taskTypeToVisualDictionary) {
             TaskInfo taskInfo = _taskTypeToInfoDictionary[taskVisual.Key];
             TaskItem taskSaveInfo = Saver.GetTaskInfo(taskInfo.TaskId);
@@ -184,11 +187,16 @@ public class TasksManager : MonoBehaviour {
                     _taskCountView.PlusOne();
                 }
                 SetPlayerValue(taskInfo.TaskType, taskSaveInfo.Count);
+                countNotReady++;
             }
             else {
                 Debug.Log($"Задача {taskSaveInfo.Id} загрузилась как выполненная");
                 _taskTypeToVisualDictionary[taskVisual.Key].DisableTask();
             }
+        }
+
+        if (countNotReady == 0) {
+            _dailyQuest.ShowAllDaliesDone();
         }
     }
 
@@ -281,6 +289,16 @@ public class TasksManager : MonoBehaviour {
         Saver.UpdateTaskInfo(taskInfo.TaskId, taskInfo.FullValue, true);
         _bank.AddMoney(taskInfo.TaskMoney);
         _taskCountView.MinusOne();
+        CheckTaskCount();
+    }
+
+    private void CheckTaskCount() {
+        foreach (var taskVisual in _taskTypeToVisualDictionary) {
+            TaskInfo taskInfo = _taskTypeToInfoDictionary[taskVisual.Key];
+            TaskItem taskSaveInfo = Saver.GetTaskInfo(taskInfo.TaskId);
+            if(!taskSaveInfo.IsGetReward) return;
+        }
+        _dailyQuest.ShowAllDaliesDone();
     }
 
     private void ShowNotification(TaskInfo taskInfo) {

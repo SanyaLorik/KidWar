@@ -110,7 +110,7 @@ public class ThrowGameStarter : MonoBehaviour  {
     }
     
     public void ChangeAfkStatus(bool afk, bool changeVisual = true) {
-        Debug.Log("ChangeAfkStatus");
+        // Debug.Log("ChangeAfkStatus");
         _afkPressed = afk;
         _firstPlayerBot = _afkPressed;
         _secondPlayerBot = true;
@@ -166,6 +166,6 @@ public class ThrowGameStarter : MonoBehaviour  {
         _battleManager.InitForNewGame(_firstPlayerBot, _secondPlayerBot);
         GameStarted?.Invoke(true);
         _startGamePressed = false;
-        Debug.Log("Старт игры!");
+        // Debug.Log("Старт игры!");
     }
 }

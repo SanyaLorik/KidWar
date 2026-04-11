@@ -18,7 +18,10 @@ public class LocalizationData : LocalizationDataBase,
     // Battle info
     public string PlayerHit;
     public string PlayerWinner;
-    
+
+    [field: Header("Статический текст")]
+    [field: SerializeField] public StaticTranslation<string>[] StaticTranslates { get; private set; }
+
     [Header("Списки")]
     public List<TaskTranslate> TaskTranslates;
     public List<TutorialTranslate> TutorialTranslates;
@@ -32,10 +35,6 @@ public class LocalizationData : LocalizationDataBase,
     public string SelectedSkinButton;
     public string Money;
 
-    
-    
-    
-    
     public DailyRewardLocaliation DailyReward;
 
     DailyRewardLocaliation IDailyRewardLocalization.DailyReward => DailyReward;

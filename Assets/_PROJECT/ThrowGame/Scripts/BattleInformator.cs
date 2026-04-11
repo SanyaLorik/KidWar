@@ -34,9 +34,11 @@ public class BattleInformator : MonoBehaviour {
 
     private void OnGameStarted(bool started) {
         // Игра началась выводим имена
-        if (started && _battleManager.MainPlayerPlay) {
-            ShowNicknames();
-            InitAvatars();
+        if (started) {
+            if (_battleManager.MainPlayerPlay) {
+                ShowNicknames();
+                InitAvatars();
+            }
         }
         // Игра кончилась епта выводим инфу о победителе по кол-ву хп видимо...
         else {
@@ -46,6 +48,7 @@ public class BattleInformator : MonoBehaviour {
             }
             else {
                 string info = string.Format(_localization.PlayerWinner, GetWinnerName());
+                Debug.Log("Get winner name");
                 ShowInfo(info);
             }
         }
@@ -59,17 +62,16 @@ public class BattleInformator : MonoBehaviour {
     }
 
     private void ShowNicknames() {
-       
-            // По сути просто если там бот то подставляем его ник, если игра 1 на 1 то оставляем просто "Враг"
-            if (_battleManager.SecondThrower.ObjectThrower.PlayerHandle) {
-                _secondPlayerNickname.text = _localization.Enemy;
-            }
-            else {
-                _secondPlayerNickname.text = _battleManager.SecondThrower.ObjectThrower.Nickname;
-            }
+        // По сути просто если там бот то подставляем его ник, если игра 1 на 1 то оставляем просто "Враг"
+        if (_battleManager.SecondThrower.ObjectThrower.PlayerHandle) {
+            _secondPlayerNickname.text = _localization.Enemy;
+        }
+        else {
+            _secondPlayerNickname.text = _battleManager.SecondThrower.ObjectThrower.Nickname;
+        }
     }
 
-    public string GetWinnerName() {
+    private string GetWinnerName() {
         string winnerName = 
             _battleManager.IsFirstThrowerStep  
             ?
@@ -83,6 +85,7 @@ public class BattleInformator : MonoBehaviour {
     private void OnPlayerHit() {
         if (_battleManager.MainPlayerPlay) return;
 
+        Debug.Log("OnPlayerHit");
         string playerName = _battleManager.IsFirstThrowerStep
             ? _battleManager.FirstThrower.ObjectThrower.Nickname
             : _battleManager.SecondThrower.ObjectThrower.Nickname;

@@ -55,10 +55,11 @@ public class HpView : MonoBehaviour {
     }
 
     public void MinusHp(int hp, bool stayInLeft) {
-        if (_battleManager.PlayerStepInPvb) {
-            PlayerHit?.Invoke();
+        // Визуал меняем ток если игрок играет
+        if (_battleManager.MainPlayerPlay) {
+            ChangeHp(hp, stayInLeft);
         }
-        ChangeHp(hp, stayInLeft);
+        PlayerHit?.Invoke();
     }
 
     private void ChangeHp(int hp, bool stayInLeft) {

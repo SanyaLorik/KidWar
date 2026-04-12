@@ -1,4 +1,4 @@
-using Architecture_M;
+using SanyaBeerExtension;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -6,10 +6,9 @@ using Zenject;
 
 public class StaticTranslater : MonoBehaviour
 {
-    [SerializeField] private StaticTranslation<TextMeshProUGUI>[] _texts;
+    [SerializeField] private StaticTranslation<TextMeshProUGUI[]>[] _texts;
 
     [Inject] private LocalizationData _localization;
-    [Inject] private IInputActivity a;
 
     private void Start()
     {
@@ -22,7 +21,7 @@ public class StaticTranslater : MonoBehaviour
                 continue;
             }
 
-            text.Data.text = translation.Data;
+            text.Data.ForEach(i => i.text = translation.Data);
         }
     }
 }

@@ -109,8 +109,22 @@ MonoBehaviour:
     <Data>k__BackingField: Random bonus
   - <Id>k__BackingField: Reset all quests
     <Data>k__BackingField: Reset all quests
-  - <Id>k__BackingField: Reset all quests
-    <Data>k__BackingField: Reset all quests
+  - <Id>k__BackingField: Wind
+    <Data>k__BackingField: Wind
+  - <Id>k__BackingField: Your move
+    <Data>k__BackingField: Your move
+  - <Id>k__BackingField: Enemy move
+    <Data>k__BackingField: Enemy move
+  - <Id>k__BackingField: Go ahead
+    <Data>k__BackingField: Go ahead!
+  - <Id>k__BackingField: Get ready
+    <Data>k__BackingField: Get ready
+  - <Id>k__BackingField: You move
+    <Data>k__BackingField: You move!
+  - <Id>k__BackingField: Enemy move
+    <Data>k__BackingField: Enemy move!
+  - <Id>k__BackingField: Roulette Skin Text
+    <Data>k__BackingField: Dropping
   TaskTranslates:
   - <Id>k__BackingField: 0
     _text: Hit the enemy {0} times

@@ -107,6 +107,10 @@ MonoBehaviour:
     <Data>k__BackingField: At you
   - <Id>k__BackingField: Random bonus
     <Data>k__BackingField: Random bonus
+  - <Id>k__BackingField: Reset all quests
+    <Data>k__BackingField: Reset all quests
+  - <Id>k__BackingField: Reset all quests
+    <Data>k__BackingField: Reset all quests
   TaskTranslates:
   - <Id>k__BackingField: 0
     _text: Hit the enemy {0} times

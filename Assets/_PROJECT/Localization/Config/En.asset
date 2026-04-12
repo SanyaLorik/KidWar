@@ -77,6 +77,10 @@ MonoBehaviour:
     <Data>k__BackingField: FOV
   - <Id>k__BackingField: Sensitivity
     <Data>k__BackingField: Sensitivity
+  - <Id>k__BackingField: Daily Rewards
+    <Data>k__BackingField: Daily Rewards
+  - <Id>k__BackingField: Day
+    <Data>k__BackingField: Day
   TaskTranslates:
   - <Id>k__BackingField: 0
     _text: Hit the enemy {0} times

@@ -81,6 +81,8 @@ MonoBehaviour:
     <Data>k__BackingField: Daily Rewards
   - <Id>k__BackingField: Day
     <Data>k__BackingField: Day
+  - <Id>k__BackingField: Tutorial Info Header Text
+    <Data>k__BackingField: Tutorial
   TaskTranslates:
   - <Id>k__BackingField: 0
     _text: Hit the enemy {0} times

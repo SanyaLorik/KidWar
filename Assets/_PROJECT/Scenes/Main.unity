@@ -8326,7 +8326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1520620395730448806, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1694486353791466662, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: _timeToColldown
@@ -9966,7 +9966,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 006d1d6f55e70b54ba81a40fc7b6aee3, type: 2}
     - target: {fileID: 4349500979724909561, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4387164080850172384, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive

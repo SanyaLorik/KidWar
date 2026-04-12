@@ -3571,14 +3571,13 @@ GameObject:
   - component: {fileID: 2003282944436915659}
   - component: {fileID: 8736516738906856875}
   - component: {fileID: 3598987282411311626}
-  - component: {fileID: 124432345174526713}
   m_Layer: 0
   m_Name: Give Up Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4388927948038585054
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3681,7 +3680,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 124432345174526713}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ModifierChanger, Assembly-CSharp
         m_MethodName: TryUse
         m_Mode: 1
@@ -3693,23 +3692,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &124432345174526713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997680711687219750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a5be8e26a249842bb3118721bd5648, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ModifierChanger
-  _timeToColldown: 30
-  _availableImage: {fileID: 0}
-  _throwableModifier: {fileID: 11400000, guid: ea7eed4452c093146a3a68d97cb4163b, type: 2}
-  _pointerToModifier: {fileID: 0}
-  _modifierNameText: {fileID: 0}
 --- !u!1 &2123278755084830648
 GameObject:
   m_ObjectHideFlags: 0

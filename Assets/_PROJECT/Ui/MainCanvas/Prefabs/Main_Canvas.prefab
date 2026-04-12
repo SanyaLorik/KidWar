@@ -3328,7 +3328,7 @@ GameObject:
   - component: {fileID: 5424794754772003494}
   - component: {fileID: 5693559539699345543}
   m_Layer: 0
-  m_Name: Fast Game Text
+  m_Name: Two Player Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3804,7 +3804,7 @@ GameObject:
   - component: {fileID: 3275631459156592767}
   - component: {fileID: 5906041395580607845}
   m_Layer: 0
-  m_Name: Two Player Text
+  m_Name: Fast Game Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

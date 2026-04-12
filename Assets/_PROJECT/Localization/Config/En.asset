@@ -131,6 +131,12 @@ MonoBehaviour:
     <Data>k__BackingField: Damage
   - <Id>k__BackingField: Give Up
     <Data>k__BackingField: Give Up
+  - <Id>k__BackingField: Player
+    <Data>k__BackingField: PLAYER
+  - <Id>k__BackingField: Winner
+    <Data>k__BackingField: WINNER
+  - <Id>k__BackingField: AlertAd
+    <Data>k__BackingField: Ad in
   TaskTranslates:
   - <Id>k__BackingField: 0
     _text: Hit the enemy {0} times

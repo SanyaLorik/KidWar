@@ -32,9 +32,101 @@ MonoBehaviour:
   Enemy: Enemy
   PlayerHit: '{0} scores! '
   PlayerWinner: '{0} wins! '
+  <StaticTranslates>k__BackingField:
+  - <Id>k__BackingField: Parkour Header Text
+    <Data>k__BackingField: Parkour
+  - <Id>k__BackingField: Parkour Prize
+    <Data>k__BackingField: Get a reward for completing!
+  - <Id>k__BackingField: Parkour Footer Text
+    <Data>k__BackingField: Start
+  - <Id>k__BackingField: Fast Game Gate Header Text
+    <Data>k__BackingField: Start Game
+  - <Id>k__BackingField: In Fight
+    <Data>k__BackingField: In Fight
+  - <Id>k__BackingField: Fast Game Gate Footer Text
+    <Data>k__BackingField: Go!
+  - <Id>k__BackingField: Roulette
+    <Data>k__BackingField: Roulette
+  - <Id>k__BackingField: Shop
+    <Data>k__BackingField: Shop
+  - <Id>k__BackingField: Bonus
+    <Data>k__BackingField: Bonus
+  - <Id>k__BackingField: Award
+    <Data>k__BackingField: Award
+  - <Id>k__BackingField: Take Award
+    <Data>k__BackingField: Take Award
   TaskTranslates:
   - <Id>k__BackingField: 0
-    name: Hit enemy {0} times.
+    _text: Hit the enemy {0} times
+  - <Id>k__BackingField: 1
+    _text: Win {0} times
+  - <Id>k__BackingField: 2
+    _text: Use the first aid kit {0} times
+  - <Id>k__BackingField: 3
+    _text: Use the shield {0} times
+  - <Id>k__BackingField: 4
+    _text: Heal {0} health
+  - <Id>k__BackingField: 5
+    _text: Go through parkour
+  TutorialTranslates:
+  - <Id>k__BackingField: 0
+    _text: Hold your finger in this area and move it - aim at the enemy
+  - <Id>k__BackingField: 1
+    _text: Power scale = throw range. The more you charge, the further it flies.
+  - <Id>k__BackingField: 2
+    _text: Release your finger and the projectile will fly straight at the target
+  - <Id>k__BackingField: 3
+    _text: Replenish your health by tapping on the first-aid kit
+  - <Id>k__BackingField: 4
+    _text: Click on the "Explosion" before throwing - the damage will become more
+      powerful.
+  BonusesTranslates:
+  - <Id>k__BackingField: shield
+    _text: Shield
+  - <Id>k__BackingField: health
+    _text: Health
+  - <Id>k__BackingField: reset
+    _text: Reset
+  ModifiersTranslate:
+  - <Id>k__BackingField: explosion
+    _text: Explosion
+  - <Id>k__BackingField: giant
+    _text: Giant
+  - <Id>k__BackingField: double
+    _text: X2
+  - <Id>k__BackingField: aim
+    _text: Aim
+  SkinTranslates:
+  - <Id>k__BackingField: creeper
+    _text: Creeper
+  - <Id>k__BackingField: deer
+    _text: Deer
+  - <Id>k__BackingField: foxie
+    _text: Foxie
+  - <Id>k__BackingField: freddie
+    _text: Freddie
+  - <Id>k__BackingField: gihun
+    _text: Gihun
+  - <Id>k__BackingField: guard
+    _text: Guard
+  - <Id>k__BackingField: huggie
+    _text: Huggle
+  - <Id>k__BackingField: kissie
+    _text: Kissie
+  - <Id>k__BackingField: noobic
+    _text: Noobic
+  - <Id>k__BackingField: obby
+    _text: Obby
+  - <Id>k__BackingField: tits
+    _text: Queen
+  - <Id>k__BackingField: tralalelo
+    _text: Tralalelo
+  - <Id>k__BackingField: tung
+    _text: Tung-Tung
+  GetButton: Get
+  SelectSkinButton: Select
+  SelectedSkinButton: Selected
+  Money: Money
   DailyReward:
     <ShowAsAllowReceive>k__BackingField: Get
     <ShowAsReceived>k__BackingField: Gotten

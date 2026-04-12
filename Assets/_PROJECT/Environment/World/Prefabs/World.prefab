@@ -53048,7 +53048,7 @@ GameObject:
   - component: {fileID: 5787801693885774925}
   - component: {fileID: 6345959961185362311}
   m_Layer: 0
-  m_Name: Parkour Header Text
+  m_Name: Fast Game Info Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

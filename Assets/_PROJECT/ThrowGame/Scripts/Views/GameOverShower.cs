@@ -98,7 +98,7 @@ public class GameOverShower : MonoBehaviour {
 
     // Типо ход остановился на игроке
     private bool MainPlayerWinner()
-        => _battleManager.IsFirstThrowerStep;  
+        => !_battleManager.IsFirstThrowerLoose;  
 
         
     

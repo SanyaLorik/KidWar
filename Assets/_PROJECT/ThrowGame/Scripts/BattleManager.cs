@@ -1,9 +1,12 @@
 using System;
 using System.Threading;
 using _PROJECT.Scripts.Helpers;
+using Architecture_M;
 using Cysharp.Threading.Tasks;
 using SanyaBeerExtension;
+using UnityEditor.Overlays;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 
@@ -20,6 +23,7 @@ public class BattleManager : MonoBehaviour {
     [SerializeField] private Transform _leftCameraFocus;
     [SerializeField] private RouletteSkin _roulette;
     [SerializeField] private float _timeToWaitAfterGameOver;
+    [SerializeField] private Button _giveUpButton;
     
     private ThrowableObject _newThrowableObjectInRoulette;
     
@@ -29,16 +33,19 @@ public class BattleManager : MonoBehaviour {
     private bool _stepIsOver;
     private bool GameIsOver => FirstThrower.ObjectThrower.CurrentLifesCount == 0 ||  SecondThrower.ObjectThrower.CurrentLifesCount == 0;
     public bool IsFirstThrowerStep { get; private set; }
+    public bool IsFirstThrowerLoose => FirstThrower.ObjectThrower.CurrentLifesCount == 0;
     public bool BotTurnNow { get; private set; }
     public bool MainPlayerPlay { get; private set; }
 
     public bool IsPvbMode => FirstThrower.ObjectThrower.PlayerHandle && !SecondThrower.ObjectThrower.PlayerHandle;
+    public bool IsPvpMove => FirstThrower.ObjectThrower.PlayerHandle && SecondThrower.ObjectThrower.PlayerHandle;
 
     public bool PlayerStepInPvb => IsFirstThrowerStep  && IsPvbMode;
         
     public bool AllowToPlay { get; private set; }
 
     public event Action NewPlayerTurn;
+    public event Action GameStarted;
 
     
     [Inject] IThrowGamePlayer _mainPlayer;
@@ -53,6 +60,7 @@ public class BattleManager : MonoBehaviour {
     [Inject] ThrowObjectsIniter _throwObjectsIniter;
     [Inject] GameOverShower _gameOverShower;
     [Inject] PlayerSkinInventory _skinInventory;
+    [Inject] IGameSave _gameSave;
 
     
     public int GetCurrentPlayerLifesCount() {
@@ -73,12 +81,33 @@ public class BattleManager : MonoBehaviour {
 
     
     private void OnEnable() {
-        _throwerCalculator.ObjectThrowed += FocusCamera;
+        _throwerCalculator.ObjectThrowed += FocusCameraToThrowed;
         // Конец хода если игрок походил чи кончилось время
         _throwerCalculator.ObjectFalled += StepIsOver;
         _timerToThrowStep.TimeIsOver += StepIsOver;
+        _giveUpButton.onClick.AddListener(GiveUpButton);
     }
 
+    private void GiveUpButton() {
+        // На всякий, но при этих режимах скрыто будет
+        if (!_gameSave.GetSave<GameSave>().TutorialPassed) return;
+        if (!MainPlayerPlay) return;
+        
+        if (IsPvpMove) {
+            if (FirstThrower.ObjectThrower.PlayerHandle) {
+                FirstThrower.ObjectThrower.SetDead();
+            }
+            else {
+                SecondThrower.ObjectThrower.SetDead();
+            }
+        }
+        else {
+            FirstThrower.ObjectThrower.SetDead();
+        }
+        
+
+    }
+    
     private void StepIsOver() {
         _stepIsOver = true;
     }
@@ -87,7 +116,9 @@ public class BattleManager : MonoBehaviour {
     public void InitForNewGame(bool firstPlayerBot, bool secondPlayerBot) {
         AllowToPlay = false;
         MainPlayerPlay = !firstPlayerBot;
-
+        InitGiveUpButton();
+        
+        
         string firstSkinId = _skinInventory.DefaultSkinConfig.Id;
         string secondSkinId = _skinInventory.DefaultSkinConfig.Id;
         
@@ -123,6 +154,15 @@ public class BattleManager : MonoBehaviour {
         GoBattle().Forget();
     }
 
+    private void InitGiveUpButton() {
+        _giveUpButton.gameObject.SetActive(_gameSave.GetSave<GameSave>().TutorialPassed && MainPlayerPlay);
+    }
+
+    private void SetGiveUpButtonInteractable(bool enabled) {
+        if(!MainPlayerPlay) return;
+        _giveUpButton.interactable = enabled;
+    }
+
     private void InitHitCalculator(bool secondPlayerBot) {
         // Он включен в момент боя ТОЛЬКО у правого бота при PVB 
         FirstThrower.ObjectThrower.SetHitCalculatorState(false);
@@ -151,8 +191,8 @@ public class BattleManager : MonoBehaviour {
     }
 
 
-    public event Action GameStarted;
     private async UniTask GoBattle() {
+        SetGiveUpButtonInteractable(false);
         Debug.Log("GoBattle");
         if (MainPlayerPlay) {
             FocusCamera(_leftCameraFocus);
@@ -198,7 +238,7 @@ public class BattleManager : MonoBehaviour {
         BotTurnNow = !thrower.PlayerHandle;
         
 
-        
+        SetGiveUpButtonInteractable(false);
         // Анимация шага игрока
         FocusCamera(pointToCameraFocus);
         if (MainPlayerPlay) {
@@ -211,6 +251,7 @@ public class BattleManager : MonoBehaviour {
         else {
             _newThrowableObjectInRoulette = _throwObjectsIniter.GetRandomToyForBot;
         }
+        SetGiveUpButtonInteractable(true);
         
         AllowToPlay = true;
         _stepIsOver = false;
@@ -295,6 +336,11 @@ public class BattleManager : MonoBehaviour {
     private void FocusCamera(Transform obj) {
         if(!MainPlayerPlay) return;
         // Debug.Log("Focus camera");
+        _camera.SetCameraToPlayThrow(obj);
+    }
+    
+    private void FocusCameraToThrowed(Transform obj) {
+        if(!MainPlayerPlay || GameIsOver) return;
         _camera.SetCameraToPlayThrow(obj);
     }
     

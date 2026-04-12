@@ -1,3 +1,4 @@
+using DG.Tweening;
 using SanyaBeerExtension;
 using UnityEngine;
 
@@ -7,8 +8,12 @@ public class WindChooseView : MonoBehaviour {
     [Header("Диапазон силы ветра")] 
     [SerializeField] private PairedValue<float> _windForce;
     
+    [Header("Указатель ветра анимация")] 
+    [SerializeField] private float _pointerScaleRatio;
+    [SerializeField] private float _pointerScaleDuration;
+    [SerializeField] private Ease _pointerUpScaleEase;
+    [SerializeField] private Ease _pointerDownScaleEase;
     
-
     public float CurrentWindForce { get; private set; }
 
     
@@ -19,14 +24,29 @@ public class WindChooseView : MonoBehaviour {
         
         float xEnd = RectTransformHelper.CalculateXEnd(_progressParent);
         SetPointerNegative(_pointer, _windPercent, xEnd);
+        AnimatePointer();
         // Debug.Log("установка уэтра! " + CurrentWindForce);
+    }
+
+    private void AnimatePointer() {
+        Sequence seq = DOTween.Sequence();
+        _pointer.localScale = Vector3.one;
+        seq.Append(_pointer
+            .DOScale(_pointerScaleRatio, _pointerScaleDuration)
+            .SetEase(_pointerUpScaleEase)   
+        );
+        seq.Append(_pointer
+            .DOScale(1f, _pointerScaleDuration)
+            .SetEase(_pointerDownScaleEase)   
+        );
+            
     }
     
     
     /// <summary>
     /// Можно процент поставить отрицательный
     /// </summary>
-    public static void SetPointerNegative(RectTransform pointer, float percent, float xEnd, float offset = 0)
+    private static void SetPointerNegative(RectTransform pointer, float percent, float xEnd, float offset = 0)
     {
         Vector2 newPointerPos = new Vector2(xEnd * percent + offset, pointer.anchoredPosition.y);
         pointer.anchoredPosition = newPointerPos;

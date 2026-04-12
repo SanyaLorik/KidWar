@@ -571,6 +571,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCopyBotController
   _hiddenBot: {fileID: 1199807186}
+--- !u!114 &165966951 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3598987282411311626, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &170024202 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3028764257783719380, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -1049,7 +1060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
-  _chanceToBeatPlayer: 0.3
+  _chanceToBeatPlayer: 0.2
   _delayBeforeUseModifier:
     <From>k__BackingField: 0.7
     <To>k__BackingField: 1.5
@@ -3457,6 +3468,7 @@ MonoBehaviour:
   _leftCameraFocus: {fileID: 1532480889}
   _roulette: {fileID: 84340740}
   _timeToWaitAfterGameOver: 2
+  _giveUpButton: {fileID: 165966951}
 --- !u!1 &906176968
 GameObject:
   m_ObjectHideFlags: 0
@@ -7612,6 +7624,10 @@ MonoBehaviour:
   _windForce:
     <From>k__BackingField: -15
     <To>k__BackingField: 15
+  _pointerScaleRatio: 2.5
+  _pointerScaleDuration: 0.7
+  _pointerUpScaleEase: 27
+  _pointerDownScaleEase: 26
 --- !u!114 &1895003132 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3237455100138701712, guid: 4618323e71e227f4d92fcd9561fc8042, type: 3}

@@ -37,7 +37,7 @@ public class PlayerBank : MonoBehaviour {
     
     public void AddMoney(long amount) {
         if (amount <= 0) {
-            Debug.LogError("Попытка добавить <= 0");
+            // Debug.LogWarning("Попытка добавить < 0");
             return;
         }
 

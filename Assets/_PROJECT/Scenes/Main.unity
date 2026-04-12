@@ -763,6 +763,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &223620556 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3996723985969372564, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &228719997 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5873842927757448871, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -2351,6 +2362,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DualLegParticles
   _ps: {fileID: 1589046483}
   _botBehaviour: 0
+--- !u!114 &554865099 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6115804681842342708, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &561556910
 GameObject:
   m_ObjectHideFlags: 0
@@ -2900,6 +2922,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd804cb867d301349afaf14642d04474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BonusChanger
+--- !u!114 &718640714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8104787947343059264, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &726583779 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3208761398338104014, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -6080,6 +6113,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899d5dfd07c60924c8716d68f9d5f965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LuringPlayer_M.DailyQuest
+--- !u!114 &1541814198 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4704732605173779758, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1545851728 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6491610286027937281, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -6596,6 +6640,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4574654781403514679, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1619121633 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6161977335959747431, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1628438532 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 914969261010259787, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -7360,6 +7415,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5262964279867118062, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1877723372 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7849031038217983550, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &1880339771 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5630054485868908104, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -7947,6 +8013,17 @@ MonoBehaviour:
   - {fileID: 972953661}
   _timeToChangeMaps: 60
   _changeRandomMap: 1
+--- !u!114 &2052158510 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2656125954545299700, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &2052816075
 GameObject:
   m_ObjectHideFlags: 0
@@ -8074,6 +8151,7 @@ MonoBehaviour:
   - <Id>k__BackingField: Shop
     <Data>k__BackingField:
     - {fileID: 1895003132}
+    - {fileID: 2052158510}
   - <Id>k__BackingField: Bonus
     <Data>k__BackingField:
     - {fileID: 1935525312}
@@ -8112,6 +8190,7 @@ MonoBehaviour:
   - <Id>k__BackingField: Settings
     <Data>k__BackingField:
     - {fileID: 1184112384}
+    - {fileID: 554865099}
   - <Id>k__BackingField: Music
     <Data>k__BackingField:
     - {fileID: 283763244}
@@ -8209,6 +8288,13 @@ MonoBehaviour:
   - <Id>k__BackingField: Roulette Skin Text
     <Data>k__BackingField:
     - {fileID: 522148639}
+  - <Id>k__BackingField: Damage Skin
+    <Data>k__BackingField:
+    - {fileID: 718640714}
+    - {fileID: 1619121633}
+    - {fileID: 223620556}
+    - {fileID: 1541814198}
+    - {fileID: 1877723372}
   Header: {fileID: 11400000, guid: a2d79142d38f1bc4c90686d790eb0402, type: 2}
 --- !u!1 &2083012114
 GameObject:

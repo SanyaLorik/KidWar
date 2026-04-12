@@ -69,6 +69,14 @@ MonoBehaviour:
     <Data>k__BackingField: You are not in the fight
   - <Id>k__BackingField: Settings
     <Data>k__BackingField: Settings
+  - <Id>k__BackingField: Music
+    <Data>k__BackingField: Music
+  - <Id>k__BackingField: Effects
+    <Data>k__BackingField: Effects
+  - <Id>k__BackingField: FOV
+    <Data>k__BackingField: FOV
+  - <Id>k__BackingField: Sensitivity
+    <Data>k__BackingField: Sensitivity
   TaskTranslates:
   - <Id>k__BackingField: 0
     _text: Hit the enemy {0} times

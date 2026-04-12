@@ -8358,6 +8358,9 @@ MonoBehaviour:
     - {fileID: 223620556}
     - {fileID: 1541814198}
     - {fileID: 1877723372}
+  - <Id>k__BackingField: Give Up
+    <Data>k__BackingField:
+    - {fileID: 2383758755132589755}
   Header: {fileID: 11400000, guid: a2d79142d38f1bc4c90686d790eb0402, type: 2}
 --- !u!1 &2083012114
 GameObject:
@@ -13256,6 +13259,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523b312e96c51e246996412beab12357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.AlertAd
+--- !u!114 &2383758755132589755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5432359977753870907, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &2383758755132589756 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8602613489154947340, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}

@@ -129,6 +129,8 @@ MonoBehaviour:
     <Data>k__BackingField: Dropping
   - <Id>k__BackingField: Damage Skin
     <Data>k__BackingField: Damage
+  - <Id>k__BackingField: Give Up
+    <Data>k__BackingField: Give Up
   TaskTranslates:
   - <Id>k__BackingField: 0
     _text: Hit the enemy {0} times

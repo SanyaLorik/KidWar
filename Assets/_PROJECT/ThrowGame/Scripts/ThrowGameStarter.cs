@@ -50,7 +50,9 @@ public class ThrowGameStarter : MonoBehaviour  {
         Debug.Log("GameOver, _startGamePressed = " + _startGamePressed);
         GameStarted?.Invoke(false);
         GameIsStarted = false;
-        _advTimerStarter.ShowAdvAfterBattle();
+        if (_battleManager.MainPlayerPlay) {
+            _advTimerStarter.ShowAdvAfterBattle();
+        }
         
         // Ну наверное начинать сразу...
         if (!_startGamePressed) {

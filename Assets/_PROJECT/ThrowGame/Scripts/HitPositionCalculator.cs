@@ -24,7 +24,7 @@ public class HitPositionCalculator : MonoBehaviour {
         
         ContactPoint contact = collision.GetContact(0);
         _percentage = CalculateHitPercentage(contact.point)/100f;
-        Debug.Log($"Попадание на высоте: {_percentage:F1}%");
+        // Debug.Log($"Попадание на высоте: {_percentage:F1}%");
         _economyCalculator.AddNewBodyRatio(_percentage);
         
         _allowCalculate = false;

@@ -30,6 +30,7 @@ MonoBehaviour:
   BotsPhrases: []
   Timer: Start in {0}...
   Enemy: Enemy
+  You: You
   PlayerHit: '{0} scores! '
   PlayerWinner: '{0} wins! '
   <StaticTranslates>k__BackingField:

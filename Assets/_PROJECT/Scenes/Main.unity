@@ -302,8 +302,8 @@ MonoBehaviour:
     <From>k__BackingField: 1
     <To>k__BackingField: 2
   _diapasoneNearPlayer:
-    <From>k__BackingField: -7
-    <To>k__BackingField: 7
+    <From>k__BackingField: -15
+    <To>k__BackingField: -10
 --- !u!114 &81327182 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5189908968470787554, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7281b2e919429f9af961498abfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotObjectThrower
-  _chanceToBeatPlayer: 0.2
+  _chanceToBeatPlayer: 0.3
   _delayBeforeUseModifier:
     <From>k__BackingField: 0.7
     <To>k__BackingField: 1.5
@@ -1083,8 +1083,8 @@ MonoBehaviour:
     <From>k__BackingField: 1
     <To>k__BackingField: 2
   _diapasoneNearPlayer:
-    <From>k__BackingField: -7
-    <To>k__BackingField: 7
+    <From>k__BackingField: -15
+    <To>k__BackingField: -10
 --- !u!114 &272806834 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7786920678812743296, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -1188,33 +1188,43 @@ MonoBehaviour:
   - FullValue: 1
     TaskMoney: 15000
     TaskType: 0
+    TaskId: hit1
   - FullValue: 2
     TaskMoney: 30000
     TaskType: 1
+    TaskId: win2
   - FullValue: 5
     TaskMoney: 50000
     TaskType: 1
+    TaskId: win5
   - FullValue: 3
     TaskMoney: 10000
     TaskType: 2
+    TaskId: healCount3
   - FullValue: 4
     TaskMoney: 10000
     TaskType: 3
+    TaskId: shield4
   - FullValue: 100
     TaskMoney: 250000
     TaskType: 4
+    TaskId: healLifes100
   - FullValue: 1
     TaskMoney: 10000
     TaskType: 5
+    TaskId: parkour1
   - FullValue: 7
     TaskMoney: 50000
     TaskType: 1
+    TaskId: win7
   - FullValue: 10
     TaskMoney: 100000
     TaskType: 1
+    TaskId: win10
   - FullValue: 60
     TaskMoney: 7500
     TaskType: 4
+    TaskId: healLifes60
   _tasksVisual:
   - {fileID: 745534520}
   - {fileID: 272806834}
@@ -1878,6 +1888,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0154568316644ab0adffc107bbeafd3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BonusCardItem
+--- !u!114 &440260566 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4620162442469944325, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &441681443 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8095395718853766938, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -3079,8 +3100,9 @@ MonoBehaviour:
   _progressText: {fileID: 726583779}
   _parentRectTransform: {fileID: 1179665516}
   _progressRectTransform: {fileID: 784941482}
-  <TaskType>k__BackingField: 0
   _takeRewardButton: {fileID: 1087158072}
+  <TaskType>k__BackingField: 0
+  <TaskId>k__BackingField: 
 --- !u!1 &773301382 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4349500979724909561, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -4822,6 +4844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleInformator
   _textFieldContainer: {fileID: 1628438532}
   _textFieldToInformate: {fileID: 1956258026}
+  _firstPlayerNickname: {fileID: 440260566}
   _secondPlayerNickname: {fileID: 381088934}
   _timeToShowInfo: 3
   _leftAva: {fileID: 1436615220}
@@ -6692,10 +6715,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 289875695}
   - {fileID: 2036788670}
   - {fileID: 1712996297}
   - {fileID: 1880911096}
-  - {fileID: 289875695}
   - {fileID: 597798110}
   - {fileID: 1707508955}
   - {fileID: 895105926}
@@ -10293,6 +10316,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3332105352604517744, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <TaskId>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3364995596002742241, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: _skinItemConfig
       value: 
@@ -11409,6 +11436,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5152298723270191826, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <TaskId>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5157708782586989959, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -11712,6 +11743,10 @@ PrefabInstance:
     - target: {fileID: 5646868227618997240, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0.55569005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5647776134836031233, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <TaskId>k__BackingField
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5668798461259623003, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -12051,9 +12086,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6203214044291813314, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <TaskId>k__BackingField
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6226204733251967077, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6243591967314018080, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <TaskId>k__BackingField
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6274260043608316667, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <TaskId>k__BackingField
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6317088626946975494, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
@@ -12727,6 +12774,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7786920678812743296, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <TaskId>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805359774056169824, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <TaskId>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7839058540840900375, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -13026,6 +13081,10 @@ PrefabInstance:
     - target: {fileID: 8443074002481752629, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8506487232615826383, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+      propertyPath: <TaskId>k__BackingField
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8523383419236711461, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive

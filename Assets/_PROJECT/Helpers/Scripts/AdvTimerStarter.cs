@@ -62,8 +62,10 @@ public class AdvTimerStarter : MonoBehaviour {
         ShowAdvAfterBattleAsync().Forget();
     }
     
+    
     private async UniTask ShowAdvAfterBattleAsync() {
         await UniTask.WaitForSeconds(1);
+        Debug.Log("EnableTimer in ShowAdvAfterBattleAsync");
         _interstitialDelaying.EnableTimer();
     }
 }

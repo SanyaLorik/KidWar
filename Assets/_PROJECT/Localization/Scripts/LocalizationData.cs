@@ -15,6 +15,7 @@ public class LocalizationData : LocalizationDataBase,
 
     public string Timer;
     public string Enemy;
+    public string You;
     // Battle info
     public string PlayerHit;
     public string PlayerWinner;

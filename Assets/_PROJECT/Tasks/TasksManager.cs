@@ -25,7 +25,7 @@ public class TaskInfo {
     public int FullValue;
     public int TaskMoney;
     public TaskType TaskType;
-    public string TaskId => TaskType.ToString();
+    public string TaskId;
 }
 
 
@@ -49,8 +49,8 @@ public class TasksManager : MonoBehaviour {
     
     
     // Инфа по заданию и росту
-    private readonly Dictionary<TaskType, TaskInfo> _taskTypeToInfoDictionary = new ();
-    private readonly Dictionary<TaskType, TaskVisual> _taskTypeToVisualDictionary = new ();
+    private readonly Dictionary<string, TaskInfo> _taskIdToInfoDictionary = new ();
+    private readonly Dictionary<string, TaskVisual> _taskVisualIdToViewDictionary = new ();
         
     
     // Стата игрока в данный момент 
@@ -91,7 +91,6 @@ public class TasksManager : MonoBehaviour {
     
     private void Start() {
         CreateTaskInfoDictionary();
-        CreateTaskVisualDictionary();
         TableInitialize();
         if (_dailyQuest.IsTimePassed) {
             ResetCompletedTasks();
@@ -114,10 +113,9 @@ public class TasksManager : MonoBehaviour {
     
     private void ResetCompletedTasks() {
         _dailyQuest.ShowDailies();
-        foreach (var taskVisual in _taskTypeToVisualDictionary) {
-            TaskInfo taskInfo = GetTaskInfoByType(taskVisual.Value.TaskType);
-            
-            if (Saver.GetTaskInfo(taskInfo.TaskId).IsGetReward) {
+        foreach (var taskVisual in _taskVisualIdToViewDictionary) {
+            if (Saver.GetTaskInfo(taskVisual.Value.TaskId).IsGetReward) {
+                TaskInfo taskInfo = _taskIdToInfoDictionary[taskVisual.Value.TaskId];
                 SetPlayerValue(taskVisual.Value.TaskType, 0);
                 taskVisual.Value.EnableTask(taskInfo);
             }
@@ -177,12 +175,19 @@ public class TasksManager : MonoBehaviour {
     
     private void TableInitialize() {
         int countNotReady = 0;
-        foreach (var taskVisual in _taskTypeToVisualDictionary) {
-            TaskInfo taskInfo = _taskTypeToInfoDictionary[taskVisual.Key];
-            TaskItem taskSaveInfo = Saver.GetTaskInfo(taskInfo.TaskId);
-            _taskTypeToVisualDictionary[taskVisual.Key].SetTaskLocalizationText();
+        int iterator = 0;
+        foreach (var taskInfoPair in _taskIdToInfoDictionary) {
+            // Initialize
+            TaskInfo taskInfo = taskInfoPair.Value;
+            string taskId = taskInfo.TaskId;
+            _taskVisualIdToViewDictionary[taskId].InitTask(taskId, taskInfo.TaskType);
+            
+            // Get save data
+            TaskItem taskSaveInfo = Saver.GetTaskInfo(taskId);
+            
+            
             if (!taskSaveInfo.IsGetReward) {
-                _taskTypeToVisualDictionary[taskVisual.Key].SetTaskVisual(taskInfo, taskSaveInfo.Count);
+                _taskVisualIdToViewDictionary[taskId].SetTaskVisual(taskInfo, taskSaveInfo.Count);
                 if (taskSaveInfo.Count >= taskInfo.FullValue) {
                     _taskCountView.PlusOne();
                 }
@@ -191,10 +196,30 @@ public class TasksManager : MonoBehaviour {
             }
             else {
                 Debug.Log($"Задача {taskSaveInfo.Id} загрузилась как выполненная");
-                _taskTypeToVisualDictionary[taskVisual.Key].DisableTask();
+                _taskVisualIdToViewDictionary[taskId].DisableTask();
             }
         }
 
+        // foreach (var taskVisual in _taskVisualIdToViewDictionary) {
+        //     TaskInfo taskInfo = _taskIdToInfoDictionary[taskVisual.Value.TaskId];
+        //     TaskItem taskSaveInfo = Saver.GetTaskInfo(taskInfo.TaskId);
+        //     _taskVisualIdToViewDictionary[taskVisual.Key].SetTaskLocalizationText();
+        //     if (!taskSaveInfo.IsGetReward) {
+        //         _taskVisualIdToViewDictionary[taskVisual.Key].SetTaskVisual(taskInfo, taskSaveInfo.Count);
+        //         if (taskSaveInfo.Count >= taskInfo.FullValue) {
+        //             _taskCountView.PlusOne();
+        //         }
+        //         SetPlayerValue(taskInfo.TaskType, taskSaveInfo.Count);
+        //         countNotReady++;
+        //     }
+        //     else {
+        //         Debug.Log($"Задача {taskSaveInfo.Id} загрузилась как выполненная");
+        //         _taskVisualIdToViewDictionary[taskVisual.Key].DisableTask();
+        //     }
+        // }
+        
+        
+        
         if (countNotReady == 0) {
             _dailyQuest.ShowAllDaliesDone();
         }
@@ -203,22 +228,17 @@ public class TasksManager : MonoBehaviour {
    
 
     private void CreateTaskInfoDictionary() {
+        int iterator = 0;
         foreach (var task in _tasksInfo) {
-            if (_taskTypeToInfoDictionary.ContainsKey(task.TaskType)) {
+            if (_taskIdToInfoDictionary.ContainsKey(task.TaskId)) {
                 Debug.LogWarning($"Повтор ключа! {task.TaskType}");
+                continue;
             }
-            _taskTypeToInfoDictionary[task.TaskType] = task;
+            _taskIdToInfoDictionary[task.TaskId] = task;
+            _taskVisualIdToViewDictionary[task.TaskId] = _tasksVisual[iterator++]; 
         }
     }
     
-    private void CreateTaskVisualDictionary() {
-        foreach (var task in _tasksVisual) {
-            if (_taskTypeToVisualDictionary.ContainsKey(task.TaskType)) {
-                Debug.LogWarning($"Повтор ключя! {task.TaskType}");
-            }
-            _taskTypeToVisualDictionary[task.TaskType] = task;
-        }
-    }
 
     private int GetPlayerValue(TaskType taskType) {
         switch (taskType) {
@@ -265,36 +285,55 @@ public class TasksManager : MonoBehaviour {
 
     
     private void UpdateTaskProgress(TaskType type) {
-        int currentValue = GetPlayerValue(type);
-        TaskInfo taskInfo = _taskTypeToInfoDictionary[type];
-        TaskVisual taskVisual = _taskTypeToVisualDictionary[type];
+        foreach (var taskVisualPair in _taskVisualIdToViewDictionary) {
+            int currentValue = GetPlayerValue(type);
+            TaskInfo taskInfo = _taskIdToInfoDictionary[taskVisualPair.Value.TaskId];
+            
+            if(taskVisualPair.Value.TaskType != type) continue;
+            
+            TaskVisual taskVisual = taskVisualPair.Value;
+            Saver.UpdateTaskInfo(taskInfo.TaskId, currentValue, false );
+            _gameSave.Save();
         
-        Saver.UpdateTaskInfo(taskInfo.TaskId, currentValue, false );
-        _gameSave.Save();
+            if (currentValue >= taskInfo.FullValue && !taskVisual.TaskIsComplete) {
+                taskVisual.SetTaskCompleteVisual(currentValue, taskInfo.FullValue);
+                _taskCountView.PlusOne();
+                ShowNotification(taskInfo);
+            }
+            else {
+                taskVisual.UpdateTaskScoreVisual(currentValue, taskInfo.FullValue);
+            }
+            Saver.UpdateTaskInfo(taskInfo.TaskId, currentValue, false );
+            _gameSave.Save();
         
-        if (currentValue >= taskInfo.FullValue && !taskVisual.TaskIsComplete) {
-            taskVisual.SetTaskCompleteVisual(currentValue, taskInfo.FullValue);
-            _taskCountView.PlusOne();
-            ShowNotification(taskInfo);
-        }
-        else {
-            taskVisual.UpdateTaskScoreVisual(currentValue, taskInfo.FullValue);
+            if (currentValue >= taskInfo.FullValue && !taskVisual.TaskIsComplete) {
+                taskVisual.SetTaskCompleteVisual(currentValue, taskInfo.FullValue);
+                _taskCountView.PlusOne();
+                ShowNotification(taskInfo);
+            }
+            else {
+                taskVisual.UpdateTaskScoreVisual(currentValue, taskInfo.FullValue);
+            }
+            
         }
     }
     
 
-    public void SetCompleteTask(TaskType taskType) {
+    public void SetCompleteTask(string taskId) {
         // Обновляем данные
-        TaskInfo taskInfo = _taskTypeToInfoDictionary[taskType];
+        TaskInfo taskInfo = _taskIdToInfoDictionary[taskId];
         Saver.UpdateTaskInfo(taskInfo.TaskId, taskInfo.FullValue, true);
         _bank.AddMoney(taskInfo.TaskMoney);
         _taskCountView.MinusOne();
         CheckTaskCount();
     }
+    
+    
 
     private void CheckTaskCount() {
-        foreach (var taskVisual in _taskTypeToVisualDictionary) {
-            TaskInfo taskInfo = _taskTypeToInfoDictionary[taskVisual.Key];
+        foreach (var taskVisual in _taskVisualIdToViewDictionary) {
+            TaskInfo taskInfo = _taskIdToInfoDictionary[taskVisual.Value.TaskId];
+            
             TaskItem taskSaveInfo = Saver.GetTaskInfo(taskInfo.TaskId);
             if(!taskSaveInfo.IsGetReward) return;
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using _PROJECT.Scripts.Helpers;
@@ -11,6 +12,7 @@ using Zenject;
 public class BattleInformator : MonoBehaviour {
     [SerializeField] private GameObject _textFieldContainer;
     [SerializeField] private TextMeshProUGUI _textFieldToInformate;
+    [SerializeField] private TextMeshProUGUI _firstPlayerNickname;
     [SerializeField] private TextMeshProUGUI _secondPlayerNickname;
     [SerializeField] private float _timeToShowInfo;
 
@@ -30,6 +32,10 @@ public class BattleInformator : MonoBehaviour {
     private void OnEnable() {
         _gameStarter.GameStarted += OnGameStarted;
         _hpView.PlayerHit += OnPlayerHit;
+    }
+
+    private void Start() {
+        _firstPlayerNickname.text = _localization.You;
     }
 
     private void OnGameStarted(bool started) {

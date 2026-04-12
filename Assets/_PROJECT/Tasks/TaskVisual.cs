@@ -11,12 +11,12 @@ public class TaskVisual : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _progressText;
     [SerializeField] private RectTransform _parentRectTransform;
     [SerializeField] private RectTransform _progressRectTransform;
-    [field: SerializeField] public TaskType TaskType { get; private set; }
     [SerializeField] private Button _takeRewardButton;
     
     public bool TaskIsComplete { get; private set; }
     private string _taskLocalizationText;
-    
+    [field: SerializeField] public TaskType TaskType { get; private set; }
+    [field: SerializeField] public string TaskId { get; private set; }
     
     [Inject] private NumberFormatter _formatter;
     [Inject] private LocalizationData _localization;
@@ -27,8 +27,15 @@ public class TaskVisual : MonoBehaviour {
         _takeRewardButton.onClick.AddListener(GetTaskRewardByClick);
     }
 
+    public void InitTask(string taskId, TaskType taskType) {
+        TaskId = taskId;
+        TaskType = taskType;
+        SetTaskLocalizationText();
+    }
+    
+    
     private void GetTaskRewardByClick() {
-        _tasksManager.SetCompleteTask(TaskType);
+        _tasksManager.SetCompleteTask(TaskId);
         DisableTask();
     }
 
@@ -46,7 +53,7 @@ public class TaskVisual : MonoBehaviour {
     }
 
     
-    public void SetTaskLocalizationText() {
+    private void SetTaskLocalizationText() {
         _taskLocalizationText = _localization.GetTranslatedText(TaskType,  _localization.TaskTranslates);
     }
 

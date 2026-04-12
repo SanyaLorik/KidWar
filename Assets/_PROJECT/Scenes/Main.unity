@@ -1164,23 +1164,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TasksManager
   _tasksInfo:
   - FullValue: 1
-    TaskMoney: 1000
+    TaskMoney: 15000
     TaskType: 0
   - FullValue: 2
-    TaskMoney: 1000
+    TaskMoney: 30000
+    TaskType: 1
+  - FullValue: 5
+    TaskMoney: 50000
     TaskType: 1
   - FullValue: 3
-    TaskMoney: 1000
+    TaskMoney: 10000
     TaskType: 2
   - FullValue: 4
-    TaskMoney: 1000
+    TaskMoney: 10000
     TaskType: 3
-  - FullValue: 5
-    TaskMoney: 1000
+  - FullValue: 100
+    TaskMoney: 250000
     TaskType: 4
   - FullValue: 1
-    TaskMoney: 1000
+    TaskMoney: 10000
     TaskType: 5
+  - FullValue: 7
+    TaskMoney: 50000
+    TaskType: 1
+  - FullValue: 10
+    TaskMoney: 100000
+    TaskType: 1
+  - FullValue: 60
+    TaskMoney: 7500
+    TaskType: 4
   _tasksVisual:
   - {fileID: 745534520}
   - {fileID: 272806834}
@@ -1188,6 +1200,10 @@ MonoBehaviour:
   - {fileID: 752650300}
   - {fileID: 1133525196}
   - {fileID: 2059990343}
+  - {fileID: 2383758755132589761}
+  - {fileID: 2383758755132589760}
+  - {fileID: 2383758755132589757}
+  - {fileID: 1786724184}
   _canvas: {fileID: 1536376277}
   _openCanvasButton: {fileID: 1499425432}
   _closeCanvasButton: {fileID: 1656217096}
@@ -7082,6 +7098,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 104473648134748723, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1786724184 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6274260043608316667, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0935a71e3780254cb5a7dc268ad66ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TaskVisual
 --- !u!114 &1790020950 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7204481278166513307, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -13240,6 +13267,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0154568316644ab0adffc107bbeafd3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BonusCardItem
+--- !u!114 &2383758755132589757 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8506487232615826383, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0935a71e3780254cb5a7dc268ad66ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TaskVisual
 --- !u!114 &2383758755132589758 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3058000819977656872, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -13256,6 +13294,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1732263699532266779, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
   m_PrefabInstance: {fileID: 2383758755132589753}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2383758755132589760 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6203214044291813314, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0935a71e3780254cb5a7dc268ad66ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TaskVisual
+--- !u!114 &2383758755132589761 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6243591967314018080, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0935a71e3780254cb5a7dc268ad66ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TaskVisual
 --- !u!114 &2383758755132589764
 MonoBehaviour:
   m_ObjectHideFlags: 0

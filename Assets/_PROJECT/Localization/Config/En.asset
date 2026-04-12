@@ -83,6 +83,16 @@ MonoBehaviour:
     <Data>k__BackingField: Day
   - <Id>k__BackingField: Tutorial Info Header Text
     <Data>k__BackingField: Tutorial
+  - <Id>k__BackingField: Victory
+    <Data>k__BackingField: Victory
+  - <Id>k__BackingField: Lose
+    <Data>k__BackingField: Lose
+  - <Id>k__BackingField: Result
+    <Data>k__BackingField: Result
+  - <Id>k__BackingField: Sale X2
+    <Data>k__BackingField: Benefit X2
+  - <Id>k__BackingField: Continue
+    <Data>k__BackingField: Continue
   TaskTranslates:
   - <Id>k__BackingField: 0
     _text: Hit the enemy {0} times

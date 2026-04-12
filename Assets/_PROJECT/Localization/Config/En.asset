@@ -55,6 +55,20 @@ MonoBehaviour:
     <Data>k__BackingField: Award
   - <Id>k__BackingField: Take Award
     <Data>k__BackingField: Take Award
+  - <Id>k__BackingField: Start Game
+    <Data>k__BackingField: Start game
+  - <Id>k__BackingField: Game For Two
+    <Data>k__BackingField: Game For Two
+  - <Id>k__BackingField: Gift
+    <Data>k__BackingField: Gift
+  - <Id>k__BackingField: Quest
+    <Data>k__BackingField: Quest
+  - <Id>k__BackingField: AFK
+    <Data>k__BackingField: AFK
+  - <Id>k__BackingField: You are not in the fight
+    <Data>k__BackingField: You are not in the fight
+  - <Id>k__BackingField: Settings
+    <Data>k__BackingField: Settings
   TaskTranslates:
   - <Id>k__BackingField: 0
     _text: Hit the enemy {0} times

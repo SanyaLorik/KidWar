@@ -3582,6 +3582,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Architecture_M.AdInstaller
   _alertAd: {fileID: 2383758755132589754}
   _advertisingMonetization: {fileID: 7884425874105686572, guid: 1bf00c072a644e0469bd1eb8c8dff897, type: 3}
+--- !u!114 &935521752 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 520196048153564250, guid: 4618323e71e227f4d92fcd9561fc8042, type: 3}
+  m_PrefabInstance: {fileID: 5123427090692961068}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &959501763 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1942634019222303315, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -6899,6 +6910,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a5be8e26a249842bb3118721bd5648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModifierChanger
+--- !u!114 &1737721325 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6279172206128923145, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &1743526941 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1442046709268103521, guid: 4618323e71e227f4d92fcd9561fc8042, type: 3}
@@ -6910,6 +6932,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2505bd4cb240e4caaca8ac5d1b2250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DelayedTrigger
+--- !u!114 &1747519262 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 259564429069353327, guid: 4618323e71e227f4d92fcd9561fc8042, type: 3}
+  m_PrefabInstance: {fileID: 5123427090692961068}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1758947341
 GameObject:
   m_ObjectHideFlags: 0
@@ -8148,10 +8181,12 @@ MonoBehaviour:
   - <Id>k__BackingField: Roulette
     <Data>k__BackingField:
     - {fileID: 202414614}
+    - {fileID: 1737721325}
   - <Id>k__BackingField: Shop
     <Data>k__BackingField:
     - {fileID: 1895003132}
     - {fileID: 2052158510}
+    - {fileID: 1747519262}
   - <Id>k__BackingField: Bonus
     <Data>k__BackingField:
     - {fileID: 1935525312}
@@ -8250,6 +8285,7 @@ MonoBehaviour:
     - {fileID: 203467545}
     - {fileID: 1659701164}
     - {fileID: 197113381}
+    - {fileID: 935521752}
   - <Id>k__BackingField: At you
     <Data>k__BackingField:
     - {fileID: 106047164}

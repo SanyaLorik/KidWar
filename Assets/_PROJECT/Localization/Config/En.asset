@@ -93,6 +93,14 @@ MonoBehaviour:
     <Data>k__BackingField: Benefit X2
   - <Id>k__BackingField: Continue
     <Data>k__BackingField: Continue
+  - <Id>k__BackingField: Lucky Spin
+    <Data>k__BackingField: Lucky Spin
+  - <Id>k__BackingField: Next attempt via
+    <Data>k__BackingField: Next attempt via
+  - <Id>k__BackingField: Free Spin
+    <Data>k__BackingField: Free Spin!
+  - <Id>k__BackingField: Get
+    <Data>k__BackingField: Get
   TaskTranslates:
   - <Id>k__BackingField: 0
     _text: Hit the enemy {0} times

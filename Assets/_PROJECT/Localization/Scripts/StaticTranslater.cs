@@ -1,4 +1,4 @@
-using SanyaBeerExtension;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -6,9 +6,11 @@ using Zenject;
 
 public class StaticTranslater : MonoBehaviour
 {
-    [SerializeField] private StaticTranslation<TextMeshProUGUI[]>[] _texts;
+    [SerializeField] private List<StaticTranslation<List<TextMeshProUGUI>>> _texts;
 
     [Inject] private LocalizationData _localization;
+
+    public LocalizationData Header;
 
     private void Start()
     {
@@ -22,6 +24,18 @@ public class StaticTranslater : MonoBehaviour
             }
 
             text.Data.ForEach(i => i.text = translation.Data);
+        }
+    }
+
+    [ContextMenu("FillHeader")]
+    public void FillHeader()
+    {
+        foreach (var header in Header.StaticTranslates)
+        {
+            StaticTranslation<List<TextMeshProUGUI>> staticTranslation = new();
+            staticTranslation.Id = header.Id;
+
+            _texts.Add(staticTranslation);
         }
     }
 }

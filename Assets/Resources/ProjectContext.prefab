@@ -94,7 +94,7 @@ MonoBehaviour:
   _loaderSdk: {fileID: 5751522966675192470, guid: 41d8f989b0374904391e28e4184a1654, type: 3}
   _saveSdkSO: {fileID: 11400000, guid: f0897a73bd743534fbd27a21f4eb66f3, type: 2}
   _saveLocalSO: {fileID: 11400000, guid: ca887d5cf051ea344be44dc8a1ff43e7, type: 2}
-  _chooseType: 1
+  _chooseType: 0
   _isClearSaveWhenStart: 0
 --- !u!1 &2994956587070537658
 GameObject:

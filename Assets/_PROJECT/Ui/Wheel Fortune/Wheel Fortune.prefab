@@ -151,7 +151,7 @@ PrefabInstance:
     - target: {fileID: 3212196624706120436, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: <Icon>k__BackingField
       value: 
-      objectReference: {fileID: 21300000, guid: f7c4f45c961e0e5408a7fb03314199f5, type: 3}
+      objectReference: {fileID: 21300000, guid: 515f9281a67ee2d40b7bb84c93d5104d, type: 3}
     - target: {fileID: 3212196624706120436, guid: ad849f3eec0a8e546a24d317f100c9d4, type: 3}
       propertyPath: 'managedReferences[-2]'
       value: 

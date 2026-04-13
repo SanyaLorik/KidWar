@@ -104,7 +104,7 @@ public class TasksManager : MonoBehaviour {
             (isSuccess) => 
             {
                 if (isSuccess) {
-                    Debug.Log("Обновление тасок");
+                    // Debug.Log("Обновление тасок");
                     ResetCompletedTasks();
                 }
             }
@@ -114,9 +114,10 @@ public class TasksManager : MonoBehaviour {
     private void ResetCompletedTasks() {
         _dailyQuest.ShowDailies();
         foreach (var taskVisual in _taskVisualIdToViewDictionary) {
+            // Debug.Log(taskVisual.Value.TaskId);
             if (Saver.GetTaskInfo(taskVisual.Value.TaskId).IsGetReward) {
                 TaskInfo taskInfo = _taskIdToInfoDictionary[taskVisual.Value.TaskId];
-                SetPlayerValue(taskVisual.Value.TaskType, 0);
+                SetPlayerValue(taskVisual.Value.TaskType, 0, taskVisual.Value.TaskId);
                 taskVisual.Value.EnableTask(taskInfo);
             }
         }
@@ -131,7 +132,7 @@ public class TasksManager : MonoBehaviour {
     private void OnPlayerShielded() {
         if (_battleManager.PlayerStepInPvb) {
             ++_shieldCount;
-            Debug.Log($"Игрок использовал щит {_shieldCount} раз");
+            // Debug.Log($"Игрок использовал щит {_shieldCount} раз");
             UpdateTaskProgress(TaskType.ShieldCount);
         }        
     }
@@ -143,7 +144,7 @@ public class TasksManager : MonoBehaviour {
 
         _healsLifesCount += count;
         UpdateTaskProgress(TaskType.HealsLifesCount);
-        Debug.Log($"Игрок использовал аптечку  {_useHealCount} раз, излечил {_healsLifesCount} здоровья");
+        // Debug.Log($"Игрок использовал аптечку  {_useHealCount} раз, излечил {_healsLifesCount} здоровья");
     }
 
     
@@ -151,7 +152,7 @@ public class TasksManager : MonoBehaviour {
         if (winner) {
             ++_winCount;
             UpdateTaskProgress(TaskType.WinCount);
-            Debug.Log($"Игрок выиграл {_winCount} раз");
+            // Debug.Log($"Игрок выиграл {_winCount} раз");
         }
     }
 
@@ -159,7 +160,7 @@ public class TasksManager : MonoBehaviour {
     private void UpdateParkourTask() {
         _parkour = 1;
         UpdateTaskProgress(TaskType.Parkour);
-        Debug.Log($"Игрок прошел паркур");
+        // Debug.Log($"Игрок прошел паркур");
     }
 
 
@@ -167,7 +168,7 @@ public class TasksManager : MonoBehaviour {
         if (_battleManager.MainPlayerPlay && _battleManager.IsFirstThrowerStep) {
             ++_hitCount;
             UpdateTaskProgress(TaskType.HitCount);
-            Debug.Log($"Игрок попал {_hitCount} раз");
+            // Debug.Log($"Игрок попал {_hitCount} раз");
         }
     }
     
@@ -191,11 +192,11 @@ public class TasksManager : MonoBehaviour {
                 if (taskSaveInfo.Count >= taskInfo.FullValue) {
                     _taskCountView.PlusOne();
                 }
-                SetPlayerValue(taskInfo.TaskType, taskSaveInfo.Count);
+                SetPlayerValue(taskInfo.TaskType, taskSaveInfo.Count, taskInfo.TaskId);
                 countNotReady++;
             }
             else {
-                Debug.Log($"Задача {taskSaveInfo.Id} загрузилась как выполненная");
+                // Debug.Log($"Задача {taskSaveInfo.Id} загрузилась как выполненная");
                 _taskVisualIdToViewDictionary[taskId].DisableTask();
             }
         }
@@ -231,7 +232,7 @@ public class TasksManager : MonoBehaviour {
         int iterator = 0;
         foreach (var task in _tasksInfo) {
             if (_taskIdToInfoDictionary.ContainsKey(task.TaskId)) {
-                Debug.LogWarning($"Повтор ключа! {task.TaskType}");
+                // Debug.LogWarning($"Повтор ключа! {task.TaskType}");
                 continue;
             }
             _taskIdToInfoDictionary[task.TaskId] = task;
@@ -258,8 +259,8 @@ public class TasksManager : MonoBehaviour {
         }
     }
 
-    private void SetPlayerValue(TaskType taskType, int count) {
-        string id = _tasksInfo.Find(t => t.TaskType == taskType).TaskId;
+    private void SetPlayerValue(TaskType taskType, int count, string id) {
+        Debug.Log($"SetPlayerValue {id} {count} {false}");
         Saver.UpdateTaskInfo(id, count, false);
         switch (taskType) {
             case TaskType.HitCount:
@@ -342,7 +343,7 @@ public class TasksManager : MonoBehaviour {
 
     private void ShowNotification(TaskInfo taskInfo) {
         TaskComplete?.Invoke();
-        Debug.LogWarning("Таска выполнена!");
+        // Debug.LogWarning("Таска выполнена!");
         // _taskNotification.ShowNotification("+"+ _formatter.ValuteFormatter(taskInfo.TaskMoney));
     }
 

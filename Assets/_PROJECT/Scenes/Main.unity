@@ -4887,6 +4887,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &1227933903 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2452435496066505964, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &1231202925 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 421188331456015305, guid: 4618323e71e227f4d92fcd9561fc8042, type: 3}
@@ -5926,7 +5937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputInstaller
   _mobileInputViewPrefab: {fileID: 3967064296492133266, guid: cc9e6dd412bf9004683139a19bb58739, type: 3}
   _mobileContainer: {fileID: 1491452725}
-  _platformDebugType: 1
+  _platformDebugType: 2
 --- !u!114 &1499425432 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4479908961170281836, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
@@ -6763,8 +6774,8 @@ Transform:
   - {fileID: 2036788670}
   - {fileID: 1712996297}
   - {fileID: 1880911096}
-  - {fileID: 597798110}
   - {fileID: 1707508955}
+  - {fileID: 597798110}
   - {fileID: 895105926}
   - {fileID: 140419455}
   - {fileID: 203431245}
@@ -6933,11 +6944,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 688973736}
   - {fileID: 1204563356}
   - {fileID: 1438379521}
   - {fileID: 1639090478}
   - {fileID: 1367748772}
-  - {fileID: 688973736}
   - {fileID: 327985596}
   - {fileID: 1479494121}
   - {fileID: 1893693009}
@@ -8337,6 +8348,7 @@ MonoBehaviour:
     <Data>k__BackingField:
     - {fileID: 1986280886}
     - {fileID: 290649583}
+    - {fileID: 1227933903}
   - <Id>k__BackingField: Take Award
     <Data>k__BackingField:
     - {fileID: 567501984}
@@ -11924,7 +11936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5863743624469371311, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5881432909530698604, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

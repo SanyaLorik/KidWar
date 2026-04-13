@@ -25,9 +25,10 @@ public class PlayerStateManager : MonoBehaviour{
     [Inject] private PlayerMovement _playerMovement;
     [Inject] private BattleManager _battleManager;
     [Inject] private IGameSave _saver;
-
     [InjectOptional] private IActivityButtonPC _activityButtonPC;
     [Inject] private ThrowGameStarter _throwGameManager;
+    [Inject] private TutorialManager _tutorialManager;
+
     
     public event Action<PlayerState> StateChanged;
     
@@ -61,7 +62,8 @@ public class PlayerStateManager : MonoBehaviour{
         ChangePlayerState(playerGoPlay ? PlayerState.Play : PlayerState.InSpawn);
     }
 
-    private void MobileInputHide(bool hide) {
+    public void MobileInputHide(bool hide) {
+        Debug.Log("MobileInputHide: " + hide);
         if (_activityButtonPC == null) return;
         if (hide) {
             _activityButtonPC.HideJumpButton();

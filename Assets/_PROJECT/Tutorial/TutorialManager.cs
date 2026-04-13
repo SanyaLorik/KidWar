@@ -41,6 +41,8 @@ public class TutorialManager : MonoBehaviour {
     [Inject] private BonusManager _bonusManager;
     [Inject] private ModifierManager _modifierManager;
     [Inject] private PlayersStepView _stepView;
+    [Inject] private PlayerStateManager _playerStateManager;
+    [Inject] private IInputActivity _inputActivity;
 
 
     public void OnEnable() {
@@ -56,10 +58,17 @@ public class TutorialManager : MonoBehaviour {
     private void Start() {
         _narrator.Disactive();
         if (!TutorialPassed) {
+            HideMobileInput().Forget();
             _bonusManager.InitBonusesCount(_startBonusesCount);
             _bonusManager.SetBonusesEnable(false);
             _modifierManager.SetModifiersEnable(false);
         }
+    }
+
+    private async UniTask HideMobileInput() {
+        await UniTask.WaitForSeconds(.5f);
+        _playerStateManager.MobileInputHide(true);
+        _inputActivity.Disable();
     }
     
 
@@ -69,6 +78,7 @@ public class TutorialManager : MonoBehaviour {
         }
     }
 
+    
     private void OnChoosedModifier(IThrowableModifier modifier) {
         Debug.Log($"modifier = {modifier} modifier is ThrowableModifierExplosion = {modifier is ThrowableModifierExplosion}");
         if (modifier is ThrowableModifierExplosion) {
@@ -85,6 +95,8 @@ public class TutorialManager : MonoBehaviour {
 
 
     private void StartTutorial() {
+        _playerStateManager.MobileInputHide(true);
+        _inputActivity.Disable();
         TutorialStartAsync().Forget();
     }
 

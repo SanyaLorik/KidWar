@@ -13,8 +13,18 @@ MonoBehaviour:
   m_Name: SDK Save
   m_EditorClassIdentifier: Assembly-CSharp::GameSaveSO
   Save:
-    Money: 10000
+    Money: 0
     IsBoughtPurchase: 0
-    Skins:
-    - Id: obby_skin
-    SkinWearId: obby_skin
+    TutorialPassed: 0
+    Skins: []
+    SkinWearId: 
+    Bonuses: []
+    Tasks: []
+    DailyRewardSave:
+      LastDateTimeReceived: 
+      LastDayNumber: -1
+    WheelFortuneSave:
+      CountSpinAllow: 3
+      LastDateTimeSpined: 
+    DailyQuestSave:
+      LastDateTimeEntered: 

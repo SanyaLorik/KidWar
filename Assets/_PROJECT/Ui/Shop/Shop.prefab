@@ -5097,7 +5097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8178090005439894202, guid: 18858429556dc7f45a95ece25faa436f, type: 3}
       propertyPath: m_text
-      value: "+2\u041A"
+      value: "+5\u041A"
       objectReference: {fileID: 0}
     - target: {fileID: 8434529325870783083, guid: 18858429556dc7f45a95ece25faa436f, type: 3}
       propertyPath: m_text

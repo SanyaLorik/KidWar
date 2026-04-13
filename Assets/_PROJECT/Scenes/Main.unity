@@ -4204,7 +4204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MoneyAdvItem
   _getButton: {fileID: 101087214}
   _getButtonText: {fileID: 192819191}
-  _money: 2000
+  _money: 5000
 --- !u!1 &1117280026
 GameObject:
   m_ObjectHideFlags: 0

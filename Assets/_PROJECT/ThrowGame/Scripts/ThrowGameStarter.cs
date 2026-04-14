@@ -120,7 +120,7 @@ public class ThrowGameStarter : MonoBehaviour  {
             _afkStatusText.SetActive(_afkPressed);
         }
         // Ушел в афк врубаем таймер
-        if (afk) {
+        if (afk && _advTimerStarter != null) {
             _advTimerStarter.EnableTimer();
         }
 

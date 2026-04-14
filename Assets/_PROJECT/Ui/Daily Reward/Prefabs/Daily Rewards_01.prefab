@@ -1214,7 +1214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7671303134713982981, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: managedReferences[1210044605646503947]._newMoney
-      value: 10000000
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 7686950750628358658, guid: eece2a4987aa62e46bf093f792c2509a, type: 3}
       propertyPath: m_text

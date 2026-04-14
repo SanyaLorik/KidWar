@@ -29,6 +29,13 @@ public class GameSave : GameSaveBase,
     public WheelFortuneSave WheelFortuneSave;
     public DailyQuestSave DailyQuestSave;
 
+    //public override void PrinData(int code)
+    //{
+    //    Debug.Log("p TutorialPassed " + TutorialPassed);
+    //    Debug.Log("p Money " + Money);
+    //    Debug.Log("p heshcode " + code);
+    //}
+
     public void AddNewSkin(string id) {
         if(Skins.Any(s => s.Id == id)) return;
         Skins.Add(new SkinItem {

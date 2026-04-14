@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Local Save
   m_EditorClassIdentifier: Assembly-CSharp::GameSaveSO
   Save:
-    Money: 0
+    Money: 200
     IsBoughtPurchase: 0
-    TutorialPassed: 0
+    TutorialPassed: 1
     Skins:
     - Id: obby
     - Id: tits

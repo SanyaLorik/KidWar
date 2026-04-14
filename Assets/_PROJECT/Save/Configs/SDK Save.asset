@@ -13,51 +13,13 @@ MonoBehaviour:
   m_Name: SDK Save
   m_EditorClassIdentifier: Assembly-CSharp::GameSaveSO
   Save:
-    Money: 20000
+    Money: 0
     IsBoughtPurchase: 0
     TutorialPassed: 0
-    Skins:
-    - Id: obby
-    - Id: tits
-    SkinWearId: tits
-    Bonuses:
-    - Id: health
-      Count: 3
-    - Id: shield
-      Count: 3
-    - Id: reset
-      Count: 3
-    Tasks:
-    - Id: hit1
-      Count: 7
-      IsGetReward: 0
-    - Id: win2
-      Count: 4
-      IsGetReward: 0
-    - Id: win5
-      Count: 4
-      IsGetReward: 0
-    - Id: healCount3
-      Count: 6
-      IsGetReward: 0
-    - Id: shield4
-      Count: 0
-      IsGetReward: 0
-    - Id: healLifes100
-      Count: 95
-      IsGetReward: 0
-    - Id: parkour1
-      Count: 0
-      IsGetReward: 0
-    - Id: win7
-      Count: 4
-      IsGetReward: 0
-    - Id: win10
-      Count: 4
-      IsGetReward: 0
-    - Id: healLifes60
-      Count: 95
-      IsGetReward: 0
+    Skins: []
+    SkinWearId: 
+    Bonuses: []
+    Tasks: []
     DailyRewardSave:
       LastDateTimeReceived: 
       LastDayNumber: -1

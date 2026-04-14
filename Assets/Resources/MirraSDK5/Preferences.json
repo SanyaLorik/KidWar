@@ -50,6 +50,32 @@
                     }
                 ]
             }
+        },
+        {
+            "key": "MirraWebConfiguration",
+            "group": {
+                "boolCollection": [
+                    {
+                        "key": "IData.Visible",
+                        "value": false
+                    },
+                    {
+                        "key": "IFlags.Visible",
+                        "value": false
+                    },
+                    {
+                        "key": "IAds.Visible",
+                        "value": false
+                    },
+                    {
+                        "key": "IDevice.Visible",
+                        "value": false
+                    }
+                ],
+                "intCollection": [],
+                "floatCollection": [],
+                "stringCollection": []
+            }
         }
     ]
 }

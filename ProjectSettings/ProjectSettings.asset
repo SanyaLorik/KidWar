@@ -548,7 +548,7 @@ PlayerSettings:
   m_TemplateCustomTags:
     AUTO_SYNC_PERSISTENT_DATA_PATH: 
     DESKTOP_ASPECT_RATIO: 
-    DEVICE_PIXEL_RATIO: 
+    DEVICE_PIXEL_RATIO: 1.4
     LANDSCAPE_ONLY: true
     MATCH_WEBGL_TO_CANVAS_SIZE: 
     MOBILE_LANDSCAPE_ASPECT_RATIO: 
@@ -872,7 +872,8 @@ PlayerSettings:
     Android: 1
   il2cppCompilerConfiguration:
     WebGL: 2
-  il2cppCodeGeneration: {}
+  il2cppCodeGeneration:
+    WebGL: 1
   il2cppStacktraceInformation: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}

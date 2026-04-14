@@ -30,7 +30,7 @@ public class PlayerBank : MonoBehaviour {
     private void Start() {
         _moneyTexts.ForEach(t => t.text = _formatter.ValuteFormatter(PlayerCapital));
         if (!Saves.TutorialPassed) {
-            PlayerCapital += _moneyStartCapital;
+            PlayerCapital = _moneyStartCapital;
         }
     }
 

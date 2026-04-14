@@ -4265,6 +4265,17 @@ MonoBehaviour:
       type: {class: MoneyReceiverShop, ns: , asm: Assembly-CSharp}
       data:
         _newMoney: 600000
+--- !u!114 &1122490014 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1512841536540941521, guid: 776d8e27a07b4864182ee7a91abd1de2, type: 3}
+  m_PrefabInstance: {fileID: 2383758755132589753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1131067823
 GameObject:
   m_ObjectHideFlags: 0
@@ -8502,6 +8513,9 @@ MonoBehaviour:
   - <Id>k__BackingField: AlertAd
     <Data>k__BackingField:
     - {fileID: 868309487}
+  - <Id>k__BackingField: Spin
+    <Data>k__BackingField:
+    - {fileID: 1122490014}
   Header: {fileID: 11400000, guid: a2d79142d38f1bc4c90686d790eb0402, type: 2}
 --- !u!1 &2083012114
 GameObject:

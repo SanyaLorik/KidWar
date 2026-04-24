@@ -61,13 +61,13 @@ public class DualLegParticles : MonoBehaviour {
 
     private async UniTask PlayerLogic(CancellationToken token) {
         while (!token.IsCancellationRequested) {
-            Vector2 move = _playerMovement.MoveInput;
+            bool allowPlay = _playerMovement.AllowMove;
 
-            if (move == Vector2.zero && IsPlaying || !_allowToPlay) {
+            if (allowPlay && IsPlaying || !_allowToPlay) {
                 IsPlaying = false;
                 StopRunning();
             }
-            else if (move != Vector2.zero && !IsPlaying && _allowToPlay) {
+            else if (allowPlay && !IsPlaying && _allowToPlay) {
                 IsPlaying = true;
                 StartRunning();
             }

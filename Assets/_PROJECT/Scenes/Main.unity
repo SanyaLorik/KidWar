@@ -2534,8 +2534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685e4e6beb9f015409ef464f3a085501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThrowGameManager
-  _timerDuration: 15
-  _durationAfterGameOver: 4
+  _timerDuration: 10
+  _durationAfterGameOver: 2
   _timerText: {fileID: 1956258026}
   _timerCanvas: {fileID: 1628438532}
   _afkButton: {fileID: 1467414111}

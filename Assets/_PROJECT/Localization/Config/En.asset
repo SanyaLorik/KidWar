@@ -183,7 +183,7 @@ MonoBehaviour:
     _text: Aim
   SkinTranslates:
   - <Id>k__BackingField: creeper
-    _text: Creeper
+    _text: Cool Creep
   - <Id>k__BackingField: deer
     _text: Deer
   - <Id>k__BackingField: foxie

@@ -2150,7 +2150,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3589107094480186593}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.44430992
+  m_Size: 0.4444695
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5583,7 +5583,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9147503378653611179, guid: 6c5f79769de62c94999bc23e1aac06f7, type: 3}
       propertyPath: m_text
-      value: "\u041A\u0440\u0438\u043F\u0435\u0440"
+      value: "\u041A\u0440\u0438\u043F\u0435\u0440\u043E\u043A"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9147503378653611179, guid: 6c5f79769de62c94999bc23e1aac06f7, type: 3}
+      propertyPath: m_fontSize
+      value: 58.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

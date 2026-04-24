@@ -25,7 +25,7 @@ public class RouletteSkin : MonoBehaviour
     [SerializeField] private RectTransform _finish;
 
     [Header("Audio")]
-    [SerializeField] private AudioSource _tikAudioSource;
+    [SerializeField] private AudioSource _startAudioSource;
 
     private float _spacing;
     private float _distance;
@@ -65,6 +65,8 @@ public class RouletteSkin : MonoBehaviour
         print("_distance: " + _distance);
         print("totalDistance: " + totalDistance);
 
+        _startAudioSource.Play();
+
         float previousDistance = 0;
 
         do
@@ -82,10 +84,7 @@ public class RouletteSkin : MonoBehaviour
                 {
                     float x = 0;
                     if (i == _items.Length - 1)
-                    {
                         x = xOffset;
-                        _tikAudioSource.Play();
-                    }
 
                     int indexNextItem = (i + 1) % _items.Length;
                     _items[i].Rect.anchoredPosition = _items[indexNextItem].Rect.anchoredPosition.AddX(-_spacing - x);
@@ -105,10 +104,6 @@ public class RouletteSkin : MonoBehaviour
             await UniTask.Yield(cancellationToken: destroyCancellationToken);
         }
         while (expendedTime < _duration);
-
-        _tikAudioSource.Play();
-
-        // await UniTask.WaitWhile(() => _tikAudioSource.isPlaying == true);
 
         return throwableObject;
     }

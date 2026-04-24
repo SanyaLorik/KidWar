@@ -205,7 +205,7 @@ MonoBehaviour:
     _text: "\u0410\u0432\u0442\u043E"
   SkinTranslates:
   - <Id>k__BackingField: creeper
-    _text: "\u041A\u0440\u0438\u043F\u0435\u0440"
+    _text: "\u041A\u0440\u0438\u043F\u0435\u0440\u043E\u043A"
   - <Id>k__BackingField: deer
     _text: "\u041E\u043B\u0435\u043D\u044C"
   - <Id>k__BackingField: foxie

@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
     // [SerializeField] private PlayerVisual _visual;
 
     public Vector2 MoveInput => _inputDirection2.Direction2;
+    public bool AllowMove => _inputDirection2.Direction2 != Vector2.zero && !IsPlaying;
     private float _currentRoll;
     private float _rollVelocity;
     private bool _wasGroundedLastFrame;
@@ -89,10 +90,8 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
         }
         else {
             _inputActivity.Disable();
-            if (_controllerOffRoutine != null) {
-                StopCoroutine(_controllerOffRoutine);
-            }
-            _controllerOffRoutine = StartCoroutine(ControllerOffRoutine());
+            IsPlaying = true;
+            StartCoroutine(OffAnimationsRoutine());
         }
     }
 
@@ -104,19 +103,21 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
     public ObjectThrower ObjectThrower => _thrower;
 
     private Coroutine _controllerOffRoutine;
-    /// <summary>
-    /// После телепорта пусть все коллизии просчитает а потом отключится для игры
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator ControllerOffRoutine() {
-        yield return new WaitForSeconds(1f);
-        IsPlaying = true;
-        SetCharacterControllerState(false);
+    private IEnumerator OffAnimationsRoutine() {
+        yield return new WaitForSeconds(.5f);
+        IsRunning = false;
+        RunningStateChanged?.Invoke(IsRunning);
     }
 
 
-
+    private float _lastJumpTime;
+    private const float JumpCooldown = 0.1f; // 100 мс
     public void OnJump() {
+        if (Time.time - _lastJumpTime < JumpCooldown)
+            return;
+
+        _lastJumpTime = Time.time;
+
         if (_jumpsUsed == 0) {
             _verticalVelocity = _gameData.JumpForce;
             JumpPressed?.Invoke();
@@ -143,7 +144,6 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
 
 
     private void Walk() {
-        if (IsPlaying) return;
         Transform cam = Camera.main.transform;
         Vector3 camForward = cam.forward;
         Vector3 camRight = cam.right;
@@ -157,9 +157,13 @@ public class PlayerMovement : MonoBehaviour, IThrowGamePlayer {
         Vector3 move = camRight * MoveInput.x + camForward * MoveInput.y;
         bool hasInput = move.sqrMagnitude > 0.001f;
 
+        if (IsPlaying) {
+            move = Vector3.zero;
+        }
+        
         if (hasInput != IsRunning) {
             IsRunning = hasInput;
-            RunningStateChanged?.Invoke(IsRunning);
+            RunningStateChanged?.Invoke(IsRunning && !IsPlaying);
         }
 
         // ГРАВИТАЦИЯ

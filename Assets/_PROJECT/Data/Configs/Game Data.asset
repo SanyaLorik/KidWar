@@ -39,7 +39,7 @@ MonoBehaviour:
       <From>k__BackingField: 9
       <To>k__BackingField: 6.12
     <ZoomToWinnerView>k__BackingField: 0.4
-    <JoystickSensivityMultiplier>k__BackingField: 500
+    <JoystickSensivityMultiplier>k__BackingField: 750
     <MouseSensivityMultiplier>k__BackingField: 0.4
     <ZoomDiapasone>k__BackingField:
       <From>k__BackingField: 0.5

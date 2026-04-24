@@ -33,6 +33,7 @@ public class GameOverShower : MonoBehaviour {
     [Inject] private CameraOrbitalController _camera;
     [Inject] private AdvertisingMonetizationMirra _advertisingMonetization;
     [Inject] private EconomyCalculator _economyCalculator;
+    [Inject] private AdvHelper _advHelper;
 
     private void Start() {
         _allContainer.DisactiveSelf();
@@ -115,6 +116,9 @@ public class GameOverShower : MonoBehaviour {
     }
 
     private void GetReward(bool doubleReward) {
+        if (!doubleReward) {
+            _advHelper.ShowAdv();
+        }
         _economyCalculator.GetReward(doubleReward);
         CloseResultWindow();
     }

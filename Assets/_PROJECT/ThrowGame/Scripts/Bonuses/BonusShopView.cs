@@ -23,7 +23,7 @@ public class BonusShopView : MonoBehaviour {
     
     [Inject] private BonusManager _bonusManager;
     [Inject] private IGameSave _save;
-    [Inject] private AdvTimerStarter _advTimerStarter;
+    [Inject] private AdvHelper _advHelper;
     [Inject] private AdvertisingMonetizationMirra _advertisingMonetization;
     [Inject] private PlayerBank _bank;
 
@@ -38,14 +38,14 @@ public class BonusShopView : MonoBehaviour {
     private void OnTriggerEnter(Collider collider) {
         if(!collider.TryGetComponent(out PlayerMovement _)) return;
         _trigger.DelayedTriggerAction(OpenBonusCanvasAnimation);
-        _advTimerStarter.DisableTimer();
+        _advHelper.DisableTimer();
     }
     
     
     private void OnTriggerExit(Collider collider) {
         if(!collider.TryGetComponent(out PlayerMovement _)) return;
         _trigger.CancelTriggerAction();
-        _advTimerStarter.EnableTimer();
+        _advHelper.EnableTimer();
     }
     
     
@@ -86,6 +86,7 @@ public class BonusShopView : MonoBehaviour {
 
     
     private void OpenBonusCanvasAnimation() {
+        _advHelper.ShowAdv();
         OnOpenCanvas();
         _canvas.ActiveSelf();
         GameEvents.TriggerUseInvoke();

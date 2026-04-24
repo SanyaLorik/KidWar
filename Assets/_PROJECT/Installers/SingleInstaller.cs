@@ -5,7 +5,7 @@ public class SingleInstaller : MonoInstaller {
     [SerializeField] private GameObject[] _canvasesToHide;
     
     public override void InstallBindings() {
-        Container.Bind<AdvTimerStarter>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<AdvHelper>().FromComponentInHierarchy().AsSingle().NonLazy();
         BindCamera();
         BindSettings();
         BindValuteFormatter();

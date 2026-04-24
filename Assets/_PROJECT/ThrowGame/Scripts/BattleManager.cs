@@ -279,7 +279,7 @@ public class BattleManager : MonoBehaviour {
 
     private async UniTask WaitThrowableObjectGet() {
         _roulette.gameObject.ActiveSelf();
-        await UniTask.NextFrame();
+        
         _roulette.ResetItemPosition();
         _roulette.FillRandomSkins();
         _newThrowableObjectInRoulette = await _roulette.SpinAsync();

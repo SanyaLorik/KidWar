@@ -22,7 +22,7 @@ public class ThrowGameStarter : MonoBehaviour  {
 
     [Inject] private BattleManager _battleManager;
     [Inject] private LocalizationData _localization;
-    [Inject] private AdvTimerStarter _advTimerStarter;
+    [Inject] private AdvHelper _advHelper;
     [Inject] private TutorialManager _tutorialManager;
 
 
@@ -51,7 +51,7 @@ public class ThrowGameStarter : MonoBehaviour  {
         GameStarted?.Invoke(false);
         GameIsStarted = false;
         if (_battleManager.MainPlayerPlay) {
-            _advTimerStarter.ShowAdvAfterBattle();
+            _advHelper.ShowAdvAfterBattle();
         }
         
         // Ну наверное начинать сразу...
@@ -120,8 +120,8 @@ public class ThrowGameStarter : MonoBehaviour  {
             _afkStatusText.SetActive(_afkPressed);
         }
         // Ушел в афк врубаем таймер
-        if (afk && _advTimerStarter != null) {
-            _advTimerStarter.EnableTimer();
+        if (afk && _advHelper != null) {
+            _advHelper.EnableTimer();
         }
 
     }
@@ -137,7 +137,7 @@ public class ThrowGameStarter : MonoBehaviour  {
         _tokenSource = new CancellationTokenSource();
         // Таймер стартанул где игрок будет играть, вырубаем таймер нахуй
         if (!_afkPressed) {
-            _advTimerStarter.DisableTimer();
+            _advHelper.DisableTimer();
         }
         NewGameTimer(time, _tokenSource.Token).Forget();
     }

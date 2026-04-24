@@ -108,7 +108,7 @@ public class RouletteSkin : MonoBehaviour
 
         _tikAudioSource.Play();
 
-        await UniTask.WaitWhile(() => _tikAudioSource.isPlaying == true);
+        // await UniTask.WaitWhile(() => _tikAudioSource.isPlaying == true);
 
         return throwableObject;
     }

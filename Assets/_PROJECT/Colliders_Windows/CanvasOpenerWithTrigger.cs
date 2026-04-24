@@ -9,7 +9,7 @@ public class CanvasOpenerWithTrigger : TriggerBehaviourBase {
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
 
-    [Inject] AdvTimerStarter _advTimerStarter;
+    [Inject] AdvHelper _advHelper;
     
     private void OnEnable() {
         if (_openButton != null) {
@@ -22,12 +22,12 @@ public class CanvasOpenerWithTrigger : TriggerBehaviourBase {
     }
 
     protected override void PlayerBehaviourOnEnter() {
-        _advTimerStarter.DisableTimer();
+        _advHelper.DisableTimer();
         _delayedTrigger.DelayedTriggerAction(TriggerAction); 
     }
     
     protected override void PlayerBehaviourOnExit() {
-        _advTimerStarter.EnableTimer();
+        _advHelper.EnableTimer();
         _delayedTrigger.CancelTriggerAction();
     }
 

@@ -158,7 +158,7 @@ public class TasksManager : MonoBehaviour {
 
     
     private void UpdateParkourTask() {
-        _parkour = 1;
+        _parkour++;
         UpdateTaskProgress(TaskType.Parkour);
         // Debug.Log($"Игрок прошел паркур");
     }

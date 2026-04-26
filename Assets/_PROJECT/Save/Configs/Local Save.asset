@@ -15,7 +15,7 @@ MonoBehaviour:
   Save:
     Money: 200
     IsBoughtPurchase: 0
-    TutorialPassed: 1
+    TutorialPassed: 0
     Skins:
     - Id: obby
     - Id: tits

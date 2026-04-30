@@ -4,7 +4,7 @@ using SanyaBeerExtension;
 using UnityEngine;
 using Zenject;
 
-public class PurchaseSlotKW : PurchaseSlot
+public class PurchaseSlotKW : PurchaseSlotBase
 {
     [SerializeReference][SubclassSelector] private AwardReceiver[] _purshaseItems;
 

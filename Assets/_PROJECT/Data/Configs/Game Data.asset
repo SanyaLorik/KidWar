@@ -18,6 +18,7 @@ MonoBehaviour:
     <InterstitialDelay>k__BackingField: 80
     <AdTimerInitial>k__BackingField: 2
     <AdTimerFinal>k__BackingField: 0
+    <MinimumMinutesSocialNetworkingActivity>k__BackingField: 8
     <WalkSpeed>k__BackingField: 10
     <JumpForce>k__BackingField: 12
     <SecondJumpForce>k__BackingField: 16

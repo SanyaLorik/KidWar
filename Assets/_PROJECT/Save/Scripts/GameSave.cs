@@ -7,7 +7,7 @@ using UnityEngine;
 
 [Serializable]
 public class GameSave : GameSaveBase,
-    IDailyRewardSaveLoader, IWheelFortuneSaveLoader, IDailyQuestSaveLoader
+    IDailyRewardSaveLoader, IWheelFortuneSaveLoader, IDailyQuestSaveLoader, ICommunitySaveLoader
 {
     public long Money;
     public bool IsBoughtPurchase = false;
@@ -28,6 +28,7 @@ public class GameSave : GameSaveBase,
     public DailyRewardSave DailyRewardSave;
     public WheelFortuneSave WheelFortuneSave;
     public DailyQuestSave DailyQuestSave;
+    public CommunitySave CommunitySave;
 
     //public override void PrinData(int code)
     //{
@@ -125,6 +126,11 @@ public class GameSave : GameSaveBase,
     DailyQuestSave IDailyQuestSaveLoader.Load()
     {
         return DailyQuestSave;
+    }
+
+    CommunitySave ICommunitySaveLoader.Load() 
+    {
+        return CommunitySave;
     }
 }
 

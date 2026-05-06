@@ -6,38 +6,22 @@ using UnityEngine.UI;
 public class MobileInputView : MobileInputViewBase
 {
     [field: SerializeField] public Button JumpButton { get; private set; }
+    [SerializeField] private InputHandle _orbital;
 
-    [SerializeField] private Joystick _orbitalMovement;
-
-    public Vector2 OrbitalDirection
-    {
-        get
-        {
-            if (_orbitalMovement.Direction == _orbitalDirectionPrevious)
-            {
-                _orbitalDirectionPrevious = _orbitalMovement.Direction;
-                return Vector2.zero;
-            }
-
-            _orbitalDirectionPrevious = _orbitalMovement.Direction;
-            return _orbitalMovement.Direction;
-        }
-    }
-
-    private Vector2 _orbitalDirectionPrevious = Vector2.zero;
+    public Vector2 OrbitalDirection => _orbital.Direction;
 
     public override void Enable()
     {
         base.Enable();
 
-        _orbitalMovement.ActiveSelf();
+        _orbital.ActiveSelf();
     }
 
     public override void Disable()
     {
         base.Disable();
 
-        _orbitalMovement.DisactiveSelf();
+        _orbital.DisactiveSelf();
     }
 
     public void ShowJumpButton()
@@ -52,11 +36,11 @@ public class MobileInputView : MobileInputViewBase
 
     public void ShowOrbitalJoystick()
     {
-        _orbitalMovement.ActiveSelf();
+        _orbital.ActiveSelf();
     }
 
     public void HidOrbitalJoystick()
     {
-        _orbitalMovement.DisactiveSelf();
+        _orbital.DisactiveSelf();
     }
 }

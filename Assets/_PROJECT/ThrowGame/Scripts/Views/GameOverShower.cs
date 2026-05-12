@@ -43,6 +43,11 @@ public class GameOverShower : MonoBehaviour {
         _continueButton.onClick.AddListener(() => GetReward(false));
         _continue2xButton.onClick.AddListener(TryShowAdv);
     }
+    
+    private void OnDisable() {
+        _continueButton.onClick.RemoveAllListeners();
+        _continue2xButton.onClick.RemoveAllListeners();
+    }
 
     private void HidePlayCanvas() {
         _playgroundContainer.DisactiveSelf();

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1397508025197451149}
   - component: {fileID: 2286371093910534174}
   m_Layer: 9
-  m_Name: Creeper
+  m_Name: Rainbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

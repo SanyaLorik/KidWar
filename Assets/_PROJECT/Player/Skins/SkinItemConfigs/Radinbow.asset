@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce84f230e1152664b9b9ba1ff8d010ad, type: 3}
-  m_Name: Creeper
+  m_Name: Radinbow
   m_EditorClassIdentifier: Assembly-CSharp::SkinItem
-  <Id>k__BackingField: creeper
+  <Id>k__BackingField: rainbow
   <Price>k__BackingField: 400000
   <CountAdvToUnlock>k__BackingField: 0
   <SkinPrefab>k__BackingField: {fileID: 5194921409329958626, guid: 5d768ffb710339741a007b87cfea03ec, type: 3}

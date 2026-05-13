@@ -17,6 +17,14 @@ MonoBehaviour:
   <HourTime>k__BackingField: h
   <MinuteTime>k__BackingField: m
   <SecondTime>k__BackingField: s
+  Suffixies:
+  - 
+  - K
+  - M
+  - B
+  - T
+  - "\u041A\u0432"
+  - "\u041A\u0430"
   <AdsInterstitial>k__BackingField: Ad in
   <LabelProgressNarrator>k__BackingField: Label
   Suffixies:
@@ -182,8 +190,8 @@ MonoBehaviour:
   - <Id>k__BackingField: aim
     _text: Aim
   SkinTranslates:
-  - <Id>k__BackingField: creeper
-    _text: Cool Creep
+  - <Id>k__BackingField: rainbow
+    _text: Rainbow
   - <Id>k__BackingField: deer
     _text: Deer
   - <Id>k__BackingField: foxie

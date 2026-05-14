@@ -95,6 +95,7 @@ public class TasksManager : MonoBehaviour {
         if (_dailyQuest.IsTimePassed) {
             ResetCompletedTasks();
         }
+        CheckTaskCount();
     }
 
 
@@ -117,7 +118,8 @@ public class TasksManager : MonoBehaviour {
             // Debug.Log(taskVisual.Value.TaskId);
             if (Saver.GetTaskInfo(taskVisual.Value.TaskId).IsGetReward) {
                 TaskInfo taskInfo = _taskIdToInfoDictionary[taskVisual.Value.TaskId];
-                SetPlayerValue(taskVisual.Value.TaskType, 0, taskVisual.Value.TaskId);
+                LoadPlayerValue(taskVisual.Value.TaskType, 0, taskVisual.Value.TaskId);
+                ResetTaskById(taskVisual);
                 taskVisual.Value.EnableTask(taskInfo);
             }
         }
@@ -125,10 +127,11 @@ public class TasksManager : MonoBehaviour {
     }
 
     
-    private TaskInfo GetTaskInfoByType(TaskType taskType)
-        => _tasksInfo.First(t => t.TaskType == taskType);
-    
-    
+    private void ResetTaskById(KeyValuePair<string, TaskVisual> taskVisual) {
+        Saver.UpdateTaskInfo(taskVisual.Value.TaskId, 0, false);
+    }
+
+
     private void OnPlayerShielded() {
         if (_battleManager.PlayerStepInPvb) {
             ++_shieldCount;
@@ -175,7 +178,6 @@ public class TasksManager : MonoBehaviour {
     
     
     private void TableInitialize() {
-        int countNotReady = 0;
         int iterator = 0;
         foreach (var taskInfoPair in _taskIdToInfoDictionary) {
             // Initialize
@@ -186,43 +188,18 @@ public class TasksManager : MonoBehaviour {
             // Get save data
             TaskItem taskSaveInfo = Saver.GetTaskInfo(taskId);
             
-            
             if (!taskSaveInfo.IsGetReward) {
                 _taskVisualIdToViewDictionary[taskId].SetTaskVisual(taskInfo, taskSaveInfo.Count);
                 if (taskSaveInfo.Count >= taskInfo.FullValue) {
                     _taskCountView.PlusOne();
                 }
-                SetPlayerValue(taskInfo.TaskType, taskSaveInfo.Count, taskInfo.TaskId);
-                countNotReady++;
+                LoadPlayerValue(taskInfo.TaskType, taskSaveInfo.Count, taskInfo.TaskId);
             }
             else {
                 // Debug.Log($"Задача {taskSaveInfo.Id} загрузилась как выполненная");
+                Debug.Log($"Задача {taskInfo.TaskId} загрузилась как выполненная, вырубаем");
                 _taskVisualIdToViewDictionary[taskId].DisableTask();
             }
-        }
-
-        // foreach (var taskVisual in _taskVisualIdToViewDictionary) {
-        //     TaskInfo taskInfo = _taskIdToInfoDictionary[taskVisual.Value.TaskId];
-        //     TaskItem taskSaveInfo = Saver.GetTaskInfo(taskInfo.TaskId);
-        //     _taskVisualIdToViewDictionary[taskVisual.Key].SetTaskLocalizationText();
-        //     if (!taskSaveInfo.IsGetReward) {
-        //         _taskVisualIdToViewDictionary[taskVisual.Key].SetTaskVisual(taskInfo, taskSaveInfo.Count);
-        //         if (taskSaveInfo.Count >= taskInfo.FullValue) {
-        //             _taskCountView.PlusOne();
-        //         }
-        //         SetPlayerValue(taskInfo.TaskType, taskSaveInfo.Count);
-        //         countNotReady++;
-        //     }
-        //     else {
-        //         Debug.Log($"Задача {taskSaveInfo.Id} загрузилась как выполненная");
-        //         _taskVisualIdToViewDictionary[taskVisual.Key].DisableTask();
-        //     }
-        // }
-        
-        
-        
-        if (countNotReady == 0) {
-            _dailyQuest.ShowAllDaliesDone();
         }
     }
 
@@ -255,13 +232,11 @@ public class TasksManager : MonoBehaviour {
                 return _shieldCount;
             case TaskType.HealsLifesCount:
                 return _healsLifesCount;
-            default: return -1;
+            default: return 0;
         }
     }
 
-    private void SetPlayerValue(TaskType taskType, int count, string id) {
-        Debug.Log($"SetPlayerValue {id} {count} {false}");
-        Saver.UpdateTaskInfo(id, count, false);
+    private void LoadPlayerValue(TaskType taskType, int count, string id) {
         switch (taskType) {
             case TaskType.HitCount:
                  _hitCount = count;
@@ -293,29 +268,22 @@ public class TasksManager : MonoBehaviour {
             if(taskVisualPair.Value.TaskType != type) continue;
             
             TaskVisual taskVisual = taskVisualPair.Value;
-            Saver.UpdateTaskInfo(taskInfo.TaskId, currentValue, false );
-            _gameSave.Save();
-        
-            if (currentValue >= taskInfo.FullValue && !taskVisual.TaskIsComplete) {
-                taskVisual.SetTaskCompleteVisual(currentValue, taskInfo.FullValue);
-                _taskCountView.PlusOne();
-                ShowNotification(taskInfo);
-            }
-            else {
-                taskVisual.UpdateTaskScoreVisual(currentValue, taskInfo.FullValue);
-            }
-            Saver.UpdateTaskInfo(taskInfo.TaskId, currentValue, false );
-            _gameSave.Save();
-        
-            if (currentValue >= taskInfo.FullValue && !taskVisual.TaskIsComplete) {
-                taskVisual.SetTaskCompleteVisual(currentValue, taskInfo.FullValue);
-                _taskCountView.PlusOne();
-                ShowNotification(taskInfo);
-            }
-            else {
-                taskVisual.UpdateTaskScoreVisual(currentValue, taskInfo.FullValue);
-            }
             
+            if (taskVisual.TaskIsComplete) continue;
+            
+            Saver.UpdateTaskInfo(taskInfo.TaskId, currentValue, false );
+            _gameSave.Save();
+        
+            if (currentValue >= taskInfo.FullValue && !taskVisual.TaskIsComplete) {
+                taskVisual.SetTaskCompleteVisual(currentValue, taskInfo.FullValue);
+                _taskCountView.PlusOne();
+                ShowNotification(taskInfo);
+            }
+            else {
+                taskVisual.UpdateTaskScoreVisual(currentValue, taskInfo.FullValue);
+            }
+            Saver.UpdateTaskInfo(taskInfo.TaskId, currentValue, false );
+            _gameSave.Save();
         }
     }
     

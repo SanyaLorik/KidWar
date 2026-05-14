@@ -48,6 +48,7 @@ public class TaskVisual : MonoBehaviour {
     }
 
     public void DisableTask() {
+        Debug.Log($"Задачу {TaskId} вырубаем");
         gameObject.DisactiveSelf();
         _takeRewardButton.interactable = false;
     }

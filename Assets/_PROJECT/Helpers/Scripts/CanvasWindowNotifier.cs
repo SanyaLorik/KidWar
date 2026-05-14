@@ -12,7 +12,19 @@ public class CanvasWindowNotifier : MonoBehaviour {
     
     private void OnEnable() {
         SystemEvents.WindowOpen(true);
+        
+        
         _сanvasesToHide.DisactiveSelf();
+        
+        foreach (var obj in _сanvasesToHide) {
+            if (obj == null) continue;
+
+            if (obj.activeSelf) {
+                obj.SetActive(false);
+            }
+        }
+        
+        
         _inputActivity.Disable();
         if (!_allowCameraZoom) {
             SystemEvents.ForbidZoomChange(true);
@@ -20,11 +32,19 @@ public class CanvasWindowNotifier : MonoBehaviour {
     }
     
     private void OnDisable() {
-        _сanvasesToHide.ActiveSelf();
+        foreach (var obj in _сanvasesToHide) {
+            if (obj == null) continue;
+
+            if (!obj.activeSelf) {
+                obj.SetActive(true);
+            }
+        }
         SystemEvents.WindowOpen(false);
         _inputActivity.Enable();
         if (!_allowCameraZoom) {
             SystemEvents.ForbidZoomChange(false);
         }
     }
+    
+    
 }

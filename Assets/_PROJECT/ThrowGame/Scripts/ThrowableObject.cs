@@ -127,7 +127,7 @@ public class ThrowableObject : MonoBehaviour {
     private async UniTask SetCollidersTemporaryDisabledAsync(bool state) {
         if (Modifier is ThrowableModifierGigant) return;
         _colliders.ForEach(c => c.enabled = false);
-        await UniTask.WaitForSeconds(.7f);
+        await UniTask.WaitForSeconds(1.5f);
         _colliders.ForEach(c => c.enabled = true);
     }
 

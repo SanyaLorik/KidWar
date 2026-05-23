@@ -19,7 +19,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     [Header("Диапазон угла бросания")]
     [SerializeField] private PairedValue<float> _angleDiapasone;
     [Header("Угол при котором будет максимальный бросок")]
-    [SerializeField] private float _angleWithMaxDistance;
+    [SerializeField] private PairedValue<float> _angleWithMaxDistanceRange;
     [Header("Коэффициенты меньшего и большего угла")]
     [SerializeField] private float _minAngleRatio;
     
@@ -165,7 +165,7 @@ public class ObjectThrowerCalculator : MonoBehaviour {
         float currForce = (throwDistance - _wind.CurrentWindForce * windSign) / (angleRatio * _initialDistance);
         if (currForce > 1f) {
             int maxAttempts = 100; // защита от бесконечного цикла
-            startAngle = _angleWithMaxDistance; 
+            startAngle = Random.Range(_angleWithMaxDistanceRange.From, _angleWithMaxDistanceRange.To); 
             while (currForce > 1f && startAngle >= _angleDiapasone.From && maxAttempts > 0) {
                 startAngle -= angleEps;
                 angleRatio = CalculateAngleRatio(startAngle);
@@ -271,13 +271,36 @@ public class ObjectThrowerCalculator : MonoBehaviour {
     
     
     private float CalculateAngleRatio(float angle) {
-        // Отклонение от 45°, максимальное 45°
-        float diff = Mathf.Abs(angle - _angleWithMaxDistance);
-    
-        // ratio: 1 при 45°, 0 при 0° или 90°
-        float ratio = 1f - (diff / _angleWithMaxDistance);
-    
-        return Mathf.Max(_minAngleRatio, ratio);
+        // Внутри диапазона — максимальная сила
+        if (angle >= _angleWithMaxDistanceRange.From &&
+            angle <= _angleWithMaxDistanceRange.To)
+        {
+            return 1f;
+        }
+
+        float diff;
+
+        // Левее диапазона
+        if (angle < _angleWithMaxDistanceRange.From)
+        {
+            diff = _angleWithMaxDistanceRange.From - angle;
+
+            // насколько можно отклониться влево
+            float maxDiff = _angleWithMaxDistanceRange.From - _angleDiapasone.From;
+
+            float ratio = 1f - diff / maxDiff;
+
+            return Mathf.Max(_minAngleRatio, ratio);
+        }
+
+        // Правее диапазона
+        diff = angle - _angleWithMaxDistanceRange.To;
+
+        float rightMaxDiff = _angleDiapasone.To - _angleWithMaxDistanceRange.To;
+
+        float rightRatio = 1f - diff / rightMaxDiff;
+
+        return Mathf.Max(_minAngleRatio, rightRatio);
     }
 
 }

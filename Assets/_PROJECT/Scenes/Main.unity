@@ -4275,7 +4275,9 @@ MonoBehaviour:
   _angleDiapasone:
     <From>k__BackingField: 0
     <To>k__BackingField: 90
-  _angleWithMaxDistance: 45
+  _angleWithMaxDistanceRange:
+    <From>k__BackingField: 30
+    <To>k__BackingField: 55
   _minAngleRatio: 0.2
   _baseHeight: 20
   _minTrajectoryLength: 8
@@ -4284,7 +4286,7 @@ MonoBehaviour:
   _minDistance: 5
   <LeftPoint>k__BackingField: {fileID: 1246083445}
   <RightPoint>k__BackingField: {fileID: 1845374056}
-  <OffsetToMaxThrow>k__BackingField: 40
+  <OffsetToMaxThrow>k__BackingField: 20
   _floorPoint: {fileID: 5540201212081949085}
   _durationBeforeThrow: 0.1
 --- !u!114 &1078219645 stripped
